@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/joao/Desktop/Prog1/tp3'
+gcc -Wall -g -std=c90 -c main.c
+gcc -Wall -g -std=c90 -c libpilha.c
+gcc  main.o libpilha.o -o verificaexpressao 
+make: Leaving directory '/home/joao/Desktop/Prog1/tp3'
+ 
