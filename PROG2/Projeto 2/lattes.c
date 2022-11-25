@@ -6,18 +6,45 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+/* ############################# Funções ###################################### */
+
+char *file_to_buffer(char *file_name)
+{
+    FILE *file;
+    char *buffer;
+    int tam;
+    
+    file = fopen(file_name, "r");
+    if (! file){
+        printf("Failed to open %s\n", file_name);
+        exit(1);
+    }
+
+    if (file){
+        fseek(file, 0, SEEK_END);
+        tam = ftell(file);
+        fseek(file, 0, SEEK_SET);
+        buffer = malloc ((sizeof(char) * (tam + 1)));
+        if (buffer)
+            fread(buffer, 1, tam, file);
+    }
+    fclose(file);
+    return buffer;
+}
+
+/* ############################# Main ###################################### */
+
 int main(int argc, char **argv)
 { 
     /* verifica se todos argumentos foram chamados */
     if (argc < 6){
-        printf("Chamada errada.\n");
+        printf("Chamada incorreta.\n");
         return 1;
     }
 
-    /* ./lattes -d /lattes-cvs -c qualis-conf.txt -p qualis-periodicos.txt */
+    /* ./lattes -d lattes-cvs -c qualis-conf.txt -p qualis-periodicos.txt */
 
-    FILE *arq;
-    int option, tam;
+    int option;
     char *buffer_conf, *buffer_period, *dir_path;
 
     while ((option = getopt(argc, argv, "d:c:p:")) != -1){
@@ -25,45 +52,14 @@ int main(int argc, char **argv)
         {
         case 'd' :
             dir_path = optarg;
-            puts(dir_path);
             break;
         
         case 'c' :
-            arq = fopen(optarg, "r");
-            if (! arq){
-                printf("Erro ao abrir %s\n", optarg);
-                exit(1);
-            }
-
-            if (arq){
-                fseek(arq, 0, SEEK_END);
-                tam = ftell(arq);
-                fseek(arq, 0, SEEK_SET);
-                buffer_conf = malloc ((sizeof(char) * tam) + 1);
-                if (buffer_conf)
-                    fread(buffer_conf, 1, tam, arq);
-            }
-            fclose(arq);
-            /* puts(buffer_conf); */
+            buffer_conf = file_to_buffer(optarg);
             break;
-        
-        case 'p' :
-            arq = fopen(optarg, "r");
-            if (! arq){
-                printf("Erro ao abrir %s\n", optarg);
-                exit(1);
-            }
 
-            if (arq){
-                fseek(arq, 0, SEEK_END);
-                tam = ftell(arq);
-                fseek(arq, 0, SEEK_SET);
-                buffer_period = malloc ((sizeof(char) * tam) + 1);
-                if (buffer_period)
-                    fread(buffer_period, 1, tam, arq);
-            }
-            fclose(arq);
-            /* puts(buffer_period); */
+        case 'p' :
+            buffer_period = file_to_buffer(optarg);
             break;
 
         default:
@@ -72,11 +68,35 @@ int main(int argc, char **argv)
             break;
         }
     }
+
+    /* ################################################################### */
+
+    DIR *dirstream;
+    struct dirent *direntry;
+
+    dirstream = opendir(dir_path);
+    if (! dirstream){
+        printf("Falha em abrir o diretorio %s\n", dir_path);
+        exit(1);
+    }
+
+    /* varre as entradas do diretorio aberto */
+    for (;;){
+        /* pega a proxima entrada */
+        direntry = readdir(dirstream);
+        /* criterio de parada: se for nula, para */
+        if (! direntry)
+            break;
+
+        /* encontra os periodicos no xml e os 
+        guarda num vetor de strings(matriz) */
         
-    // Leio do curriculo, guardo o periodico numa string.
+        
 
-    char *periodicos_cvs;
+    }   
 
-    
 
+
+    free(buffer_conf);
+    free(buffer_period);
 }
