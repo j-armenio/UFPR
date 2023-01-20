@@ -3,36 +3,61 @@
 #include <string.h>
 
 #define LINESIZE 1024
-#define TAM 1024
 
 /* Ex 1 */
 void numero_de_caracteres_txt(){
     FILE *arq;
-    char txt_title[TAM];
-    char c;
-    int cont;
+    int count = 0;
+    char c = 0;
+    char string[LINESIZE+1];
 
-    scanf("%s", txt_title);
-    
+    scanf("%s", string);
+
     /* abre o arquivo para leitura */
-    arq = fopen("poema1.txt", "r");
-    if (! arq){
-        printf("Erro ao abrir %s\n", txt_title);
+    arq = fopen(string, "r");
+    if (!arq){
+        printf("Erro ao abrir arquivo.\n");
         exit(1);
     }
 
-    /* le os caracteres ate o fim do arquivo */
-    c = fgetc (arq);
-    while (c != EOF){
-        cont++;
+    /* le caracter do arquivo */
+    c = fgetc(arq); /* le um caractere */
+    
+    while (c != EOF){ /* enquanto eh diferente do fim do arquivo */
+        count++;
         c = fgetc(arq);
     }
 
     fclose(arq);
 
-    printf("%d\n", cont);
+    printf("%d\n", count);
+}
+
+void numero_de_caracteres_2(){
+    FILE *arq;
+    char string[LINESIZE+1];
+
+    scanf("%s", string);
+
+    arq = fopen(string, "r");
+    if (!arq){
+        perror("Erro ao abrir arquivo.\n");
+        exit(1);
+    }
+
+    fseek(arq, 0, SEEK_END);
+    printf("%ld\n", ftell(arq));
+    fclose(arq);
+}
+
+/* Ex 2 */
+void le_e_faz_media(){
+    FILE *arq;
+
+    scanf("%s", string);
+
 }
 
 int main(){
-    numero_de_caracteres_txt();
+
 }
