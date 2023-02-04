@@ -1,8 +1,9 @@
 #include <stdlib.h>
 
 typedef struct HtItem {
-    char *table;
+    int table;
     int data;
+    int index;
 } HtItem;
 
 HtItem *createTable();

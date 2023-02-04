@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "myht.h"
+#include "hasht.h"
 
 #define TABLE_SIZE 11
 
@@ -32,8 +32,6 @@ HtItem *createTable()
     HsT = malloc(sizeof(HtItem) * TABLE_SIZE);
     mustInit(HsT, "Tabela");
 
-    /* DAR MALLOCA NAS TABLE */
-
     for (i = 0; i < TABLE_SIZE; i++){
         HsT[i].data = 0;
         HsT[i].table = 0;
@@ -53,18 +51,20 @@ int insertHt(HtItem *T1, HtItem *T2, int key)
     int pos1 = key % TABLE_SIZE;
     int posaux;
 
-    /* printf("pos1:%d pos2:%d\n", pos1, pos2); */
-
     /* Verifica se a pos na T1 esta ocupada */
     if ((T1[pos1].data == 0) || (T1[pos1].data == -1)){
         T1[pos1].data = key;
-        T1[pos1].table = "T1";
+        T1[pos1].table = 1;
+        T1[pos1].index = pos1;
     }
     else{ /* se já estiver ocupada, colocar na T2 */
         posaux = floor(TABLE_SIZE * (T1[pos1].data * 0.9 - floor(T1[pos1].data * 0.9)));
         T2[posaux].data = T1[pos1].data;
+        T2[posaux].table = 2;
+        T2[posaux].index = posaux;
         T1[pos1].data = key;
-        T1[pos1].table = "T2";
+        T1[pos1].table = 1;
+        T1[pos1].index = pos1;
     }
     return 1;
 }
@@ -82,43 +82,41 @@ int removeHt(HtItem *T1, HtItem *T2, int key)
     return 1;
 }
 
+int compareItens(const void *a, const void *b)
+{
+    HtItem *item1 = (HtItem *) a;
+    HtItem *item2 = (HtItem *) b;
+    
+    return (item1->data - item2->data);
+}
 
 void printTables(HtItem *T1, HtItem *T2)
 {
     int i, j;
-    int count = 0;
-    char *curTb = malloc(sizeof(char) * 3);
+    j = 0;
 
-    /* conta a quantidade de impressões que devem ser feitas*/
+    HtItem *resultTable = malloc(sizeof(HtItem) * TABLE_SIZE * 2);
+
+    /* Insere todas chaves de ambas tabelas em um array */
     for (i = 0; i < TABLE_SIZE; i++){
-        if ((T1[i].data != -1) && (T1[i].data != 0)){
-            count++;
+        if ((T1[i].data != 0) && (T1[i].data != -1)){
+            resultTable[j] = T1[i];
+            j++;
         }
-        if ((T2[i].data != -1) && (T2[i].data != 0)){
-            count++;
+    }
+    for (i = 0; i < TABLE_SIZE; i++){
+        if ((T2[i].data != 0) && (T2[i].data != -1)){
+            resultTable[j] = T2[i];
+            j++;
         }
     }
 
-    /* Pega a menor chave da tabela */
-    int menor = T1[0].data;
-    for (i = 1; i < TABLE_SIZE; i++){
-        if (T1[i].data < menor){
-            menor = T1[i].data;
-            curTb = "T1";
-        }
-    }
+    qsort(resultTable, TABLE_SIZE, sizeof(HtItem), compareItens);
 
-    for (i = 0; i < count; i++){
-        for (j = 0; j < TABLE_SIZE; j++){
-            if (T1[j].data < menor){
-                menor = T1[j].data;
-                curTb = "T1";
-            }
-            if (T2[j].data < menor){
-                menor = T2[j].data;
-                curTb = "T2";
-            }
+    /* Imprime os valores do array */
+    for (i = 0; i < TABLE_SIZE; i++){
+        if ((resultTable[i].data != 0) && (resultTable[i].data != -1)){
+            printf("%d,T%d,%d\n", resultTable[i].data, resultTable[i].table, resultTable[i].index);
         }
-        printf("%d,%s,%d\n", menor, curTb, j);
     }
 }

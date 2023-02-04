@@ -4,13 +4,13 @@ LDFLAGS = -lm
 CC = gcc
 
 # arquivos-objeto
-	objects = main.o myht.o
+	objects = main.o hasht.o
      
 all: $(objects)
-	$(CC) -o main $(objects) $(LDFLAGS)
+	$(CC) -o myht $(objects) $(LDFLAGS)
 
-myht.o: myht.c
-	$(CC) -c $(CFLAGS) myht.c
+hasht.o: hasht.c
+	$(CC) -c $(CFLAGS) hasht.c
 
 clean:
 	rm -f $(objects) index
