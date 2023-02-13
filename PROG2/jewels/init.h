@@ -1,10 +1,11 @@
 #ifndef __INIT_H__
 #define __INIT_H__
 
-#define DISPLAY_HEIGHT 900
-#define DISPLAY_WIDTH 1600
+#include "structs.h"
 
-void mustInit(bool test, const char *description);
-void initAll(ALLEGRO_DISPLAY *disp, ALLEGRO_EVENT_QUEUE *evQueue);
+#define DISPLAY_WIDTH 1280
+#define DISPLAY_HEIGHT 720
+
+void initAll(gameManager_t *gm);
 
 #endif

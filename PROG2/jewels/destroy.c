@@ -1,5 +1,3 @@
-/* Funções que liberam a memória alocada */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <allegro5/allegro.h>
@@ -8,15 +6,12 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_ttf.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "destroy.h"
-#include "init.h"
 
-void freeAll(ALLEGRO_DISPLAY *disp)
+void freeAll(gameManager_t *gm)
 {
-    /* al_destroy_bitmap(background); */
-    /* al_destroy_font() */
-    al_destroy_display(disp);
+    /* da segfault sla pq */
+    /* al_destroy_display(gm->disp); */
+
+    free(gm);
 }

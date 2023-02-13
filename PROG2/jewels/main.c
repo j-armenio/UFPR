@@ -7,28 +7,19 @@
 #include <allegro5/allegro_ttf.h>
 
 #include "init.h"
-#include "draw.h"
 #include "structs.h"
 #include "destroy.h"
 
 int main()
 {
-    /* Variáveis do Allegro */
-    ALLEGRO_DISPLAY *disp = NULL;
-    ALLEGRO_EVENT_QUEUE *evQueue = NULL;
-    ALLEGRO_BITMAP *background = NULL;
-    ALLEGRO_FONT *titleFont = NULL;
-    ALLEGRO_FONT *mainFont = NULL;
+    gameManager_t *gm = NULL;
 
-    /* Variáveis */
+    /* Inicializa o gameManager, Allegro e suas extensoes*/
+    initAll(gm);
 
-    /* Inicializa o Allegro e suas extensões */
-    initAll(disp, evQueue);
+    /* Desenha a matriz e atribui uma crop para cada espaço na matriz */
+    /* drawGame(gm); */
 
-    loadFiles(background, titleFont, mainFont);
-
-    drawLevel();
-
-    /* Libera toda memória alocada */
-    freeAll(disp);
+    /* Libera toda memoria alocada */
+    freeAll(gm);
 }

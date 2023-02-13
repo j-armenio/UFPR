@@ -1,6 +1,8 @@
 #ifndef __DESTROY_H__
 #define __DESTROY_H__
 
-void freeAll(ALLEGRO_DISPLAY *disp);
+#include "structs.h"
+
+void freeAll(gameManager_t *gm);
 
 #endif
