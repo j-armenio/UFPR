@@ -11,6 +11,8 @@
 void freeAll(gameManager_t *gm)
 {
     al_destroy_display(gm->disp);
+    al_destroy_timer(gm->timer);
+    al_destroy_event_queue(gm->evQueue);
 
     free(gm);
 }

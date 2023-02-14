@@ -61,12 +61,14 @@ void drawFirstGame(gameManager_t *gm)
         }
     }
 
-    /* desenha os peixes na tela */
+    /* desenha os peixes na tela - REFAZER O JEITO DE DESENHAR AQUI */
     int aux1, aux2;
     aux1 = aux2 = 0;
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
             al_draw_bitmap(gm->matrix[i][j].sprite, OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+            gm->matrix[i][j].fishX = OFFSET_X + aux1;
+            gm->matrix[i][j].fishY = OFFSET_Y + aux2;
             aux2 += 80;
         }
         aux1 += 80;
@@ -74,7 +76,7 @@ void drawFirstGame(gameManager_t *gm)
     }
 
     /* Desenha o resto da UI */
-    al_draw_bitmap(gm->otherBitmaps[SCORE_BOARD], 40, 10, 0);
-    al_draw_bitmap(gm->otherBitmaps[OBJECTIVE_BOARD], 20, 200, 0);
+    al_draw_bitmap(gm->otherBitmaps[SCORE_BOARD], 220, 120, 0);
+    al_draw_bitmap(gm->otherBitmaps[OBJECTIVE_BOARD], 275, 320, 0);
 
 }

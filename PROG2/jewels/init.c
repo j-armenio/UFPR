@@ -63,18 +63,18 @@ void initAllegro()
 
 gameManager_t *initGameManager()
 {
-    /* aloca memoria para o gm */
+    /* aloca memoria e inicializa os componentes de gm */
     gameManager_t *gm = (gameManager_t *) malloc(sizeof(gameManager_t));
 
-    /* inicializa o display */
     gm->disp = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
     mustInit(gm->disp, "display");
-
     al_set_window_title(gm->disp, "Fishing Crush");
 
-    /* inicializa a fila de eventos */
     gm->evQueue = al_create_event_queue();
     mustInit(gm->evQueue, "evQueue");
+
+    gm->timer = al_create_timer(1.0 / FPS);
+    mustInit(gm->timer, "timer");
 
     /* aloca a matriz de peixes */
     gm->matrix = malloc(sizeof(fish_t *) * MATRIX_SIZE);
@@ -82,6 +82,8 @@ gameManager_t *initGameManager()
     int i;
     for (i = 0; i < MATRIX_SIZE; i++)
         gm->matrix[i] = malloc(sizeof(fish_t) * MATRIX_SIZE);
+
+    gm->mouseX = gm->mouseY = 0;
 
     /* carrega os addons do jogo */ 
     loadAddons(gm);

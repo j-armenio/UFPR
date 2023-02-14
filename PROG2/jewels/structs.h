@@ -13,6 +13,7 @@
 #define OFFSET_X 690
 #define OFFSET_Y 125
 #define BETWEEN_FISHES 80
+#define FPS 60
 
 enum State {
     STARTING, 
@@ -40,12 +41,15 @@ enum OthersBitmaps {
 };
 
 enum Fonts {
-    MAIN_FONT, 
-    TITLE_FONT
+    MAIN_FONT,
+    TITLE_FONT,
+    DIALOG_FONT
 };
 
 typedef struct fish {
     int fishID;
+    int fishX;
+    int fishY;
     ALLEGRO_BITMAP *sprite;
 } fish_t;
 
@@ -55,7 +59,10 @@ typedef struct gameManager {
     ALLEGRO_BITMAP *backgrounds[2];
     ALLEGRO_BITMAP *otherBitmaps[5];
     ALLEGRO_EVENT_QUEUE *evQueue;
+    ALLEGRO_TIMER *timer;
     fish_t **matrix;
+    int mouseX;
+    int mouseY;
 } gameManager_t;
 
 #endif
