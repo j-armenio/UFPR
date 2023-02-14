@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_audio.h>
@@ -14,6 +15,8 @@
 
 int main()
 {
+    srand(time(NULL));
+
     gameManager_t *gm = NULL;
 
     /* Inicializa o Allegro, suas extensoes e o gameManager */

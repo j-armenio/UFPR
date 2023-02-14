@@ -13,7 +13,7 @@
 #define OFFSET_X 690
 #define OFFSET_Y 125
 #define BETWEEN_FISHES 80
-#define FPS 60
+#define FPS 60.0
 
 enum State {
     STARTING, 
@@ -27,7 +27,12 @@ enum BitmapFishes {
     FISH_1,
     FISH_2,
     FISH_3,
-    FISH_4
+    FISH_4,
+    FISH_0_SELECTED,
+    FISH_1_SELECTED,
+    FISH_2_SELECTED,
+    FISH_3_SELECTED,
+    FISH_4_SELECTED,
 };
 
 enum BitmapBackgrounds {
@@ -43,26 +48,31 @@ enum OthersBitmaps {
 enum Fonts {
     MAIN_FONT,
     TITLE_FONT,
-    DIALOG_FONT
+    DIALOGUE_FONT
 };
 
 typedef struct fish {
     int fishID;
     int fishX;
     int fishY;
-    ALLEGRO_BITMAP *sprite;
+    int fishMoveX;
+    int fishMoveY;
+    int selected;
+    ALLEGRO_BITMAP *sprite[2];
 } fish_t;
 
 typedef struct gameManager {
     ALLEGRO_DISPLAY *disp;
-    ALLEGRO_BITMAP *fishes[5];
+    ALLEGRO_BITMAP *fishes[10];
     ALLEGRO_BITMAP *backgrounds[2];
     ALLEGRO_BITMAP *otherBitmaps[5];
+    ALLEGRO_FONT *fonts[3];
     ALLEGRO_EVENT_QUEUE *evQueue;
     ALLEGRO_TIMER *timer;
     fish_t **matrix;
     int mouseX;
     int mouseY;
+    int selected;
 } gameManager_t;
 
 #endif

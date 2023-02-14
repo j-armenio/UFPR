@@ -12,14 +12,14 @@ CFLAGS = -g -Wall -std=c99 `$(PKG_CONFIG) --cflags $(ALLEGRO_LIBS)`
 LIBS = `$(PKG_CONFIG) --libs $(ALLEGRO_LIBS)`
 
 # arquivos-objeto
-OBJ = main.o init.o structs.o destroy.o draw.o run.o
+OBJ = main.o init.o structs.o destroy.o draw.o run.o update.o
 
 all:main
 
 main: $(OBJ)
 		$(CC) -o main $(OBJ) $(LIBS)
 
-main.o: main.o init.o structs.o destroy.o draw.o run.o
+main.o: main.o init.o structs.o destroy.o draw.o run.o update.o
 		$(CC) -c main.c $(CFLAGS) 
 
 structs.o: structs.c structs.h
@@ -36,6 +36,9 @@ draw.o: draw.c draw.h
 
 run.o: run.c run.h
 		$(CC) -c run.c $(CFLAGS)
+
+update.o: update.c update.h
+		$(CC) -c update.c $(CFLAGS)
 
 clean:
 		-rm -f *~ $(OBJ) 

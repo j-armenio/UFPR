@@ -26,6 +26,22 @@ void mustInit(bool test, const char *description)
     exit(1);
 }
 
+int getRandomFish()
+{
+    int ID = rand() % 5;
+
+    if (ID == 0)
+        return FISH_0;
+    else if (ID == 1)
+        return FISH_1;
+    else if (ID == 2)
+        return FISH_2;
+    else if (ID == 3)
+        return FISH_3;
+    else
+        return FISH_4;
+}
+
 void loadAddons(gameManager_t *gm)
 {
     /* Carrega os sprites dos peixes */
@@ -34,6 +50,12 @@ void loadAddons(gameManager_t *gm)
     gm->fishes[FISH_2] = al_load_bitmap("addons/images/fish2.png");
     gm->fishes[FISH_3] = al_load_bitmap("addons/images/fish3.png");
     gm->fishes[FISH_4] = al_load_bitmap("addons/images/fish4.png");
+    gm->fishes[FISH_0_SELECTED] = al_load_bitmap("addons/images/fish0_selected.png");
+    gm->fishes[FISH_1_SELECTED] = al_load_bitmap("addons/images/fish1_selected.png");
+    gm->fishes[FISH_2_SELECTED] = al_load_bitmap("addons/images/fish2_selected.png");
+    gm->fishes[FISH_3_SELECTED] = al_load_bitmap("addons/images/fish3_selected.png");
+    gm->fishes[FISH_4_SELECTED] = al_load_bitmap("addons/images/fish4_selected.png");
+
 
     /* Carrega as imagens de fundo */
     gm->backgrounds[BACKGROUND_GAME] = al_load_bitmap("addons/images/background_game.jpg");
@@ -43,6 +65,49 @@ void loadAddons(gameManager_t *gm)
     gm->otherBitmaps[SCORE_BOARD] = al_load_bitmap("addons/images/scoreBoard.png");
 
     /* Carrega as fontes */
+    gm->fonts[MAIN_FONT] = al_load_ttf_font("addons/fonts/StVlRegular.ttf", 20, 0);
+    gm->fonts[TITLE_FONT] = al_load_ttf_font("addons/fonts/StVlAllCaps.ttf", 20, 0);
+    gm->fonts[DIALOGUE_FONT] = al_load_ttf_font("addons/fonts/StVlDialogue.ttf", 20, 0);
+}
+
+/* Inicializa apenas a parte logica da matriz */
+void startMatrix(gameManager_t *gm)
+{
+    /* gera um peixe para cada espaço da matriz */
+    int i, j;
+    for (i = 0; i < MATRIX_SIZE; i++){
+        for (j = 0; j < MATRIX_SIZE; j++){
+            gm->matrix[i][j].fishID = getRandomFish();
+            gm->matrix[i][j].selected = 0;
+            gm->matrix[i][j].fishMoveX = 0;
+            gm->matrix[i][j].fishMoveY = 0;
+        }
+    }
+
+    for (i = 0; i < MATRIX_SIZE; i++){
+        for (j = 0; j < MATRIX_SIZE; j++){
+            if (gm->matrix[i][j].fishID == FISH_0){
+                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_0];
+                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_0_SELECTED];
+            }
+            else if (gm->matrix[i][j].fishID == FISH_1){
+                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_1];
+                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_1_SELECTED];
+            }
+            else if (gm->matrix[i][j].fishID == FISH_2){
+                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_2];
+                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_2_SELECTED];
+            }
+            else if (gm->matrix[i][j].fishID == FISH_3){
+                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_3];
+                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_3_SELECTED];
+            }
+            else if (gm->matrix[i][j].fishID == FISH_4){
+                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_4];
+                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_4_SELECTED];
+            }
+        }
+    }
 }
 
 /* ------------- Funcoes globais -------------*/
@@ -84,9 +149,11 @@ gameManager_t *initGameManager()
         gm->matrix[i] = malloc(sizeof(fish_t) * MATRIX_SIZE);
 
     gm->mouseX = gm->mouseY = 0;
+    gm->selected = 0;
 
     /* carrega os addons do jogo */ 
     loadAddons(gm);
+    startMatrix(gm);
 
     return gm;
 }

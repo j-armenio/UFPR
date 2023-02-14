@@ -9,17 +9,90 @@
 #include "run.h"
 #include "structs.h"
 #include "draw.h"
+#include "update.h"
 
 void runGame(gameManager_t *gm)
 {
+    al_register_event_source(gm->evQueue, al_get_timer_event_source(gm->timer));
+    al_register_event_source(gm->evQueue, al_get_display_event_source(gm->disp));
+    al_register_event_source(gm->evQueue, al_get_keyboard_event_source());
+    al_register_event_source(gm->evQueue, al_get_mouse_event_source());
+
     bool done = false;
+    bool redraw = true;
+    ALLEGRO_EVENT ev;
 
-    while (! done)
+    al_start_timer(gm->timer);
+
+    /* Loop principal do jogo */
+    while (1)
     {
-        drawFirstGame(gm);
+        al_wait_for_event(gm->evQueue, &ev);
 
-        al_flip_display();
-        al_rest(50.0);
-        done = true;
+        switch (ev.type)
+        {
+            case ALLEGRO_EVENT_TIMER:
+                /* game logic */
+
+                /* if (selected == 2){ */
+                    /* checa se rolou um match
+                    if (match){
+                        logica de match
+                    } else {
+                        deseleciona os peixes
+                    }
+                    selected = 0;
+                    
+                } */
+                redraw = true;
+                break;
+
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                done = true;
+                break;
+            
+            case ALLEGRO_EVENT_KEY_DOWN:
+                switch (ev.keyboard.keycode)
+                {
+                    case ALLEGRO_KEY_ESCAPE:
+                        done = true;
+                        break;
+                }
+                break;
+
+            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+                gm->mouseX = ev.mouse.x;
+                gm->mouseY = ev.mouse.y;
+
+                /* 
+                selected tem 3 estados:
+                    0 - nenhum selecionado
+                    1 - um selecionado
+                    2 - dois selecionados 
+                */
+
+                if (gm->selected == 0){
+                    if (isFishSelected(gm)){
+                        gm->selected = 1;
+                    }
+                }
+                else if (gm->selected == 1){
+                    if (isFishSelected(gm)){
+                        gm->selected = 2;
+                    }
+                }
+                break;
+        }
+
+        if (done)
+            break;
+
+        if (redraw && al_is_event_queue_empty(gm->evQueue))
+        {
+            updateVisual(gm);
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 100, 0, "Mouse X: %d, Mouse Y: %d", gm->mouseX, gm->mouseY);
+            al_flip_display();
+            redraw = false;
+        }
     }
 }

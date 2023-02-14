@@ -3,6 +3,6 @@
 
 #include "structs.h"
 
-void drawFirstGame(gameManager_t *gm);
+void updateVisual(gameManager_t *gm);
 
 #endif

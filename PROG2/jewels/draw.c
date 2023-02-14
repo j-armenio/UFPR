@@ -10,63 +10,29 @@
 #include "structs.h"
 
 /* ------------- Prototypes ------------- */
-void drawFirstGame(gameManager_t *gm);
+void updateVisual(gameManager_t *gm);
 
 /* ------------- Funcoes internas ------------- */
 
-int getRandomFish()
-{
-    int ID = rand() % 5;
-
-    if (ID == 0)
-        return FISH_0;
-    else if (ID == 1)
-        return FISH_1;
-    else if (ID == 2)
-        return FISH_2;
-    else if (ID == 3)
-        return FISH_3;
-    else
-        return FISH_4;
-}
-
 /* ------------- Funcoes globais -------------*/
 
-void drawFirstGame(gameManager_t *gm)
+/* Atualiza A PARTE VISUAL */
+void updateVisual(gameManager_t *gm)
 {
-    srand(time(NULL));
+    int i, j;
 
     al_draw_bitmap(gm->backgrounds[BACKGROUND_GAME], 0, 0, 0);
 
-    /* gera um peixe para cada espaço da matriz */
-    int i, j;
-    for (i = 0; i < MATRIX_SIZE; i++){
-        for (j = 0; j < MATRIX_SIZE; j++){
-            gm->matrix[i][j].fishID = getRandomFish();
-        }
-    }
-
-    for (i = 0; i < MATRIX_SIZE; i++){
-        for (j = 0; j < MATRIX_SIZE; j++){
-            if (gm->matrix[i][j].fishID == FISH_0)
-                gm->matrix[i][j].sprite = gm->fishes[FISH_0];
-            else if (gm->matrix[i][j].fishID == FISH_1)
-                gm->matrix[i][j].sprite = gm->fishes[FISH_1];
-            else if (gm->matrix[i][j].fishID == FISH_2)
-                gm->matrix[i][j].sprite = gm->fishes[FISH_2];
-            else if (gm->matrix[i][j].fishID == FISH_3)
-                gm->matrix[i][j].sprite = gm->fishes[FISH_3];
-            else if (gm->matrix[i][j].fishID == FISH_4)
-                gm->matrix[i][j].sprite = gm->fishes[FISH_4];
-        }
-    }
-
-    /* desenha os peixes na tela - REFAZER O JEITO DE DESENHAR AQUI */
+    /* desenha os peixes na tela */
     int aux1, aux2;
     aux1 = aux2 = 0;
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            al_draw_bitmap(gm->matrix[i][j].sprite, OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+            if (gm->matrix[i][j].selected){
+                al_draw_bitmap(gm->matrix[i][j].sprite[1], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+            } else {
+                al_draw_bitmap(gm->matrix[i][j].sprite[0], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+            }
             gm->matrix[i][j].fishX = OFFSET_X + aux1;
             gm->matrix[i][j].fishY = OFFSET_Y + aux2;
             aux2 += 80;
