@@ -9,16 +9,19 @@
 #include "init.h"
 #include "structs.h"
 #include "destroy.h"
+#include "draw.h"
+#include "run.h"
 
 int main()
 {
     gameManager_t *gm = NULL;
 
-    /* Inicializa o gameManager, Allegro e suas extensoes*/
-    initAll(gm);
+    /* Inicializa o Allegro, suas extensoes e o gameManager */
+    initAllegro();
+    gm = initGameManager();
 
-    /* Desenha a matriz e atribui uma crop para cada espaço na matriz */
-    /* drawGame(gm); */
+    /* Roda toda logica do jogo */
+    runGame(gm);
 
     /* Libera toda memoria alocada */
     freeAll(gm);

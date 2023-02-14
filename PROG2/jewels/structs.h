@@ -9,8 +9,10 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_ttf.h>
 
-#define MAT_ROWS 8
-#define MAT_COLS 8
+#define MATRIX_SIZE 7
+#define OFFSET_X 690
+#define OFFSET_Y 125
+#define BETWEEN_FISHES 80
 
 enum State {
     STARTING, 
@@ -19,12 +21,12 @@ enum State {
     ENDPHASE
 };
 
-enum BitmapCrops {
-    CROP_0,
-    CROP_1,
-    CROP_2,
-    CROP_3,
-    CROP_4
+enum BitmapFishes {
+    FISH_0,
+    FISH_1,
+    FISH_2,
+    FISH_3,
+    FISH_4
 };
 
 enum BitmapBackgrounds {
@@ -32,20 +34,28 @@ enum BitmapBackgrounds {
     BACKGROUND_GAME
 };
 
+enum OthersBitmaps {
+    SCORE_BOARD,
+    OBJECTIVE_BOARD
+};
+
 enum Fonts {
     MAIN_FONT, 
     TITLE_FONT
 };
 
+typedef struct fish {
+    int fishID;
+    ALLEGRO_BITMAP *sprite;
+} fish_t;
+
 typedef struct gameManager {
     ALLEGRO_DISPLAY *disp;
-    ALLEGRO_BITMAP *crops[5];
+    ALLEGRO_BITMAP *fishes[5];
     ALLEGRO_BITMAP *backgrounds[2];
+    ALLEGRO_BITMAP *otherBitmaps[5];
+    ALLEGRO_EVENT_QUEUE *evQueue;
+    fish_t **matrix;
 } gameManager_t;
-
-typedef struct crop {
-    int crop;
-    ALLEGRO_BITMAP *img;
-} crop_t;
 
 #endif

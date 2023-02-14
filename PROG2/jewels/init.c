@@ -9,7 +9,7 @@
 #include "init.h"
 #include "structs.h"
 
-/* Prototypes */
+/* ------------- Prototypes ------------- */
 void mustInit(bool test, const char *description);
 void initAll(gameManager_t *gm);
 void loadBitmaps(gameManager_t *gm);
@@ -26,17 +26,29 @@ void mustInit(bool test, const char *description)
     exit(1);
 }
 
-void loadBitmaps(gameManager_t *gm)
+void loadAddons(gameManager_t *gm)
 {
+    /* Carrega os sprites dos peixes */
+    gm->fishes[FISH_0] = al_load_bitmap("addons/images/fish0.png");
+    gm->fishes[FISH_1] = al_load_bitmap("addons/images/fish1.png");
+    gm->fishes[FISH_2] = al_load_bitmap("addons/images/fish2.png");
+    gm->fishes[FISH_3] = al_load_bitmap("addons/images/fish3.png");
+    gm->fishes[FISH_4] = al_load_bitmap("addons/images/fish4.png");
+
+    /* Carrega as imagens de fundo */
     gm->backgrounds[BACKGROUND_GAME] = al_load_bitmap("addons/images/background_game.jpg");
+
+    /* Carrega as outras imagens */
+    gm->otherBitmaps[OBJECTIVE_BOARD] = al_load_bitmap("addons/images/objectiveBoard.png");
+    gm->otherBitmaps[SCORE_BOARD] = al_load_bitmap("addons/images/scoreBoard.png");
+
+    /* Carrega as fontes */
 }
 
-/* ------------- Funcoes externas -------------*/
+/* ------------- Funcoes globais -------------*/
 
-void initAll(gameManager_t *gm)
+void initAllegro()
 {
-    gm = malloc(sizeof(gameManager_t));
-
     /* inicialização do allegro */
     mustInit(al_init(), "allegro");
 
@@ -47,17 +59,32 @@ void initAll(gameManager_t *gm)
     mustInit(al_install_audio(), "audio");
     mustInit(al_install_mouse(), "mouse");
     mustInit(al_install_keyboard(), "keyboard");
+}
 
+gameManager_t *initGameManager()
+{
+    /* aloca memoria para o gm */
+    gameManager_t *gm = (gameManager_t *) malloc(sizeof(gameManager_t));
+
+    /* inicializa o display */
     gm->disp = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
     mustInit(gm->disp, "display");
 
-    al_set_window_title(gm->disp, "Jewels");
+    al_set_window_title(gm->disp, "Fishing Crush");
 
-    /* carregando addons */
-    loadBitmaps(gm);
+    /* inicializa a fila de eventos */
+    gm->evQueue = al_create_event_queue();
+    mustInit(gm->evQueue, "evQueue");
 
-    al_draw_bitmap(gm->backgrounds[BACKGROUND_GAME], 0, 0, 0);
+    /* aloca a matriz de peixes */
+    gm->matrix = malloc(sizeof(fish_t *) * MATRIX_SIZE);
 
-    al_flip_display();
-    al_rest(30.0);
+    int i;
+    for (i = 0; i < MATRIX_SIZE; i++)
+        gm->matrix[i] = malloc(sizeof(fish_t) * MATRIX_SIZE);
+
+    /* carrega os addons do jogo */ 
+    loadAddons(gm);
+
+    return gm;
 }

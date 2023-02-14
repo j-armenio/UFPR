@@ -6,6 +6,7 @@
 #define DISPLAY_WIDTH 1280
 #define DISPLAY_HEIGHT 720
 
-void initAll(gameManager_t *gm);
+void initAllegro();
+gameManager_t *initGameManager();
 
 #endif

@@ -10,8 +10,7 @@
 
 void freeAll(gameManager_t *gm)
 {
-    /* da segfault sla pq */
-    /* al_destroy_display(gm->disp); */
+    al_destroy_display(gm->disp);
 
     free(gm);
 }
