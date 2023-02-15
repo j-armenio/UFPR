@@ -32,18 +32,8 @@ void runGame(gameManager_t *gm)
         switch (ev.type)
         {
             case ALLEGRO_EVENT_TIMER:
-                /* game logic */
+                updateLogic(gm);
 
-                /* if (selected == 2){ */
-                    /* checa se rolou um match
-                    if (match){
-                        logica de match
-                    } else {
-                        deseleciona os peixes
-                    }
-                    selected = 0;
-                    
-                } */
                 redraw = true;
                 break;
 
@@ -91,6 +81,7 @@ void runGame(gameManager_t *gm)
         {
             updateVisual(gm);
             al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 100, 0, "Mouse X: %d, Mouse Y: %d", gm->mouseX, gm->mouseY);
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 120, 0, "selected: %d", gm->selected);
             al_flip_display();
             redraw = false;
         }

@@ -9,11 +9,6 @@
 #include "init.h"
 #include "structs.h"
 
-/* ------------- Prototypes ------------- */
-void mustInit(bool test, const char *description);
-void initAll(gameManager_t *gm);
-void loadBitmaps(gameManager_t *gm);
-
 /* ------------- Funcoes internas -------------*/
 
 /* Função que verifica se algo foi iniciado corretamente */
@@ -56,7 +51,6 @@ void loadAddons(gameManager_t *gm)
     gm->fishes[FISH_3_SELECTED] = al_load_bitmap("addons/images/fish3_selected.png");
     gm->fishes[FISH_4_SELECTED] = al_load_bitmap("addons/images/fish4_selected.png");
 
-
     /* Carrega as imagens de fundo */
     gm->backgrounds[BACKGROUND_GAME] = al_load_bitmap("addons/images/background_game.jpg");
 
@@ -77,35 +71,42 @@ void startMatrix(gameManager_t *gm)
     int i, j;
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            gm->matrix[i][j].fishID = getRandomFish();
-            gm->matrix[i][j].selected = 0;
-            gm->matrix[i][j].fishMoveX = 0;
-            gm->matrix[i][j].fishMoveY = 0;
+            gm->matrix[i][j]->fishID = getRandomFish();
+            gm->matrix[i][j]->selected = 0;
+            gm->matrix[i][j]->fishMoveX = 0;
+            gm->matrix[i][j]->fishMoveY = 0;
         }
     }
 
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            if (gm->matrix[i][j].fishID == FISH_0){
-                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_0];
-                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_0_SELECTED];
+            if (gm->matrix[i][j]->fishID == FISH_0){
+                gm->matrix[i][j]->sprite[0] = gm->fishes[FISH_0];
+                gm->matrix[i][j]->sprite[1] = gm->fishes[FISH_0_SELECTED];
+                gm->matrix[i][j]->fishType = FISH_TYPE_0;
             }
-            else if (gm->matrix[i][j].fishID == FISH_1){
-                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_1];
-                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_1_SELECTED];
+            else if (gm->matrix[i][j]->fishID == FISH_1){
+                gm->matrix[i][j]->sprite[0] = gm->fishes[FISH_1];
+                gm->matrix[i][j]->sprite[1] = gm->fishes[FISH_1_SELECTED];
+                gm->matrix[i][j]->fishType = FISH_TYPE_1;
             }
-            else if (gm->matrix[i][j].fishID == FISH_2){
-                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_2];
-                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_2_SELECTED];
+            else if (gm->matrix[i][j]->fishID == FISH_2){
+                gm->matrix[i][j]->sprite[0] = gm->fishes[FISH_2];
+                gm->matrix[i][j]->sprite[1] = gm->fishes[FISH_2_SELECTED];
+                gm->matrix[i][j]->fishType = FISH_TYPE_2;
             }
-            else if (gm->matrix[i][j].fishID == FISH_3){
-                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_3];
-                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_3_SELECTED];
+            else if (gm->matrix[i][j]->fishID == FISH_3){
+                gm->matrix[i][j]->sprite[0] = gm->fishes[FISH_3];
+                gm->matrix[i][j]->sprite[1] = gm->fishes[FISH_3_SELECTED];
+                gm->matrix[i][j]->fishType = FISH_TYPE_3;
             }
-            else if (gm->matrix[i][j].fishID == FISH_4){
-                gm->matrix[i][j].sprite[0] = gm->fishes[FISH_4];
-                gm->matrix[i][j].sprite[1] = gm->fishes[FISH_4_SELECTED];
+            else if (gm->matrix[i][j]->fishID == FISH_4){
+                gm->matrix[i][j]->sprite[0] = gm->fishes[FISH_4];
+                gm->matrix[i][j]->sprite[1] = gm->fishes[FISH_4_SELECTED];
+                gm->matrix[i][j]->fishType = FISH_TYPE_4;
             }
+            gm->matrix[i][j]->matI = i;
+            gm->matrix[i][j]->matJ = j;
         }
     }
 }
@@ -141,17 +142,24 @@ gameManager_t *initGameManager()
     gm->timer = al_create_timer(1.0 / FPS);
     mustInit(gm->timer, "timer");
 
-    /* aloca a matriz de peixes */
+    /* aloca a matriz e os peixes */
+    int i, j;
     gm->matrix = malloc(sizeof(fish_t *) * MATRIX_SIZE);
-
-    int i;
     for (i = 0; i < MATRIX_SIZE; i++)
         gm->matrix[i] = malloc(sizeof(fish_t) * MATRIX_SIZE);
 
+    for (i = 0; i < MATRIX_SIZE; i++){
+        for (j = 0; j < MATRIX_SIZE; j++){
+            gm->matrix[i][j] = malloc(sizeof(fish_t));
+        }
+    }
+
     gm->mouseX = gm->mouseY = 0;
     gm->selected = 0;
+    
+    for (i = 0; i < 2; i++)
+        gm->selectedFishes[i] = NULL;
 
-    /* carrega os addons do jogo */ 
     loadAddons(gm);
     startMatrix(gm);
 

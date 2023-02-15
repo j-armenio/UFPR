@@ -15,10 +15,10 @@
 #define BETWEEN_FISHES 80
 #define FPS 60.0
 
-enum State {
+enum GameState {
     STARTING, 
-    STANDBY, 
-    PLAYING, 
+    STANDBY,
+    PLAYING,
     ENDPHASE
 };
 
@@ -33,6 +33,15 @@ enum BitmapFishes {
     FISH_2_SELECTED,
     FISH_3_SELECTED,
     FISH_4_SELECTED,
+};
+
+enum FishTypes {
+    FISH_TYPE_0,
+    FISH_TYPE_1,
+    FISH_TYPE_2,
+    FISH_TYPE_3,
+    FISH_TYPE_4,
+    FISH_TYPE_NULL
 };
 
 enum BitmapBackgrounds {
@@ -53,11 +62,14 @@ enum Fonts {
 
 typedef struct fish {
     int fishID;
+    int fishType;
     int fishX;
     int fishY;
     int fishMoveX;
     int fishMoveY;
     int selected;
+    int matI;
+    int matJ;
     ALLEGRO_BITMAP *sprite[2];
 } fish_t;
 
@@ -69,10 +81,12 @@ typedef struct gameManager {
     ALLEGRO_FONT *fonts[3];
     ALLEGRO_EVENT_QUEUE *evQueue;
     ALLEGRO_TIMER *timer;
-    fish_t **matrix;
+    fish_t ***matrix;
+    fish_t *selectedFishes[2];
     int mouseX;
     int mouseY;
     int selected;
+    int gameState;
 } gameManager_t;
 
 #endif

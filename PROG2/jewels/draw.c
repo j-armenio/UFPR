@@ -9,9 +9,6 @@
 #include "draw.h"
 #include "structs.h"
 
-/* ------------- Prototypes ------------- */
-void updateVisual(gameManager_t *gm);
-
 /* ------------- Funcoes internas ------------- */
 
 /* ------------- Funcoes globais -------------*/
@@ -28,13 +25,13 @@ void updateVisual(gameManager_t *gm)
     aux1 = aux2 = 0;
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            if (gm->matrix[i][j].selected){
-                al_draw_bitmap(gm->matrix[i][j].sprite[1], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+            if (gm->matrix[i][j]->selected){
+                al_draw_bitmap(gm->matrix[i][j]->sprite[1], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
             } else {
-                al_draw_bitmap(gm->matrix[i][j].sprite[0], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
+                al_draw_bitmap(gm->matrix[i][j]->sprite[0], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
             }
-            gm->matrix[i][j].fishX = OFFSET_X + aux1;
-            gm->matrix[i][j].fishY = OFFSET_Y + aux2;
+            gm->matrix[i][j]->fishX = OFFSET_X + aux1;
+            gm->matrix[i][j]->fishY = OFFSET_Y + aux2;
             aux2 += 80;
         }
         aux1 += 80;

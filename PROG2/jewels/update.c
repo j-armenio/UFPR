@@ -9,28 +9,48 @@
 #include "update.h"
 #include "structs.h"
 
-/* ------------- Prototypes ------------- */
-void checkMatch(gameManager_t *gm);
-void updateLogic(gameManager_t *gm);
-bool isFishSelected(gameManager_t *gm);
-
 /* ------------- Funcoes internas -------------*/
+
+void switchFishes(gameManager_t *gm, fish_t *fish1, fish_t *fish2)
+{
+    int auxI, auxJ;
+
+    auxI = fish1->matI;
+    auxJ = fish1->matJ;
+
+    fish1->matI = fish2->matI;
+    fish1->matJ = fish2->matJ;
+
+    fish2->matI = auxI;
+    fish2->matJ = auxJ;
+
+    gm->matrix[fish1->matI][fish1->matJ] = fish1;
+    gm->matrix[fish2->matI][fish2->matJ] = fish2;
+}
+
+bool checkMatch(gameManager_t *gm)
+{
+    /* percorre toda matriz procurando por um match */
+    int i, j;
+
+    /* !!!!!!PAREI AQUI!!!!!! */
+    /* varrer a matriz toda checando os tipos horizontalmente e verticalmente
+       caso ache um match, destruir todos. Separar caso de 3, 4 e 5> */
+
+}
 
 /* ------------- Funcoes globais -------------*/
 
 bool isFishSelected(gameManager_t *gm)
 {
-    /*
-    Preciso pegar as coordenadas do mouse e comparar com as coordenadas de cada peixe da matriz,
-    caso ela seja igual a alguma, eu ligo o selected no peixe e retorno true 
-    */
     int i, j;
 
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            if (gm->mouseX >= gm->matrix[i][j].fishX && gm->mouseX <= gm->matrix[i][j].fishX + 60 &&
-                gm->mouseY >= gm->matrix[i][j].fishY && gm->mouseY <= gm->matrix[i][j].fishY + 60){
-                    gm->matrix[i][j].selected = true;
+            if (gm->mouseX >= gm->matrix[i][j]->fishX && gm->mouseX <= gm->matrix[i][j]->fishX + 60 &&
+                gm->mouseY >= gm->matrix[i][j]->fishY && gm->mouseY <= gm->matrix[i][j]->fishY + 60){
+                    gm->matrix[i][j]->selected = true;
+                    gm->selectedFishes[gm->selected] = gm->matrix[i][j];
                     return true;
                 }
         }
@@ -38,9 +58,27 @@ bool isFishSelected(gameManager_t *gm)
     return false;
 }
 
-void checkMatch(gameManager_t *gm)
-{ }
-
 /* Atualiza a LOGICA */
 void updateLogic(gameManager_t *gm)
-{ }
+{
+    if (gm->selected == 2){
+        switchFishes(gm, gm->selectedFishes[0], gm->selectedFishes[1]);
+
+        gm->selectedFishes[0]->selected = false;
+        gm->selectedFishes[1]->selected = false;
+        gm->selected = 0;
+    }
+
+    /* inicializa e ja checka se tem match na matriz */
+
+
+    /* 
+    checa se tem match 
+    if (match)
+        remove os peixes no match
+    else
+        troca os peixes de volta
+    */
+    
+
+}
