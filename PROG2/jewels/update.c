@@ -28,15 +28,32 @@ void switchFishes(gameManager_t *gm, fish_t *fish1, fish_t *fish2)
     gm->matrix[fish2->matI][fish2->matJ] = fish2;
 }
 
+
 bool checkMatch(gameManager_t *gm)
 {
+
+    return true;
     /* percorre toda matriz procurando por um match */
     int i, j;
+    int match = 0;
 
-    /* !!!!!!PAREI AQUI!!!!!! */
     /* varrer a matriz toda checando os tipos horizontalmente e verticalmente
-       caso ache um match, destruir todos. Separar caso de 3, 4 e 5> */
+    caso ache um match de 3, 4 ou 5, destruir todos os peixes */
+    for (i = 0; i < MATRIX_SIZE; i++){
+        for (j = 0; j < MATRIX_SIZE; j++){
+            /* checa horizontalmente */
+            if (gm->matrix[i][j]->fishType == gm->matrix[i][j+1]->fishType &&
+                gm->matrix[i][j]->fishType == gm->matrix[i][j+2]->fishType){
+                    match++;
+                    gm->matrix[i][j]->matched = true;
+                    gm->matrix[i][j+1]->matched = true;
+                    gm->matrix[i][j+2]->matched = true;
+                }
+            /* checa verticalmente */
+        }
+    }
 
+    return true;
 }
 
 /* ------------- Funcoes globais -------------*/
@@ -60,25 +77,43 @@ bool isFishSelected(gameManager_t *gm)
 
 /* Atualiza a LOGICA */
 void updateLogic(gameManager_t *gm)
-{
-    if (gm->selected == 2){
-        switchFishes(gm, gm->selectedFishes[0], gm->selectedFishes[1]);
-
-        gm->selectedFishes[0]->selected = false;
-        gm->selectedFishes[1]->selected = false;
-        gm->selected = 0;
-    }
-
-    /* inicializa e ja checka se tem match na matriz */
-
-
+{   
     /* 
-    checa se tem match 
-    if (match)
-        remove os peixes no match
-    else
-        troca os peixes de volta
+    Fazer uma maquina de estados para cada fase do processo 
+    STANDBY - se selected == 2, troca os peixes
+    PROCESSING - checa se tem match, se tiver match, remove os peixes / se nao tiver match, troca os peixes de volta
     */
-    
 
+    bool done = false;
+
+    if (gm->selected == 2)
+        gm->logicState = SWITCHING;
+    else if (gm->logicState == STANDBY)
+        gm->logicState = PROCESSING;
+
+    while (! done)
+    {
+        switch (gm->logicState){
+            case SWITCHING:
+                switchFishes(gm, gm->selectedFishes[0], gm->selectedFishes[1]);
+                gm->selectedFishes[0]->selected = false;
+                gm->selectedFishes[1]->selected = false;
+                gm->selected = 0;
+                gm->logicState = PROCESSING;
+                break;
+            
+            case PROCESSING:
+                if (checkMatch(gm)){
+                    /* HOUVE MATCH, remove os peixes que deram match */
+                } else {
+                    /* NÃO HOUVE MATCH, retorna os selecionados para sua posição original */
+                }
+                gm->logicState = STANDBY;
+                break;
+            
+            case STANDBY:
+                done = true;
+                break;
+        }  
+    }
 }

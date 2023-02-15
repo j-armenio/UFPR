@@ -15,11 +15,10 @@
 #define BETWEEN_FISHES 80
 #define FPS 60.0
 
-enum GameState {
-    STARTING, 
+enum LogicState {
     STANDBY,
-    PLAYING,
-    ENDPHASE
+    SWITCHING,
+    PROCESSING
 };
 
 enum BitmapFishes {
@@ -68,6 +67,7 @@ typedef struct fish {
     int fishMoveX;
     int fishMoveY;
     int selected;
+    int matched;
     int matI;
     int matJ;
     ALLEGRO_BITMAP *sprite[2];
@@ -86,7 +86,7 @@ typedef struct gameManager {
     int mouseX;
     int mouseY;
     int selected;
-    int gameState;
+    int logicState;
 } gameManager_t;
 
 #endif

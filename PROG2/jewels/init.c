@@ -73,6 +73,7 @@ void startMatrix(gameManager_t *gm)
         for (j = 0; j < MATRIX_SIZE; j++){
             gm->matrix[i][j]->fishID = getRandomFish();
             gm->matrix[i][j]->selected = 0;
+            gm->matrix[i][j]->matched = 0;
             gm->matrix[i][j]->fishMoveX = 0;
             gm->matrix[i][j]->fishMoveY = 0;
         }
@@ -156,6 +157,7 @@ gameManager_t *initGameManager()
 
     gm->mouseX = gm->mouseY = 0;
     gm->selected = 0;
+    gm->logicState = STANDBY;
     
     for (i = 0; i < 2; i++)
         gm->selectedFishes[i] = NULL;
