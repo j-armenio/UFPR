@@ -20,7 +20,12 @@ void drawMainMenu(gameManager_t *gm)
 
 void drawTopScoreUI(gameManager_t *gm)
 {
-    al_draw_bitmap(gm->otherBitmaps[TOP_SCORE_UI], 0, 0, 0);
+    al_draw_bitmap(gm->otherBitmaps[TOP_SCORE_UI], 250, 0, 0);
+}
+
+void drawCreditsUI(gameManager_t *gm)
+{
+    al_draw_bitmap(gm->otherBitmaps[CREDITS_UI], 150, 0, 0);
 }
 
 int isButtonSelected(gameManager_t *gm)
@@ -98,7 +103,7 @@ void runMenu(gameManager_t *gm)
                 if (gm->menuState == MAIN_MENU){
                     switch (isButtonSelected(gm)){
                     case 1:
-                        gm->menuState = MAIN_MENU;
+                        gm->menuState = MAIN_MENU; 
                         break;
                     case 2:
                         gm->menuState = TOPSCORE_MENU;
@@ -116,18 +121,18 @@ void runMenu(gameManager_t *gm)
                     }
                 }
 
-                /* casos para pop-ups */
+                /* casos para sair de pop-ups */
                 if (gm->menuState == TOPSCORE_MENU){
-                    if (gm->mouseX >= 0 && gm->mouseX <= 100){
-                        if (gm->mouseY >= 0 && gm->mouseY <= 100){
+                    if (gm->mouseX >= 336 && gm->mouseX <= 452){
+                        if (gm->mouseY >= 79 && gm->mouseY <= 120){
                             gm->menuState = MAIN_MENU;
                         }
                     }
                 }
 
                 if (gm->menuState == CREDITS_MENU){
-                    if (gm->mouseX >= 0 && gm->mouseX <= 100){
-                        if (gm->mouseY >= 0 && gm->mouseY <= 100){
+                    if (gm->mouseX >= 285 && gm->mouseX <= 415){
+                        if (gm->mouseY >= 103 && gm->mouseY <= 150){
                             gm->menuState = MAIN_MENU;
                         }
                     }
@@ -153,7 +158,7 @@ void runMenu(gameManager_t *gm)
 
                 case CREDITS_MENU:
                     drawMainMenu(gm);
-                    /* drawCreditsUI(gm); */
+                    drawCreditsUI(gm);
                     break;
 
                 case IN_GAME:

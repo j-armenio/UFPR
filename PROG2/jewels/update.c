@@ -59,7 +59,7 @@ bool checkMatch(gameManager_t *gm)
             if (i < MATRIX_SIZE - 2)
             {
                 if ((gm->matrix[i][j]->fishType == gm->matrix[i+1][j]->fishType) &&
-                    (gm->matrix[i][j]->fishType == gm->matrix[i+2][j]->fishType)){
+                    (gm->matrix[i+1][j]->fishType == gm->matrix[i+2][j]->fishType)){
                         gm->matrix[i][j]->matched = 1;
                         gm->matrix[i+1][j]->matched = 1;
                         gm->matrix[i+2][j]->matched = 1;
@@ -70,7 +70,7 @@ bool checkMatch(gameManager_t *gm)
             if (j < MATRIX_SIZE - 2)
             {
                 if ((gm->matrix[i][j]->fishType == gm->matrix[i][j+1]->fishType) &&
-                    (gm->matrix[i][j]->fishType == gm->matrix[i][j+2]->fishType)){
+                    (gm->matrix[i][j+1]->fishType == gm->matrix[i][j+2]->fishType)){
                         gm->matrix[i][j]->matched = 1;
                         gm->matrix[i][j+1]->matched = 1;
                         gm->matrix[i][j+2]->matched = 1;

@@ -17,8 +17,6 @@ void runGame(gameManager_t *gm)
     bool redraw = true;
     ALLEGRO_EVENT ev;
 
-    al_start_timer(gm->timer);
-
     /* Loop principal do jogo */
     while (1)
     {
@@ -58,11 +56,21 @@ void runGame(gameManager_t *gm)
                         gm->selected = 2;
                     }
                 }
+
+                /* Verifica se clicou no botao BACK */
+                if (gm->mouseX >= 222 && gm->mouseX <= 352){
+                    if (gm->mouseY >= 460 && gm->mouseY <= 507){
+                        done = true;
+                    }
+                }
+
                 break;
         }
 
-        if (done)
+        if (done){
+            gm->menuState = MAIN_MENU;
             break;
+        }
 
         if (redraw && al_is_event_queue_empty(gm->evQueue))
         {

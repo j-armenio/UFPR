@@ -11,11 +11,6 @@
 
 /* ------------- Funcoes internas ------------- */
 
-void drawUI(gameManager_t *gm)
-{
-    al_draw_bitmap(gm->otherBitmaps[SCORE_BOARD], 220, 120, 0);
-    al_draw_bitmap(gm->otherBitmaps[OBJECTIVE_BOARD], 275, 320, 0);
-}
 
 /* ------------- Funcoes globais -------------*/
 
@@ -45,7 +40,4 @@ void updateVisual(gameManager_t *gm)
         aux1 += 80;
         aux2 = 0;
     }
-
-    /* Desenha o resto da UI */
-    drawUI(gm);
 }
