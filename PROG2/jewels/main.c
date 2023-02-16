@@ -12,6 +12,7 @@
 #include "destroy.h"
 #include "draw.h"
 #include "run.h"
+#include "menu.h"
 
 int main()
 {
@@ -23,8 +24,8 @@ int main()
     initAllegro();
     gm = initGameManager();
 
-    /* Roda toda logica do jogo */
-    runGame(gm);
+    /* maquina de estados para menu do jogo */
+    runMenu(gm);
 
     /* Libera toda memoria alocada */
     freeAll(gm);

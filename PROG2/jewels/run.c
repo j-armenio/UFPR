@@ -13,11 +13,6 @@
 
 void runGame(gameManager_t *gm)
 {
-    al_register_event_source(gm->evQueue, al_get_timer_event_source(gm->timer));
-    al_register_event_source(gm->evQueue, al_get_display_event_source(gm->disp));
-    al_register_event_source(gm->evQueue, al_get_keyboard_event_source());
-    al_register_event_source(gm->evQueue, al_get_mouse_event_source());
-
     bool done = false;
     bool redraw = true;
     ALLEGRO_EVENT ev;

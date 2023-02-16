@@ -9,16 +9,28 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_ttf.h>
 
+#define DISPLAY_WIDTH 1280
+#define DISPLAY_HEIGHT 720
 #define MATRIX_SIZE 7
 #define OFFSET_X 690
 #define OFFSET_Y 125
 #define BETWEEN_FISHES 80
 #define FPS 60.0
 
+/* Estados de Menu */
+enum GameStates {
+    MAIN_MENU,
+    TOPSCORE_MENU,
+    CREDITS_MENU,
+    IN_GAME,
+    EXIT
+};
+
+/* Estados de jogo */
 enum LogicState {
     STANDBY,
     SWITCHING,
-    PROCESSING
+    PROCESSING,
 };
 
 enum BitmapFishes {
@@ -45,13 +57,15 @@ enum FishTypes {
 };
 
 enum BitmapBackgrounds {
-    BACKGROUND_MENU,
+    START_SCREEN,
     BACKGROUND_GAME
 };
 
 enum OthersBitmaps {
     SCORE_BOARD,
-    OBJECTIVE_BOARD
+    OBJECTIVE_BOARD,
+    TOP_SCORE_UI,
+    CREDITS_UI
 };
 
 enum Fonts {
@@ -88,6 +102,7 @@ typedef struct gameManager {
     int mouseY;
     int selected;
     int logicState;
+    int menuState;
 } gameManager_t;
 
 #endif

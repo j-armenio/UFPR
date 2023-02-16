@@ -52,11 +52,13 @@ void loadAddons(gameManager_t *gm)
     gm->fishes[FISH_4_SELECTED] = al_load_bitmap("addons/images/fish4_selected.png");
 
     /* Carrega as imagens de fundo */
+    gm->backgrounds[START_SCREEN] = al_load_bitmap("addons/images/start_screen.jpg");
     gm->backgrounds[BACKGROUND_GAME] = al_load_bitmap("addons/images/background_game.jpg");
 
     /* Carrega as outras imagens */
     gm->otherBitmaps[OBJECTIVE_BOARD] = al_load_bitmap("addons/images/objectiveBoard.png");
     gm->otherBitmaps[SCORE_BOARD] = al_load_bitmap("addons/images/scoreBoard.png");
+    gm->otherBitmaps[TOP_SCORE_UI] = al_load_bitmap("addons/images/topscore.png");
 
     /* Carrega as fontes */
     gm->fonts[MAIN_FONT] = al_load_ttf_font("addons/fonts/StVlRegular.ttf", 20, 0);
@@ -135,7 +137,7 @@ gameManager_t *initGameManager()
 
     gm->disp = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
     mustInit(gm->disp, "display");
-    al_set_window_title(gm->disp, "Fishing Crush");
+    al_set_window_title(gm->disp, "Fish Valley");
 
     gm->evQueue = al_create_event_queue();
     mustInit(gm->evQueue, "evQueue");
@@ -158,6 +160,7 @@ gameManager_t *initGameManager()
     gm->mouseX = gm->mouseY = 0;
     gm->selected = 0;
     gm->logicState = STANDBY;
+    gm->menuState = MAIN_MENU;
     
     for (i = 0; i < 2; i++)
         gm->selectedFishes[i] = NULL;
