@@ -54,19 +54,11 @@ void runGame(gameManager_t *gm)
                 gm->mouseX = ev.mouse.x;
                 gm->mouseY = ev.mouse.y;
 
-                /* 
-                selected tem 3 estados:
-                    0 - nenhum selecionado
-                    1 - um selecionado
-                    2 - dois selecionados 
-                */
-
                 if (gm->selected == 0){
                     if (isFishSelected(gm)){
                         gm->selected = 1;
                     }
-                }
-                else if (gm->selected == 1){
+                } else if (gm->selected == 1){
                     if (isFishSelected(gm)){
                         gm->selected = 2;
                     }

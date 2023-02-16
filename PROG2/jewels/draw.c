@@ -11,6 +11,12 @@
 
 /* ------------- Funcoes internas ------------- */
 
+void drawUI(gameManager_t *gm)
+{
+    al_draw_bitmap(gm->otherBitmaps[SCORE_BOARD], 220, 120, 0);
+    al_draw_bitmap(gm->otherBitmaps[OBJECTIVE_BOARD], 275, 320, 0);
+}
+
 /* ------------- Funcoes globais -------------*/
 
 /* Atualiza A PARTE VISUAL */
@@ -25,7 +31,9 @@ void updateVisual(gameManager_t *gm)
     aux1 = aux2 = 0;
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
-            if (gm->matrix[i][j]->selected){
+            if (gm->matrix[i][j]->fishType == FISH_TYPE_NULL)
+                continue;
+            else if (gm->matrix[i][j]->selected){
                 al_draw_bitmap(gm->matrix[i][j]->sprite[1], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
             } else {
                 al_draw_bitmap(gm->matrix[i][j]->sprite[0], OFFSET_X + aux1, OFFSET_Y + aux2, 0);
@@ -39,7 +47,5 @@ void updateVisual(gameManager_t *gm)
     }
 
     /* Desenha o resto da UI */
-    al_draw_bitmap(gm->otherBitmaps[SCORE_BOARD], 220, 120, 0);
-    al_draw_bitmap(gm->otherBitmaps[OBJECTIVE_BOARD], 275, 320, 0);
-
+    drawUI(gm);
 }

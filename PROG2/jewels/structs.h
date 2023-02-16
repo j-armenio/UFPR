@@ -32,6 +32,7 @@ enum BitmapFishes {
     FISH_2_SELECTED,
     FISH_3_SELECTED,
     FISH_4_SELECTED,
+    FISH_NULL
 };
 
 enum FishTypes {
