@@ -35,9 +35,20 @@ void updateVisual(gameManager_t *gm)
             }
             gm->matrix[i][j]->fishX = OFFSET_X + aux1;
             gm->matrix[i][j]->fishY = OFFSET_Y + aux2;
+            /* FISH INFO*/
+
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), gm->matrix[i][j]->fishX, gm->matrix[i][j]->fishY, 0, "x:%dy:%d", gm->matrix[i][j]->fishX, gm->matrix[i][j]->fishY);
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), gm->matrix[i][j]->fishX, gm->matrix[i][j]->fishY+20, 0, "matched:%d", gm->matrix[i][j]->matched);
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), gm->matrix[i][j]->fishX, gm->matrix[i][j]->fishY+40, 0, "selected:%d", gm->matrix[i][j]->selected);
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), gm->matrix[i][j]->fishX, gm->matrix[i][j]->fishY+60, 0, "fishType:%d", gm->matrix[i][j]->fishType);
+
             aux2 += 80;
         }
         aux1 += 80;
         aux2 = 0;
     }
+
+    /* caso esteja com o help aberto */
+    if (gm->logicState == HELP_WD)
+                al_draw_bitmap(gm->otherBitmaps[HELP_UI], 7, 10, 0);
 }

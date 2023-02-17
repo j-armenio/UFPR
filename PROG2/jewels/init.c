@@ -60,6 +60,7 @@ void loadAddons(gameManager_t *gm)
     gm->otherBitmaps[SCORE_BOARD] = al_load_bitmap("addons/images/scoreBoard.png");
     gm->otherBitmaps[TOP_SCORE_UI] = al_load_bitmap("addons/images/topscore.png");
     gm->otherBitmaps[CREDITS_UI] = al_load_bitmap("addons/images/credits.png");
+    gm->otherBitmaps[HELP_UI] = al_load_bitmap("addons/images/help_me.png");
 
     /* Carrega as fontes */
     gm->fonts[MAIN_FONT] = al_load_ttf_font("addons/fonts/StVlRegular.ttf", 20, 0);

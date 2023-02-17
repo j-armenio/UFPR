@@ -18,7 +18,7 @@
 #define FPS 60.0
 
 /* Estados de Menu */
-enum GameStates {
+enum MenuStates {
     MAIN_MENU,
     TOPSCORE_MENU,
     CREDITS_MENU,
@@ -31,6 +31,7 @@ enum LogicState {
     STANDBY,
     SWITCHING,
     PROCESSING,
+    HELP_WD
 };
 
 enum BitmapFishes {
@@ -65,7 +66,8 @@ enum OthersBitmaps {
     SCORE_BOARD,
     OBJECTIVE_BOARD,
     TOP_SCORE_UI,
-    CREDITS_UI
+    CREDITS_UI,
+    HELP_UI
 };
 
 enum Fonts {

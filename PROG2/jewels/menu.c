@@ -92,6 +92,10 @@ void runMenu(gameManager_t *gm)
                     case ALLEGRO_KEY_ESCAPE:
                         done = true;
                         break;
+
+                    case ALLEGRO_KEY_ENTER:
+                        gm->menuState = IN_GAME;
+                        break;
                 }
                 break;
 
@@ -171,6 +175,7 @@ void runMenu(gameManager_t *gm)
                     break;
             }
 
+            al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 140, 0, "logicState: %d, menuState: %d", gm->logicState, gm->menuState);
             al_flip_display();
             redraw = false;
         }
