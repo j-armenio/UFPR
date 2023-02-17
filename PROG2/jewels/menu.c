@@ -167,6 +167,7 @@ void runMenu(gameManager_t *gm)
 
                 case IN_GAME:
                     drawMainMenu(gm);
+                    gm->logicState = STANDBY;
                     runGame(gm);
                     break;
                 

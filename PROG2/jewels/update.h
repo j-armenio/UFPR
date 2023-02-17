@@ -4,6 +4,6 @@
 #include "structs.h"
 
 void updateLogic(gameManager_t *gm);
-bool isFishSelected(gameManager_t *gm);
+bool isMouseFishing(gameManager_t *gm);
 
 #endif

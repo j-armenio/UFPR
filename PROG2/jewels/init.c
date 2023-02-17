@@ -83,6 +83,7 @@ void startMatrix(gameManager_t *gm)
         }
     }
 
+    /* preenche os componentes de cada peixe dependendo de seu ID */
     for (i = 0; i < MATRIX_SIZE; i++){
         for (j = 0; j < MATRIX_SIZE; j++){
             if (gm->matrix[i][j]->fishID == FISH_0){
@@ -114,6 +115,20 @@ void startMatrix(gameManager_t *gm)
             gm->matrix[i][j]->matJ = j;
         }
     }
+
+    int aux1, aux2;
+    aux1 = aux2 = 0;
+
+    /* preenche os fishX e fishY dos peixes */
+    for (i = 0; i < MATRIX_SIZE; i++){
+        for (j = 0; j < MATRIX_SIZE; j++){
+            gm->matrix[i][j]->fishX = OFFSET_X + aux1;
+            gm->matrix[i][j]->fishY = OFFSET_Y + aux2;
+            aux2 += 80;
+        }
+        aux1 += 80;
+        aux2 = 0;
+    }
 }
 
 /* ------------- Funcoes globais -------------*/
@@ -126,6 +141,7 @@ void initAllegro()
     /* inicialização das extensões do allegro */
     mustInit(al_init_image_addon(), "image_addon");
     mustInit(al_init_acodec_addon(), "acodec_addon");
+    mustInit(al_init_font_addon(), "font_addon");
     mustInit(al_init_ttf_addon(), "ttf_addon");
     mustInit(al_install_audio(), "audio");
     mustInit(al_install_mouse(), "mouse");
@@ -160,12 +176,15 @@ gameManager_t *initGameManager()
     }
 
     gm->mouseX = gm->mouseY = 0;
-    gm->selected = 0;
     gm->logicState = STANDBY;
     gm->menuState = MAIN_MENU;
-    
-    for (i = 0; i < 2; i++)
+    gm->switchNeighbour = NEIGHBOURS_NULL;
+    gm->switchDone = 0;
+    gm->switchI = 0;
+
+    for (i = 0; i < 1; i++)
         gm->selectedFishes[i] = NULL;
+    gm->selected = 0;
 
     loadAddons(gm);
     startMatrix(gm);

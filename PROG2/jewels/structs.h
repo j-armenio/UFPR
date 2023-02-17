@@ -16,6 +16,7 @@
 #define OFFSET_Y 125
 #define BETWEEN_FISHES 80
 #define FPS 60.0
+#define MOVE_SPEED 10
 
 /* Estados de Menu */
 enum MenuStates {
@@ -55,6 +56,14 @@ enum FishTypes {
     FISH_TYPE_3,
     FISH_TYPE_4,
     FISH_TYPE_NULL
+};
+
+enum Neighbours {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    NEIGHBOURS_NULL
 };
 
 enum BitmapBackgrounds {
@@ -103,6 +112,9 @@ typedef struct gameManager {
     int mouseX;
     int mouseY;
     int selected;
+    int switchNeighbour;
+    int switchI;
+    int switchDone;
     int logicState;
     int menuState;
 } gameManager_t;

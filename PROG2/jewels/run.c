@@ -31,9 +31,9 @@ void runGame(gameManager_t *gm)
                 break;
 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                done = true;
+                done = true;    
                 break;
-            
+        
             case ALLEGRO_EVENT_KEY_DOWN:
                 switch (ev.keyboard.keycode)
                 {
@@ -44,11 +44,10 @@ void runGame(gameManager_t *gm)
                     case ALLEGRO_KEY_H:
                         if (gm->logicState == STANDBY){
                             gm->logicState = HELP_WD;
-                            redraw = true;
                         } else if (gm->logicState == HELP_WD){
                             gm->logicState = STANDBY;
-                            redraw = true;
                         }
+                        redraw = true;
 
                         break;
                     case ALLEGRO_KEY_F1:
@@ -68,30 +67,39 @@ void runGame(gameManager_t *gm)
                 gm->mouseX = ev.mouse.x;
                 gm->mouseY = ev.mouse.y;
 
-                if (gm->logicState == STANDBY){
-                    if (isFishSelected(gm)){
-                        
-                    }
-
+                switch (gm->logicState)
+                {
+                case STANDBY:
                     /* Verifica se clicou no botao BACK */
                     if (gm->mouseX >= 222 && gm->mouseX <= 352){
                         if (gm->mouseY >= 460 && gm->mouseY <= 507){
                             done = true;
                         }
                     }
-                }
+                    /* verifica se clicou em algum peixe */
+                    isMouseFishing(gm);
+                    
+                    if (gm->selected == 2)
+                        gm->logicState = SWITCHING;
 
-                /* Check if exit button is pressed in HELP */
-                if (gm->logicState == HELP_WD){
-                    if (gm->mouseX >= 94 && gm->mouseX <= 208){
-                        if (gm->mouseY >= 90 && gm->mouseY <= 130){
-                            gm->logicState = STANDBY;
-                            redraw = true;
+                    redraw = true;
+
+                    break;
+                
+                case HELP_WD:
+                    /* EM HELP verifica se clicou no EXIT */
+                    if (gm->logicState == HELP_WD){
+                        if (gm->mouseX >= 94 && gm->mouseX <= 208){
+                            if (gm->mouseY >= 90 && gm->mouseY <= 130){
+                                gm->logicState = STANDBY;
+                                redraw = true;
+                            }
                         }
                     }
-                }
+                    break;
 
                 break;
+                }
         }
 
         if (done){
@@ -107,6 +115,7 @@ void runGame(gameManager_t *gm)
             al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 120, 0, "selected: %d", gm->selected);
             al_draw_textf(gm->fonts[DIALOGUE_FONT], al_map_rgb(255, 255, 255), 100, 140, 0, "logicState: %d, menuState: %d", gm->logicState, gm->menuState);
             al_flip_display();
+
             redraw = false;
         }
     }
