@@ -1,11 +1,11 @@
 CC = gcc
 CGLAGS = -Wall -g -std=c90 -D_DEFAULT_SOURCE
 
-all: main.c
-	$(CC) $(CFLAGS) main.c -o main
+all: beale.c
+	$(CC) $(CFLAGS) beale.c -o beale
 
 clean:
 	-rm -f *~ *.o
 
 purge: clean
-	-rm -f main
+	-rm -f beale
