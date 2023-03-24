@@ -22,7 +22,7 @@ node_t *createNode(int key, char letter)
 }
 
 // Busca uma key na arvore e caso ele exista, retorna seu node
-node_t *binarySearch(node_t *root, int key)
+node_t *AVL_binarySearch(node_t *root, int key)
 {
     if (root == NULL)
         return NULL;
@@ -31,9 +31,9 @@ node_t *binarySearch(node_t *root, int key)
         return root;
 
     if (key < root->key)
-        return binarySearch(root->left, key);
+        return AVL_binarySearch(root->left, key);
     else
-        return binarySearch(root->right, key);
+        return AVL_binarySearch(root->right, key);
 }
 
 // Calcula a height de qualquer node da arvore
@@ -141,7 +141,7 @@ node_t *balanceAVL(node_t* root, int key)
 }
 
 // Inclui um nodedo com a key inserida e retorna a root
-node_t *inclusion(node_t *root, int key, char letter)
+node_t *AVL_inclusion(node_t *root, int key, char letter)
 {
     node_t* nodeBal;
 
@@ -152,10 +152,10 @@ node_t *inclusion(node_t *root, int key, char letter)
     }
     // Encontra a posição da key na árvore e adiciona o nodedo
     if (key > root->key){
-        root->right = inclusion(root->right, key, letter);
+        root->right = AVL_inclusion(root->right, key, letter);
     }
     else if (key < root->key){
-        root->left = inclusion(root->left, key, letter);
+        root->left = AVL_inclusion(root->left, key, letter);
     } 
     else {
         return root;
@@ -170,22 +170,22 @@ node_t *inclusion(node_t *root, int key, char letter)
 }
 
 // Travesia EmOrdem(left->root->right)
-void inOrder(node_t *root)
+void AVL_inOrder(node_t *root)
 {
     if (root == NULL)
         return;
     
-    inOrder(root->left);
+    AVL_inOrder(root->left);
     printf("|%c|%d|\n", root->letter, root->key);
-    inOrder(root->right);
+    AVL_inOrder(root->right);
 }
 
 // Libera a memoria de toda arvore
-void destroyTree(node_t *root)
+void AVL_destroyTree(node_t *root)
 {
     if (root == NULL)
         return;
-    destroyTree(root->left);
-    destroyTree(root->right);
+    AVL_destroyTree(root->left);
+    AVL_destroyTree(root->right);
     free(root);
 }

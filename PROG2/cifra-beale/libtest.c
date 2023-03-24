@@ -31,12 +31,12 @@ void testAvl()
             case 1:
                 printf("Enter the key to be inserted: ");
                 scanf(" %c", &letter);
-                root = inclusion(root, i, letter);
+                root = AVL_inclusion(root, i, letter);
                 i++;
                 break;
             case 2:
                 printf("Inorder Traversal:\n");
-                inOrder(root);
+                AVL_inOrder(root);
                 printf("\n");
                 break;
             case 3:
@@ -53,9 +53,9 @@ void testAvl()
     for (i = 0; i < 10000; i++)
     {
         letter = randomNum(97, 122);
-        root = inclusion(root, i, letter);
+        root = AVL_inclusion(root, i, letter);
     }
 
-    inOrder(root);
+    AVL_inOrder(root);
 
 }

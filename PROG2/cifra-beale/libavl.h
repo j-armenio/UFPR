@@ -11,9 +11,9 @@ typedef struct node {
     struct node *right;
 } node_t;
 
-node_t *inclusion(node_t *root, int key, char letter);
-node_t *binarySearch(node_t *root, int key);
-void inOrder(node_t *root);
-void destroyTree(node_t *root);
+node_t *AVL_inclusion(node_t *root, int key, char letter);
+node_t *AVL_binarySearch(node_t *root, int key);
+void AVL_inOrder(node_t *root);
+void AVL_destroyTree(node_t *root);
 
 #endif
