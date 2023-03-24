@@ -3,10 +3,23 @@
 
 #include <stdio.h>
 
-#include "libAVL.h"
+#include "libavl.h"
+
+typedef struct entryInfo {
+    int encryptingMode; // OK
+    int encrypting_CipherBook; // OK
+
+    int decryptingMode; // OK
+    int decryptingMode_CipherBook; // OK
+    int decryptingMode_KeysFile; // OK
+
+    char *originalMsgPath; // OK
+    char *outputPath; // OK
+    char *keysFilePath; 
+    char *cipherBookPath;
+} entryInfo_t;
 
 int randomNum(int min, int max);
-void handleEntry(int argc, char **argv, int encryptingMode, int encrypting_CipherBook, int decryptingMode, int decryptingMode_CipherBook, int decryptingMode_KeysFile, 
-                    char *originalMsgPath, char *outputPath, char *keysFilePath, char *cipherBookPath);
+void handleEntries(int argc, char **argv, entryInfo_t *inInfo);
 
 #endif

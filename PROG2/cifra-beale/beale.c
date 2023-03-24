@@ -2,23 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "libGeneral.h"
-#include "libAVL.h"
+#include "libgeneral.h"
+#include "libavl.h"
 
 int main(int argc, char **argv)
 {
-    int encryptingMode, encrypting_CipherBook, decryptingMode, decryptingMode_KeysFile, decryptingMode_CipherBook;
-    char *originalMsgPath, *outputPath, *keysFilePath, *cipherBookPath;
+    entryInfo_t *inInfo = NULL;
     node_t *rootCipherBook = NULL;
 
-    handleEntries(argc, argv, encryptingMode, encrypting_CipherBook, decryptingMode, decryptingMode_CipherBook, decryptingMode_KeysFile, originalMsgPath, outputPath, keysFilePath);
+    handleEntries(argc, argv, inInfo);
 
-    if (encryptingMode)
-    {
-        encrypt(rootCipherBook, originalMsgPath, outputPath);
-    }
-    else if (decryptingMode)
-    {
-        decrypt(rootCipherBook, originalMsgPath, outputPath);
+    if (inInfo->encryptingMode){
+        
     }
 }

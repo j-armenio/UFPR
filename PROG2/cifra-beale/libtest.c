@@ -3,9 +3,9 @@
 #include <string.h>
 #include <time.h>
 
-#include "libTest.h"
-#include "libAVL.h"
-#include "libGeneral.h"
+#include "libtest.h"
+#include "libavl.h"
+#include "libgeneral.h"
 
 void testAvl()
 {

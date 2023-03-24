@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "libAVL.h"
+#include "libavl.h"
 
 // Retorna um ponteiro para um nodevo node
 node_t *createNode(int key, char letter)
