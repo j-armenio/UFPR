@@ -3,14 +3,17 @@
 
 typedef struct node {
     int key;
-    char letter;
     int height;
+    int depth;
+    char letter;
+    struct node *parent;
     struct node *left;
     struct node *right;
 } node_t;
 
-node_t *insertNode(node_t *root, int key, char letter);
-void inOrderTraversal(node_t *root);
+node_t *inclusion(node_t *root, int key, char letter);
+node_t *binarySearch(node_t *root, int key);
+void inOrder(node_t *root);
 void destroyTree(node_t *root);
 
 #endif

@@ -9,4 +9,6 @@ char* cypherBookNumbering(FILE *cypherBook);
 char* keysBookCreation(FILE *cypherBook);
 int freeAllocatedMemory(FILE *cypherBook);
 
+int randomNum(int min, int max);
+
 #endif

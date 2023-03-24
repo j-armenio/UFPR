@@ -5,7 +5,6 @@
 #include <getopt.h>
 
 #include "libGeneral.h"
-#include "libTest.h"
 #include "libAVL.h"
 
 int main(int argc, char **argv)
@@ -61,10 +60,5 @@ int main(int argc, char **argv)
         printf("Decriptando...\n");
     };
 
-    /* freeAllocatedMemory(cypherBook); */
-
-    /* ---------- Testando AVL ---------- */
-    printf("--------------------\n");
-
-    testAvl();
+    freeAllocatedMemory(cypherBook);
 }
