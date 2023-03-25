@@ -6,20 +6,24 @@
 #include "libavl.h"
 
 typedef struct entryInfo {
-    int encryptingMode; // OK
-    int encrypting_CipherBook; // OK
+    int encryptingMode;
+    int encrypting_KeysFile;
 
-    int decryptingMode; // OK
-    int decryptingMode_CipherBook; // OK
-    int decryptingMode_KeysFile; // OK
+    int decryptingMode;
+    int decryptingMode_CipherBook;
+    int decryptingMode_KeysFile;
 
-    char *originalMsgPath; // OK
-    char *outputPath; // OK
+    char *originalMsgPath;
+    char *outputPath;
     char *keysFilePath; 
     char *cipherBookPath;
 } entryInfo_t;
 
 int randomNum(int min, int max);
-void handleEntries(int argc, char **argv, entryInfo_t *inInfo);
+entryInfo_t *handleEntries(int argc, char **argv);
+int encryptMsg(entryInfo_t *inInfo);
+int bookToKeysFile();
+int decryptMsgWithKeysFile();
+int decryptMsgWithCipherBook();
 
 #endif

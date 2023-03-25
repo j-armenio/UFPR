@@ -11,7 +11,7 @@
 /* ------------------ Prototypes ------------------------ */
 
 int randomNum(int min, int max);
-void handleEntry(int argc, char **argv, entryInfo_t *entryFlags);
+entryInfo_t *handleEntries(int argc, char **argv);
 node_t *cypherBookToTree(char *cipherBookPath, node_t *rootCipherBook);
 entryInfo_t *allocateFlags();
 void destroyEntry(entryInfo_t *inInfo);
@@ -29,7 +29,7 @@ entryInfo_t *allocateFlags()
     }
 
     inInfo->encryptingMode = 0;
-    inInfo->encrypting_CipherBook = 0;
+    inInfo->encrypting_KeysFile = 0;
     inInfo->decryptingMode = 0;
     inInfo->decryptingMode_CipherBook = 0;
     inInfo->decryptingMode_KeysFile = 0;
@@ -45,6 +45,19 @@ void destroyEntry(entryInfo_t *inInfo)
     free(inInfo);
 }
 
+node_t *fileToTree(char *filePath)
+{
+    FILE *file = NULL;
+    node_t *root = NULL;
+
+    file = fopen(filePath, "r");
+    if (! file){
+        printf("Falha ao abrir o arquivo %s.\n", filePath);
+        return NULL;
+    }
+
+    
+}
 
 /* ------------------ Funções Externas ------------------ */
 
@@ -54,13 +67,14 @@ int randomNum(int min, int max)
     return rand() % (max + 1 - min) + min;
 }
 
-void handleEntries(int argc, char **argv, entryInfo_t *inInfo)
+entryInfo_t *handleEntries(int argc, char **argv)
 {
     int option;
+    entryInfo_t *inInfo = NULL;
 
     inInfo = allocateFlags();
 
-    inInfo->encryptingMode = inInfo->encrypting_CipherBook = inInfo->decryptingMode = 
+    inInfo->encryptingMode = inInfo->encrypting_KeysFile = inInfo->decryptingMode = 
         inInfo->decryptingMode_CipherBook = inInfo->decryptingMode_KeysFile = 0;
 
     printf("Processando as entradas...\n");
@@ -87,9 +101,6 @@ void handleEntries(int argc, char **argv, entryInfo_t *inInfo)
             if (inInfo->decryptingMode)
                 inInfo->decryptingMode_CipherBook = 1;
             
-            if (inInfo->encryptingMode)
-                inInfo->encrypting_CipherBook = 1;
-
             inInfo->cipherBookPath = optarg;
             break;
 
@@ -109,6 +120,9 @@ void handleEntries(int argc, char **argv, entryInfo_t *inInfo)
         case 'c':
             inInfo->keysFilePath = optarg;
 
+            if (inInfo->encryptingMode)
+                inInfo->encrypting_KeysFile = 1;
+
             if (inInfo->decryptingMode)
                 inInfo->decryptingMode_KeysFile = 1;
             break;
@@ -118,4 +132,38 @@ void handleEntries(int argc, char **argv, entryInfo_t *inInfo)
             break;
         }
     }
+    
+    return inInfo;
 }
+
+/* 
+    Para criptografar uma mensagem tendo um livro de cifra, o programa deve:
+        1. Ler o livro de cifra e armazenar em uma árvore AVL;
+        2. Ler a mensagem original;
+        3. Criptografar a mensagem original;
+        4. Escrever a mensagem criptografada em um arquivo de saída.
+*/
+int encryptMsg(entryInfo_t *inInfo)
+{
+    printf("Encrypting...\n");
+
+    node_t *cipherAvl = NULL;
+
+    cipherAvl = fileToTree(inInfo->cipherBookPath);
+}
+
+int bookToKeysFile()
+{
+    printf("Asking for keys file - Converting cipher book to keys file...\n");
+}
+
+int decryptMsgWithKeysFile()
+{
+    printf("Decrypting with keys file...\n");
+}
+
+int decryptMsgWithCipherBook()
+{
+    printf("Decrypting with cipher book...\n");
+}
+

@@ -8,11 +8,22 @@
 int main(int argc, char **argv)
 {
     entryInfo_t *inInfo = NULL;
-    node_t *rootCipherBook = NULL;
+    FILE *keysFile = NULL;
 
-    handleEntries(argc, argv, inInfo);
+    inInfo = handleEntries(argc, argv);
 
     if (inInfo->encryptingMode){
-        
+        encryptMsg(inInfo);
+        if (inInfo->encrypting_KeysFile){
+            bookToKeysFile();
+        }
+    } else if (inInfo->decryptingMode){
+        printf("Decrypting\n");
+        if (inInfo->decryptingMode_KeysFile){
+            decryptMsgWithKeysFile(inInfo, keysFile);
+        }
+        else if (inInfo->decryptingMode_CipherBook){
+            decryptMsgWithCipherBook(inInfo, keysFile);
+        }
     }
 }
