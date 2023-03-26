@@ -6,8 +6,10 @@
 #include "libtest.h"
 #include "libavl.h"
 #include "libgeneral.h"
+#include "liblist.h"
 
 void testAvl()
+
 {
     int choice, i, go;
     node_t *root = NULL;
@@ -58,4 +60,64 @@ void testAvl()
 
     AVL_inOrder(root);
 
+}
+
+void testList(){
+    int go, choice, i;
+    char letter;
+
+    listLetters_t *list = NULL;
+    list = createLettersList();
+
+    printf("Testando a Lista...\n");
+
+    // TESTE 1: ESCOLHE MANUALMENTE QUAIS COLOCAR
+
+    i = 0;
+
+    while (go)
+    {
+        printf("1. Insert\n");
+        printf("2. Print List\n");
+        printf("3. Exit\n");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter the letter to be inserted: ");
+                scanf(" %c", &letter);
+                if (! searchLetter(letter, list)){
+                    insertLetter(letter, list);
+                    insertPosition(i, list->tail);
+                } else if (searchLetter(letter, list)){
+                    // insere posicao e aumenta repeticoes
+                    insertPosition(i, searchLetter(letter, list));
+                    searchLetter(letter, list)->repetitions++;                    
+                }
+                i++;
+                break;
+            case 2:
+                printf("Print List:\n");
+                printList(list);
+                printf("\n");
+                break;
+            case 3:
+                go = 0;
+                break;
+            default:
+                printf("Invalid choice\n");
+        }       
+    }
+}
+
+void testIndex()
+{
+    listLetters_t *list = NULL;
+
+    list = createLettersList();
+
+    list = indexAllList(list);
+
+    printList(list);
 }

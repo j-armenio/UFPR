@@ -4,15 +4,15 @@
 #include <time.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <ctype.h>
 
 #include "libgeneral.h"
-#include "libavl.h"
+#include "liblist.h"
 
 /* ------------------ Prototypes ------------------------ */
 
 int randomNum(int min, int max);
 entryInfo_t *handleEntries(int argc, char **argv);
-node_t *cypherBookToTree(char *cipherBookPath, node_t *rootCipherBook);
 entryInfo_t *allocateFlags();
 void destroyEntry(entryInfo_t *inInfo);
 
@@ -45,18 +45,60 @@ void destroyEntry(entryInfo_t *inInfo)
     free(inInfo);
 }
 
-node_t *fileToTree(char *filePath)
+int normalizeAccent(int inChar)
 {
-    FILE *file = NULL;
-    node_t *root = NULL;
+    // 
+}
 
-    file = fopen(filePath, "r");
-    if (! file){
-        printf("Falha ao abrir o arquivo %s.\n", filePath);
+
+listLetters_t *cipherBookToList(char *cipherBookPath)
+{
+    char firstLetter;
+
+    FILE *cipherBook = NULL;
+    listLetters_t *list = NULL;
+
+    list = createLettersList();
+    list = indexAllList(list);
+
+    cipherBook = fopen(cipherBookPath, "r");
+    if (! cipherBook){
+        printf("Falha ao abrir o livro de cifra.\n");
         return NULL;
     }
 
-    
+    int position = 0;
+    int c, prev_c = ' ';
+
+    while ((c = fgetc(cipherBook)) != EOF)
+    {
+        // c = normalizeAccent(c);
+        // First letter of the file
+        if (position == 0){
+            while (! isalnum(c)){
+                c = fgetc(cipherBook);
+            }
+            // printf("%d: %c \n", position, tolower(c));
+            insertPosition(position, searchLetter(tolower(c), list));
+            position++;
+            prev_c = tolower(c);
+            c = fgetc(cipherBook);
+            continue;
+        }
+
+        if (isalnum(c) && (!isalnum(prev_c) && !(prev_c == '-')))
+            {
+            // printf("%d: %c  --- %c \n", position, tolower(c), prev_c);
+            insertPosition(position, searchLetter(tolower(c), list));
+            position++;
+        }
+        prev_c = tolower(c);
+    }
+    printf("\n");
+
+    // printList(list);
+
+    fclose(cipherBook);
 }
 
 /* ------------------ Funções Externas ------------------ */
@@ -138,18 +180,22 @@ entryInfo_t *handleEntries(int argc, char **argv)
 
 /* 
     Para criptografar uma mensagem tendo um livro de cifra, o programa deve:
-        1. Ler o livro de cifra e armazenar em uma árvore AVL;
+        1. Ler o livro de cifra e armazenar na lista;
         2. Ler a mensagem original;
         3. Criptografar a mensagem original;
         4. Escrever a mensagem criptografada em um arquivo de saída.
 */
 int encryptMsg(entryInfo_t *inInfo)
 {
+    listLetters_t *cipherBookList = NULL;
+
     printf("Encrypting...\n");
 
-    node_t *cipherAvl = NULL;
+    // 1. Ler o livro de cifra e armazenar na lista;
+    cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
-    cipherAvl = fileToTree(inInfo->cipherBookPath);
+    // 2. Ler a mensagem original
+    convertMsg();
 }
 
 int bookToKeysFile()

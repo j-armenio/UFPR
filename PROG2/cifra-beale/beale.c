@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "libgeneral.h"
-#include "libavl.h"
+#include "libtest.h"
 
 int main(int argc, char **argv)
 {
