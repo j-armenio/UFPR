@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-#include "libavl.h"
-
 typedef struct entryInfo {
     int encryptingMode;
     int encrypting_KeysFile;

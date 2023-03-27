@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 
 #include "libgeneral.h"
 #include "libtest.h"
 
 int main(int argc, char **argv)
 {
+    char *locale;
+    locale = setlocale (LC_CTYPE, "");
+
     entryInfo_t *inInfo = NULL;
     FILE *keysFile = NULL;
 

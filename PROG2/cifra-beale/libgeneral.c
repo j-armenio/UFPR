@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <ctype.h>
+#include <wchar.h>
 
 #include "libgeneral.h"
 #include "liblist.h"
@@ -72,31 +73,29 @@ listLetters_t *cipherBookToList(char *cipherBookPath)
 
     while ((c = fgetc(cipherBook)) != EOF)
     {
-        // c = normalizeAccent(c);
-        // First letter of the file
         if (position == 0){
             while (! isalnum(c)){
                 c = fgetc(cipherBook);
             }
-            // printf("%d: %c \n", position, tolower(c));
+            // printf("%d: %c ", position, tolower(c));
             insertPosition(position, searchLetter(tolower(c), list));
             position++;
-            prev_c = tolower(c);
+            prev_c = c;
             c = fgetc(cipherBook);
             continue;
         }
 
-        if (isalnum(c) && (!isalnum(prev_c) && !(prev_c == '-')))
-            {
-            // printf("%d: %c  --- %c \n", position, tolower(c), prev_c);
+        if (isalnum(c) && ((prev_c == ' ') || (prev_c == '\n')))
+        {
+            // printf("%d:%c ", position, c);
             insertPosition(position, searchLetter(tolower(c), list));
             position++;
         }
-        prev_c = tolower(c);
+        prev_c = c;
     }
     printf("\n");
 
-    // printList(list);
+    printList(list);
 
     fclose(cipherBook);
 }
@@ -195,7 +194,7 @@ int encryptMsg(entryInfo_t *inInfo)
     cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
     // 2. Ler a mensagem original
-    convertMsg();
+    // convertMsg();
 }
 
 int bookToKeysFile()

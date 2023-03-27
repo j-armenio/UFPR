@@ -4,12 +4,10 @@
 #include <time.h>
 
 #include "libtest.h"
-#include "libavl.h"
 #include "libgeneral.h"
 #include "liblist.h"
 
-void testAvl()
-
+/* void testAvl()
 {
     int choice, i, go;
     node_t *root = NULL;
@@ -17,7 +15,6 @@ void testAvl()
 
     printf("Testando a AVL...\n");
 
-    // TESTE 1: ESCOLHE MANUALMENTE QUAIS COLOCAR
     i = 0;
     go = 1;
 
@@ -49,7 +46,6 @@ void testAvl()
         }       
     }
 
-    // TESTE 2: COLOCA UM MONTE
     srand ( time(NULL) );
 
     for (i = 0; i < 10000; i++)
@@ -60,7 +56,7 @@ void testAvl()
 
     AVL_inOrder(root);
 
-}
+} */
 
 void testList(){
     int go, choice, i;
