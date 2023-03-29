@@ -99,6 +99,15 @@ void printList(listLetters_t *list)
     }
 }
 
+void reversePrint(nodeLetter_t *aux)
+{
+    if(aux == NULL)
+        return;
+    reversePrint(aux->next);
+    printf ("%c\n", aux->letter);
+
+}
+
 void printListToFile(listLetters_t *list, char *filePath)
 {
     FILE *file;
@@ -112,7 +121,7 @@ void printListToFile(listLetters_t *list, char *filePath)
     nodeLetter_t *aux = list->head;
 
     // Imprimir do ultimo elemento para o primeiro da lista de posições
-
+    reversePrint(aux);
 }
 
 // Adicionar nodos de 1 a 9 e de a a z
