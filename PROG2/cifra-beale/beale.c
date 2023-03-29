@@ -2,32 +2,31 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <time.h>
 
 #include "libgeneral.h"
 #include "libtest.h"
 
 int main(int argc, char **argv)
 {
+    // srand(time(NULL));
+
     char *locale;
     locale = setlocale (LC_CTYPE, "");
 
     entryInfo_t *inInfo = NULL;
-    FILE *keysFile = NULL;
 
     inInfo = handleEntries(argc, argv);
 
     if (inInfo->encryptingMode){
         encryptMsg(inInfo);
-        if (inInfo->encrypting_KeysFile){
-            bookToKeysFile();
-        }
     } else if (inInfo->decryptingMode){
         printf("Decrypting\n");
         if (inInfo->decryptingMode_KeysFile){
-            decryptMsgWithKeysFile(inInfo, keysFile);
+            decryptMsgWithKeysFile(inInfo);
         }
         else if (inInfo->decryptingMode_CipherBook){
-            decryptMsgWithCipherBook(inInfo, keysFile);
+            decryptMsgWithCipherBook(inInfo);
         }
     }
 }

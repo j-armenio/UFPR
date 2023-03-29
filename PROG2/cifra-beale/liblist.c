@@ -84,6 +84,7 @@ nodeLetter_t *searchLetter(char letter, listLetters_t *list)
 void printList(listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
+
     while (aux != NULL){
         printf("%c: ", aux->letter);
 
@@ -92,9 +93,26 @@ void printList(listLetters_t *list)
             printf("%d ", auxPos->position);
             auxPos = auxPos->next;
         }
+        printf(": %d", aux->repetitions);
         printf("\n");
         aux = aux->next;
     }
+}
+
+void printListToFile(listLetters_t *list, char *filePath)
+{
+    FILE *file;
+
+    file = fopen(filePath, "w");
+    if (! file){
+        printf("Falha ao abrir arquivo de saída.\n");
+        return;
+    }
+
+    nodeLetter_t *aux = list->head;
+
+    // Imprimir do ultimo elemento para o primeiro da lista de posições
+
 }
 
 // Adicionar nodos de 1 a 9 e de a a z

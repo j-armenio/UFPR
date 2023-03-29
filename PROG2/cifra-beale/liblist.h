@@ -24,6 +24,7 @@ nodeLetter_t *insertLetter(char letter, listLetters_t *list);
 nodePosition_t *insertPosition(int position, nodeLetter_t *node);
 nodeLetter_t *searchLetter(char letter, listLetters_t *list);
 void printList(listLetters_t *list);
+void printListToFile(listLetters_t *list, char *filePath);
 listLetters_t *indexAllList(listLetters_t *list);
 
 #endif
