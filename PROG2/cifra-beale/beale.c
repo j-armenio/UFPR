@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv)
 {
-    // srand(time(NULL));
+    srand(time(NULL));
 
     char *locale;
     locale = setlocale (LC_CTYPE, "");
@@ -20,13 +20,15 @@ int main(int argc, char **argv)
 
     if (inInfo->encryptingMode){
         encryptMsg(inInfo);
+        printf("Done!\n");
     } else if (inInfo->decryptingMode){
-        printf("Decrypting\n");
         if (inInfo->decryptingMode_KeysFile){
             decryptMsgWithKeysFile(inInfo);
+            printf("Done!\n");
         }
         else if (inInfo->decryptingMode_CipherBook){
             decryptMsgWithCipherBook(inInfo);
+            printf("Done!\n");
         }
     }
 }

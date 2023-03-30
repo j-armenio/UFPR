@@ -91,21 +91,59 @@ listLetters_t *cipherBookToList(char *cipherBookPath)
     return list;
 }
 
-int bookToKeysFile(char *keysilePath, listLetters_t *cipherBookList)
+listLetters_t *keysFileToList(char *keysFilePath)
+{
+    // 1. Ler o arquivo de chaves e armazenar na lista;
+    FILE *keysFile = NULL;
+    listLetters_t *list = NULL;
+
+    keysFile = fopen(keysFilePath, "r");
+    if (! keysFile){
+        printf("Falha ao abrir o arquivo de chaves.\n");
+        return NULL;
+    }
+
+    list = createLettersList();
+
+    char c;
+    char line[1024];
+
+    char s[2] = " ";
+    char *token;
+    
+
+    while (! feof (keysFile))
+    {
+        // uso o fgetc pra pegar a primeira letra
+        c = fgetc(keysFile);
+        insertLetter(c, list);
+
+        // uso o fgets pra pegar o resto da linha
+        fgets(line, 1024, keysFile);
+
+        token = strtok(line, s);
+
+        while (token != NULL){
+            token = strtok(NULL, s);
+            if (token != NULL && token[0] != ' ')
+                if (isalnum(token[0]))
+                    insertPosition(atoi(token), searchLetter(c, list));
+        }
+    }
+
+    // printList(list);
+
+    return list;
+}
+
+int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList)
 {
     printf("Asking for keys file - Converting cipher book to keys file...\n");
 
-    FILE *keysFile = NULL;
-
-    keysFile = fopen(keysilePath, "w");
-    if (! keysFile){
-        printf("Falha ao abrir o arquivo de chaves.\n");
-        return 0;
-    }
-    
+    printListToFile(cipherBookList, keysFilePath);    
 }
 
-void convertMsg(entryInfo_t *inInfo, listLetters_t* cipherBookList)
+void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 {
     FILE *originalMsg = NULL;
     FILE *outputMsg = NULL;
@@ -153,6 +191,53 @@ void convertMsg(entryInfo_t *inInfo, listLetters_t* cipherBookList)
     fclose(outputMsg);
 }
 
+void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
+{
+    FILE *originalMsg = NULL;
+    FILE *outputMsg = NULL;
+
+    originalMsg = fopen(inInfo->originalMsgPath, "r");
+    if (! originalMsg){
+        printf("Falha ao abrir a mensagem original.\n");
+        return;
+    }
+
+    outputMsg = fopen(inInfo->outputPath, "w");
+    if (! outputMsg){
+        printf("Falha ao abrir o arquivo de saída.\n");
+        return;
+    }
+
+    char line[1024];
+    char *token;
+
+    int i;
+
+    fgets(line, 1024, originalMsg);
+    while (! feof (originalMsg))
+    {
+        if (line[0] == '\0')
+            break;
+        if (line[0] == ' ')
+            continue;
+        token = strtok(line, " ");
+
+        while (token != NULL){
+            if (atoi(token) == -1){
+                fprintf(outputMsg, " ");
+            } else if (atoi(token) == -2){
+                fprintf(outputMsg, "\n");
+            } else {
+                fprintf(outputMsg, "%c", searchPosition(atoi(token), cipherBookList)->letter);
+            }
+            token = strtok(NULL, " ");
+            fgets(line, 1024, originalMsg);
+        }
+    }
+
+    fclose(originalMsg);
+    fclose(outputMsg);
+}
 
 /* ------------------ Funções Externas ------------------ */
 
@@ -172,12 +257,15 @@ entryInfo_t *handleEntries(int argc, char **argv)
     inInfo->encryptingMode = inInfo->encrypting_KeysFile = inInfo->decryptingMode = 
         inInfo->decryptingMode_CipherBook = inInfo->decryptingMode_KeysFile = 0;
 
-    printf("Processando as entradas...\n");
+    printf("Processing the command line...\n");
     /* 
         encrypt :               ./beale -e -b LivroCifra -m MensagemOriginal -o MensagemCodificada -c ArquivoDeChaves
+                                ./beale -e -b ./txts/LivroCifra -m ./txts/MensagemOriginal -o ./txts/MensagemCodificada -c ./txts/OUTArquivoDeChaves
         decrypt :              
             arquivo de chaves:  ./beale -d -i MensagemCodificada -c ArquivoDeChaves -o MensagemDecodificada
+                                ./beale -d -i ./txts/MensagemCodificada -c ./txts/INArquivoDeChaves -o ./txts/MensagemDecodificada
             livro de cifra :    ./beale -d -i MensagemCodificada -b LivroCifra -o MensagemDecodificada
+                                ./beale -d -i ./txts/MensagemCodificada -b ./txts/LivroCifra -o ./txts/MensagemDecodificada
     */ 
 
     while ((option = getopt(argc, argv, "eb:m:o:c:di:")) != -1)
@@ -241,7 +329,7 @@ int encryptMsg(entryInfo_t *inInfo)
     cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
     // 2. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida;
-    convertMsg(inInfo, cipherBookList);
+    encryptAndWrite(inInfo, cipherBookList);
 
     // 3. Se pedir, escrever o arquivo de chaves;
     if (inInfo->encrypting_KeysFile){
@@ -249,13 +337,29 @@ int encryptMsg(entryInfo_t *inInfo)
     }
 }
 
-int decryptMsgWithKeysFile()
+int decryptMsgWithKeysFile(entryInfo_t *inInfo)
 {
     printf("Decrypting with keys file...\n");
+
+    listLetters_t *cipherBookList = NULL;
+
+    // 1. Ler o arquivo de chaves e armazenar na lista;
+    cipherBookList = keysFileToList(inInfo->keysFilePath);
+
+    // 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida;
+    decryptAndWrite(inInfo, cipherBookList);
 }
 
-int decryptMsgWithCipherBook()
+int decryptMsgWithCipherBook(entryInfo_t *inInfo)
 {
     printf("Decrypting with cipher book...\n");
+
+    listLetters_t *cipherBookList = NULL;
+
+    // 1. Ler o livro de cifra e armazenar na lista;
+    cipherBookList = cipherBookToList(inInfo->cipherBookPath);
+
+    // 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida;
+    decryptAndWrite(inInfo, cipherBookList);
 }
 

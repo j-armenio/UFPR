@@ -20,8 +20,7 @@ typedef struct entryInfo {
 int randomNum(int min, int max);
 entryInfo_t *handleEntries(int argc, char **argv);
 int encryptMsg(entryInfo_t *inInfo);
-int bookToKeysFile();
-int decryptMsgWithKeysFile();
-int decryptMsgWithCipherBook();
+int decryptMsgWithKeysFile(entryInfo_t *inInfo);
+int decryptMsgWithCipherBook(entryInfo_t *inInfo);
 
 #endif

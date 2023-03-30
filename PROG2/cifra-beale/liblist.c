@@ -81,31 +81,47 @@ nodeLetter_t *searchLetter(char letter, listLetters_t *list)
     return NULL;
 }
 
+nodeLetter_t *searchPosition(char position, listLetters_t *list)
+{
+    nodeLetter_t *aux = list->head;
+    nodePosition_t *auxPos = NULL;
+
+    while (aux != NULL){
+        auxPos = aux->positions;
+        while (auxPos != NULL){
+            if (auxPos->position == position){
+                return aux;
+            }
+            auxPos = auxPos->next;
+        }
+        aux = aux->next;
+    }
+    return NULL;
+}
+
 void printList(listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
 
     while (aux != NULL){
-        printf("%c: ", aux->letter);
+        printf("%c: %d: ", aux->letter, aux->repetitions);
 
         nodePosition_t *auxPos = aux->positions;
         while (auxPos != NULL){
             printf("%d ", auxPos->position);
             auxPos = auxPos->next;
         }
-        printf(": %d", aux->repetitions);
         printf("\n");
         aux = aux->next;
     }
 }
 
-void reversePrint(nodeLetter_t *aux)
+void reversePrint(nodePosition_t *aux, FILE *file)
 {
-    if(aux == NULL)
-        return;
-    reversePrint(aux->next);
-    printf ("%c\n", aux->letter);
-
+    if (aux->next != NULL){
+        reversePrint(aux->next, file);
+    }
+    fprintf(file, "%d ", aux->position);
 }
 
 void printListToFile(listLetters_t *list, char *filePath)
@@ -120,8 +136,14 @@ void printListToFile(listLetters_t *list, char *filePath)
 
     nodeLetter_t *aux = list->head;
 
-    // Imprimir do ultimo elemento para o primeiro da lista de posições
-    reversePrint(aux);
+    while (aux != NULL){
+        if (aux->positions != NULL){
+            fprintf(file, "%c: ", aux->letter);
+            reversePrint(aux->positions, file);
+            fprintf(file, "\n");
+        }
+        aux = aux->next;
+    }
 }
 
 // Adicionar nodos de 1 a 9 e de a a z
