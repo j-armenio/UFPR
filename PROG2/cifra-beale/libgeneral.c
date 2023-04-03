@@ -93,7 +93,7 @@ listLetters_t *cipherBookToList(char *cipherBookPath)
 
 listLetters_t *keysFileToList(char *keysFilePath)
 {
-    // 1. Ler o arquivo de chaves e armazenar na lista;
+    /* 1. Ler o arquivo de chaves e armazenar na lista; */
     FILE *keysFile = NULL;
     listLetters_t *list = NULL;
 
@@ -114,11 +114,11 @@ listLetters_t *keysFileToList(char *keysFilePath)
 
     while (! feof (keysFile))
     {
-        // uso o fgetc pra pegar a primeira letra
+        /* uso o fgetc pra pegar a primeira letra */
         c = fgetc(keysFile);
         insertLetter(c, list);
 
-        // uso o fgets pra pegar o resto da linha
+        /* uso o fgets pra pegar o resto da linha */
         fgets(line, 1024, keysFile);
 
         token = strtok(line, s);
@@ -131,7 +131,7 @@ listLetters_t *keysFileToList(char *keysFilePath)
         }
     }
 
-    // printList(list);
+    /* printList(list); */
 
     return list;
 }
@@ -241,7 +241,7 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 
 /* ------------------ Funções Externas ------------------ */
 
-// Retorna um número aleatório em um range de min a max
+/* Retorna um número aleatório em um range de min a max */
 int getRandomNumber(int min, int max)
 {
     return rand() % (max + 1 - min) + min;
@@ -325,13 +325,13 @@ int encryptMsg(entryInfo_t *inInfo)
 
     printf("Encrypting...\n");
 
-    // 1. Ler o livro de cifra e armazenar na lista;
+    /* 1. Ler o livro de cifra e armazenar na lista; */
     cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
-    // 2. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida;
+    /* 2. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida; */
     encryptAndWrite(inInfo, cipherBookList);
 
-    // 3. Se pedir, escrever o arquivo de chaves;
+    /* 3. Se pedir, escrever o arquivo de chaves; */
     if (inInfo->encrypting_KeysFile){
         bookToKeysFile(inInfo->keysFilePath, cipherBookList);
     }
@@ -343,10 +343,10 @@ int decryptMsgWithKeysFile(entryInfo_t *inInfo)
 
     listLetters_t *cipherBookList = NULL;
 
-    // 1. Ler o arquivo de chaves e armazenar na lista;
+    /* 1. Ler o arquivo de chaves e armazenar na lista; */
     cipherBookList = keysFileToList(inInfo->keysFilePath);
 
-    // 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida;
+    /* 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida; */
     decryptAndWrite(inInfo, cipherBookList);
 }
 
@@ -356,10 +356,10 @@ int decryptMsgWithCipherBook(entryInfo_t *inInfo)
 
     listLetters_t *cipherBookList = NULL;
 
-    // 1. Ler o livro de cifra e armazenar na lista;
+    /* 1. Ler o livro de cifra e armazenar na lista; */
     cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
-    // 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida;
+    /* 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida; */
     decryptAndWrite(inInfo, cipherBookList);
 }
 

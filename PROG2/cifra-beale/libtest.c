@@ -67,7 +67,7 @@ void testList(){
 
     printf("Testando a Lista...\n");
 
-    // TESTE 1: ESCOLHE MANUALMENTE QUAIS COLOCAR
+    /* TESTE 1: ESCOLHE MANUALMENTE QUAIS COLOCAR */
 
     i = 0;
 
@@ -87,7 +87,7 @@ void testList(){
                     insertLetter(letter, list);
                     insertPosition(i, list->tail);
                 } else if (searchLetter(letter, list)){
-                    // insere posicao e aumenta repeticoes
+                    /* insere posicao e aumenta repeticoes */
                     insertPosition(i, searchLetter(letter, list));
                     searchLetter(letter, list)->repetitions++;                    
                 }

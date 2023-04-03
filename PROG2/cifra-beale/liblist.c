@@ -146,7 +146,7 @@ void printListToFile(listLetters_t *list, char *filePath)
     }
 }
 
-// Adicionar nodos de 1 a 9 e de a a z
+/* Adicionar nodos de 1 a 9 e de a a z */
 listLetters_t *indexAllList(listLetters_t *list)
 {
     int i;
