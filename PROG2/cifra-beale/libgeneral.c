@@ -213,9 +213,9 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 
     int i;
 
-    fgets(line, 1024, originalMsg);
     while (! feof (originalMsg))
     {
+        fgets(line, 1024, originalMsg);
         if (line[0] == '\0')
             break;
         if (line[0] == ' ')
@@ -226,12 +226,13 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
             if (atoi(token) == -1){
                 fprintf(outputMsg, " ");
             } else if (atoi(token) == -2){
+                /* printf("\n"); */
                 fprintf(outputMsg, "\n");
             } else {
+                /* printf("%c", searchPosition(atoi(token), cipherBookList)->letter); */
                 fprintf(outputMsg, "%c", searchPosition(atoi(token), cipherBookList)->letter);
             }
             token = strtok(NULL, " ");
-            fgets(line, 1024, originalMsg);
         }
     }
 

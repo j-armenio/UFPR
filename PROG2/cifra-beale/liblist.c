@@ -81,7 +81,7 @@ nodeLetter_t *searchLetter(char letter, listLetters_t *list)
     return NULL;
 }
 
-nodeLetter_t *searchPosition(char position, listLetters_t *list)
+nodeLetter_t *searchPosition(int position, listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
     nodePosition_t *auxPos = NULL;
