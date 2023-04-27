@@ -34,9 +34,11 @@ void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
     }
 
     char c;
-    int randomNum;
+    int randomNum, lastPos;
     nodeLetter_t *letterAux = NULL;
     nodePosition_t *positionAux = NULL;
+
+    printList(cipherBookList);
 
     while ((c = fgetc(originalMsg)) != EOF)
     {
@@ -44,7 +46,14 @@ void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
         {
             letterAux = searchLetter(tolower(c), cipherBookList);
             positionAux = letterAux->positions;
-            printf("%d\n", positionAux->position);
+
+            if (positionAux == NULL) /* eh uma letra que nao tem nenhuma posicao, não esta na referencia */
+            {
+                /*  preciso pegar a maior posicao da lista inteira, a letra que não esta contida na lista e
+                    criar um novo nodoPosition para essa letra. */
+                lastPos = getLastPositionFromList();
+            
+            }
 
             randomNum = getRandomNumber(0, letterAux->repetitions);
 

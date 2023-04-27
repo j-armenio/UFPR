@@ -73,9 +73,8 @@ nodeLetter_t *searchLetter(char letter, listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
     while (aux != NULL){
-        if (aux->letter == letter){
+        if (aux->letter == letter)
             return aux;
-        }
         aux = aux->next;
     }
     return NULL;
@@ -97,6 +96,26 @@ nodeLetter_t *searchPosition(int position, listLetters_t *list)
         aux = aux->next;
     }
     return NULL;
+}
+
+int getLastPositionFromList(listLetters_t *list)
+{
+    nodeLetter_t *currentLetter = list->head;
+    nodePosition_t *auxPos = currentLetter->positions;
+    int max;
+
+    while (auxPos == NULL){
+        currentLetter = currentLetter->next;
+    }
+
+    while (currentLetter != NULL){
+        auxPos = currentLetter->positions;
+        while (auxPos != NULL){
+
+        }
+
+        currentLetter = currentLetter->next;
+    }
 }
 
 void printList(listLetters_t *list)
