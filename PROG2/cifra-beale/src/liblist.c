@@ -100,22 +100,27 @@ nodeLetter_t *searchPosition(int position, listLetters_t *list)
 
 int getLastPositionFromList(listLetters_t *list)
 {
-    nodeLetter_t *currentLetter = list->head;
-    nodePosition_t *auxPos = currentLetter->positions;
-    int max;
+    int max = -10;
+    nodeLetter_t *current = list->head;
 
-    while (auxPos == NULL){
-        currentLetter = currentLetter->next;
-    }
+    while (current->positions == NULL)
+        current = current->next;
 
-    while (currentLetter != NULL){
-        auxPos = currentLetter->positions;
-        while (auxPos != NULL){
+    /* Percorre a lista principal */
+    while (current != NULL) {
+        nodePosition_t *currentPos = current->positions;
 
+        /* Percorre a sub-lista encadeada */
+        while (currentPos != NULL) {
+            if (currentPos->position > max) {
+                max = currentPos->position;
+            }
+            currentPos = currentPos->next;
         }
-
-        currentLetter = currentLetter->next;
+        
+        current = current->next;
     }
+    return max;
 }
 
 void printList(listLetters_t *list)

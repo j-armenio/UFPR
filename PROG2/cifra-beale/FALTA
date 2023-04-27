@@ -1,4 +1,6 @@
-1. Tratar letras que não estão na lista quando for CODIFICAR
-2. Testar decriptar com key file
+*OK* 1. Tratar letras que não estão na lista quando for CODIFICAR
+*OK* 1.5. Tratamento de quando for decriptar e tiver uma letra que não está no registro
+*OK* 2. Testar decriptar com key file
+2.5. Debugar testDecKey (Possivelmente caga na hora de passar para cipherBookList)
 3. Comentar todo código
 4. Fazer LEIAME

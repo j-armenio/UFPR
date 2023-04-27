@@ -18,22 +18,19 @@ int main(int argc, char **argv)
 
     inInfo = handleEntries(argc, argv);
 
-    if (inInfo->encryptingMode) /* OK */
+    if (inInfo->encryptingMode)
     {
         encryptMsg(inInfo);
-        printf("Done!\n");
     } 
     else if (inInfo->decryptingMode)
     {
         if (inInfo->decryptingMode_KeysFile)
         {
             decryptMsgWithKeysFile(inInfo);
-            printf("Done!\n");
         }
         else if (inInfo->decryptingMode_CipherBook)
         {
             decryptMsgWithCipherBook(inInfo);
-            printf("Done!\n");
         }
     }
 

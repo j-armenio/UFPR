@@ -22,10 +22,10 @@ purge: clean
 
 # Utils Commands
 testEnc:
-	./beale -e -b test/LivroCifra -m test/MensagemOriginal -o test/MensagemCodificada -c test/ArquivoDeChaves
+	./beale -e -b test/LivroCifra.txt -m test/MensagemOriginal -o test/MensagemCodificada -c test/ArquivoDeChaves
 
 testDecKey:
 	./beale -d -i test/MensagemCodificada -c test/ArquivoDeChaves -o test/MensagemDecodificada
 
 testDecBook:
-	./beale -d -i test/MensagemCodificada -b test/LivroCifra -o test/MensagemDecodificada
+	./beale -d -i test/MensagemCodificada -b test/LivroCifra.txt -o test/MensagemDecodificada

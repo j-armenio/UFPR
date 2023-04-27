@@ -111,8 +111,6 @@ entryInfo_t *handleEntries(int argc, char **argv)
     inInfo->encryptingMode = inInfo->encrypting_KeysFile = inInfo->decryptingMode = 
         inInfo->decryptingMode_CipherBook = inInfo->decryptingMode_KeysFile = 0;
 
-    printf("Processing the command line...\n");
-
     while ((option = getopt(argc, argv, "eb:m:o:c:di:")) != -1)
     {
         switch (option)
@@ -209,8 +207,6 @@ listLetters_t *cipherBookToList(char *cipherBookPath)
 
 int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList)
 {
-    printf("Asking for keys file - Converting cipher book to keys file...\n");
-
     if (! printListToFile(cipherBookList, keysFilePath))
         return 0;
     return 1;

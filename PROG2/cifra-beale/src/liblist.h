@@ -27,5 +27,6 @@ nodeLetter_t *searchPosition(int position, listLetters_t *list);
 void printList(listLetters_t *list);
 int printListToFile(listLetters_t *list, char *filePath);
 listLetters_t *indexAllList(listLetters_t *list);
+int getLastPositionFromList(listLetters_t *list);
 
 #endif

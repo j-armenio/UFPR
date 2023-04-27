@@ -34,35 +34,57 @@ void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
     }
 
     char c;
-    int randomNum, lastPos;
+    int randomNum, lastPos, i, j;
     nodeLetter_t *letterAux = NULL;
     nodePosition_t *positionAux = NULL;
 
-    printList(cipherBookList);
+    char *newLetters;
+    newLetters = malloc(sizeof(char) * ARRAY_SIZE);
+    if (!newLetters){
+        printf("Erro ao alocar matriz.\n");
+        return;
+    }
+
+    i = 0;
 
     while ((c = fgetc(originalMsg)) != EOF)
     {
         if (isalnum(c))
         {
+
             letterAux = searchLetter(tolower(c), cipherBookList);
             positionAux = letterAux->positions;
 
-            if (positionAux == NULL) /* eh uma letra que nao tem nenhuma posicao, não esta na referencia */
+            if (positionAux == NULL)
+            { /* iteracao que ocorre toda vez que uma letra que nao estava registrada aparece */
+                lastPos = getLastPositionFromList(cipherBookList);
+                insertPosition(lastPos+1, letterAux);
+                
+                newLetters[i] = letterAux->letter;
+                i++;
+
+                fprintf(outputMsg, "%d ", lastPos+1);
+            }
+            else
             {
-                /*  preciso pegar a maior posicao da lista inteira, a letra que não esta contida na lista e
-                    criar um novo nodoPosition para essa letra. */
-                lastPos = getLastPositionFromList();
+                for (j = 0; j <= i; j++){
+                    if (letterAux->letter == newLetters[j]){
+                        lastPos = getLastPositionFromList(cipherBookList);
+                        insertPosition(lastPos+1, letterAux);
+                    }
+                }
+
+                randomNum = getRandomNumber(0, letterAux->repetitions);
+
+                while (randomNum > 0 && positionAux->next != NULL)
+                {
+                    positionAux = positionAux->next;
+                    randomNum--;
+                }
             
+                fprintf(outputMsg, "%d ", positionAux->position);
             }
 
-            randomNum = getRandomNumber(0, letterAux->repetitions);
-
-            while (randomNum > 0 && positionAux->next != NULL)
-            {
-                positionAux = positionAux->next;
-                randomNum--;
-            }
-            fprintf(outputMsg, "%d ", positionAux->position);
         } else if (c == ' '){
             fprintf(outputMsg, "-1 ");
         } else if (c == '\n'){
@@ -78,18 +100,17 @@ int encryptMsg(entryInfo_t *inInfo)
 {
     listLetters_t *cipherBookList = NULL;
 
-    printf("Encrypting...\n");
-
     /* 1. Ler o livro de cifra e armazenar na lista; */
     cipherBookList = cipherBookToList(inInfo->cipherBookPath);
 
-    /* 2. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida; */
-    encryptAndWrite(inInfo, cipherBookList);
-
-    /* 3. Se pedir, escrever o arquivo de chaves; */
+    /* 2. Se pedir, escrever o arquivo de chaves; */
     if (inInfo->encrypting_KeysFile){
         bookToKeysFile(inInfo->keysFilePath, cipherBookList);
     }
+
+    /* 3. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida; */
+    encryptAndWrite(inInfo, cipherBookList);
+
     return 0;
 }
 
@@ -126,16 +147,22 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 
         while (token != NULL){
             if (atoi(token) == -1){
+                /* printf(" "); */
                 fprintf(outputMsg, " ");
             } else if (atoi(token) == -2){
                 /* printf("\n"); */
                 fprintf(outputMsg, "\n");
             } else {
-                /* printf("%c", searchPosition(atoi(token), cipherBookList)->letter); */
-                fprintf(outputMsg, "%c", searchPosition(atoi(token), cipherBookList)->letter);
+                if (searchPosition(atoi(token), cipherBookList) == NULL){ /* letra nao pertencente ao registro */
+                    /* printf("X"); */
+                    fprintf(outputMsg, "X");
+                } else {
+                    /* printf("%c", searchPosition(atoi(token), cipherBookList)->letter); */
+                    fprintf(outputMsg, "%c", searchPosition(atoi(token), cipherBookList)->letter);
+                }
             }
             token = strtok(NULL, " ");
-        }
+        } 
     }
 
     fclose(originalMsg);
