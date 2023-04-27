@@ -1,7 +1,7 @@
-#ifndef _LIB_GENERAL_H_
-#define _LIB_GENERAL_H_
+#ifndef _LIB_UTIL_H_
+#define _LIB_UTIL_H_
 
-#include <stdio.h>
+#include "liblist.h"
 
 typedef struct entryInfo {
     int encryptingMode;
@@ -17,10 +17,13 @@ typedef struct entryInfo {
     char *cipherBookPath;
 } entryInfo_t;
 
-int randomNum(int min, int max);
+entryInfo_t *allocateFlags();
+void destroyEntry(entryInfo_t *inInfo);
+listLetters_t *keysFileToList(char *keysFilePath);
+int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList);
+listLetters_t *cipherBookToList(char *cipherBookPath);
+int getRandomNumber(int min, int max);
 entryInfo_t *handleEntries(int argc, char **argv);
-int encryptMsg(entryInfo_t *inInfo);
-int decryptMsgWithKeysFile(entryInfo_t *inInfo);
-int decryptMsgWithCipherBook(entryInfo_t *inInfo);
+
 
 #endif

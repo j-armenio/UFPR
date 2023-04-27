@@ -1,11 +1,31 @@
+# Variables
 CC = gcc
-CGLAGS = -Wall -g -std=c90 -D_DEFAULT_SOURCE
+CFLAGS = -Wall -g -std=c90 -D_DEFAULT_SOURCE
+LIBS = src/libutil.c src/liblist.c src/libcrypto.c
+OBJS = src/beale.o
 
-all: beale.c libgeneral.c libgeneral.h libtest.c libtest.h liblist.c liblist.h
-	$(CC) $(CFLAGS) beale.c libgeneral.c libtest.c liblist.c -o beale
+# Compilation Rules
+all: beale
+
+beale: $(OBJS)
+	$(CC) $(CFLAGS) -o beale $(OBJS) $(LIBS)
+
+beale.o: beale.c
+	$(CC) $(CFLAGS) -c beale.c
 
 clean:
-	-rm -f *~ *.o
+	-rm -f src/*~ src/*.o
 
 purge: clean
 	-rm -f beale
+
+
+# Utils Commands
+testEnc:
+	./beale -e -b test/LivroCifra -m test/MensagemOriginal -o test/MensagemCodificada -c test/ArquivoDeChaves
+
+testDecKey:
+	./beale -d -i test/MensagemCodificada -c test/ArquivoDeChaves -o test/MensagemDecodificada
+
+testDecBook:
+	./beale -d -i test/MensagemCodificada -b test/LivroCifra -o test/MensagemDecodificada

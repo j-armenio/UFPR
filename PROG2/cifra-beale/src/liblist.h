@@ -1,5 +1,5 @@
-#ifndef _LIB_LIST_TREE_
-#define _LIB_LIST_TREE_
+#ifndef _LIB_LIST_
+#define _LIB_LIST_
 
 typedef struct nodePosition {
     int position;
@@ -25,7 +25,7 @@ nodePosition_t *insertPosition(int position, nodeLetter_t *node);
 nodeLetter_t *searchLetter(char letter, listLetters_t *list);
 nodeLetter_t *searchPosition(int position, listLetters_t *list);
 void printList(listLetters_t *list);
-void printListToFile(listLetters_t *list, char *filePath);
+int printListToFile(listLetters_t *list, char *filePath);
 listLetters_t *indexAllList(listLetters_t *list);
 
 #endif

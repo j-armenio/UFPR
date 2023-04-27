@@ -124,14 +124,14 @@ void reversePrint(nodePosition_t *aux, FILE *file)
     fprintf(file, "%d ", aux->position);
 }
 
-void printListToFile(listLetters_t *list, char *filePath)
+int printListToFile(listLetters_t *list, char *filePath)
 {
     FILE *file;
 
     file = fopen(filePath, "w");
     if (! file){
         printf("Falha ao abrir arquivo de saída.\n");
-        return;
+        return 1;
     }
 
     nodeLetter_t *aux = list->head;
@@ -144,6 +144,7 @@ void printListToFile(listLetters_t *list, char *filePath)
         }
         aux = aux->next;
     }
+    return 0;
 }
 
 /* Adicionar nodos de 1 a 9 e de a a z */
