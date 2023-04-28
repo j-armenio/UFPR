@@ -96,7 +96,7 @@ listLetters_t *keysFileToList(char *keysFilePath)
         }
     }
 
-    /* printList(list); */
+    printList(list);
 
     return list;
 }
