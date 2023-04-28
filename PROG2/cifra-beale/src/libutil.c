@@ -69,21 +69,31 @@ listLetters_t *keysFileToList(char *keysFilePath)
     }
 
     list = createLettersList();
+    list = indexAllList(list);
+
+    nodeLetter_t *currentLetter = NULL;
+
+    char line[1024];
+
+    while (fgets(line, sizeof(line), keysFile))
+    {
+
+    }
+
+
+    /*
 
     char c;
     char line[1024];
 
     char s[2] = " ";
     char *token;
-    
 
     while (! feof (keysFile))
     {
-        /* uso o fgetc pra pegar a primeira letra */
         c = fgetc(keysFile);
         insertLetter(c, list);
 
-        /* uso o fgets pra pegar o resto da linha */
         fgets(line, 1024, keysFile);
 
         token = strtok(line, s);
@@ -94,9 +104,51 @@ listLetters_t *keysFileToList(char *keysFilePath)
                 if (isalnum(token[0]))
                     insertPosition(atoi(token), searchLetter(c, list));
         }
+    } 
+    */
+
+    return list;
+}
+
+listLetters_t *cipherBookToList(char *cipherBookPath)
+{
+    FILE *cipherBook = NULL;
+    listLetters_t *list = NULL;
+
+    list = createLettersList();
+    list = indexAllList(list);
+
+    cipherBook = fopen(cipherBookPath, "r");
+    if (! cipherBook){
+        printf("Falha ao abrir o livro de cifra.\n");
+        return NULL;
     }
 
-    printList(list);
+    int position = 0;
+    int c, prev_c = ' ';
+
+    while ((c = fgetc(cipherBook)) != EOF)
+    {
+        if (position == 0){
+            while (! isalnum(c)){
+                c = fgetc(cipherBook);
+            }
+            insertPosition(position, searchLetter(tolower(c), list));
+            position++;
+            prev_c = c;
+            c = fgetc(cipherBook);
+            continue;
+        }
+
+        if (isalnum(c) && ((prev_c == ' ') || (prev_c == '\n')))
+        {
+            insertPosition(position, searchLetter(tolower(c), list));
+            position++;
+        }
+        prev_c = c;
+    }
+
+    fclose(cipherBook);
 
     return list;
 }
@@ -160,49 +212,6 @@ entryInfo_t *handleEntries(int argc, char **argv)
     }
     
     return inInfo;
-}
-
-listLetters_t *cipherBookToList(char *cipherBookPath)
-{
-    FILE *cipherBook = NULL;
-    listLetters_t *list = NULL;
-
-    list = createLettersList();
-    list = indexAllList(list);
-
-    cipherBook = fopen(cipherBookPath, "r");
-    if (! cipherBook){
-        printf("Falha ao abrir o livro de cifra.\n");
-        return NULL;
-    }
-
-    int position = 0;
-    int c, prev_c = ' ';
-
-    while ((c = fgetc(cipherBook)) != EOF)
-    {
-        if (position == 0){
-            while (! isalnum(c)){
-                c = fgetc(cipherBook);
-            }
-            insertPosition(position, searchLetter(tolower(c), list));
-            position++;
-            prev_c = c;
-            c = fgetc(cipherBook);
-            continue;
-        }
-
-        if (isalnum(c) && ((prev_c == ' ') || (prev_c == '\n')))
-        {
-            insertPosition(position, searchLetter(tolower(c), list));
-            position++;
-        }
-        prev_c = c;
-    }
-
-    fclose(cipherBook);
-
-    return list;
 }
 
 int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList)
