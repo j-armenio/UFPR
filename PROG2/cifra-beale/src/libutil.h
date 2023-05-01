@@ -21,11 +21,10 @@ typedef struct entryInfo {
 
 entryInfo_t *allocateFlags();
 void destroyEntry(entryInfo_t *inInfo);
+entryInfo_t *handleEntries(int argc, char **argv);
 listLetters_t *keysFileToList(char *keysFilePath);
 int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList);
 listLetters_t *cipherBookToList(char *cipherBookPath);
 int getRandomNumber(int min, int max);
-entryInfo_t *handleEntries(int argc, char **argv);
-
 
 #endif

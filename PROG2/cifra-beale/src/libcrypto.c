@@ -122,6 +122,7 @@ int encryptMsg(entryInfo_t *inInfo)
 
 /* ------------------ DECRYPT FUNCTIONS ------------------ */
 
+/* Recebe as flags de entrada, decodifica a mensagem e a imprime no output */
 void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 {
     FILE *originalMsg = NULL;
@@ -139,12 +140,12 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
         return;
     }
 
-    char line[1024];
+    char line[2048];
     char *token;
 
     while (! feof (originalMsg))
     {
-        fgets(line, 1024, originalMsg);
+        fgets(line, 2048, originalMsg);
         if (line[0] == '\0')
             break;
         if (line[0] == ' ')
@@ -153,17 +154,13 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 
         while (token != NULL){
             if (atoi(token) == -1){
-                /* printf(" "); */
                 fprintf(outputMsg, " ");
             } else if (atoi(token) == -2){
-                /* printf("\n"); */
                 fprintf(outputMsg, "\n");
             } else {
                 if (searchPosition(atoi(token), cipherBookList) == NULL){ /* letra nao pertencente ao registro */
-                    /* printf("X"); */
                     fprintf(outputMsg, "X");
                 } else {
-                    /* printf("%c", searchPosition(atoi(token), cipherBookList)->letter); */
                     fprintf(outputMsg, "%c", searchPosition(atoi(token), cipherBookList)->letter);
                 }
             }
