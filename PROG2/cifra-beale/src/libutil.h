@@ -3,6 +3,8 @@
 
 #include "liblist.h"
 
+#define ARRAY_SIZE 1024
+
 typedef struct entryInfo {
     int encryptingMode;
     int encrypting_KeysFile;

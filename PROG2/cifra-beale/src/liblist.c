@@ -3,6 +3,7 @@
 
 #include "liblist.h"
 
+/* Cria a lista de letras */
 listLetters_t *createLettersList()
 {
     listLetters_t *list = (listLetters_t *)malloc(sizeof(listLetters_t));
@@ -18,6 +19,30 @@ listLetters_t *createLettersList()
     return list;
 }
 
+/* Liberar cada nodo da lista de posicoes da cada nodo da lista de letras */
+int destroyList(listLetters_t *list)
+{
+    nodeLetter_t *aux = list->head;
+    nodePosition_t *auxPos = NULL;
+
+    while (aux != NULL){
+        auxPos = aux->positions;
+        while (auxPos != NULL){
+            aux->positions = aux->positions->next;
+            free(auxPos);
+            auxPos = aux->positions;
+        }
+        list->head = list->head->next;
+        free(aux);
+        aux = list->head;
+    }
+
+    free(list);
+
+    return 0;
+}
+
+/* Insere uma letra na lista */
 nodeLetter_t *insertLetter(char letter, listLetters_t *list)
 {
     nodeLetter_t *node = (nodeLetter_t *)malloc(sizeof(nodeLetter_t));
@@ -28,6 +53,7 @@ nodeLetter_t *insertLetter(char letter, listLetters_t *list)
 
     node->letter = letter;
     node->repetitions = 0;
+    node->positions = NULL;
     node->next = NULL;
 
     if (list->size == 0){
@@ -43,6 +69,7 @@ nodeLetter_t *insertLetter(char letter, listLetters_t *list)
     return node;
 }
 
+/* Insere uma posição em um nodo contido na lista de letras */
 nodePosition_t *insertPosition(int position, nodeLetter_t *node)
 {
     nodePosition_t *nodePos = (nodePosition_t *)malloc(sizeof(nodePosition_t));
@@ -69,6 +96,7 @@ nodePosition_t *insertPosition(int position, nodeLetter_t *node)
     return nodePos;
 }
 
+/* Procura uma letra na lista e retorna o nodo que a contem */
 nodeLetter_t *searchLetter(char letter, listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
@@ -80,6 +108,7 @@ nodeLetter_t *searchLetter(char letter, listLetters_t *list)
     return NULL;
 }
 
+/* Procura uma posição na lista de uma letra e retorna o nodo que a contem */
 nodeLetter_t *searchPosition(int position, listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
@@ -98,6 +127,7 @@ nodeLetter_t *searchPosition(int position, listLetters_t *list)
     return NULL;
 }
 
+/* Pega a posição com maior valor númerico da lista */
 int getLastPositionFromList(listLetters_t *list)
 {
     int max = -10;
@@ -123,6 +153,7 @@ int getLastPositionFromList(listLetters_t *list)
     return max;
 }
 
+/* Imprime a lista inteira com as repetições de cada letra */
 void printList(listLetters_t *list)
 {
     nodeLetter_t *aux = list->head;
@@ -140,6 +171,7 @@ void printList(listLetters_t *list)
     }
 }
 
+/* Imprime a lista com as posiões do menor ao maior */
 void reversePrint(nodePosition_t *aux, FILE *file)
 {
     if (aux->next != NULL){
@@ -148,6 +180,7 @@ void reversePrint(nodePosition_t *aux, FILE *file)
     fprintf(file, "%d ", aux->position);
 }
 
+/* Imprime a lista direto para um arquivo */
 int printListToFile(listLetters_t *list, char *filePath)
 {
     FILE *file;
@@ -168,10 +201,13 @@ int printListToFile(listLetters_t *list, char *filePath)
         }
         aux = aux->next;
     }
+
+    fclose(file);
+
     return 0;
 }
 
-/* Adicionar nodos de 1 a 9 e de a a z */
+/* Adicionar nodos de 1 a 9 e de a a z na lista */
 listLetters_t *indexAllList(listLetters_t *list)
 {
     int i;

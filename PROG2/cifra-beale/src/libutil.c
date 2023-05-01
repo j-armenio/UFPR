@@ -27,6 +27,7 @@ int getRandomNumber(int min, int max)
     return rand() % (max + 1 - min) + min;
 }
 
+/* Aloca e seta a estrutura de flags de entradas */
 entryInfo_t *allocateFlags()
 {
     entryInfo_t *inInfo = NULL;
@@ -51,11 +52,13 @@ entryInfo_t *allocateFlags()
     return inInfo;
 }
 
+/* Libera memória da entrada */
 void destroyEntry(entryInfo_t *inInfo)
 {
     free(inInfo);
 }
 
+/* Copia as posições contidas no Arquivo de Chaves para uma lista */
 listLetters_t *keysFileToList(char *keysFilePath)
 {
     /* 1. Ler o arquivo de chaves e armazenar na lista; */
@@ -72,44 +75,51 @@ listLetters_t *keysFileToList(char *keysFilePath)
     list = indexAllList(list);
 
     nodeLetter_t *currentLetter = NULL;
+    char c;
+    char *currentPosition = NULL;
+    currentPosition = (char *)malloc(2);
+    if (! currentPosition){
+        printf("Falha ao alocar memória para a posição atual.\n");
+        return NULL;
+    }
+    currentPosition[0] = '\0';
 
-    char line[1024];
-
-    while (fgets(line, sizeof(line), keysFile))
+    c = fgetc(keysFile);
+    while (c != EOF)
     {
+        currentLetter = searchLetter(c, list);
+    
+        c = fgetc(keysFile);
+        c = fgetc(keysFile);
 
+        while (c != '\n') {
+            while (c != ' '){
+                /* logica para ir somando as strings para dentro do currentPosition */
+                currentPosition = (char *)realloc(currentPosition, strlen(currentPosition) + 1);
+                if (! currentPosition){
+                    printf("Falha ao alocar memória para a posição atual.\n");
+                    return NULL;
+                }
+                currentPosition[strlen(currentPosition)] = c;
+
+                c = fgetc(keysFile);
+                if (c == ' '){
+                    insertPosition(atoi(currentPosition), currentLetter);
+                }
+            }
+            memset(currentPosition, 0, strlen(currentPosition));
+            c = fgetc(keysFile);
+        }
+        c = fgetc(keysFile);
     }
 
-
-    /*
-
-    char c;
-    char line[1024];
-
-    char s[2] = " ";
-    char *token;
-
-    while (! feof (keysFile))
-    {
-        c = fgetc(keysFile);
-        insertLetter(c, list);
-
-        fgets(line, 1024, keysFile);
-
-        token = strtok(line, s);
-
-        while (token != NULL){
-            token = strtok(NULL, s);
-            if (token != NULL && token[0] != ' ')
-                if (isalnum(token[0]))
-                    insertPosition(atoi(token), searchLetter(c, list));
-        }
-    } 
-    */
+    free(currentPosition);
+    fclose(keysFile);
 
     return list;
 }
 
+/* Analisa o Livro de Cifra e passa seus valores para uma lista */
 listLetters_t *cipherBookToList(char *cipherBookPath)
 {
     FILE *cipherBook = NULL;
@@ -153,6 +163,7 @@ listLetters_t *cipherBookToList(char *cipherBookPath)
     return list;
 }
 
+/* Recebe a entrada padrão e configura as flags de entrada */
 entryInfo_t *handleEntries(int argc, char **argv)
 {
     int option;
@@ -214,6 +225,7 @@ entryInfo_t *handleEntries(int argc, char **argv)
     return inInfo;
 }
 
+/* Retorna 1 caso a impressão no output seja feita com sucesso e 0 caso contrário */
 int bookToKeysFile(char *keysFilePath, listLetters_t *cipherBookList)
 {
     if (! printListToFile(cipherBookList, keysFilePath))

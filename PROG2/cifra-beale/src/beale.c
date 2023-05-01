@@ -11,9 +11,6 @@ int main(int argc, char **argv)
 {
     srand(time(NULL));
 
-    /* char *locale;
-    locale = setlocale (LC_CTYPE, ""); */
-
     entryInfo_t *inInfo = NULL;
 
     inInfo = handleEntries(argc, argv);
@@ -33,6 +30,8 @@ int main(int argc, char **argv)
             decryptMsgWithCipherBook(inInfo);
         }
     }
+
+    destroyEntry(inInfo);
 
     return 0;
 }

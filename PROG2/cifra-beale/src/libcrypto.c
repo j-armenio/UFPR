@@ -16,6 +16,7 @@ int decryptMsgWithCipherBook(entryInfo_t *inInfo);
 
 /* ------------------ ENCRYPT FUNCTIONS ------------------ */
 
+/* Recebe as flags de entrada, codifica a mensagem e a imprime no output */
 void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 {
     FILE *originalMsg = NULL;
@@ -44,6 +45,7 @@ void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
         printf("Erro ao alocar matriz.\n");
         return;
     }
+    memset(newLetters, 0, ARRAY_SIZE);
 
     i = 0;
 
@@ -92,6 +94,7 @@ void encryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
         }
     }
 
+    free(newLetters);
     fclose(originalMsg);
     fclose(outputMsg);
 }
@@ -110,6 +113,9 @@ int encryptMsg(entryInfo_t *inInfo)
 
     /* 3. Ler a mensagem original, criptografa-lá e escrever ela no arquivo de saida; */
     encryptAndWrite(inInfo, cipherBookList);
+
+    /* 4. Liberar a lista; */
+    destroyList(cipherBookList);
 
     return 0;
 }
@@ -171,8 +177,6 @@ void decryptAndWrite(entryInfo_t *inInfo, listLetters_t* cipherBookList)
 
 int decryptMsgWithKeysFile(entryInfo_t *inInfo)
 {
-    printf("Decrypting with keys file...\n");
-
     listLetters_t *cipherBookList = NULL;
 
     /* 1. Ler o arquivo de chaves e armazenar na lista; */
@@ -181,13 +185,14 @@ int decryptMsgWithKeysFile(entryInfo_t *inInfo)
     /* 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida; */
     decryptAndWrite(inInfo, cipherBookList);
 
+    /* 3. Liberar a lista; */
+    destroyList(cipherBookList);
+
     return 0;
 }
 
 int decryptMsgWithCipherBook(entryInfo_t *inInfo)
 {
-    printf("Decrypting with cipher book...\n");
-
     listLetters_t *cipherBookList = NULL;
 
     /* 1. Ler o livro de cifra e armazenar na lista; */
@@ -195,6 +200,9 @@ int decryptMsgWithCipherBook(entryInfo_t *inInfo)
 
     /* 2. Ler a mensagem codificada, descriptografa-lá e escrever ela no arquivo de saida; */
     decryptAndWrite(inInfo, cipherBookList);
+
+    /* 3. Liberar a lista; */
+    destroyList(cipherBookList);
 
     return 0;
 }

@@ -1,1 +1,25 @@
 João Armênio Silveira GRR20211792
+
+    Segue o projeto onde foi feita a criação de um programa, que, de acordo com a codificação, cifra de Baele, tem as seguintes funcionalidades:
+        - Cifrar um arquivo de texto.
+        - Decifrar um arquivo de texto com base no livro Cifra.
+        - Decifrar um arquivo de texto com base no arquivo de chaves.
+
+    O projeto está inteiro contido na pasta "src", onde se encontram os seguintes arquivos:
+        - beale.c: arquivo principal do programa, onde se encontra a função main contendo apenas as principais chamadas de funções.
+
+        - liblist.c: arquivo onde se encontram as funções de manipulação de listas.
+        - liblist.h: arquivo onde se encontram as declarações das funções de manipulação de listas.
+
+        - libutil.c: arquivo onde se encontram as funções de manipulação de strings.
+        - libutil.h: arquivo onde se encontram as declarações das funções de manipulação de strings.
+
+        - libcrypto.c: arquivo onde se encontram as funções de cifragem e decifragem.
+        - libcrypto.h: arquivo onde se encontram as declarações das funções de cifragem e decifragem.
+
+
+    Falando mais especificamente sobre cada uma das bibliotecas implementadas:
+        - liblist.c: Foi implementada uma lista encadeada chamada de listLetters, composta de nodeLetter, nodos que dentro de si armazenam uma letra, o número de repetições que essa letra terá na lista (não há dois nodos da mesma letra), e dois ponteiros, um para o próximo nodo e outro que aponta para uma segunda lista, chamada de positions. Essa segunda lista encadeada contém nodos chamados de nodePosition, que contém um ponteiro para seu próximo nodo e um int de position, que será ultilizado para armazenar uma única posição de uma palavra do LivroCifra.
+	A implementação das funções segue a lógica das duas listas encadeadas, onde há funções separadas para a inserção de um nodo e de uma letra, cada um em sua respectiva lista. Além disso há funções como printList, que imprime a lista no terminal e printListToFile, que já imprime diretamente em um arquivo.
+
+

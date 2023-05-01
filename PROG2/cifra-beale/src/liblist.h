@@ -20,6 +20,7 @@ typedef struct listLetters {
 } listLetters_t;
 
 listLetters_t *createLettersList();
+int destroyList(listLetters_t *list);
 nodeLetter_t *insertLetter(char letter, listLetters_t *list);
 nodePosition_t *insertPosition(int position, nodeLetter_t *node);
 nodeLetter_t *searchLetter(char letter, listLetters_t *list);
