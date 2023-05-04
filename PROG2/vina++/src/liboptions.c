@@ -5,9 +5,13 @@
 
 int printHelpMessage()
 {
-    printf("As seguintes opções estão disponíveis para o programa vina++,\n"
+    printf(
+        "\n"
+        "As seguintes opções estão disponíveis para o programa vina++,\n"
         "seguindo o formato:\n"
-        "  vina++ <opção> <archive> [membro1 membro2 ...]\n"
+        "\n"
+        "  ./vina++ <opção> <archive> [membro1 membro2 ...]\n"
+        "\n"
         "=======================================================================\n"
         "\n"
         "  -i : insere/acresenta um ou mais membros ao archive. Caso o membro\n"
@@ -26,13 +30,20 @@ int printHelpMessage()
         "  -r: remove os membros indicados de archive.\n"
         "\n"
         "  -c: lista o conteúdo de archive em ordem, incluindo as propriedades\n"
-        "  de cada membro (nome, UID, permissões, tamanho e data de modificação)\n"
-        "  e sua ordem no arquivo.\n"
+        "  de cada membro (nome, UID, permissões, tamanho e data de\n"
+        "  modificação) e sua ordem no arquivo.\n"
         "\n"
-        "  -h: imprime uma pequena mensagem de ajuda com as opções disponíveis"
+        "  -h: imprime uma pequena mensagem de ajuda com as opções disponíveis\n"
         "  e encerra.\n"
         "\n"
-        "=======================================================================\n");
+        "=======================================================================\n"
+        "\n"
+        );
     
     return 0;
+}
+
+insertFilesIntoBackup(argc, argv)
+{
+    
 }
