@@ -4,11 +4,12 @@
 typedef struct member {
     char *name; // array size 256
     char *location; // array size 256 *se tiver um path com mais de 256 vsf né
-    time_t modificationDate;
+    char *modificationDate; // array size 20
     int uid;
     int permissions;
     int size;
     int order;
+    struct member *next;
 } member_t;
 
 typedef struct directory {
