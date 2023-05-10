@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "liboptions.h"
+#include "libdirectory.h"
 
 int printHelpMessage()
 {
@@ -43,7 +47,12 @@ int printHelpMessage()
     return 0;
 }
 
-insertFilesIntoBackup(argc, argv)
+int insertFilesIntoBackup(int argc, char **argv)
 {
-    
+    member_t *newMember = NULL;
+    char *currentPath = argv[3];
+
+    newMember = fillMemberInfo(currentPath);
+
+    return 1;
 }

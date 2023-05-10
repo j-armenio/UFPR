@@ -4,7 +4,7 @@
 
 #include "liboptions.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
     if (argc <= 1){
         printf("Erro na execução do comando, insira uma opção.\n");
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         switch (option)
         {
         case 'i':
-            printf("Insere um membro no archive\n");
+            printf("Insere membros no archive\n");
             insertFilesIntoBackup(argc, argv);
             break;
         

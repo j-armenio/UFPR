@@ -1,7 +1,7 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -g -std=c90 -D_DEFAULT_SOURCE
-LIBS = src/liboptions.c
+CFLAGS = -Wall -g -D_DEFAULT_SOURCE # -std=c90
+LIBS = src/liboptions.c src/libdirectory.c
 OBJS = src/vina++.o
 
 # Compilation Rules
