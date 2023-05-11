@@ -130,6 +130,7 @@ directory_t *createDirectory()
         exit(1);
     }
 
+    newDirectory->directorySize = 0;
     newDirectory->count = 0;
     newDirectory->members = NULL;
 

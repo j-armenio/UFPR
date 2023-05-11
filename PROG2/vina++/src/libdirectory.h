@@ -13,8 +13,12 @@ typedef struct member {
 } member_t;
 
 typedef struct directory {
-    int count; // quantidade de membros no arquivo 
+    int directorySize; // Tamanho total do arquivo, para saber onde o diretorio começa
+    int count; // Quantidade de membros no arquivo
     member_t *members; // Lista de membros no arquivo
 } directory_t;
+
+directory_t *createDirectory();
+directory_t *addMember(directory_t *directory, char *filePath);
 
 #endif

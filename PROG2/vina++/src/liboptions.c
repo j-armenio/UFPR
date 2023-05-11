@@ -6,6 +6,7 @@
 
 #include "liboptions.h"
 #include "libdirectory.h"
+#include "libbackup.h"
 
 int printHelpMessage()
 {
@@ -49,10 +50,17 @@ int printHelpMessage()
 
 int insertFilesIntoBackup(int argc, char **argv)
 {
-    member_t *newMember = NULL;
-    char *currentPath = argv[3];
+    // Cria o arquivo de backup
+    FILE *backup = fopen(argv[2], "wb");
+    if (! backup){
+        printf("Erro ao criar arquivo de backup.\n");
+        exit(1);
+    }
 
-    newMember = fillMemberInfo(currentPath);
+    
+
+
+    fclose(backup);
 
     return 1;
 }
