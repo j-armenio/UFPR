@@ -14,6 +14,12 @@
 /* ------------------ PROTOTYPES ------------------ */
 
 void printMember(member_t *member);
+member_t *allocateEmptyMember();
+member_t *createNewMember(char *filePath);
+void freeMember(member_t *member);
+directory_t *createDirectory();
+directory_t *addMemberToDirectory(directory_t *directory, char *filePath);
+void removeMemberFromDirectory(directory_t *directory, member_t *targetedMember);
 
 /* ------------------ INTERNAL FUNCTIONS ------------------ */
 
@@ -130,14 +136,13 @@ directory_t *createDirectory()
         exit(1);
     }
 
-    newDirectory->directorySize = 0;
     newDirectory->count = 0;
     newDirectory->members = NULL;
 
     return newDirectory;
 }
 
-directory_t *addMember(directory_t *directory, char *filePath)
+directory_t *addMemberToDirectory(directory_t *directory, char *filePath)
 {
     member_t *newMember = NULL;
 
@@ -153,11 +158,35 @@ directory_t *addMember(directory_t *directory, char *filePath)
         aux->next = newMember;
     }
     directory->count++;
+    newMember->order = directory->count;
 
     return directory;
 }
 
-void removeMember(directory_t *directory, member_t *targetedMember)
+void removeMemberFromDirectory(directory_t *directory, member_t *targetedMember)
 {
 
+}
+
+void printAllMembersFromDir(directory_t *dir)
+{
+    member_t *curMember = dir->members;
+    int i = 0;
+
+    while (curMember != NULL)
+    {
+        printf("-----------------------------");
+        printf("name: %s\n", curMember->name);
+        printf("location: %s\n", curMember->location);
+        printf("modificationDate: %s\n", curMember->modificationDate);
+        printf("uid: %d\n", curMember->uid);
+        printf("permissions: %d\n", curMember->permissions);
+        printf("size: %d\n", curMember->size);
+        printf("order: %d\n", curMember->order);
+        printf("-----------------------------");
+        printf("\n");
+        /* printf("%d\n", i);
+        i++; */
+        curMember = curMember->next;
+    }
 }

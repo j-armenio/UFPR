@@ -50,17 +50,31 @@ int printHelpMessage()
 
 int insertFilesIntoBackup(int argc, char **argv)
 {
-    // Cria o arquivo de backup
-    FILE *backup = fopen(argv[2], "wb");
-    if (! backup){
+    // 1. Criar o diretorio
+    directory_t *directoryStruct = NULL;
+    directoryStruct = createDirectory();
+
+    // 2. Crir o arquivo de backup
+    FILE *backupFile = fopen(argv[2], "wb");
+    if (! backupFile){
         printf("Erro ao criar arquivo de backup.\n");
         exit(1);
     }
 
-    
+    // 3. Fazer um loop, que a cada iteração passa por um dos arquivos a ser comprimido
+    int i;
+    for (i = 3; i < argc; i++)
+    {
+        // 4. Le o content do file e insere esse content no backup
+        contentFromFileToBackup(backupFile, argv[i]);
+
+        // 5. Atualiza as informações da structDir
+        addMemberToDirectory(directoryStruct, argv[i]);
+
+        printAllMembersFromDir(directoryStruct);
+    }
 
 
-    fclose(backup);
-
+    fclose(backupFile);
     return 1;
 }

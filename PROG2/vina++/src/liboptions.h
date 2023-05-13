@@ -5,6 +5,5 @@
 
 int printHelpMessage();
 int insertFilesIntoBackup(int argc,char **argv);
-member_t *fillMemberInfo(char *currentPath);
 
 #endif
