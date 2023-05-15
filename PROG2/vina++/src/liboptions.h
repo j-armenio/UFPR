@@ -5,5 +5,7 @@
 
 int printHelpMessage();
 int insertFilesIntoBackup(int argc,char **argv);
+void extractFiles(int argc, char **argv);
+void extractAllFiles(char *directoryPath);
 
 #endif

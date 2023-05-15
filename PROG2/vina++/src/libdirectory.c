@@ -157,25 +157,19 @@ directory_t *addMemberToDirectory(directory_t *directory, char *filePath)
         }
         aux->next = newMember;
     }
-    directory->count++;
     newMember->order = directory->count;
+    directory->count++;
 
     return directory;
-}
-
-void removeMemberFromDirectory(directory_t *directory, member_t *targetedMember)
-{
-
 }
 
 void printAllMembersFromDir(directory_t *dir)
 {
     member_t *curMember = dir->members;
-    int i = 0;
 
     while (curMember != NULL)
     {
-        printf("-----------------------------");
+        printf("-----------------------------\n");
         printf("name: %s\n", curMember->name);
         printf("location: %s\n", curMember->location);
         printf("modificationDate: %s\n", curMember->modificationDate);
@@ -183,10 +177,8 @@ void printAllMembersFromDir(directory_t *dir)
         printf("permissions: %d\n", curMember->permissions);
         printf("size: %d\n", curMember->size);
         printf("order: %d\n", curMember->order);
-        printf("-----------------------------");
+        printf("-----------------------------\n");
         printf("\n");
-        /* printf("%d\n", i);
-        i++; */
         curMember = curMember->next;
     }
 }

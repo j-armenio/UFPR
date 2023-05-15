@@ -25,7 +25,6 @@ member_t *createNewMember(char *filePath);
 void freeMember(member_t *member);
 directory_t *createDirectory();
 directory_t *addMemberToDirectory(directory_t *directory, char *filePath);
-void removeMemberFromDirectory(directory_t *directory, member_t *targetedMember);
 void printAllMembersFromDir(directory_t *dir);
 
 #endif
