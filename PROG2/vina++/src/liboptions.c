@@ -52,45 +52,57 @@ int printHelpMessage()
 
 int insertFilesIntoBackup(int argc, char **argv)
 {
-    // 1. Criar o diretorio
+    // Criar o diretorio
     directory_t *directoryStruct = NULL;
     directoryStruct = createDirectory();
 
-    // 2. Crir o arquivo de backup
+    // Criar o arquivo de backup
     FILE *backupFile = fopen(argv[2], "wb");
-    if (! backupFile){
+    if (! backupFile) {
         printf("Erro ao criar arquivo de backup.\n");
         exit(1);
     }
 
-    // 3. Fazer um loop, que a cada iteração passa por um dos arquivos a ser comprimido
+    // Pega as infos dos membros para o dir
     int i;
     for (i = 3; i < argc; i++)
-    {
-        // 4. Le o content do file e insere esse content no backup
-        contentFromFileToBackup(backupFile, argv[i]);
-
-        // 5. Atualiza as informações da structDir
         addMemberToDirectory(directoryStruct, argv[i]);
+
+    // Conta o tamanho total que todos arquivos vão ter no backup
+    int totalSize = 0;
+    member_t *aux = directoryStruct->members;
+
+    while (aux != NULL) {
+        totalSize += aux->size;
+        aux = aux->next;
     }
+
+    printf("Tamanho total: %d\n", totalSize);
+    fwrite(&totalSize, sizeof(int), 1, backupFile);
+
+    // Le o content do file e insere esse content no backup
+    for (i = 3; i < argc; i++)
+        FileContentToBackup(backupFile, argv[i]);
+
+    int auxInt;
+    fseek(backupFile, 0, SEEK_SET);
+    fread(&auxInt, sizeof(int), 1, backupFile);
+    printf("Tamanho total222: %d\n", auxInt);
 
     // printAllMembersFromDir(directoryStruct);
 
     fseek(backupFile, 0, SEEK_END);
 
-    // 6. Passa o conteudo do dir para o backup
+    // Passa o conteudo do dir para o backup
     member_t *curMember = directoryStruct->members;
 
-    // 7. Escreve o header no inicio da area de diretorio do backup: <HEADER BACKUP>
-    fwrite("<HEADER BACKUP>", sizeof(char), 15, backupFile);
-
-    // 8. Escreve o conteudo do dir no backup
+    // Escreve o conteudo do dir no backup
     while (curMember != NULL)
     {
-        // 8.1 Escreve o header do membro no inicio da area de diretorio do backup: <HEADER MEMBER>
+        // Escreve o header do membro no inicio da area de diretorio do backup: <HEADER MEMBER>
         fwrite("<HEADER MEMBER>", sizeof(char), 15, backupFile);
 
-        // 8.2 Escreve os dados do membro no backup
+        // Escreve os dados do membro no backup
         fwrite(curMember->name, sizeof(char), strlen(curMember->name) , backupFile);
         // printf("Nome: %s\n", curMember->name);
         fwrite(curMember->location, sizeof(char), strlen(curMember->location), backupFile);

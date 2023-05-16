@@ -4,6 +4,8 @@ CFLAGS = -Wall -g -D_DEFAULT_SOURCE # -std=c90
 LIBS = src/liboptions.c src/libdirectory.c src/libbackup.c src/libtest.c
 OBJS = src/vina++.o
 
+TESTOBJ = src/testExec.o
+
 # Compilation Rules
 all: vina++
 
@@ -18,3 +20,6 @@ clean:
 
 purge: clean
 	-rm -f vina++
+
+test: $(TESTOBJ)
+	$(CC) $(CFLAGS) -o testExec $(TESTOBJ) $(LIBS)

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "libdirectory.h"
 #include "libutil.h"
 
 /* Retorna 1 caso o caminho do arquivo recebido seja absoluto e 0 caso seja relativo */
