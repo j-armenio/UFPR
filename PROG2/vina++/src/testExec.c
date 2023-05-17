@@ -3,6 +3,7 @@
 #include <string.h>
 
 // ./testExec 1 bkp.vpp file1 file2
+// ./testExec 2 bkp.vpp
 
 int testAllocation(void *pointer)
 {
@@ -21,11 +22,9 @@ int main(int argc, char **argv)
 
     if (! strcmp(argv[1], "1"))
     {
-        // abre bkp.vpp
         backup = fopen(argv[2], "wb");
         testAllocation(backup);
 
-        // INSERE NO BACKUP
         for (int i = 3; i < argc; i++) { 
             file = fopen(argv[i], "rb");
             testAllocation(file);
@@ -34,9 +33,9 @@ int main(int argc, char **argv)
 
             fseek(file, 0, SEEK_END);
             fileSize = ftell(file);
-            printf("%d\n", fileSize);
             fseek(file, 0, SEEK_SET);
             fwrite(&fileSize, sizeof(int), 1, backup);
+            printf("%d\n", fileSize);
 
             char *buffer;
             buffer = (char *)malloc(sizeof(char) * fileSize);
@@ -47,15 +46,13 @@ int main(int argc, char **argv)
         }
         fclose(backup);
     } else {
-        // REMOVE DO BACKUP
         backup = fopen(argv[2], "rb");
         testAllocation(backup);
 
-        file = fopen("extract.jpeg", "wb");
+        file = fopen("extract.ods", "wb");
         testAllocation(file);
 
-        // size mp3 13743
-        fileSize = 13743;
+        fread(&fileSize, sizeof(int), 1, backup);
 
         char *buffer;
         buffer = (char *)malloc(sizeof(char) * fileSize);
