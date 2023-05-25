@@ -80,18 +80,28 @@ int insertFilesIntoBackup(int argc, char **argv)
     for (i = 3; i < argc; i++)
         FileContentToBackup(backupFile, argv[i]);
 
+    char *lineBreak = "\n";
+
     // Imprime o dir para o backup
     member_t *curMember = directoryStruct->members;
     while (curMember != NULL)
     {
         fwrite("<HEADER MEMBER>", sizeof(char), 15, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(curMember->name, sizeof(char), strlen(curMember->name) , backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(curMember->location, sizeof(char), strlen(curMember->location), backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(curMember->modificationDate, sizeof(char), 20, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(&(curMember->uid), sizeof(int), 1, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(&(curMember->permissions), sizeof(int), 1, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(&(curMember->size), sizeof(int), 1, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         fwrite(&(curMember->order), sizeof(int), 1, backupFile);
+        fwrite(lineBreak, sizeof(char), 1, backupFile);
         
         curMember = curMember->next;
     }
@@ -102,12 +112,56 @@ int insertFilesIntoBackup(int argc, char **argv)
     return 1;
 }
 
-void extractFiles(int argc, char **argv)
+void extractAllFiles(char *backupPath)
 {
+    directory_t *directoryStruct = NULL;
+    directoryStruct = createDirectory();
 
+    FILE *backupFile = fopen(backupPath, "rb");
+    if (! backupFile) {
+        printf("Erro ao abrir arquivo de backup.\n");
+        exit(1);
+    }
+
+    // Pega o tamanho total do backup
+    unsigned int totalSize = 0;
+    fread(&totalSize, sizeof(int), 1, backupFile);
+
+    // Vai ate a parte do diretorio do arquivo
+    fseek(backupFile, totalSize, SEEK_SET);
+
+    // Le o dir do backup e insere no directoryStruct
+    char *header = "<HEADER MEMBER>";
+    char *buffer = NULL;
+
+    while (fread(buffer, sizeof(char), 15, backupFile) != 0)
+    {
+        if (strcmp(buffer, header) == 0) {
+            member_t *newMember = allocateEmptyMember();
+            fread(newMember->name, sizeof(char), 100, backupFile);
+            // + 1 no ponteiro para pular o \n
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(newMember->location, sizeof(char), 100, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(newMember->modificationDate, sizeof(char), 20, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(&(newMember->uid), sizeof(int), 1, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(&(newMember->permissions), sizeof(int), 1, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(&(newMember->size), sizeof(int), 1, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+            fread(&(newMember->order), sizeof(int), 1, backupFile);
+            fseek(backupFile, 1, SEEK_CUR);
+
+            addMemberToDirectory(directoryStruct, newMember->name);
+        }
+    }
+
+    
 }
 
-void extractAllFiles(char *directoryPath)
+void extractFiles(int argc, char **argv)
 {
 
 }

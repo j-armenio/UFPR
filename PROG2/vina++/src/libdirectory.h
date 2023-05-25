@@ -3,8 +3,8 @@
 
 // Cada member tem toda informação de um arquivo que está no backup
 typedef struct member {
-    char *name; // array size 256
-    char *location; // array size 256 *se tiver um path com mais de 256 vsf né
+    char *name; // array size 64
+    char *location; // array size 128 *se tiver um path com mais de 128 vsf né
     char *modificationDate; // array size 20
     int uid;
     int permissions;

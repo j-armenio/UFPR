@@ -9,7 +9,8 @@
 #include "libdirectory.h"
 #include "libutil.h"
 
-#define STRING_MAX_SIZE 256
+#define NAME_MAX_SIZE 64
+#define LOCATION_MAX_SIZE 128
 
 /* ------------------ PROTOTYPES ------------------ */
 
@@ -47,14 +48,14 @@ member_t *allocateEmptyMember()
     }
 
     newMember->name = NULL;
-    newMember->name = malloc(sizeof(char) * STRING_MAX_SIZE);
+    newMember->name = malloc(sizeof(char) * NAME_MAX_SIZE);
     if (! newMember->name){
         printf("Erro ao alocar nome do membro.\n");
         exit(1);
     }
 
     newMember->location = NULL;
-    newMember->location = malloc(sizeof(char) * STRING_MAX_SIZE);
+    newMember->location = malloc(sizeof(char) * LOCATION_MAX_SIZE);
     if (! newMember->location){
         printf("Erro ao alocar localização do membro.\n");
         exit(1);
@@ -97,7 +98,7 @@ member_t *createNewMember(char *filePath)
     }
     newMember->name = fileName;
 
-    strcpy(newMember->location, filePath); // PERGUNTAR COMO EXATAMENTE É PRA GUARDAR O CAMINHO
+    strcpy(newMember->location, filePath);
     // se for caminho absoluto, transformar em relativo
     /* if (isAbsolutePath(newMember->location))
         newMember->location = */
@@ -172,7 +173,7 @@ void printAllMembersFromDir(directory_t *dir)
         printf("-----------------------------\n");
         printf("name: %s\n", curMember->name);
         printf("location: %s\n", curMember->location);
-        printf("modificationDate: %s\n", curMember->modificationDate);
+        printf("modificationDate: %s", curMember->modificationDate);
         printf("uid: %d\n", curMember->uid);
         printf("permissions: %d\n", curMember->permissions);
         printf("size: %d\n", curMember->size);
