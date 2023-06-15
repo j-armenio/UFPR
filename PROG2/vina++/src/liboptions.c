@@ -124,22 +124,33 @@ void extractAllFiles(char *backupPath)
     }
 
     // Pega o tamanho total do backup
-    unsigned int totalSize = 0;
-    fread(&totalSize, sizeof(int), 1, backupFile);
+    unsigned int binarySize = 0;
+    fread(&binarySize, sizeof(int), 1, backupFile);
+    printf("Binary size: %d\n", binarySize);
 
     // Vai ate a parte do diretorio do arquivo
-    fseek(backupFile, totalSize, SEEK_SET);
+    fseek(backupFile, binarySize, SEEK_SET);
 
-    // Le o dir do backup e insere no directoryStruct
-    char *header = "<HEADER MEMBER>";
     char *buffer = NULL;
 
-    while (fread(buffer, sizeof(char), 15, backupFile) != 0)
+    int c;
+    while ((c = fgetc(backupFile)) != EOF)
+        printf("%c", c);
+
+    // fread(buffer, sizeof(char), 15, backupFile);
+    // printf("Buffer: %s\n", buffer);
+
+    // Le o dir do backup e insere no directoryStruct
+    // char *header = "<HEADER MEMBER>";
+    // char *buffer = NULL;
+
+    // fread(buffer, 1, 15, backupFile);
+
+    /* while (fread(buffer, sizeof(char), 15, backupFile) != 0)
     {
         if (strcmp(buffer, header) == 0) {
             member_t *newMember = allocateEmptyMember();
             fread(newMember->name, sizeof(char), 100, backupFile);
-            // + 1 no ponteiro para pular o \n
             fseek(backupFile, 1, SEEK_CUR);
             fread(newMember->location, sizeof(char), 100, backupFile);
             fseek(backupFile, 1, SEEK_CUR);
@@ -156,9 +167,8 @@ void extractAllFiles(char *backupPath)
 
             addMemberToDirectory(directoryStruct, newMember->name);
         }
-    }
+    } */
 
-    
 }
 
 void extractFiles(int argc, char **argv)
