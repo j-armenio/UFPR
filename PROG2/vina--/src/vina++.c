@@ -37,8 +37,13 @@ int main(int argc, char **argv)
             break;
 
         case 'x':
-            printf("Extrai os membros indicados\n");
-        
+            if (argc == 3){
+                printf("Extrai todos os membros\n");
+                extractAllFiles(argc, argv);
+            } else {
+                printf("Extrai membros indicados\n");
+                extractFiles(argc, argv);
+            }
             break;
 
         case 'r':

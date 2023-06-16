@@ -139,3 +139,21 @@ void insertToBackup(int argc, char **argv)
 {
     
 }
+
+void extractAllFiles(int argc, char **argv)
+{
+    FILE *bkp = fopen(argv[2], "rb+");
+    if (bkp == NULL) {
+        printf("Erro ao abrir o arquivo de backup.\n");
+        exit(1);
+    }
+
+    int totalSize;
+    fread(&totalSize, sizeof(int), 1, bkp);
+    printf("Tamanho total do conteudo dos arquivos: %d\n", totalSize);
+}
+
+void extractFiles(int argc, char **argv)
+{
+
+}
