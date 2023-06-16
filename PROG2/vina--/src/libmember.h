@@ -11,7 +11,7 @@ typedef struct member {
     unsigned int size;
     unsigned int uid;
     unsigned int permissions;
-    unsigned int position; // ordem do membro no arquivo (e na lista)
+    int position; // ordem do membro no arquivo (e na lista)
     struct member *next;
     struct member *previous;
 } member;
@@ -25,5 +25,9 @@ typedef struct {
 directory *createDirectory();
 void freeDirectory(directory *dir);
 void printDirectory(directory *dir);
+directory *insertMemberToDir(directory *dir, char *path);
+int getFilesTotalSize(directory *dir);
+member *getMemberByPosition(directory *dir, int position);
+void writeMember(FILE *bkp, member *m);
 
 #endif

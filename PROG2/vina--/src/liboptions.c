@@ -60,17 +60,79 @@ void insertFilesToBackup(int argc, char **argv)
 {
     if (checkIfFileExists(argv[2]) == 0){
         /* Backup NOVO */
+        printf("Backup novo.\n");
         insertToNewBackup(argc, argv);
         return;
     } else {
         /* Backup já existente */
+        printf("Backup já existente.\n");
         insertToBackup(argc, argv);
     }
 }
 
 void insertToNewBackup(int argc, char **argv)
 {
+    FILE *backup = fopen(argv[2], "wb+");
+    if (backup == NULL){
+        printf("Erro ao abrir o arquivo de backup.\n");
+        exit(1);
+    }
+
+    directory *dir = createDirectory();
+    if (dir == NULL){
+        printf("Erro ao criar o diretório.\n");
+        exit(1);
+    }
+
+    int i;
+    for (i = 3; i < argc; i++)
+    {
+        if (checkIfFileExists(argv[i]) == 0){
+            printf("O arquivo %s não existe.\n", argv[i]);
+            continue;
+        }
+        insertMemberToDir(dir, argv[i]);
+    }
+
+    printf("--------------\n");
+    printDirectory(dir);
+    printf("--------------\n");
     
+    /* Pegar o tamanho total dos arquivos e escrever no inicio do bkp */
+    int totalSize = getFilesTotalSize(dir);
+    fwrite(&totalSize, sizeof(int), 1, backup);
+
+    /* Escrever o conteudo dos arquivos no bkp */
+    for (i = 3; i < argc; i++)
+    {
+        FILE *file = fopen(argv[i], "rb+");
+        if (file == NULL){
+            printf("Erro ao abrir o arquivo %s.\n", argv[i]);
+            exit(1);
+        }
+        fseek(file, 0, SEEK_END);
+        int fileSize = ftell(file);
+        rewind(file);
+
+        char *buffer = (char *) malloc(fileSize);
+        if (buffer == NULL){
+            printf("Erro ao alocar memória para o buffer.\n");
+            exit(1);
+        }
+
+        fread(buffer, 1, fileSize, file);
+        fwrite(buffer, 1, fileSize, backup);
+
+        free(buffer);
+        fclose(file);
+    }
+
+    /* Escrever o diretorio no bkp */
+    for (i = 0; i < dir->memberCount; i++)
+    {
+        member *m = getMemberByPosition(dir, i);
+        writeMember(backup, m);
+    }
 }
 
 void insertToBackup(int argc, char **argv)

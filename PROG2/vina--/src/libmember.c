@@ -48,7 +48,10 @@ member *createMember(char *path)
     newMember->uid = fileInfo.st_uid;
     newMember->permissions = fileInfo.st_mode;
 
-    newMember->position = 0;
+    newMember->position = -1;
+
+    newMember->next = NULL;
+    newMember->previous = NULL;
 
     return newMember;
 }
@@ -104,4 +107,96 @@ void printDirectory(directory *dir)
         printMember(currentMember);
         currentMember = currentMember->next;
     }
+}
+
+directory *insertMemberToDir(directory *dir, char *path)
+{
+    member *newMember = NULL;
+    newMember = createMember(path);
+
+    if (dir == NULL || newMember == NULL) {
+        printf("Erro ao inserir membro no diretório.\n");
+        return NULL;
+    }
+
+    /* Lista com elementos */
+    if (dir->head != NULL) {
+        dir->tail->next = newMember;
+        newMember->previous = dir->tail;
+        dir->tail = newMember;
+        newMember->position = dir->tail->previous->position + 1;
+    }
+
+    /* Lista vazia */
+    if (dir->head == NULL) {
+        dir->head = newMember;
+        dir->tail = newMember;
+        newMember->position = 0;
+    }
+
+    dir->memberCount++;
+    newMember->next = NULL;
+
+    return dir;
+}
+
+int getFilesTotalSize(directory *dir)
+{
+    member *currentMember = dir->head;
+    int totalSize = 0;
+
+    while (currentMember != NULL) {
+        totalSize += currentMember->size;
+        currentMember = currentMember->next;
+    }
+
+    return totalSize;
+}
+
+member *getMemberByPosition(directory *dir, int position)
+{
+    member *currentMember = dir->head;
+
+    while (currentMember != NULL) {
+        if (currentMember->position == position)
+            return currentMember;
+        currentMember = currentMember->next;
+    }
+
+    return NULL;
+}
+
+void writeMember(FILE *bkp, member *m)
+{
+    char quotationMarks = '\"';
+    char comma = ',';
+
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(m->name, 1, strlen(m->name), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(m->path, 1, strlen(m->path), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(m->modificationDate, 1, 25, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&m->size, 1, sizeof(int), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&m->uid, 1, sizeof(int), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&m->permissions, 1, sizeof(int), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&comma, 1, 1, bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(&m->position, 1, sizeof(int), bkp);
+    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite("\n", 1, 1, bkp);
 }
