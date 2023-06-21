@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <string.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include "liboptions.h"
 #include "libmember.h"
@@ -56,6 +59,60 @@ void printHelpMessage()
         );
 }
 
+void listMembers(int argc, char **argv)
+{
+    FILE *bkp = fopen(argv[2], "rb+");
+    if (bkp == NULL) {
+        printf("Erro ao abrir o arquivo de backup.\n");
+        exit(1);
+    }
+    directory *dir = readBackupToDirectory(bkp);
+    
+    struct stat fileInfo;
+    if (stat(argv[2], &fileInfo) != 0) {
+        printf("Erro ao obter informações do arquivo.\n");
+        exit(1);
+    }
+
+    struct passwd *pw = getpwuid(fileInfo.st_uid);
+    if (pw == NULL) {
+        printf("Erro ao obter informações do usuário.\n");
+        exit(1);
+    }
+    const char* userName = pw->pw_name;
+
+    struct group *gr = getgrgid(fileInfo.st_gid);
+    if (gr == NULL) {
+        printf("Erro ao obter informações do grupo.\n");
+        exit(1);
+    }
+    const char *groupName = gr->gr_name;
+
+    time_t bkpModificationDate = fileInfo.st_mtime;
+    struct tm *timeInfo = localtime(&bkpModificationDate);
+    char bkpModificationDateStr[20];
+    strftime(bkpModificationDateStr, 20, "%Y-%m-%d %H:%M", timeInfo);
+
+    // permissoes é %-10
+    printf("drwxrwxr-x %s/%-s         0 %s %s/\n", userName, groupName, bkpModificationDateStr, argv[2]);
+
+    member *m = dir->head;
+    int i;
+    for (i = 0; i < dir->memberCount; i++)
+    {
+        char *octalMode = getOctalMode(m->permissions);
+        
+        struct tm *timeInfo = localtime(&m->modificationDate);
+        char modificationDateStr[20];
+        strftime(modificationDateStr, 20, "%Y-%m-%d %H:%M", timeInfo);
+
+        printf("-%s %s/%-s %9d %s %s\n", octalMode, userName, groupName, m->size, modificationDateStr, m->path);
+
+        m = m->next;
+    }
+
+}
+
 void insertFilesToBackup(int argc, char **argv)
 {
     if (checkIfFileExists(argv[2]) == 0){
@@ -91,14 +148,15 @@ void insertToNewBackup(int argc, char **argv)
             printf("O arquivo %s não existe.\n", argv[i]);
             continue;
         }
-        insertMemberToDir(dir, argv[i]);
+        member *m = createMember(argv[i]);
+        insertMemberToDir(dir, m);
     }
 
     printf("--------------\n");
     printDirectory(dir);
     printf("--------------\n");
     
-    /* Pegar o tamanho total dos arquivos e escrever no inicio do bkp */
+    /* Pega o tamanho total dos arquivos e escrever no inicio do bkp */
     int totalSize = getFilesTotalSize(dir);
     fwrite(&totalSize, sizeof(int), 1, backup);
 
@@ -114,18 +172,31 @@ void insertToNewBackup(int argc, char **argv)
         int fileSize = ftell(file);
         rewind(file);
 
-        char *buffer = (char *) malloc(fileSize);
+        /* !!! BUFFER MÁXIMO DE 1024 !!! */
+        char *buffer = (char *) malloc(sizeof(char) * 1024);
         if (buffer == NULL){
             printf("Erro ao alocar memória para o buffer.\n");
             exit(1);
         }
 
-        fread(buffer, 1, fileSize, file);
-        fwrite(buffer, 1, fileSize, backup);
+        int iterations = fileSize / 1024;
+        int bytesLeft = fileSize % 1024;
+
+        int j;
+        for (j = 0; j < iterations; j++) 
+        {
+            fread(buffer, 1, 1024, file);
+            fwrite(buffer, 1, 1024, backup);
+        }
+        fread(buffer, 1, bytesLeft, file);
+        fwrite(buffer, 1, bytesLeft, backup);
 
         free(buffer);
         fclose(file);
     }
+
+    /* Escreve a quantidade de memberos */
+    fwrite(&dir->memberCount, sizeof(int), 1, backup);
 
     /* Escrever o diretorio no bkp */
     for (i = 0; i < dir->memberCount; i++)
@@ -147,10 +218,10 @@ void extractAllFiles(int argc, char **argv)
         printf("Erro ao abrir o arquivo de backup.\n");
         exit(1);
     }
+    directory *dir = readBackupToDirectory(bkp);
 
-    int totalSize;
-    fread(&totalSize, sizeof(int), 1, bkp);
-    printf("Tamanho total do conteudo dos arquivos: %d\n", totalSize);
+    createFiles(bkp, dir);
+
 }
 
 void extractFiles(int argc, char **argv)

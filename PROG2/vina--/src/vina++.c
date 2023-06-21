@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <getopt.h>
 
-#include "liboptions.h"
-#include "libmember.h"
 #include "libutil.h"
 
 int main(int argc, char **argv)
 {
-    /* if (argc <= 1){
+    if (argc <= 1){
         printf("Erro na execução do comando, insira uma opção.\n");
         return 1;
-    } */
+    }
 
     int option;
 
@@ -51,7 +49,7 @@ int main(int argc, char **argv)
             break;
 
         case 'c':
-            printf("Lista conteudo em ordem\n");
+            listMembers(argc, argv);
             break;
 
         case 'h':

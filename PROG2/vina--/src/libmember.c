@@ -13,6 +13,19 @@
 
 /* --- Internas --- */
 
+void printMember(member *member)
+{
+    printf("Nome: %s\n", member->name);
+    printf("Caminho: %s\n", member->path);
+    printf("Data de modificação: %ld\n", member->modificationDate);
+    printf("Tamanho: %d\n", member->size);
+    printf("UID: %d\n", member->uid);
+    printf("Permissões: %d\n", member->permissions);
+    printf("Posição: %d\n", member->position);
+}
+
+/* --- Externas --- */
+
 member *createMember(char *path)
 {
     member *newMember = NULL;
@@ -42,11 +55,11 @@ member *createMember(char *path)
     strcpy(newMember->path, pathCopy);
     free(pathCopy);
 
-    strftime(newMember->modificationDate, 30, "%c", localtime(&fileInfo.st_mtime));
+    newMember->modificationDate = fileInfo.st_mtime;
 
     newMember->size = fileInfo.st_size;
     newMember->uid = fileInfo.st_uid;
-    newMember->permissions = fileInfo.st_mode;
+    newMember->permissions = fileInfo.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO);
 
     newMember->position = -1;
 
@@ -55,19 +68,6 @@ member *createMember(char *path)
 
     return newMember;
 }
-
-void printMember(member *member)
-{
-    printf("Nome: %s\n", member->name);
-    printf("Caminho: %s\n", member->path);
-    printf("Data de modificação: %s\n", member->modificationDate);
-    printf("Tamanho: %d\n", member->size);
-    printf("UID: %d\n", member->uid);
-    printf("Permissões: %d\n", member->permissions);
-    printf("Posição: %d\n", member->position);
-}
-
-/* --- Externas --- */
 
 directory *createDirectory()
 {
@@ -109,11 +109,8 @@ void printDirectory(directory *dir)
     }
 }
 
-directory *insertMemberToDir(directory *dir, char *path)
+directory *insertMemberToDir(directory *dir, member *newMember)
 {
-    member *newMember = NULL;
-    newMember = createMember(path);
-
     if (dir == NULL || newMember == NULL) {
         printf("Erro ao inserir membro no diretório.\n");
         return NULL;
@@ -168,35 +165,92 @@ member *getMemberByPosition(directory *dir, int position)
 
 void writeMember(FILE *bkp, member *m)
 {
-    char quotationMarks = '\"';
-    char comma = ',';
-
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(m->name, 1, strlen(m->name), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(m->path, 1, strlen(m->path), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(m->modificationDate, 1, 25, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
+    fwrite(m->path, 1, PATH_MAX_SIZE, bkp);
+    fwrite(m->name, 1, NAME_MAX_SIZE, bkp);
+    fwrite(&m->modificationDate, 1, sizeof(time_t), bkp);
     fwrite(&m->size, 1, sizeof(int), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
     fwrite(&m->uid, 1, sizeof(int), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
     fwrite(&m->permissions, 1, sizeof(int), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite(&comma, 1, 1, bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
     fwrite(&m->position, 1, sizeof(int), bkp);
-    fwrite(&quotationMarks, 1, 1, bkp);
-    fwrite("\n", 1, 1, bkp);
+}
+
+directory *readBackupToDirectory(FILE *bkp)
+{
+    int binarySize;
+    fread(&binarySize, sizeof(int), 1, bkp);
+
+    directory *dir = createDirectory();
+    if (! dir) {
+        printf("Erro ao alocar memória para o diretório.\n");
+        return NULL;
+    }
+
+    int memCount;
+
+    fseek(bkp, 4, SEEK_SET); // Pula o do int no começo do arquivo
+    fseek(bkp, binarySize, SEEK_CUR); // Pula todo conteudo binario
+    fread(&memCount, 1, sizeof(int), bkp); // Le a quantidade de membros
+
+    char *strBuffer;
+    int intBuffer;
+    size_t tBuffer;
+
+    int i;
+    for (i = 0; i < memCount; i++)
+    {
+        member *newMember = NULL;
+        newMember = (member *)malloc(sizeof(member));
+        if (! newMember) {
+            printf("Erro ao alocar memória para o membro.\n");
+            return NULL;
+        };
+
+        strBuffer = (char *)malloc(PATH_MAX_SIZE);
+        fread(strBuffer, 1, PATH_MAX_SIZE, bkp);
+        memcpy(newMember->path, strBuffer, PATH_MAX_SIZE);
+        free(strBuffer);
+
+        strBuffer = (char *)malloc(NAME_MAX_SIZE);
+        fread(strBuffer, 1, NAME_MAX_SIZE, bkp);
+        memcpy(newMember->name, strBuffer, NAME_MAX_SIZE);
+        free(strBuffer);
+
+        strBuffer = (char *)malloc(25);
+        fread(&tBuffer, 1, sizeof(time_t), bkp);
+        newMember->modificationDate = tBuffer;
+        free(strBuffer);
+
+        fread(&intBuffer, 1, sizeof(int), bkp);
+        newMember->size = intBuffer;
+
+        fread(&intBuffer, 1, sizeof(int), bkp);
+        newMember->uid = intBuffer;
+
+        fread(&intBuffer, 1, sizeof(int), bkp);
+        newMember->permissions = intBuffer;
+
+        fread(&intBuffer, 1, sizeof(int), bkp);
+        newMember->position = intBuffer;
+
+        insertMemberToDir(dir, newMember);
+    }
+
+    return dir;
+}
+
+void createFiles(FILE *file, directory *dir)
+{
+    char *buffer = (char *) malloc(sizeof(char) * 1024);
+    if (! buffer) {
+        printf("Erro ao alocar memória para o buffer.\n");
+        return;
+    }
+
+    // 1. Cria um diretorio com o mesmo nome do backup
+    // 2. Copia o conteudo do arquivo para o file (com buffer de 1024 bytes)
+    // 3. Atualiza os metadados do arquivo
+    // 4. Coloca o arquivo no diretorio
+
+
+
 }

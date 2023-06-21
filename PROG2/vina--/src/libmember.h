@@ -1,16 +1,16 @@
 #ifndef _LIB_MEMBER_
 #define _LIB_MEMBER_
 
-#define NAME_MAX_SIZE 256
 #define PATH_MAX_SIZE 1024
+#define NAME_MAX_SIZE 256
 
 typedef struct member {
-    char name[NAME_MAX_SIZE];
     char path[PATH_MAX_SIZE];
-    char modificationDate[25];
-    unsigned int size;
-    unsigned int uid;
-    unsigned int permissions;
+    char name[NAME_MAX_SIZE];
+    time_t modificationDate;
+    int size;
+    int uid;
+    int permissions;
     int position; // ordem do membro no arquivo (e na lista)
     struct member *next;
     struct member *previous;
@@ -25,9 +25,12 @@ typedef struct {
 directory *createDirectory();
 void freeDirectory(directory *dir);
 void printDirectory(directory *dir);
-directory *insertMemberToDir(directory *dir, char *path);
+member *createMember(char *path);
+directory *insertMemberToDir(directory *dir, member *newMember);
 int getFilesTotalSize(directory *dir);
 member *getMemberByPosition(directory *dir, int position);
 void writeMember(FILE *bkp, member *m);
+directory *readBackupToDirectory(FILE *bkp);
+void createFiles(FILE *file, directory *dir);
 
 #endif
