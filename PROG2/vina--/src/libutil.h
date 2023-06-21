@@ -7,5 +7,7 @@
 char *getRelativePath(char *path);
 int checkIfFileExists(char *path);
 char *getOctalMode(int permissions);
+void removeExtension(char *filename);
+void createDirectories(const char *path);
 
 #endif

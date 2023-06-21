@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "libutil.h"
 #include "libmember.h"
@@ -72,4 +74,58 @@ char *getOctalMode(int permissions)
     perm[8] = (permissions & 01) ? 'x' : '-';
 
     return perm;
+}
+
+void removeExtension(char *filename) 
+{
+    int len = strlen(filename);
+    int dotIndex = -1;
+
+    // Procurar o último ponto '.' na string
+    for (int i = len - 1; i >= 0; i--) {
+        if (filename[i] == '.') {
+            dotIndex = i;
+            break;
+        }
+    }
+
+    // Se encontrou o ponto, truncar a string a partir dele
+    if (dotIndex != -1) {
+        filename[dotIndex] = '\0';
+    }
+}
+
+void createDirectories(const char *path) 
+{
+    char *token;
+    char *pathCopy = strdup(path);
+    char *delimiter = "/";
+    char *dirPath = NULL;
+
+    token = strtok(pathCopy, delimiter);
+
+    while (token != NULL) {
+        if (dirPath == NULL) {
+            dirPath = strdup(token);
+        } else {
+            size_t len = strlen(dirPath) + strlen(token) + 2;
+            dirPath = realloc(dirPath, len);
+            strcat(dirPath, "/");
+            strcat(dirPath, token);
+        }
+
+        struct stat st;
+        if (stat(dirPath, &st) == -1) {
+            printf("Criando diretório: %s\n", dirPath);
+            if (mkdir(dirPath, 0777) == -1) {
+                printf("Erro ao criar o diretório: %s\n", dirPath);
+                exit(1);
+            }
+        }
+
+        token = strtok(NULL, delimiter);
+    }
+
+    free(pathCopy);
+    free(dirPath);
 }

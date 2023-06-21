@@ -220,20 +220,23 @@ void extractAllFiles(int argc, char **argv)
     }
     directory *dirList = readBackupToDirectory(bkp);
 
-    // Cria um diretorio com o mesmo nome do backup
-    const char *dirName = argv[2];
-    printf("%s\n", dirName);
-    int result = mkdir(dirName, S_IRWXU | S_IRWXG | S_IRWXO);
+    // Cria um diretorio com o mesmo nome do backup sem a extensao
+    char *dirName = getRelativePath(argv[2]);
+    removeExtension(dirName);
+
+    int result = mkdir(dirName, 0777);
     if (result == -1) {
         printf("Erro ao criar o diretório.\n");
         exit(1);
     }
 
-    extractToDir(argv[2], bkp, dirList);
+    result = chdir(dirName);
+    if (result == -1) {
+        printf("Erro ao entrar no diretório.\n");
+        exit(1);
+    }
 
-
-
-    
+    extractToDir(bkp, dirList); 
 
 }
 
