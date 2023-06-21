@@ -218,9 +218,22 @@ void extractAllFiles(int argc, char **argv)
         printf("Erro ao abrir o arquivo de backup.\n");
         exit(1);
     }
-    directory *dir = readBackupToDirectory(bkp);
+    directory *dirList = readBackupToDirectory(bkp);
 
-    createFiles(bkp, dir);
+    // Cria um diretorio com o mesmo nome do backup
+    const char *dirName = argv[2];
+    printf("%s\n", dirName);
+    int result = mkdir(dirName, S_IRWXU | S_IRWXG | S_IRWXO);
+    if (result == -1) {
+        printf("Erro ao criar o diretório.\n");
+        exit(1);
+    }
+
+    extractToDir(argv[2], bkp, dirList);
+
+
+
+    
 
 }
 

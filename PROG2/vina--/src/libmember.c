@@ -238,7 +238,7 @@ directory *readBackupToDirectory(FILE *bkp)
     return dir;
 }
 
-void createFiles(FILE *file, directory *dir)
+void extractToDir(char *dirName, FILE *bkp, directory *dirList)
 {
     char *buffer = (char *) malloc(sizeof(char) * 1024);
     if (! buffer) {
@@ -246,11 +246,35 @@ void createFiles(FILE *file, directory *dir)
         return;
     }
 
-    // 1. Cria um diretorio com o mesmo nome do backup
-    // 2. Copia o conteudo do arquivo para o file (com buffer de 1024 bytes)
-    // 3. Atualiza os metadados do arquivo
-    // 4. Coloca o arquivo no diretorio
+    // Copia o conteudo do arquivo para os files (com buffer de 1024 bytes)
+    member *currentMember = dirList->head;
+    while (currentMember != NULL) {
+        char *newPath = (char *) malloc(sizeof(char) * (strlen(dirName) + strlen(currentMember->name) + 2));
+        if (! newPath) {
+            printf("Erro ao alocar memória para o novo caminho.\n");
+            return;
+        }
 
+        strcpy(newPath, dirName);
+        strcat(newPath, "/");
+        strcat(newPath, currentMember->name);
 
+        FILE *file = fopen(currentMember->path, "wb");
+        if (! file) {
+            printf("Erro ao abrir arquivo %s.\n", currentMember->path);
+            return;
+        }
 
+        int bytesLeft = currentMember->size;
+        while (bytesLeft > 0) {
+            int bytesToRead = bytesLeft > 1024 ? 1024 : bytesLeft;
+            fread(buffer, 1, bytesToRead, bkp);
+            fwrite(buffer, 1, bytesToRead, file);
+            bytesLeft -= bytesToRead;
+        }
+
+        free(newPath);
+        fclose(file);
+        currentMember = currentMember->next;
+    }
 }

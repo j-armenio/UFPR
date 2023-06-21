@@ -31,6 +31,6 @@ int getFilesTotalSize(directory *dir);
 member *getMemberByPosition(directory *dir, int position);
 void writeMember(FILE *bkp, member *m);
 directory *readBackupToDirectory(FILE *bkp);
-void createFiles(FILE *file, directory *dir);
+void extractToDir(char *dirName, FILE *bkp, directory *dirList);
 
 #endif
