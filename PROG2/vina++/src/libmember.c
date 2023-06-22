@@ -21,7 +21,8 @@ void printMember(member *member)
     printf("Tamanho: %d\n", member->size);
     printf("UID: %d\n", member->uid);
     printf("Permissões: %d\n", member->permissions);
-    printf("Posição: %d\n", member->position);
+    printf("Posição Lista: %d\n", member->positionList);
+    printf("Posição Backup: %ld\n", member->positionBkp);
 }
 
 /* --- Externas --- */
@@ -61,7 +62,8 @@ member *createMember(char *path)
     newMember->uid = fileInfo.st_uid;
     newMember->permissions = fileInfo.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO);
 
-    newMember->position = -1;
+    newMember->positionList = -1;
+    newMember->positionBkp = -1;
 
     newMember->next = NULL;
     newMember->previous = NULL;
@@ -121,14 +123,14 @@ directory *insertMemberToDir(directory *dir, member *newMember)
         dir->tail->next = newMember;
         newMember->previous = dir->tail;
         dir->tail = newMember;
-        newMember->position = dir->tail->previous->position + 1;
+        newMember->positionList = dir->tail->previous->positionList + 1;
     }
 
     /* Lista vazia */
     if (dir->head == NULL) {
         dir->head = newMember;
         dir->tail = newMember;
-        newMember->position = 0;
+        newMember->positionList = 0;
     }
 
     dir->memberCount++;
@@ -150,12 +152,12 @@ int getFilesTotalSize(directory *dir)
     return totalSize;
 }
 
-member *getMemberByPosition(directory *dir, int position)
+member *getMemberByPositionInList(directory *dir, int positionList)
 {
     member *currentMember = dir->head;
 
     while (currentMember != NULL) {
-        if (currentMember->position == position)
+        if (currentMember->positionList == positionList)
             return currentMember;
         currentMember = currentMember->next;
     }
@@ -171,7 +173,8 @@ void writeMember(FILE *bkp, member *m)
     fwrite(&m->size, 1, sizeof(int), bkp);
     fwrite(&m->uid, 1, sizeof(int), bkp);
     fwrite(&m->permissions, 1, sizeof(int), bkp);
-    fwrite(&m->position, 1, sizeof(int), bkp);
+    fwrite(&m->positionList, 1, sizeof(int), bkp);
+    fwrite(&m->positionBkp, 1, sizeof(unsigned long), bkp);
 }
 
 directory *readBackupToDirectory(FILE *bkp)
@@ -193,6 +196,7 @@ directory *readBackupToDirectory(FILE *bkp)
 
     char *strBuffer;
     int intBuffer;
+    unsigned long unLongBuffer;
     size_t tBuffer;
 
     int i;
@@ -230,7 +234,10 @@ directory *readBackupToDirectory(FILE *bkp)
         newMember->permissions = intBuffer;
 
         fread(&intBuffer, 1, sizeof(int), bkp);
-        newMember->position = intBuffer;
+        newMember->positionList = intBuffer;
+
+        fread(&unLongBuffer, 1, sizeof(unsigned long), bkp);
+        newMember->positionBkp = unLongBuffer;
 
         insertMemberToDir(dir, newMember);
     }
@@ -238,7 +245,7 @@ directory *readBackupToDirectory(FILE *bkp)
     return dir;
 }
 
-void extractToDir(FILE *bkp, directory *dirList)
+void extractContent(FILE *bkp, directory *dirList)
 {
     char *buffer = (char *) malloc(sizeof(char) * 1024);
     if (! buffer) {
@@ -247,17 +254,42 @@ void extractToDir(FILE *bkp, directory *dirList)
     }
 
     member *currentMember = dirList->head;
+
     while (currentMember != NULL)
     {
         createDirectories(currentMember->path);
-        /* FILE *file = fopen(currentMember->path, "wb+");
+
+        FILE *file = fopen(currentMember->path, "wb+");
         if (! file) {
             printf("Erro ao abrir arquivo %s.\n", currentMember->path);
             return;
         }
-        fclose(file); */
+
+        int iterations = currentMember->positionBkp / 1024;
+        int bytesLeft = currentMember->positionBkp % 1024;
+
+        // Vai ate o inicio do conteudo binario do membro
+        fseek(bkp, currentMember->positionBkp, SEEK_SET);
+        
+        
+        
+        fclose(file);
         currentMember = currentMember->next;
     }
+}
 
 
+// De acordo com o conteudo no bkp atualiza o positionBkp nos membros do dir
+void updatePositionsBkp(FILE *bkp, directory *dir)
+{
+    member *currMember = dir->head;
+
+    fseek(bkp, 0, SEEK_SET);
+    fseek(bkp, sizeof(int), SEEK_CUR); // pula o int do inicio
+
+    while (currMember != NULL) {
+        fseek(bkp, currMember->size, SEEK_CUR);
+        currMember->positionBkp = ftell(bkp);
+        currMember = currMember->next;
+    }
 }

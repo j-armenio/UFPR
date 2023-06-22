@@ -2,15 +2,14 @@
 #include <stdlib.h>
 #include <getopt.h>
 
-#include "liboptions.h"
-#include "libtest.h"
+#include "libutil.h"
 
 int main(int argc, char **argv)
 {
-    /* if (argc <= 1){
+    if (argc <= 1){
         printf("Erro na execução do comando, insira uma opção.\n");
         return 1;
-    } */
+    }
 
     int option;
 
@@ -24,41 +23,37 @@ int main(int argc, char **argv)
                 return 1;
             }
             printf("Insere membros no archive\n");
-            insertFilesIntoBackup(argc, argv);
+            insertFilesToBackup(argc, argv);
             break;
         
         case 'a':
-            printf("opcao a\n");
+            printf("Opcao -a\n");
             break;
 
         case 'm':
-            printf("move o membro indicado para o target");
+            printf("Move o membro indicado para o target");
             break;
 
         case 'x':
-            printf("extrai os membros indicados\n");
-            if (argc == 3){ // Extrai todos os membros
-                extractAllFiles(argv[2]);
-            } else { // Extrai membros indicados
+            if (argc == 3){
+                printf("Extrai todos os membros\n");
+                extractAllFiles(argc, argv);
+            } else {
+                printf("Extrai membros indicados\n");
                 extractFiles(argc, argv);
             }
             break;
 
         case 'r':
-            printf("remove membros indicados\n");
+            printf("Remove membros indicados\n");
             break;
 
         case 'c':
-            printf("lista conteudo em ordem\n");
+            listMembers(argc, argv);
             break;
 
         case 'h':
             printHelpMessage();
-            break;
-
-        case 't':
-            printf("Caso para testes: \n");
-            doTest(argc, argv);
             break;
 
         default:

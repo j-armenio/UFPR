@@ -11,7 +11,8 @@ typedef struct member {
     int size;
     int uid;
     int permissions;
-    int position; // ordem do membro no arquivo (e na lista)
+    int positionList; // posicao do membro na lista
+    unsigned long positionBkp; // posicao do conteudo do membro (em bytes) no bkp
     struct member *next;
     struct member *previous;
 } member;
@@ -28,9 +29,10 @@ void printDirectory(directory *dir);
 member *createMember(char *path);
 directory *insertMemberToDir(directory *dir, member *newMember);
 int getFilesTotalSize(directory *dir);
-member *getMemberByPosition(directory *dir, int position);
+member *getMemberByPositionInList(directory *dir, int positionList);
 void writeMember(FILE *bkp, member *m);
 directory *readBackupToDirectory(FILE *bkp);
-void extractToDir(FILE *bkp, directory *dirList);
+void extractContent(FILE *bkp, directory *dirList);
+void updatePositionsBkp(FILE *bkp, directory *dir);
 
 #endif

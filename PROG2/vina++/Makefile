@@ -1,10 +1,8 @@
 # Variables
 CC = gcc
 CFLAGS = -Wall -g -D_DEFAULT_SOURCE # -std=c90
-LIBS = src/liboptions.c src/libdirectory.c src/libbackup.c src/libtest.c
+LIBS = src/libmember.c src/liboptions.c src/libutil.c
 OBJS = src/vina++.o
-
-TESTOBJ = src/testExec.o
 
 # Compilation Rules
 all: vina++
@@ -20,6 +18,3 @@ clean:
 
 purge: clean
 	-rm -f vina++
-
-test: $(TESTOBJ)
-	$(CC) $(CFLAGS) -o testExec $(TESTOBJ) $(LIBS)

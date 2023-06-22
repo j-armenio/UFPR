@@ -1,8 +1,13 @@
 #ifndef _LIB_UTIL_
 #define _LIB_UTIL_
 
-#define STRING_MAX_SIZE 256
+#include "libmember.h"
+#include "liboptions.h"
 
-int isAbsolutePath(char* path);
+char *getRelativePath(char *path);
+int checkIfFileExists(char *path);
+char *getOctalMode(int permissions);
+void removeExtension(char *filename);
+void createDirectories(char *path);
 
 #endif
