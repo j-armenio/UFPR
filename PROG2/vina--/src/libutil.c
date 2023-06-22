@@ -95,37 +95,55 @@ void removeExtension(char *filename)
     }
 }
 
-void createDirectories(const char *path) 
+void createDirectories(char* caminho) 
 {
-    char *token;
-    char *pathCopy = strdup(path);
-    char *delimiter = "/";
-    char *dirPath = NULL;
-
-    token = strtok(pathCopy, delimiter);
+    char* copiaCaminho = strdup(caminho);
+    char* token = strtok(copiaCaminho, "/");
+    char* caminhoAtual = NULL;
+    char *nextToken = NULL;
 
     while (token != NULL) {
-        if (dirPath == NULL) {
-            dirPath = strdup(token);
+        if (caminhoAtual == NULL) {
+            caminhoAtual = strdup(token);
         } else {
-            size_t len = strlen(dirPath) + strlen(token) + 2;
-            dirPath = realloc(dirPath, len);
-            strcat(dirPath, "/");
-            strcat(dirPath, token);
+            size_t tamanho = strlen(caminhoAtual) + strlen(token) + 2;
+            caminhoAtual = realloc(caminhoAtual, tamanho);
+            strcat(caminhoAtual, "/");
+            strcat(caminhoAtual, token);
         }
-
+        printf("caminhoAtual: %s\n", caminhoAtual);
         struct stat st;
-        if (stat(dirPath, &st) == -1) {
-            printf("Criando diretório: %s\n", dirPath);
-            if (mkdir(dirPath, 0777) == -1) {
-                printf("Erro ao criar o diretório: %s\n", dirPath);
-                exit(1);
+        if (stat(caminhoAtual, &st) == -1) {
+            if (mkdir(caminhoAtual, 0700) != 0) {
+                printf("Erro ao criar a pasta %s\n", caminhoAtual);
+                return;
             }
         }
+    
+        token = strtok(NULL, "/");
+        
+        nextToken = strdup(token);
+        nextToken = strtok(nextToken, "/");
 
-        token = strtok(NULL, delimiter);
+        printf("token: %s\n", token);
+        printf("nextToken: %s\n", nextToken);
+
+        if (nextToken == NULL){
+            break;
+        }
+        free(nextToken);
     }
+    
+    FILE* arquivo = fopen(caminho, "a+");
+    if (arquivo != NULL) {
+        printf("Arquivo %s criado com sucesso.\n", caminho);
+        fclose(arquivo);
+    } else {
+        printf("Erro ao criar o arquivo %s\n", caminho);
+    }
+    
+    free(caminhoAtual);
+    free(copiaCaminho);
 
-    free(pathCopy);
-    free(dirPath);
+    printf("------------------\n");
 }
