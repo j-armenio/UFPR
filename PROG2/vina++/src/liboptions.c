@@ -290,9 +290,10 @@ void moveMember(int argc, char **argv)
             target->positionBkp + target->size,
             memberToMove->positionBkp
         );
-
+        int curPos = ftell(bkp);
+        
         // Copiar o memberToMove para logo depois do target
-        pasteMember(bkp, lastContentByte, memberToMove->size, target->positionBkp + target->size);
+        pasteMember(bkp, lastContentByte, memberToMove->size, curPos);
     } else {
         printf("Erro ao mover o arquivo.\n");
         printf("O arquivo de destino e o arquivo a ser movido são o mesmo.\n");
@@ -314,7 +315,7 @@ void moveMember(int argc, char **argv)
         writeMember(bkp, m);
         m = m->next;
     }
-
+    
     printDirectory(dir);
     
     free(buffer);

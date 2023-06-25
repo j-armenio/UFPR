@@ -161,6 +161,12 @@ void copyBinary(FILE *source, int fileSize, FILE *target)
 
 void pasteMember(FILE *bkp, int copyStart, int size, int writeStart)
 {
+    printf("-------\n");
+    printf("copyStart: %d\n", copyStart);
+    printf("size: %d\n", size);
+    printf("writeStart: %d\n", writeStart);
+    printf("-------\n");
+
     char *buffer = (char *)malloc(sizeof(char) * 1024);
     if (buffer == NULL) {
         printf("Erro ao alocar memória para o buffer.\n");
