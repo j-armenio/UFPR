@@ -1,0 +1,12 @@
+Considere um arquivo qualquer provido como entrada. Tal arquivo será lido com buffers de 4 caracteres. 
+Para cada buffer lido, aplique na posição correspondente uma das seguintes operações:
+-- para o primeiro byte, inverta o quinto e o sexto bit mais significativo
+-- para o segundo byte, inverta o primeiro bit mais significativo
+-- para o terceiro byte, inverta o primeiro bit menos significativo
+-- para o quarto byte, inverta o segundo e o quarto bit menos significativo
+As funções devem receber um byte (char) e devolver um byte (já com a operação aplicada). 
+Estas funções devem ser armazenadas em um vetor de ponteiros para função. 
+Para cada buffer lido, você deve aplicar a função correspondente ao indice do caractere, conforme percorre o buffer. 
+Em seguida, grave os buffers de quatro bytes codificados em um arquivo de saída, compondo o resultado codificado iterativamente. 
+Após concluir o processo de codificação, implemente uma função para a decodificação, implemente uma função para a decodificação do arquivo. 
+Em seguida, teste o funcionamento das funções em cenários genéricos.

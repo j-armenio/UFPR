@@ -1,70 +1,92 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef unsigned char byte;
+#define BUFFER_SIZE 100
 
-byte invertBits1(byte c) {
-    return c ^ 0x30; // 0011 0000 : Quinto e sexto
+typedef union{
+  struct{
+    char b1:1;
+    char b2:1;
+    char b3:1;
+    char b4:1;
+    char b5:1;
+    char b6:1;
+    char b7:1;
+    char b8:1;
+  };
+  char B;
+} manager;
+
+char f1(char input){
+  manager transformer;
+  transformer.B = input;
+  if (transformer.b3) transformer.b3 = 0;
+  else transformer.b3 = 1;
+  if (transformer.b4) transformer.b4 = 0;
+  else transformer.b4 = 1;
+  return transformer.B;
 }
 
-byte invertBits2(byte c) {
-    return c ^ 0x80; // 1000 0000 : Mais significativo
+char f2(char input){
+  manager transformer;
+  transformer.B = input;
+  if (transformer.b8) transformer.b8 = 0;
+  else transformer.b8 = 1;
+  return transformer.B;
 }
 
-byte invertBits3(byte c) {
-    return c ^ 0x01; // 0000 0001 : Menos significativo
+char f3(char input){
+  manager transformer;
+  transformer.B = input;
+  if (transformer.b1) transformer.b1 = 0;
+  else transformer.b1 = 1;
+  return transformer.B;
 }
 
-byte invertBits4(byte c) {
-    return c ^ 0x0A; // 0000 1010 : Segundo e quarto bit
+char f4(char input){
+  manager transformer;
+  transformer.B = input;
+  if (transformer.b2) transformer.b2 = 0;
+  else transformer.b2 = 1;
+  if (transformer.b4) transformer.b4 = 0;
+  else transformer.b4 = 1;
+  return transformer.B;
 }
 
-int main() {
-    byte (*encodeFuncs[4])(byte) = { 
-        invertBits1,
-        invertBits2,
-        invertBits3,
-        invertBits4
-    };
 
-    const char* inputFileName = "input.txt";
-    const char* outputFileName = "output.txt";
+int main(int argc, char** argv){
+  unsigned int check_r, check_w;
+  char buffer[BUFFER_SIZE];
+  FILE *input, *output;
+  char (*ponteiros[4])(char) = {f1, f2, f3, f4};
+  
+  if (argc != 3){
+    printf("Para usar o programa execute: %s input output\n", argv[0]);
+    return 1;
+  }
 
-    FILE* inputFile = fopen(inputFileName, "rb");
-    FILE* outputFile = fopen(outputFileName, "wb+");
-
-    byte buffer[4];
-
-    unsigned int checkR, checkW;
-
-    while (! feof(inputFile)) 
-    {
-        checkR = fread(buffer, 1, 4, inputFile);
-
-        for (int i = 0; i < sizeof(buffer); i++){
-            byte encodedChar = encodeFuncs[i](buffer[i]);
-        }
-        checkW = fwrite(buffer, 1, checkR, outputFile);
+  input = fopen(argv[1], "rb");
+  if (!input){
+    printf("O arquivo de entrada não foi aberto!\n");
+    return 2;
+  }
+  
+  output = fopen(argv[2], "wb+");
+  if (!output){
+    printf("O arquivo de saída não foi aberto!\n");
+    return 3;
+  }
+  
+  while(!feof(input)){
+    check_r = fread(buffer, 1, 4, input);
+    for (int i = 0; i < check_r; i++){
+    	buffer[i] = ponteiros[i](buffer[i]);
     }
-
-    fclose(inputFile);
-    fclose(outputFile);
-
-    printf("Arquivo codificado com sucesso.\n");
-
-    FILE* encodedFile = fopen(outputFileName, "rb");
-    FILE* decodedFile = fopen("decoded.txt", "wb");
-
-    while (fread(buffer, sizeof(byte), sizeof(buffer), encodedFile)) {
-        for (int i = 0; i < sizeof(buffer); i++) {
-            byte decodedChar = encodeFuncs[i](buffer[i]);
-            fwrite(&decodedChar, sizeof(byte), 1, decodedFile);
-        }
+    check_w = fwrite(buffer, 1, check_r, output);
+    if (check_w != check_r){
+    	printf("Houve um problema de escrita!\n");
+    	return 3;
     }
-
-    fclose(encodedFile);
-    fclose(decodedFile);
-
-    printf("Arquivo decodificado com sucesso.\n");
-
-    return 0;
+  }
+  
 }
