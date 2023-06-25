@@ -25,6 +25,30 @@ void printMember(member *member)
     printf("Posição Backup: %ld\n", member->positionBkp);
 }
 
+void updateListPositions(directory *dir)
+{
+    member *currentMember = dir->head;
+    int i = 0;
+
+    while (currentMember != NULL) {
+        currentMember->positionList = i;
+        currentMember = currentMember->next;
+        i++;
+    }
+}
+
+void updateBkpPositions(directory *dir)
+{
+    member *m = dir->head;
+    int pos = 4;
+
+    while (m != NULL) {
+        m->positionBkp = pos;
+        pos += m->size;
+        m = m->next;
+    }
+}
+
 /* --- Externas --- */
 
 member *createMember(char *path)
@@ -66,7 +90,6 @@ member *createMember(char *path)
     newMember->positionBkp = -1;
 
     newMember->next = NULL;
-    newMember->previous = NULL;
 
     return newMember;
 }
@@ -107,6 +130,7 @@ void printDirectory(directory *dir)
 
     while (currentMember != NULL) {
         printMember(currentMember);
+        printf("---\n");
         currentMember = currentMember->next;
     }
 }
@@ -121,9 +145,8 @@ directory *insertMemberToDir(directory *dir, member *newMember)
     /* Lista com elementos */
     if (dir->head != NULL) {
         dir->tail->next = newMember;
-        newMember->previous = dir->tail;
         dir->tail = newMember;
-        newMember->positionList = dir->tail->previous->positionList + 1;
+        newMember->positionList = dir->memberCount;
     }
 
     /* Lista vazia */
@@ -247,14 +270,9 @@ directory *readBackupToDirectory(FILE *bkp)
 
 void extractContent(FILE *bkp, directory *dirList)
 {
-    char *buffer = (char *) malloc(sizeof(char) * 1024);
-    if (! buffer) {
-        printf("Erro ao alocar memória para o buffer.\n");
-        return;
-    }
-
     member *currentMember = dirList->head;
 
+    fseek(bkp, 0, SEEK_SET);
     while (currentMember != NULL)
     {
         createDirectories(currentMember->path);
@@ -265,19 +283,14 @@ void extractContent(FILE *bkp, directory *dirList)
             return;
         }
 
-        int iterations = currentMember->positionBkp / 1024;
-        int bytesLeft = currentMember->positionBkp % 1024;
-
-        // Vai ate o inicio do conteudo binario do membro
         fseek(bkp, currentMember->positionBkp, SEEK_SET);
-        
-        
+
+        copyBinary(bkp, currentMember->size, file);
         
         fclose(file);
         currentMember = currentMember->next;
     }
 }
-
 
 // De acordo com o conteudo no bkp atualiza o positionBkp nos membros do dir
 void updatePositionsBkp(FILE *bkp, directory *dir)
@@ -288,8 +301,69 @@ void updatePositionsBkp(FILE *bkp, directory *dir)
     fseek(bkp, sizeof(int), SEEK_CUR); // pula o int do inicio
 
     while (currMember != NULL) {
-        fseek(bkp, currMember->size, SEEK_CUR);
         currMember->positionBkp = ftell(bkp);
+        printf("-- Posicao do membro %s: %lu\n", currMember->name, currMember->positionBkp);
+        fseek(bkp, currMember->size, SEEK_CUR);
         currMember = currMember->next;
     }
+}
+
+member *getMemberByPath(directory *dir, char *path)
+{
+    member *currentMember = dir->head;
+    char *relativePath = strdup(path);
+    relativePath = getRelativePath(relativePath);
+
+    while (currentMember != NULL) {
+        if (strcmp(currentMember->path, relativePath) == 0)
+            return currentMember;
+        currentMember = currentMember->next;
+    }
+
+    return NULL;
+}
+
+// Move o m2 para atras do m1 e atualiza todos os ponteiros
+void shiftMoveInList(directory *lst, member *target, member *move)
+{
+    if (target->next == move)
+        return;
+
+    if (target->positionList < move->positionList) {
+        member *aux1 = target->next; // proximo do target
+        member *aux2 = move->next;   // proximo do move
+        member *aux3 = target;       // anterior ao move
+        while (aux3->next != move)
+            aux3 = aux3->next;
+
+        target->next = move;
+        move->next = aux1;
+        aux3->next = aux2;
+    } else if (target->positionList > move->positionList) {
+        member *aux1 = target->next; // proximo do target
+        member *aux2 = move->next;   // proximo do move
+        member *aux3 = lst->head;    // anterior ao move
+        if (aux3 == move) {
+            target->next = move;
+            move->next = aux1;
+            lst->head = aux2;
+        } else {
+            while (aux3->next != move)
+                aux3 = aux3->next;
+
+            target->next = move;
+            move->next = aux1;
+            aux3->next = aux2;
+        }
+    } 
+
+    // Atualiza tail
+    member *aux = lst->head;
+    while (aux->next != NULL)
+        aux = aux->next;
+    lst->tail = aux;
+    lst->tail->next = NULL;
+
+    updateListPositions(lst);
+    updateBkpPositions(lst);
 }

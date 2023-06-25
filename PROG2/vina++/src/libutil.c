@@ -31,7 +31,7 @@ char *getRelativePath(char *path)
 
         return relativePath;
     }
-
+    
     /* Caso 3: "file" */
     int pathSize = strlen(path);
     int relativePathSize = prefixSize + pathSize;
@@ -118,7 +118,7 @@ void createDirectories(char* caminho)
                 return;
             }
         }
-
+        
         token = strtok_r(NULL, "/", &savePtr);
         if (strlen(savePtr) == 0) {
             break;
@@ -135,4 +135,112 @@ void createDirectories(char* caminho)
     
     free(caminhoAtual);
     free(copiaCaminho);
+}
+
+// Copia o conteúdo binário de um arquivo para outro usando um buffer de 1024 bytes
+void copyBinary(FILE *source, int fileSize, FILE *target)
+{
+    char *buffer = (char *)malloc(sizeof(char) * 1024);
+    if (buffer == NULL) {
+        printf("Erro ao alocar memória para o buffer.\n");
+        return;
+    }
+
+    int iterations = fileSize / 1024;
+    int rest = fileSize % 1024;
+    int i;
+    for (i = 0; i < iterations; i++) {
+        fread(buffer, sizeof(char), 1024, source);
+        fwrite(buffer, sizeof(char), 1024, target);
+    }
+    fread(buffer, sizeof(char), rest, source);
+    fwrite(buffer, sizeof(char), rest, target);
+
+    free(buffer);
+}
+
+void pasteMember(FILE *bkp, int copyStart, int size, int writeStart)
+{
+    char *buffer = (char *)malloc(sizeof(char) * 1024);
+    if (buffer == NULL) {
+        printf("Erro ao alocar memória para o buffer.\n");
+        return;
+    }
+
+    int bCopy = copyStart;
+    int bPaste = writeStart;
+
+    int iterations = (size / 1024);
+    int rest = size % 1024;
+
+    for (int i = 0; i < iterations; i++) {
+        fseek(bkp, bCopy, SEEK_SET);
+        fread(buffer, 1, 1024, bkp);
+        bCopy += 1024;
+        fseek(bkp, bPaste, SEEK_SET);
+        fwrite(buffer, 1, 1024, bkp);
+        bPaste += 1024;
+    }
+    fseek(bkp, bCopy, SEEK_SET);
+    fread(buffer, 1, rest, bkp);
+    fseek(bkp, bPaste, SEEK_SET);
+    fwrite(buffer, 1, rest, bkp);
+
+    free(buffer);
+}
+
+void shiftRight(FILE *file, int bStart, int bEnd, int writeEnd)
+{
+    char *buffer = (char *)malloc(sizeof(char) * 1024);
+    if (buffer == NULL) {
+        printf("Erro ao alocar memória para o buffer.\n");
+        return;
+    }
+
+    int blockSize = bEnd - bStart;
+    int iterations = blockSize / 1024;
+    int rest = blockSize % 1024;
+
+    for (int i = 0; i < iterations; i++) {
+        fseek(file, bEnd - 1024, SEEK_SET);
+        fread(buffer, 1, 1024, file);
+        bEnd -= 1024;
+        fseek(file, writeEnd - 1024, SEEK_SET);
+        fwrite(buffer, 1, 1024, file);
+        writeEnd -= 1024;
+    }
+    fseek(file, bEnd - rest, SEEK_SET);
+    fread(buffer, 1, rest, file);
+    fseek(file, writeEnd - rest, SEEK_SET);
+    fwrite(buffer, 1, rest, file);
+
+    free(buffer);
+}
+
+void shiftLeft(FILE *file, int bStart, int bEnd, int writeStart)
+{
+    char *buffer = (char *)malloc(sizeof(char) * 1024);
+    if (buffer == NULL) {
+        printf("Erro ao alocar memória para o buffer.\n");
+        return;
+    }
+
+    int blockSize = bEnd - bStart;
+    int iterations = blockSize / 1024;
+    int rest = blockSize % 1024;
+
+    for (int i = 0; i < iterations; i++) {
+        fseek(file, bStart, SEEK_SET);
+        fread(buffer, 1, 1024, file);
+        bStart += 1024;
+        fseek(file, writeStart, SEEK_SET);
+        fwrite(buffer, 1, 1024, file);
+        writeStart += 1024;
+    }
+    fseek(file, bStart, SEEK_SET);
+    fread(buffer, 1, rest, file);
+    fseek(file, writeStart, SEEK_SET);
+    fwrite(buffer, 1, rest, file);
+
+    free(buffer);
 }

@@ -31,7 +31,8 @@ int main(int argc, char **argv)
             break;
 
         case 'm':
-            printf("Move o membro indicado para o target");
+            printf("Move membro\n");
+            moveMember(argc, argv);
             break;
 
         case 'x':

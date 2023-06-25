@@ -66,6 +66,7 @@ void listMembers(int argc, char **argv)
         printf("Erro ao abrir o arquivo de backup.\n");
         exit(1);
     }
+
     directory *dir = readBackupToDirectory(bkp);
     
     struct stat fileInfo;
@@ -170,35 +171,13 @@ void insertToNewBackup(int argc, char **argv)
         int fileSize = ftell(file);
         rewind(file);
 
-        /* !!! BUFFER MÁXIMO DE 1024 !!! */
-        char *buffer = (char *) malloc(sizeof(char) * 1024);
-        if (buffer == NULL){
-            printf("Erro ao alocar memória para o buffer.\n");
-            exit(1);
-        }
+        copyBinary(file, fileSize, backup);
 
-        int iterations = fileSize / 1024;
-        int bytesLeft = fileSize % 1024;
-
-        int j;
-        for (j = 0; j < iterations; j++) 
-        {
-            fread(buffer, 1, 1024, file);
-            fwrite(buffer, 1, 1024, backup);
-        }
-        fread(buffer, 1, bytesLeft, file);
-        fwrite(buffer, 1, bytesLeft, backup);
-
-        free(buffer);
         fclose(file);
     }
 
     // Atualiza o valor positionBkp dos membros da lista, 
     updatePositionsBkp(backup, dir);
-
-    printf("------------\n");
-    printDirectory(dir);
-    printf("------------\n");
 
     /* Escreve a quantidade de memberos */
     fwrite(&dir->memberCount, sizeof(int), 1, backup);
@@ -209,6 +188,8 @@ void insertToNewBackup(int argc, char **argv)
         member *m = getMemberByPositionInList(dir, i);
         writeMember(backup, m);
     }
+
+    printDirectory(dir);
 }
 
 void insertToBackup(int argc, char **argv)
@@ -242,10 +223,100 @@ void extractAllFiles(int argc, char **argv)
     }
 
     extractContent(bkp, dirList);
-
 }
 
 void extractFiles(int argc, char **argv)
 {
-
+    
 }
+
+void moveMember(int argc, char **argv)
+{
+    FILE *bkp = fopen(argv[3], "rb+");
+    if (bkp == NULL) {
+        printf("Erro ao abrir o arquivo de backup.\n");
+        exit(1);
+    }
+    directory *dir = readBackupToDirectory(bkp);
+
+    member *target = getMemberByPath(dir, argv[2]);
+    printf("target: %s\n", target->path);
+    member *memberToMove = getMemberByPath(dir, argv[4]);
+    printf("memberToMove: %s\n", memberToMove->path);
+
+    if (target == NULL || memberToMove == NULL) {
+        printf("Erro ao mover o arquivo.\n");
+        printf("Arquivo não existe ou seu caminho está incorreto.\n");
+        exit(1);
+    }
+
+    char *buffer = (char *)malloc(sizeof(char) * 1024);
+    if (buffer == NULL) {
+        printf("Erro ao alocar memória.\n");
+        exit(1);
+    }
+
+    printf("target: %ld\n", target->positionBkp);
+    printf("memberToMove: %ld\n", memberToMove->positionBkp);
+
+    int lastContentByte = dir->tail->positionBkp + dir->tail->size;
+
+    if (target->positionBkp < memberToMove->positionBkp) {
+        printf("target < memberToMove\n");
+
+        // Copia o memberToMove para depois do ultimo byte de binario
+        pasteMember(bkp, memberToMove->positionBkp, memberToMove->size, lastContentByte);
+
+        // Shift members entre target e memberToMove para a direita
+        shiftRight(
+            bkp,
+            target->positionBkp + target->size,
+            memberToMove->positionBkp,
+            memberToMove->positionBkp + memberToMove->size
+        );
+
+        // Copiar o memberToMove para logo depois do target
+        pasteMember(bkp, lastContentByte, memberToMove->size, target->positionBkp + target->size);
+    } else if (target->positionBkp > memberToMove->positionBkp) { 
+        printf("target > memberToMove\n");
+
+        // Copia o memberToMove para depois do ultimo byte de binario
+        pasteMember(bkp, memberToMove->positionBkp, memberToMove->size, lastContentByte);
+
+        // Shift members entre target e memberToMove para a direita
+        shiftLeft(
+            bkp,
+            memberToMove->positionBkp + memberToMove->size,
+            target->positionBkp + target->size,
+            memberToMove->positionBkp
+        );
+
+        // Copiar o memberToMove para logo depois do target
+        pasteMember(bkp, lastContentByte, memberToMove->size, target->positionBkp + target->size);
+    } else {
+        printf("Erro ao mover o arquivo.\n");
+        printf("O arquivo de destino e o arquivo a ser movido são o mesmo.\n");
+        exit(1);
+    }
+
+    // Trunca o arquivo para o tamanho do ultimo byte de binario
+    ftruncate(fileno(bkp), lastContentByte);
+    // Faz o update da lista
+    shiftMoveInList(dir, target, memberToMove);
+
+    // Escreve a quantidade de membros
+    fseek(bkp, 0, SEEK_END);
+    fwrite(&dir->memberCount, sizeof(int), 1, bkp);
+
+    // Escreve o diretorio no bkp
+    member *m = dir->head;
+    while (m != NULL) {
+        writeMember(bkp, m);
+        m = m->next;
+    }
+
+    printDirectory(dir);
+    
+    free(buffer);
+    fclose(bkp);
+}  

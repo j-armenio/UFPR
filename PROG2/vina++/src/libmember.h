@@ -1,6 +1,11 @@
 #ifndef _LIB_MEMBER_
 #define _LIB_MEMBER_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 #define PATH_MAX_SIZE 1024
 #define NAME_MAX_SIZE 256
 
@@ -14,7 +19,6 @@ typedef struct member {
     int positionList; // posicao do membro na lista
     unsigned long positionBkp; // posicao do conteudo do membro (em bytes) no bkp
     struct member *next;
-    struct member *previous;
 } member;
 
 typedef struct {
@@ -34,5 +38,8 @@ void writeMember(FILE *bkp, member *m);
 directory *readBackupToDirectory(FILE *bkp);
 void extractContent(FILE *bkp, directory *dirList);
 void updatePositionsBkp(FILE *bkp, directory *dir);
+member *getMemberByPath(directory *dir, char *path);
+void shiftMoveInList(directory *lst, member *m1, member *m2);
+void printMember(member *member);
 
 #endif
