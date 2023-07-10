@@ -1,0 +1,59 @@
+João Armênio Silveira GRR20211792
+
+# Trabalho - Vina++
+
+    Segue o projeto onde foi feita a criação do programa vina++, um arquivador que tem diversas funções relacionadas a criação e manipulação de arquivos backup.
+    A implementação do projeto está contido na pasta "src/", onde os seguintes arquivos:
+        - vina++.c: arquivo principal do programa, onde é feita a leitura dos argumentos e chamada das funções. Contém apenas a função main, que chama otras funções
+        de acordo com os argumentos passados.;
+
+        - liboptions.c: arquivo que contém as principais funções do programa, recebem os argumentos passados e manipulam os arquivos de acordo com os argumentos;
+        - liboptions.h: contém as declarações das funções do arquivo liboptions.c;
+
+        - libmember.c: arquivo que contém as funções relacionadas a manipulação de lista de "membros" (arquivos e diretórios). Apenas contém funções que manipulam 
+        estruturalmente a lista;
+        - libmember.h: contém as declarações das funções do arquivo libmember.c;
+
+        - libmemUtil.c: contém funções que são auxiliares a manipulação da lista de membros;
+        - libmemUtil.h: contém as declarações das funções do arquivo libmemUtil.c;
+
+        - libbinary.c: contém todas funções que usam da leitura ou escrita de dados binários, usando buffers de tamanho 1024;
+        - libbinary.h: contém as declarações das funções do arquivo libbinary.c;
+
+        - libutil.c: contém funções váriadas que são usadas em diversas partes do programa;
+        - libutil.h: contém as declarações das funções do arquivo libutil.c;
+
+    Principais pontos da implementação:
+        - A estrutura do arquivo backup criado pelo programa é a seguinte:
+            int tamanho (4 bytes) -> tamanho total do conteúdo binário dos arquivos armazenados
+            * conteudo binário dos arquivos armazenados *
+            int quantidade de arquivos (4 bytes) -> quantidade de arquivos armazenados
+            impressão de todas informações dos arquivos armazenados (nome, caminho, data de modificação, tamanho, uid, permissões, ordem na lista e ordem no arquivo)
+
+        - As execuções agem ao redor de uma lista do tipo directory, que contém nodos do tipo member. Os nós armazenam todas informações dos arquivos que serão manipulados.
+        - Foi usada uma lista pois a quantidade de arquivos a serem manipulados é desconhecida, e a lista permite que sejam adicionados novos arquivos sem a necessidade de
+        realocar memória. Além disso, algumas operações como a remoção são mais eficientes em listas do que em vetores. A atualização da lista ocorre simultanea com a 
+        manipulação do arquivo binário, para que não haja inconsistência entre os dados do arquivo e os dados da lista.
+        - De inicio eu implementei uma lista duplamente encadeada, porém percebi que não havia necessidade, pois entre todas operações requisitadas pelo programa, 
+        nenhuma delas necessitava de muita manipulação da lista, mas sim dos conteúdos binários dos arquivos. Além disso, o ponteiro que apontava para o anterior
+        em muitos casos dificultava a implementação e não ajudava em nada.
+
+        - Há duas funções da libbinary que foram em várias parte do programa:
+            - pasteMember(): Copia o conteudo de um bloco de um arquivo, e cola em outro arquivo.
+            - copyMember (): Copia o conteudo de um bloco e cola em outro espaço desse mesmo arquivo.
+            Ambas funções foram utilizadas para as opções de inserção, remoção e movimentação.
+        
+        - A principal particularidade da implementação é como funciona a movimentação dos dados nas funções de inserção, remoção e move.
+            - Inserção: Caso seja um arquivo novo seja inserido, ele é copiado para o final. Porém caso o arquivo já exista, o processo é:
+                - Copia todo conteudo posterior ao arquivo alvo para o final do backup;
+                - Faz a inserção do arquivo novo no lugar do antigo;
+                - Copia o conteudo (que está no final) para logo após o fim do arquivo novo;
+            - Remoção: 
+                - Copia diretamente o conteudo posterior ao arquivo alvo para o lugar do arquivo alvo;
+            - Move:
+                - Copia todo conteudo posterior ao arquivo alvo para o final do backup;
+                - De acordo com a posição do target e do membro a ser movido, faz um deslocamento de dados para direita ou para esquerda;
+                - Copia o conteudo (que está no final) para logo após o fim do target;
+
+        Bugs conhecidos:
+            - Caso tente remover o último membro, o programa não funcionara corretamente e o backup ficará corrompido.
