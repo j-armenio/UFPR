@@ -14,6 +14,6 @@ int main()
     doubleRange *ranges = (doubleRange *)malloc(sizeof(doubleRange) * NUMBERS_AMOUNT);
     createRanges(numbers, ranges);
 
-
+    printRanges(ranges);
 
 }

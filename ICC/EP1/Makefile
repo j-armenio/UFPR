@@ -1,17 +1,18 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -g -D_DEFAULT_SOURCE
+CFLAGS = -Wall -g -D_DEFAULT_SOURCE -std=c99 -Werror
+LDFLAGS = -lm
 LIBS = src/libaux.c
-OBJS = src/main.o
+TARGET = src/main.o
 
 # Compilation Rules
 all: main
 
-main: $(OBJS)
-	$(CC) $(CFLAGS) -o main $(OBJS) $(LIBS)
+main: $(TARGET)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o main $(TARGET) $(LIBS)
 
 main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -c main.c
 
 clean:
 	-rm -f src/*~ src/*.o

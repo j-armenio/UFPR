@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+#include <fenv.h>
+#include <math.h>
 
 #include "libaux.h"
 
@@ -17,9 +19,18 @@ void readInput(double *numbers, char *operators)
 
 void createRanges(double *numbers, doubleRange *ranges)
 {
+    fesetround(FE_TONEAREST); // Configura arredondamento para mais próximo
+
     for (int i = 0; i < NUMBERS_AMOUNT; i++) {
-        ranges[i].min = numbers[i];
-        ranges[i].max = numbers[i];
+        ranges[i].min = nextafter(numbers[i], -DBL_MAX);
+        ranges[i].max = nextafter(numbers[i], DBL_MAX);
     }
+    return;
+}
+
+void printRanges(doubleRange *ranges)
+{
+    for (int i = 0; i < NUMBERS_AMOUNT; i++)
+        printf("Range %d: [%lf, %lf]\n", i, ranges[i].min, ranges[i].max);
     return;
 }
