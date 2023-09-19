@@ -9,10 +9,10 @@ TARGET = src/main.o
 all: main
 
 main: $(TARGET)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o main $(TARGET) $(LIBS)
+	$(CC) $(CFLAGS) -o main $(TARGET) $(LIBS) $(LDFLAGS)
 
 main.o: main.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -c main.c
+	$(CC) $(CFLAGS) -c main.c $(LDFLAGS)
 
 clean:
 	-rm -f src/*~ src/*.o

@@ -10,10 +10,12 @@ int main()
 
     readInput(numbers, operators);
 
-    // Cria intervalos
     doubleRange *ranges = (doubleRange *)malloc(sizeof(doubleRange) * NUMBERS_AMOUNT);
     createRanges(numbers, ranges);
 
     printRanges(ranges);
 
+    solveOperations(ranges, operators);
+
+    return 0;
 }

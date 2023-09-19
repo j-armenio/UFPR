@@ -12,5 +12,6 @@ typedef struct doubleRange {
 void readInput(double *numbers, char *operators);   
 void createRanges(double *numbers, doubleRange *ranges);
 void printRanges(doubleRange *ranges);
+void solveOperations(doubleRange *ranges, char *operators);
 
 #endif
