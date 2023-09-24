@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <float.h>
 #include <fenv.h>
 #include <math.h>
@@ -45,20 +46,23 @@ void printError(floatRange range)
     
     // Erro absoluto
     error = range.max - range.min;
-    printf("EA: %1.8e;", error);
+    printf("EA: %1.8e; ", error);
 
     // Erro relativo
     error = (range.max - range.min) / range.min;
-    printf("ER: %1.8e;", error);
+    printf("ER: %1.8e; ", error);
 
     // ULPs
     if (range.max == range.min)
-        printf("ULPs: 0\n");
+        printf("ULPs: 0 ");
     else {
-        
+        int32_t max = *(int32_t *)&range.max;
+        int32_t min = *(int32_t *)&range.min;
+        int64_t diff = max - min;
+        if (diff < 0)
+            diff = -diff;
+        printf("ULPs: %ld ", diff);
     }
-
-    
 
     return;
 }
@@ -148,30 +152,35 @@ void solveOperations(floatRange *ranges, char *operators)
             currentValue = sumRanges(currentValue, ranges[i+1]);
             printf("[%1.8e,%1.8e]\n", currentValue.min, currentValue.max);
             printError(currentValue);
+            printf("\n");
             break;
         case '-':
             printf("[%1.8e,%1.8e] - [%1.8e,%1.8e] =\n", currentValue.min, currentValue.max, ranges[i+1].min, ranges[i+1].max);
             currentValue = subtractRanges(currentValue, ranges[i+1]);
             printf("[%1.8e,%1.8e]\n", currentValue.min, currentValue.max);
             printError(currentValue);
+            printf("\n");
             break;
         case '*':
             printf("[%1.8e,%1.8e] * [%1.8e,%1.8e] =\n", currentValue.min, currentValue.max, ranges[i+1].min, ranges[i+1].max);
             currentValue = multiplyRanges(currentValue, ranges[i+1]);
             printf("[%1.8e,%1.8e]\n", currentValue.min, currentValue.max);
             printError(currentValue);
+            printf("\n");
             break;
         case '/':
             printf("[%1.8e,%1.8e] / [%1.8e,%1.8e] =\n", currentValue.min, currentValue.max, ranges[i+1].min, ranges[i+1].max);
             currentValue = divideRanges(currentValue, ranges[i+1]);
             printf("[%1.8e,%1.8e]\n", currentValue.min, currentValue.max);
             printError(currentValue);
+            printf("\n");
             break;
         default:
             printf("Operação Inválida.\n");
             return;
             break;
         }
+        printf("\n");
     }
 }
 
