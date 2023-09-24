@@ -7,7 +7,7 @@
 #include "libaux.h"
 
 // Acha o maior num menor que x 
-double biggestUnder(double num)
+float biggestUnder(float num)
 {
     if (fabs(num) == 0)
         return -0;
@@ -17,7 +17,7 @@ double biggestUnder(double num)
 }
 
 // Acha o menor num maior que x
-double smallestAbove(double num)
+float smallestAbove(float num)
 {
     if (fabs(num) == 0)
         return +0;
@@ -26,9 +26,46 @@ double smallestAbove(double num)
     return nextafter(num, DBL_MAX);
 }
 
-doubleRange sumRanges(doubleRange num1, doubleRange num2)
+void printRanges(floatRange *ranges)
 {
-    doubleRange ret;
+    for (int i = 0; i < NUMBERS_AMOUNT; i++)
+        printf("Range %d: [%1.8e, %1.8e]\n", i, ranges[i].min, ranges[i].max);
+    return;
+}
+
+void printRange(floatRange range)
+{
+    printf("[%1.8e, %1.8e]", range.min, range.max);
+    return;
+}
+
+void printError(floatRange range)
+{
+    float error;
+    
+    // Erro absoluto
+    error = range.max - range.min;
+    printf("EA: %1.8e;", error);
+
+    // Erro relativo
+    error = (range.max - range.min) / range.min;
+    printf("ER: %1.8e;", error);
+
+    // ULPs
+    if (range.max == range.min)
+        printf("ULPs: 0\n");
+    else {
+        
+    }
+
+    
+
+    return;
+}
+
+floatRange sumRanges(floatRange num1, floatRange num2)
+{
+    floatRange ret;
 
     ret.min = biggestUnder(num1.min + num2.min);
     ret.max = smallestAbove(num1.max + num2.max);
@@ -36,9 +73,9 @@ doubleRange sumRanges(doubleRange num1, doubleRange num2)
     return ret;
 }
 
-doubleRange subtractRanges(doubleRange num1, doubleRange num2)
+floatRange subtractRanges(floatRange num1, floatRange num2)
 {
-    doubleRange ret;
+    floatRange ret;
 
     ret.min = biggestUnder(num1.min - num2.min);
     ret.max = smallestAbove(num1.max - num2.max);
@@ -46,67 +83,63 @@ doubleRange subtractRanges(doubleRange num1, doubleRange num2)
     return ret;
 }
 
-doubleRange multiplyRanges(doubleRange num1, doubleRange num2)
+floatRange multiplyRanges(floatRange num1, floatRange num2)
 {
-    doubleRange ret;
+    floatRange ret;
+
+    ret.min = biggestUnder(num1.min * num2.min);
+    ret.max = smallestAbove(num1.max * num2.max);
 
     return ret;
 }
 
-doubleRange divideRanges(doubleRange num1, doubleRange num2)
+floatRange divideRanges(floatRange num1, floatRange num2)
 {
-    doubleRange ret;
+    floatRange ret;
+
+    if (fabs(num2.min) == 0 || fabs(num2.max) == 0) {
+        ret.min = -INFINITY;
+        ret.max = INFINITY;
+    } else {
+        ret.min = biggestUnder(num1.min / num2.min);
+        ret.max = smallestAbove(num1.max / num2.max);
+    }
 
     return ret;
 }
 
 /* --------------------------------------------------------------- */
 
-void readInput(double *numbers, char *operators)
+void readInput(float *numbers, char *operators)
 {
     for (int i = 0; i < NUMBERS_AMOUNT + OPERATORS_AMOUNT; i++) {
         if (i % 2 == 0) 
-            scanf("%lf", &numbers[i / 2]);
+            scanf("%f", &numbers[i / 2]);
         else
             scanf(" %c", &operators[i / 2]);
     }
     return;
 }
 
-void createRanges(double *numbers, doubleRange *ranges)
+void createRanges(float *numbers, floatRange *ranges)
 {
     for (int i = 0; i < NUMBERS_AMOUNT; i++) 
     {
         // Acha o maior num menor que x 
-        ranges[i].max = biggestUnder(numbers[i]);
+        ranges[i].min = biggestUnder(numbers[i]);
         // Acha o menor num maior que x
         ranges[i].max = smallestAbove(numbers[i]);
     }
     return;
 }
 
-void printRanges(doubleRange *ranges)
+void solveOperations(floatRange *ranges, char *operators)
 {
-    for (int i = 0; i < NUMBERS_AMOUNT; i++)
-        printf("Range %d: [%1.8e, %1.8e]\n", i, ranges[i].min, ranges[i].max);
-    return;
-}
-
-void printError(doubleRange range)
-{
-    
-    
-
-    printf("")
-}
-
-void solveOperations(doubleRange *ranges, char *operators)
-{
-    doubleRange currentValue = ranges[0];
+    floatRange currentValue = ranges[0];
 
     for (int i = 0; i < OPERATORS_AMOUNT; i++)
     {
-        printf("%d:\n", i);
+        printf("%d:\n", i+1);
 
         switch (operators[i])
         {
@@ -140,4 +173,35 @@ void solveOperations(doubleRange *ranges, char *operators)
             break;
         }
     }
+}
+
+void testFunction(floatRange *ranges, char *operators)
+{
+    floatRange currentValue = ranges[0];
+
+    currentValue = multiplyRanges(ranges[0], ranges[1]);
+    printRange(currentValue);
+    
+    printError(currentValue);
+    printf("\n");
+
+    currentValue = sumRanges(currentValue, ranges[2]);
+    printRange(currentValue);
+    printf("\n");
+    printError(currentValue);
+    printf("\n");
+
+    currentValue = subtractRanges(currentValue, ranges[3]);
+    printRange(currentValue);
+    printf("\n");
+    printError(currentValue);
+    printf("\n");
+
+    currentValue = divideRanges(currentValue, ranges[4]);
+    printRange(currentValue);
+    printf("\n");
+    printError(currentValue);
+    printf("\n");
+
+    return;
 }

@@ -4,14 +4,16 @@
 #define NUMBERS_AMOUNT 5
 #define OPERATORS_AMOUNT 4
 
-typedef struct doubleRange {
-    double min;
-    double max;
-} doubleRange;
+typedef struct floatRange {
+    float min;
+    float max;
+} floatRange;
 
-void readInput(double *numbers, char *operators);   
-void createRanges(double *numbers, doubleRange *ranges);
-void printRanges(doubleRange *ranges);
-void solveOperations(doubleRange *ranges, char *operators);
+void readInput(float *numbers, char *operators);   
+void createRanges(float *numbers, floatRange *ranges);
+void printRanges(floatRange *ranges);
+void solveOperations(floatRange *ranges, char *operators);
+
+void testFunction(floatRange *ranges, char *operators);
 
 #endif
