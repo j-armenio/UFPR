@@ -1,0 +1,13 @@
+Aula 01 Introdução à Disciplina
+
+Modelo Von Neumman
+	-Um programa em execução deve estar carregado em memória.
+	-Existe um ponteiro que aponta para a próxima instrução a ser executada.
+
+Na arquitetura AMD64, o registrador de instrução que armazena a próxima instrução é chamado de "ip"(instruction pointer). 
+Em outras arquiteturas é chamado "pc"(program counter).
+
+A instrução é decodificada e executada pelo processador. Após a conclusão o 'ip' é atualizado com o endereço da próxima instrução.
+
+P1: 30/04
+P2: 06/06

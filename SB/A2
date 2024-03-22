@@ -1,0 +1,45 @@
+Introdução à Execução de Programas
+
+Arquivo fonte => contém código legivel para humanos.
+
+Codificação de dados
+	ASCII => caractere com 7 bits
+	UNICODE => caractere com 32 bits, inicia com a tabela ASCII
+	UTF8...=> ultilização progressiva de bytes
+
+Na compilação em C,
+
+execução completa de geração do executável,
+	gcc programa.c -o programa
+
+gerar arquivos de código objeto do programa, 
+	gcc -c programa.c
+		Código objeto contém a transcrição de um fonte para código de máquina, porém não pode ser executado, uma vez que o ligador ainda não atuou para prover funções apenas referenciadas no arquivo fonte. 
+		É útil para que, em projetos grandes, não seja necessário recompilar o projeto todo, apenas o arquivo modificado.
+
+Para arquivos de código objeto ou executáveis, eles não são preparados para uma leitura humana, usando a aplicação hexdump, é capaz de exibir os bytes gravados em tais arquivos. 
+Outra opção para analisar executavel é o objdump. Ele possui 26 seções diferentes. Já o arquivo objeto possui apenas 5.
+A organização de um executável depende do sistema computacional, de forma geral:
+	-Operações dependem da arquitetura do sistema.
+	-Formato depende do sistema operacional.
+
+As operações AMD64 serão objeto de estudo.
+E os formatos são semelhantes, mas não intercambiáveis.
+	Windows: com, exe, pe; mac: pef; android: dex; linux: elf; 
+	Será estudado apenas ELF(Executabel and Linkable Format)
+
+Programa x Processo
+	Para que um programa passe a ser processo, o SO, através do carregador, deve ler o arquivo executável e mapeá-lo em um espaço de endereçamento do arquivo.
+	Quando um processo é criado, o SO fornece um espaço de endereçamento virtual para ele. Esse espaço tem 2^64 endereços.
+
+Divisão do Sistema Operacional:
+	-Segmentos do Processo: utilizado para alocação da imagem do processo(elf).
+	-Segmentos Dinâmicos: local onde objetos dinâmicos são alocados.
+	-Reservado do Sistema: residência do SO e de objetos inacessíveis ao processo.
+
+Existem algumas seções do arquivo executável carregado nos segmentos de processo, as principais são:
+	-Text: código
+	-Data: dados globais não inicializados
+	-BSS: dados não inicializados
+	-Heap: variáveis dinâmicas
+	-Stack: pilha de execução
