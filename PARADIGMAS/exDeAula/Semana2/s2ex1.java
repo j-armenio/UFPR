@@ -16,8 +16,7 @@ public class S2ex1 {
             
             sum = sum + num;
         }
-        
-        
+           
         System.out.println(sum);
     }
 }
