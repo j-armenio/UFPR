@@ -1,13 +1,12 @@
 import java.util.Scanner;
 
 // Tudo dentro do Java tem que estar dentro de classes
-public class Ex1 {
+public class ex1 {
 
     // Método que inicia a execução do programa
-    public static void main(String args[]) {
-
+    public static void main(String args[]) 
+    {
         Scanner input = new Scanner(System.in);
-
         int num;
 
         System.out.println("Digite um número: ");
@@ -18,5 +17,7 @@ public class Ex1 {
         } else {
             System.out.println(num + " é negativo.");
         }
+
+        input.close();
     }
 }
