@@ -333,4 +333,12 @@ public void setLigado(boolean ligado) {
 ```
 ##### Método toString()
 
-Retorna a representação de um objeto em string. Está presente em todas as classes.
+* Retorna a representação de um objeto em string. Está presente em todas as classes.
+
+```java
+// Alterando o método toString
+public String toString() 
+{
+    return String.format("Nome: %s \nAno: %d\nSalario: %f", this.nome, this.ano, this.salario);
+}
+```
