@@ -7,6 +7,7 @@
 3. [Classe e Objeto](#classe-e-objeto)
 4. [Arrays em Java](#arrays-em-java)
 5. [Classe String em Java](#classe-string-em-java)
+6. [Encapsulamento](#encapsulamento)
 
 ## Introdução a Linguagem Java
 
@@ -276,3 +277,60 @@ public class Matriz{
     * toLowerCase(): Retorna uma nova string com todas as letras em minúsculo
     * toUpperCase(): Retorna uma nova string com todas letras em maiúsculo
     
+
+## Encapsulamento
+
+Não é preciso conhecer todas as partes de uma classe para entender seu funcionamento.
+
+* Segurança;
+* Relação de confiança entre as classes: utilizar um método sem conhecer os detalhes da implementação;
+
+Regra do Encapsulamento: :star: **Nenhum objeto pode acessar os atributos de outro diretamente.** :star:
+
+### Como encapsular:
+1. Atributos declarados como **privados**.
+```java
+public class Carro {
+    private char tipo;
+}
+```
+
+2. Criar métodos get/set para <ins>cada atributo</ins> da classe.
+```java
+public char getTipo() {
+    return this.tipo;
+}
+
+// Validações devem ser sempre feitas na função set
+public void setTipo(char tipo) {
+    if (tipo == 'F' || tipo == 'D')
+        this.tipo = tipo;
+}
+```
+
+##### Classe Encapsulada:
+
+```java
+public class <NomeClasse>
+{
+    // Atributos
+    // Métodos get/set
+    // Outros métodos
+}
+```
+
+##### Tipo Boolean
+
+O padrão get/set **não** vale para variáveis boolean. Esses atributos são acessados via *is* e *set*.
+
+```java
+public boolean isLigado() {
+    return this.ligado;
+}
+public void setLigado(boolean ligado) {
+    this.ligado = ligado;
+}
+```
+##### Método toString()
+
+Retorna a representação de um objeto em string. Está presente em todas as classes.
