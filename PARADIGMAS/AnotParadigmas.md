@@ -8,6 +8,9 @@
 4. [Arrays em Java](#arrays-em-java)
 5. [Classe String em Java](#classe-string-em-java)
 6. [Encapsulamento](#encapsulamento)
+7. [Construtores](#construtores)
+8. [Atributos do tipo Classe](#atributos-do-tipo-classe)
+9. [Herança](#herança)
 
 ## Introdução a Linguagem Java
 
@@ -188,11 +191,11 @@ Define a estrutura das classes de um sistema.
 ```mermaid
 classDiagram
     class Funcionario{
-        +nome: String
-        +ano: int
-        +salario: double
-        +cadastrar(n:String, a:int, s:double) void
-        +exibirDados() void
+        nome: String
+        ano: int
+        salario: double
+        cadastrar(n:String, a:int, s:double) void
+        exibirDados() void
     }
 ```
 
@@ -342,3 +345,178 @@ public String toString()
     return String.format("Nome: %s \nAno: %d\nSalario: %f", this.nome, this.ano, this.salario);
 }
 ```
+
+## Construtores
+
+```java
+public class <NomeClasse> {
+    // Atributos
+    // Construtores
+    // Métodos get/set
+    // Outros métodos
+}
+```
+* Toda classe possui um construtor.
+* Uma classe pode ter vários construtores.
+* São chamados automaticamente quando instâncias de objetos são criadas por meio da palavra chave **new**.
+
+```java
+public class Principal {
+    public static main void(String[] args) {
+        Funcionario obj1 = new Funcionario();
+        Funcionario obj2 = new Funcionario();
+    }
+}
+```
+
+Se nenhum construtor é definido na classe, Java irá definir um construtor **padrão (default)**.
+
+Características do construtor default: 
+
+* Não possui parâmetro.
+* Não possui conteúdo.
+* Não possui tipo de retorno.
+* Possui mesmo nome da classe.
+* Possui mesmo modificador de acesso da classe.
+* Conteúdo padrão inicializado:
+    * boolean: false
+    * char: vazio
+    * int/ponto flutuante: zero
+    * instância de classe: NULL
+
+Construtores são usados para inicializar uma classe com valores específicos.
+
+```java
+public Funcionario(String nome, int ano, double salario) {
+    this.nome = nome;
+    this.ano = ano;
+    this.salario = salario;
+}
+```
+
+## Atributos do tipo Classe
+
+!!! warning
+    INCOMPLETO, MELHORAR ESSA PARTE
+
+### Relacionamento de classes na UML
+
+Associação: indica que uma classe depende da outra.
+* Associação forte: a classe A possui um ou mais atributos do tipo da classe B
+* Multiplicidade 1..1: indica que **apenas um** objeto da classe B se relaciona com objetos da classe A
+
+## Herança
+
+Uma forma de reutilização em que novas classes são criadas, absorvendo membros de uma classe existente e aprimorada com novas características e funcionalidades.
+
+* Uma subclasse **"herda"** atributos e métodos de sua superclasse e os utiliza como se fossem declarados dentro da própria classe.
+
+##### Representação sem herança: 
+
+```mermaid
+classDiagram
+    class Veiculo {
+        -preco: float
+        -marca: String
+        +getPreco()
+        +getMarca()
+        +setPreco(...)
+        +setMarca(...)
+    }
+    class Carro {
+        -preco: float
+        -marca: String
+        -numPortas: int
+        +getPreco()
+        +getMarca()
+        +setPreco(...)
+        +setMarca(...)
+        +getNumPortas()
+        +setNumPortas(...)
+    }
+    class Moto {
+        -preco: int
+        -marca: String
+        +getPreco()
+        +getMarca()
+        +setPreco(...)
+        +setMarca(...)
+    }
+```
+
+* Muita repetição de código!
+
+##### Representação com herança: 
+
+```mermaid
+classDiagram
+    direction TB
+    class Veiculo {
+        -preco: float
+        -marca: String
+        +getPreco()
+        +getMarca()
+        +setPreco(...)
+        +setMarca(...)
+    }
+    class Carro {
+        -numPortas: int
+        +getNumPortas()
+        +setNumPortas(...)
+    }
+
+    Veiculo <|-- Carro
+    Veiculo <|-- Moto
+```
+
+* superclasse (pai)   -> Veiculo
+* subclasses (filhas) -> Carro e Moto
+* Todos os carros e motos são veículos, mas nem todos veículos são carros
+
+#### Como implementar Herança
+
+1. Usar a palavra **extends**
+2. Declarar os atributos da superclasse como **protected**
+    * Membros protected podem ser acessados por:
+        1. membros da própria superclasse
+        2. membros das subclasses
+        3. membros da classe no mesmo pacote
+
+```java
+public class Veiculo {
+    protected float preco;
+    protected String marca;
+    // ...
+}
+
+public class Carro extends Veiculo {
+    // ...
+}
+
+public class Moto extends Veiculo {
+    // ...
+}
+```
+
+##### Tipos de Herança
+
+* Herança Simples: uma classe é derivada de uma única superclasse
+* Herança Múltipla: uma classe é derivada de mais de uma superclasse
+    * O Java **NÃO** permite herança múltipla
+
+##### Quando utilizar Herança?
+* Regra: realizar a pergunta ***"É um?"***
+* Ex: 
+    * Cavalo *é um* Animal?
+    * Alface *é um* Vegetal?
+    * Gorgonzola *é um* Queijo?
+    * Carro *é um* Veículo?
+
+##### Herança em Java
+
+Em Java todas as classes herdam da classe **Object**, alguns de seus métodos são:
+
+* toString(): retorna a representação de um objeto em String
+* equals(Object obj): compara dois Objects retornando true se forem iguais e false caso diferentes
+* hashCode(): retorna um código hash (int) para o objeto
+
