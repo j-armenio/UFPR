@@ -520,3 +520,87 @@ Em Java todas as classes herdam da classe **Object**, alguns de seus métodos s�
 * equals(Object obj): compara dois Objects retornando true se forem iguais e false caso diferentes
 * hashCode(): retorna um código hash (int) para o objeto
 
+!! Construtores **não** são herdados pelas subclasses. !!
+
+Instanciar um objeto da subclasse inicia uma cadeia de chamadas de construtores pais, implicitamente ou explicitamente (via super).
+
+```java
+public class Veiculo {
+    protected float preco;
+    protected String marca;
+
+    public Veiculo(float preco, String marca) {...}
+}
+
+public class Carro extends Veiculo {
+    private int numPortas;
+
+    public Carro(int numPortas, float preco, String marca) {
+        super(preco, marca); // Chamada explicita
+    }
+}
+```
+#### Métodos - Herança
+
+1. Sobreposição de método 
+    * A classe filha pode fornecer outra implementação para um método herdado, fazendo o **overriding** da classe pai.
+
+    ```java
+    public class Pai {
+        public void metodoX(int p) {
+            ...
+        }
+    }
+
+    public class Filho extends Pai {
+        public void metodoX(int p) {
+            // O código metodoX do filho sobrepõe o do pai
+        }
+    }
+    ```
+    * Regras:
+        * O nome do método, a lista de parâmetros e o tipo de retorno **devem** ser os mesmos.
+        * O nível de acesso **não pode** ser mais restrito que o método redefinido.
+
+2. Acesso do método da superclasse usando **super()**
+    * Para acessar um método da superclasse que também foi definido na subclasse:
+    `super.nomeMetodo(lista de parâmetros);`
+
+    ```java
+    public class Pai {
+        public void metodoX(int p) {...}
+    }
+
+    public class Filho extends Pai {
+        public void metodoX(int p) {
+            super.metodoX(p);
+        }
+    }
+    ```
+
+##### Notação @Override
+Indica que o método da classe filha sobrepões o método da classe pai.
+* Vantagens:
+    * Se o método filho não substituir o método pai, o código não compila.
+    * Torna o código fonte mais legível.
+
+    ```java
+    public class Filho extends Pai {
+        @Override
+        public void metodoX(int p) {
+            // ...
+        }
+    }
+    ```
+#### Classe Final
+
+Uma classe é declarada como final quando ela não puder ser herdada por nenhuma outra classe.
+
+```java
+public final class <NomeClasse> {
+    // ...
+}
+```
+
+Qualquer tentativa de criar subclasses resultará em **erro de compilação**.
+
