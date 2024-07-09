@@ -604,3 +604,86 @@ public final class <NomeClasse> {
 
 Qualquer tentativa de criar subclasses resultará em **erro de compilação**.
 
+## Sobrecarga
+
+Tipos:
+
+* Sobrecarga de construtores
+* Sobrecarga de métodos
+
+### Sobrecarga de Construtores
+
+Uma classe pode ter vários construtores sobrecarregados permitindo que objetos dessa classe sejam inicializados de diferentes maneiras, basta fornecer múltiplas declarações de construtor com assinaturas diferentes.
+
+Regras:
+* A lista de parâmetros **tem** que mudar;
+* O modificador de acesso **pode** mudar.
+
+```java
+public class ContaBancaria{
+    private String nomeT;
+    private double saldo;
+
+    // Construtor 1 - padrão
+    public ContaBancaria() {}
+
+    // Construtor 2
+    public ContaBancaria(double saldo) {
+        this.setSaldo(saldo);
+    }
+
+    // Construtor 3
+    public ContaBancaria(String nomeT) {
+        this.setNomeT(nomeT);
+    }
+
+    // Construtor 4
+    public ContaBancaria(String nomeT, double saldo) {
+        this.setNome(nomeT);
+        this.setSaldo(saldo);
+    }
+}
+```
+
+Um construtor pode ser chamado dentro de outro utilizando **this**, que deve vir sempre na primeira linha do construtor. Isso evita repetição de código.
+
+```java
+// Construtor 1 - padrão
+public ContaBancaria() {}
+
+// Construtor 2
+public ContaBancaria(double saldo) {
+    this(" ", saldo);
+}
+
+// Construtor 3
+public ContaBancaria(String nomeT) {
+    this(nomeT, 0.0);
+}
+
+// Construtor 4
+public ContaBancaria(String nomeT, double saldo) {
+    this.setNome(nomeT);
+    this.setSaldo(saldo);
+}
+```
+
+### Sobrecarga de Métodos
+
+Capacidade de possuir métodos diferentes com o mesmo nome, mas com parâmetros diferentes.
+
+Regras:
+* Nome **tem** que ser o mesmo;
+* Lista de parâmetros **tem** que mudar;
+* Tipo de retorno **pode** mudar;
+* Modificador de acesso **pode** mudar.
+
+```java
+public void imprimir(int i) {...}
+public void imprimir(float f) {...}
+public void imprimir(String s) {...}
+```
+
+## Classe Abstrata
+
+
