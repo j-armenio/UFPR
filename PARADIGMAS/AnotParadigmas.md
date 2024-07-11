@@ -11,6 +11,9 @@
 7. [Construtores](#construtores)
 8. [Atributos do tipo Classe](#atributos-do-tipo-classe)
 9. [Herança](#herança)
+10. [Sobrecarga](#sobrecarga)
+11. [Classe Abstrata](#classe-abstrata)
+12. [Interface](#interface)
 
 ## Introdução a Linguagem Java
 
@@ -686,4 +689,158 @@ public void imprimir(String s) {...}
 
 ## Classe Abstrata
 
+É uma superclasse extremamente genérica, que não pode ser instanciada.
 
+
+* Uma classe abstrata é declarada usando *abstract*;
+* Uma classe abstrata deve ter **zero ou mais** métodos abstratos. (Se contém um método abstrato deve ser declarada como abstrata)
+
+```java
+public abstract class Funcionario{} // Classe abstrata
+```
+
+#### Método abstrato
+
+* Um método abstrato também é declarado usando *abstract*.
+* Podem possuir implementação, **ou não**. Nesse segundo caso, contendo apeanas a assinatura do método.
+
+```java
+public double calcularSalario() { /* implementação */ }
+
+public abstract double calcularSalario(); // Método abstrato
+```
+* Atributos e construtores **não** pode ser abstratos.
+
+---
+
+* Uma classe concreta (não abstrata), que estende uma classe abstrata, deve fornecer a implementação dos métodos abstratos.
+* A primeira classe concreta que herdar essa hierarquia tem que obrigatoriamente fornecer a implementação dos métodos abstratos herdados.
+* Caso a classe que estende outra que tem método abstrato e não a implementa, então ela também deve ser declarada como abstrata.
+
+Exemplo:
+
+```mermaid
+classDiagram
+    direction TB
+    class ClasseAbstrata {
+        +metodoConcreto(): void
+        +metodoAbstratoA(): void*
+        +metodoAbstratoB(): void*
+    }
+    class SubClasseConcretaA {
+        +metodoAbstratoA(): void
+        +metodoAbstratoB(): void
+    }
+    class SubClasseConcretaB {
+        +metodoAbstratoA(): void
+        +metodoAbstratoB(): void
+    }
+    class SubclasseAbstrataA {
+        +metodoAbstratoA(): void
+        +metodoAbstratoB(): void*
+    }
+
+    ClasseAbstrata <|-- SubClasseConcretaA
+    ClasseAbstrata <|-- SubClasseConcretaB
+    ClasseAbstrata <|-- SubclasseAbstrataA
+```
+
+```java
+public abstract class ClasseAbstrata {
+    // Atributos
+    // Métodos get e set
+    // Outros métodos
+    public void metodoConcreto() { /*implementação*/ };
+    public abstract void metodoAbstratoA();
+    public abstract void metodoAbstratoB();
+}
+
+public class SubClasseConcretaA extends ClasseAbstrata {
+    // Atributos
+    // Métodos get e set
+    // Outros métodos
+    public void metodoAbstratoA() { /*implementação*/ }
+    public void metodoAbstratoB() { /*implementação*/ }
+}
+
+public class SubClasseConcretaB extends ClasseAbstrata {
+    // Atributos
+    // Métodos get e set
+    // Outros métodos
+    public void metodoAbstratoA() { /*implementação*/ }
+    public void metodoAbstratoB() { /*implementação*/ }
+}
+
+public abstract class SubClasseAbstrataA extends ClasseAbstrata {
+    // Atributos
+    // Métodos get e set
+    // Outros métodos
+    public void metodoAbstratoA() { /*implementação*/ }
+    public abstract void metodoAbstratoB();
+}
+```
+
+## Interface
+
+* São declaradas como *interface*;
+* Define um conjunto de métodos, mas não define **como** devem ser implementados;
+
+    ```java
+    public abstract double calcularArea();
+    public abstract void desenhar();
+    ```
+
+* Como a herança múltipla não é permitida em Java, interface serve como opção;
+
+```mermaid
+classDiagram
+    direction TB
+
+    class FormaBidimensional {
+        +calcularArea(): double*
+        +desenhar(): void*
+    }
+    <<interface>> FormaBidimensional
+    class FiguraGeometrica
+    <<interface>> FiguraGeometrica
+    class Quadrado {
+        -lado: double
+        +calcularArea(): double
+        +desenhar(): void
+    }
+
+    FormaBidimensional <|-- Quadrado : implements
+    FiguraGeometrica <|-- Quadrado : implements
+```
+
+```java
+public interface FiguraGeometrica {
+    public abstract double calcularArea();
+    public abstract void desenhar();
+}
+
+public interface FiguraGeometrica {};
+
+public class Quadrado implements FiguraGeometrica{
+    private double lado;
+
+    public double calcularArea() { /*implementação*/ }
+    public void desenhar() { /*implementação*/ }
+}
+```
+
+* Não possuem atributos;
+* As constantes são implicitamente definidas como public, static e final;
+
+    ```java
+        // Todas declarações são equivalentes em uma interface
+        double PI = 3.14;
+        public double PI = 3.14;
+        public static final double PI = 3.14;
+    ```
+* Não possuem construtor;
+* Todos métodos são implicitamente public e abstract;
+
+##### Interface ou Classe Abstrata
+
+Interface é a melhor forma de definir um tipo que permite múltiplas implementações. Uma exceção a essa regra é o caso em que a facilidade de evolução é considerada mais importante que a flexibilidade, nesse caso a classe abstrata se sobressai.
