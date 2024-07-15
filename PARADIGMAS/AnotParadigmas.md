@@ -693,7 +693,8 @@ public void imprimir(String s) {...}
 
 
 * Uma classe abstrata é declarada usando *abstract*;
-* Uma classe abstrata deve ter **zero ou mais** métodos abstratos. (Se contém um método abstrato deve ser declarada como abstrata)
+* Deve ter **zero ou mais** métodos abstratos. (Se contém um método abstrato deve ser declarada como abstrata);
+* Pode possuir métodos abstratos e não abstratos.
 
 ```java
 public abstract class Funcionario{} // Classe abstrata
@@ -702,7 +703,7 @@ public abstract class Funcionario{} // Classe abstrata
 #### Método abstrato
 
 * Um método abstrato também é declarado usando *abstract*.
-* Podem possuir implementação, **ou não**. Nesse segundo caso, contendo apeanas a assinatura do método.
+* **Não** possui implementação, apenas a assinatura do método.
 
 ```java
 public double calcularSalario() { /* implementação */ }
@@ -844,3 +845,10 @@ public class Quadrado implements FiguraGeometrica{
 ##### Interface ou Classe Abstrata
 
 Interface é a melhor forma de definir um tipo que permite múltiplas implementações. Uma exceção a essa regra é o caso em que a facilidade de evolução é considerada mais importante que a flexibilidade, nesse caso a classe abstrata se sobressai.
+
+---
+
+### Dúvidas
+* Classes abstratas devem ter construtores?
+* Dentro de uma classe, funções internas, podem usar o *this.* ou devem usar o get/set?
+* Devo usar get/set em construtores?
