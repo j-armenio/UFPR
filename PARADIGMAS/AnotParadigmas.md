@@ -14,6 +14,7 @@
 10. [Sobrecarga](#sobrecarga)
 11. [Classe Abstrata](#classe-abstrata)
 12. [Interface](#interface)
+13. [Polimorfismo](#polimorfismo)
 
 ## Introdução a Linguagem Java
 
@@ -845,6 +846,9 @@ public class Quadrado implements FiguraGeometrica{
 ##### Interface ou Classe Abstrata
 
 Interface é a melhor forma de definir um tipo que permite múltiplas implementações. Uma exceção a essa regra é o caso em que a facilidade de evolução é considerada mais importante que a flexibilidade, nesse caso a classe abstrata se sobressai.
+
+## Polimorfismo
+
 
 ---
 
