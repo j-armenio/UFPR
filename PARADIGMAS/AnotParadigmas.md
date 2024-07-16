@@ -464,7 +464,7 @@ classDiagram
         +setMarca(...)
     }
     class Carro {
-        -numPortas: int
+        -numPortas int
         +getNumPortas()
         +setNumPortas(...)
     }
@@ -725,21 +725,21 @@ Exemplo:
 classDiagram
     direction TB
     class ClasseAbstrata {
-        +metodoConcreto(): void
-        +metodoAbstratoA(): void*
-        +metodoAbstratoB(): void*
+        +metodoConcreto() void
+        +metodoAbstratoA() void*
+        +metodoAbstratoB() void*
     }
     class SubClasseConcretaA {
-        +metodoAbstratoA(): void
-        +metodoAbstratoB(): void
+        +metodoAbstratoA() void
+        +metodoAbstratoB() void
     }
     class SubClasseConcretaB {
-        +metodoAbstratoA(): void
-        +metodoAbstratoB(): void
+        +metodoAbstratoA() void
+        +metodoAbstratoB() void
     }
     class SubclasseAbstrataA {
-        +metodoAbstratoA(): void
-        +metodoAbstratoB(): void*
+        +metodoAbstratoA() void
+        +metodoAbstratoB() void*
     }
 
     ClasseAbstrata <|-- SubClasseConcretaA
@@ -799,16 +799,16 @@ classDiagram
     direction TB
 
     class FormaBidimensional {
-        +calcularArea(): double*
-        +desenhar(): void*
+        +calcularArea() double*
+        +desenhar() void*
     }
     <<interface>> FormaBidimensional
     class FiguraGeometrica
     <<interface>> FiguraGeometrica
     class Quadrado {
         -lado: double
-        +calcularArea(): double
-        +desenhar(): void
+        +calcularArea() double
+        +desenhar() void
     }
 
     FormaBidimensional <|-- Quadrado : implements
@@ -848,6 +848,219 @@ public class Quadrado implements FiguraGeometrica{
 Interface é a melhor forma de definir um tipo que permite múltiplas implementações. Uma exceção a essa regra é o caso em que a facilidade de evolução é considerada mais importante que a flexibilidade, nesse caso a classe abstrata se sobressai.
 
 ## Polimorfismo
+
+Refere-se a capacidade de diferentes objetos responderem de diferentes maneiras a uma mesma função ou método.
+
+***"polimorfismo = muitas formas"***
+
+### Tipos de Polimorfismo
+
+#### 1. Universal
+
+* Ocorre em tempo de execução.
+
+    ##### 1.1 Inclusão
+
+    * É alcançado através da herança e interface. Permite a uma classe herdar características de outra, possibilitando o uso de uma classe base para referenciar objetos de classe derivadas.
+    * Uma variável do tipo da superclasse pode armazenar objetos da subclasse.
+
+    ```mermaid
+    classDiagram
+    direction TB
+
+    class Animal {
+        +emitirSom() void
+    }
+    <<Abstract>> Animal
+    class Cachorro {
+        +emitirSom() void
+    }
+    class Gato {
+        +emitirSom() void
+    }
+    class Pato {
+        +emitirSom() void
+    }
+
+    Animal <|-- Cachorro
+    Animal <|-- Gato
+    Animal <|-- Pato
+    ```
+
+    ```java
+    public abstract class Animal {
+        public Animal() {};
+        public abstract void emitirSom();
+    }
+    public class Cachorro extends Animal {
+        public Cachorro() {};
+        public void emitirSom() {
+            System.out.println("Au au!");
+        }
+    }
+    public class Gato extends Animal {
+        public Gato() {};
+        public void emitirSom() {
+            System.out.println("Miau.");
+        }
+    }
+    public class Pato extends Animal {
+        public Pato() {};
+        public void emitirSom() {
+            System.out.println("Quack!!!");
+        }
+    }
+
+    public class Principal {
+        public static void main(String[] args) {
+            Animal x, y; 
+            x = new Cachorro();
+            x.emitirSom();
+            y = new Gato();
+            y.emitirSom();
+            // x e y são referências da classe Animal, x apontando para um objeto do
+            // tipo Cachorro e y para um objeto do tipo Gato.
+        }
+    }
+    ```
+    
+    #### 1.2. Paramétrico
+
+    * Permite que funções ou classes sejam escritas genericamente, de modo que possam manipular tipos de dados que são especificados apenas no momento da utilização.
+    * Origem no Casting(conversão de tipos), mas elimina sua necessidade.
+    * Implementado em Java por meio do Generics, que permite que uma classe trabalhe com uma grande varieadade de tipo (um de cada vez).
+
+    ```java
+    Produto tv = new Televisao();
+    Produto cel = new Celular();
+
+    // Qualquer subclasse de Produto poderá ser armazenado no objeto carrinho
+    LinkedList<Produto> carinho = new LinkedList<Produto>();
+    
+    carrinho.add(tv);
+    carrinho.add(cel);
+
+    Produto p = carrinho.iterador().next();
+    ```
+
+    **Criando e utilizando classe com Generics**
+
+    ```java
+    public class BasicGeneric <A> {
+        // A é o parâmetro da classe (não pode ser do tipo primitivo)
+        private A dado;
+
+        public A getDado() {
+            return this.dado;
+        }
+        public void setDado(A dado) {
+            this.dado = dado;
+        }
+    }
+    ```
+
+    ```java
+    String nome = "Laura";
+
+    // Instância da classe BasicGeneric "presa" ao tipo String
+    BasicGeneric<String> bG = new;
+    BasicGeneric<String>();
+
+    bG.setDado(nome);
+
+    String nome1 = bg.getDado(); // Sem casting
+    ```
+
+    * Tipo Generic do Java são restritos a objetos e **não** funcionarão com tipos primitivos.
+    * Evite usar instâncias de classe Generics com o tipo Object, isso permite incluir qualquer tipo de objeto na lista. 
+        `LinkedList<Object> lista = new LinkedList<Object>();`
+    
+#### 2. Ad Hoc
+
+* Ocorre em tempo de compilação.
+
+    ##### 2.1. Sobrecarga
+
+    * Métodos com mesmo nome e assinaturas (lista de parâmetros) diferentes podem ter comportamentos totalmente distintos.
+
+    ```java
+    public class MathOperations {
+        int soma(int a, int b) {
+            return a + b;
+        };
+        double soma(double a, double b) {
+            return a + b;
+        };
+        int soma(int a, int b, int c) {
+            return a + b + c;
+        };
+    }
+    ```
+
+    ##### 2.2. Coerção
+
+    * Também conhecida como *casting* (conversão automática de tipos de dados), consiste em forçar um objeto a assumir um tipo específico.
+    * Útil quando se deseja definir um modelo genérico que será redefinido ou especializado para outras classes de objetos. Para isso, o modelo deve ser construído a partir de tipos abstratos como interfaces e classes abstratas.
+
+    ##### Tipos de coerção:
+    
+    1. **Upcasting** 
+        * Converter um tipo derivado (subclasse) para um tipo base (superclasse).
+        * Sempre seguro e automático.
+
+        ```java
+        public class Animal {
+            void emitirSom() {
+                System.out.println("AAAAAAAAA");
+            }
+        }
+        
+        public class Cachorro extends Animal {
+            @Override
+            void emitirSom() {
+                System.out.println("Auuu");
+            }
+        }
+
+        public class Principal {
+            public static void main(String[] args) {
+                Cachorro meuDog = new Cachorro();
+                Animal meuAnimal = meuDog; // Upcasting
+                meuAnimal.emitirSom(); // output: Auuu
+            }
+        }
+        ```
+
+    2. **Downcast**
+        * Converter um tipo base (superclasse) para um tipo derivado (subclasse).
+        * Sempre explícita e pode ser insegura, pois uma superclasse pode não necessariamente ser uma instância de uma subclasse específica.
+        * É feito usando o operador `(Type)` de casting.
+
+        ```java
+        Animal meuAnimal = new Dog();
+        Cachorro meuDog = (Dog) meuAnimal; // Downcast
+        meuDog.emitirSom();
+        ```
+
+        * Se o objeto for da subclasse, a coerção será válida, mas se não for, ocorrerá um erro.
+        * Para proteger o código dessa incerteza, deve-se usar o operador especial **instanceof**.
+
+        ```java
+        Animal meuAnimal = new Dog();
+        if (meuAnimal instanceof Cachorro) {
+            Cachorro meuDog = (Cachorro) meuAnimal;
+            meuDog.emitirSom();
+        }
+        ```
+
+## Coleções
+
+
+
+
+
+
+
 
 
 ---
