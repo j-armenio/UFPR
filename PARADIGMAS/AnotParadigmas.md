@@ -1055,8 +1055,146 @@ Refere-se a capacidade de diferentes objetos responderem de diferentes maneiras 
 
 ## Coleções
 
+```mermaid
+classDiagram
+direction TB
 
+class Collection { }
+<<Interface>>Collection
+class List { }
+<<Interface>>List
+class Set { }
+<<Interface>>Set
+class ArrayList { }
+class LinkedList { }
+class SortedSet { }
+<<Interface>>SortedSet
+class HashSet { }
+class TreeSet { }
 
+Collection <|-- List
+Collection <|-- Set
+List <|.. ArrayList
+List <|.. LinkedList
+Set <|-- SortedSet
+Set <|.. HashSet
+SortedSet <|.. TreeSet
+```
+
+* Implementam estrutura de dados que armazenam qualquer tipo de objeto.
+* Não aceitam tipos primitivos como elementos, apenas instâncias de objetos.
+* Exemplos: List (ArrayList, LinkedList), Set (HashSet, TreeSet).
+
+#### Classes Wrapper
+
+* Para guardar tipos primitivos devemos usar as classes wrapper(ex: Integer, Double, Float).
+* Permite a utilização de tipos primitivos como objetos.
+
+| Classe Wrapper | Tipo primitivo |
+|       ---      |       ---      |
+| Boolean        | boolean        |
+| Byte           | byte           | 
+| Character      | char           |
+| Short          | short          | 
+| Integer        | int            |
+| Long           | long           |
+| Float          | float          |
+| Double         | double         |
+
+#### Listas
+
+* Uma Collection que pode conter elementos duplicados.
+* Mantém uma ordenação específica entre os elementos.
+* Resolve os problemas em relação ao *array* (busca, remoção, tamanho, ...).
+* É implementada por várias classes.
+
+    1. **ArrayList**
+        * Implementado como um array.
+        * Acesso sequencial e aleatório extremamente rápido.
+        * Pode ser redimensionado dinamicamente.
+        * **Não** é uma lista de arrays, é uma lista de objetos.
+        * Internamente, usa um array (encapsulado) para armazenar dados.
+        * O ArrayList não remove elementos duplicados.
+        * Começa com um tamanho fixo, que vai aumentando conforme necessário.
+
+        ```java
+        ArrayList<T> a = new ArrayList<T>();
+        ArrayList<T> b = new ArrayList<T>(20); // 20 é a capacidade inicial da lista
+
+        // É possível abstrair a partir da interface List
+        List<T> c = new ArrayList<T>();
+        Collection<T> d = new ArrayList<T>();
+        ```
+
+    ##### Métodos da interface List
+    
+    * **add()** pode ou não receber como parâmetro a posição na lista que desejamos que ele ocupe. 
+
+    ```java
+    Pessoa P = new Pessoa("joao", "joao@gmail.com");
+    ArrayList<Pessoa> a = new ArrayList<Pessoa>();
+    a.add(p); OU a.add(0, p);
+    ```
+
+    * **remove()**: informar a posição da lista a remover o elemento
+    `a.remove(int indice);`
+
+    * **get()**: ler os dados da lista
+    `Pessoa p1 = a.get(int indice);`
+
+    * **size()**: tamanho (número de elementos da lista)
+    `int tamanho = a.size();`
+
+    * **iterator()**: percorrer e acessar os elementos de uma coleção.
+
+    ```java
+    Iterator<String> i = a.iterator();
+    while (i.hasNext()) {
+        Pessoa pessoa = i.next();
+        System.out.println(pessoa.getNome());
+    }
+    ```
+    O *enhanced-for* é uma versão simplificada do laço também usada para percorrer coleções.
+
+    ```java
+    Iterator<String> i = a.iterator();
+    for (Pessoa pessoa: a) {
+        System.out.println(pessoa.getNome());
+    }
+    ```
+
+    1. **LinkedList**
+        * Lista encadeada.
+        * Pode ser instanciado usando o construtor com e sem parâmetro.
+
+        ```java
+        LinkedList<T> lista = new LinkedList<T>();
+        LinkedList<T> lista = new LinkedList<T>(int x); // x é a capacidade inicial da lista
+        ```
+
+        * Além de implementar os métodos da interface List (add, remove, get, etc) apresenta métodos para acessar o **início** ou **fim** da lista.
+
+        ```java
+        lista.add(objeto);      // a lista gerencia onde colocar o elemento
+        lista.addFirst(objeto); // adicionado ao inicio da lista
+        lista.addLast(objeto);  // adicionado ao final da lista   
+
+        lista.get(int i);       // recupera elemento de indice i
+        lista.getFirst();       // recupera elemento da primeira posicao
+        lista.getLast();        // recupera elemento da ultima posicao
+
+        lista.remove(int i);    // remove elemento de indice i
+        lista.removeFirst();    // remove elemento da primeira posicao
+        lista.removeLast();     // remove elemento da ultima posicao
+        ```
+
+##### LinkedList x ArrayList
+
+As diferenças se baseiam no custo de inserção, remoção e iteração da lista.
+* LinkedList é mais rápida para inserção e iteração, sem remover ou alterar.
+* ArrayList é melhor se você precisa de acesso com índice (acesso aleatório), ou seja, quando você usa o método get(i).
+
+#### Set (Conjunto)
 
 
 
