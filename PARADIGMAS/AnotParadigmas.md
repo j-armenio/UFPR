@@ -1292,5 +1292,68 @@ public class Principal {
 }
 ```
 
-## Padrão de Projeto
+## Padrão de Projeto 
 
+* *Design patterns* são padrões universais de soluções para problemas recorrentes e conhecidos no desenvolvimento de software.
+* Classificados em três categorias:
+    1. de criação: abstraem o processo de criação de objetos a partir da instanciação de classes;
+    2. estruturais: tratam da forma como as classes e objetos estão organizados para a formação de estruturas maiores;
+    3. comportamentais: caracterizam como as classes e objetos interagem e distribuem responsabilidades na aplicação.
+
+### Factory Method
+* Padrão de criação.
+* Oculta a lógica de instanciação do código cliente (desacopla o código que cria o objeto do código que utiliza o objeto).
+* Permite a criação de novas *factories* sem a necessidade de alterar o código já escrito.
+* Definir uma interface para criar um objeto, mas deixas as subclasses deciderem que classe instanciar.
+* Permitir a uma classe adiar a instanciação para as subclasses.
+
+```mermaid
+classDiagram
+direction TB
+
+class Creator { 
+    +factoryMethod(): Product
+    +outros_métodos
+}
+<<Abstract>> Creator
+class ConcreteCreator {
+    -atributos
+    +factoryMethod(): Product
+    +outros_métodos
+}
+
+Creator <|-- ConcreteCreator
+```
+
+* **factoryMethod()** é um método que cria objetos e os retorna.
+
+```java
+public class AutomovelFactory extends VeiculoFactory {
+    public Veiculo criarVeiculo(String tipo, String modelo) {
+        if (tipo == "carro")
+            return new Carro(modelo);
+        else if (tipo == "moto")
+            return new Moto(modelo);
+        else
+            return null;
+    }
+}
+```
+
+### Adapter
+
+* Padrão estrutural.
+* Evita a dependência com códigos externos.
+
+### Observer
+
+* Padrão comportamental.
+* Define uma depêndencia um para muitos entre objetos, de modo que, quando um objeto muda de estado, todos os seus dependentes são automaticamente notificados e atualizados.
+* Implementado com dois tipos de objetos: objetos obserados (*observable*) e objetos observadores (*observer*).
+* *Observable* possuem referência para todos seus *observer*.
+* Observados podem adicionar, remover e notificar todos observadores quando seu estado muda.
+* Observadores devem ter meios para receber notificações de seu observado.
+
+
+Objeto observado
+Observador Observador Observador Observador Observador -> dependentes
