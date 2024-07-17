@@ -1196,14 +1196,45 @@ As diferenças se baseiam no custo de inserção, remoção e iteração da list
 
 #### Set (Conjunto)
 
+* É uma *Collection* que não contém elementos duplicados.
+* Os elementos não possuem ordem conhecida.
+
+##### SortedSet
+* Agrega o conceito de **ordenação** ao conjunto.
+
+    1. **TreeSet**
+    * Armazena os elementos em uma **árvore**.
+    2. **HashSet**
+    * Armazena os elementos em uma **tabela hash**
+
+    Métodos:
+    * add, remove, contains, isEmpty, etc
+
+    Exemplo:
+    ```java
+    import java.util.*;
+    public class Principal{
+        public static void main(String[] args) {
+            HashSet<String> conj1 = new HashSet<String>();
+            TreeSet<String> conj2 = new TreeSet<String>();
+
+            conj1.add("São Paulo");
+            conj1.add("Paraná");
+            conj1.add("Santa Catarina");
+            conj2.add("São Paulo");
+            conj2.add("Paraná");
+            conj2.add("Santa Catarina");
+
+            Iterator<String> i = conj1.iterator();
+            Iterator<String> j = conj1.iterator();
+            while (i.hasNext() && j.hasNext()) {
+                String estado1 = i.next();
+                String estado2 = j.next();
+                System.out.println(estado1, estado2);
+            }
+        }
+    }
+    ```
 
 
 
-
-
----
-
-### Dúvidas
-* Classes abstratas devem ter construtores?
-* Dentro de uma classe, funções internas, podem usar o *this.* ou devem usar o get/set?
-* Devo usar get/set em construtores?
