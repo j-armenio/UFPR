@@ -855,6 +855,13 @@ Refere-se a capacidade de diferentes objetos responderem de diferentes maneiras 
 
 ### Tipos de Polimorfismo
 
+```mermaid
+flowchart TB
+    Polimorfismo --> Universal & AdHoc
+    Universal --> Inclusao & Paramétrico
+    AdHoc --> Sobrecarga & Coerção
+```
+
 #### 1. Universal
 
 * Ocorre em tempo de execução.
