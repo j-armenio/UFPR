@@ -15,6 +15,8 @@
 11. [Classe Abstrata](#classe-abstrata)
 12. [Interface](#interface)
 13. [Polimorfismo](#polimorfismo)
+14. [Coleções](#coleções)
+15. [Padrão de Projeto](#padrão-de-projeto)
 
 ## Introdução a Linguagem Java
 
@@ -1243,5 +1245,52 @@ As diferenças se baseiam no custo de inserção, remoção e iteração da list
     }
     ```
 
+#### Interface Comparable
 
+* Usada para definir a ordem natural dos objetos de uma classe.
+* É essencial para ordenação de coleções.
+
+```java
+public class Empregado implements Comparable<Empregado> {
+    private String nome;
+    private int salario;
+
+    // Construtor
+    // Métodos get/set
+    
+    // Método compareTo
+    public int compareTo(Empregado e) { 
+        if (this.salario < e.salario>)
+            return -1;
+        else if (this.salario > e.salario)
+            return 1;
+        else
+            return 0;
+    }
+}
+
+import java.util.*;
+
+public class Principal {
+    public static void main(String[] args) {
+        Empregado emp1 = new Empregado("Jose", 130);
+        Empregado emp2 = new Empregado("Ana", 110);
+        Empregado emp3 = new Empregado("Jose", 130);
+
+        Collection<Empregado> c = newTreeSet<Empregado>();
+
+        c.add(emp1);
+        c.add(emp2);
+        c.add(emp3);
+
+        Iterator<Empregado> i = c.iterator();
+        while (i.hasnext()) {
+            Empregado e = i.next();
+            System.out.println(e.getNome() + " " + e.getSalario());
+        }
+    }
+}
+```
+
+## Padrão de Projeto
 

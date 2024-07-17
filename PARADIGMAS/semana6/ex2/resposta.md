@@ -2,4 +2,4 @@ Descreva as categorias de polimorfismo que você usou no Exercício 1, indicando
 nome da categoria (sobrecarga, coerção, inclusão e/ou paramétrico), a classe em 
 que foi usada e a(s) instrução(ões) referentes a cada categoria.
 
-Os conceitos de polimorfismo usados foram a inclusão, no método calcularValorImovel()
+O conceito de polimorfismo usados foi a inclusão, quando ocorre a derivação do método calcularValorImovel().
