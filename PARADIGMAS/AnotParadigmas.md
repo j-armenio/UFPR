@@ -17,6 +17,10 @@
 13. [Polimorfismo](#polimorfismo)
 14. [Coleções](#coleções)
 15. [Padrão de Projeto](#padrão-de-projeto)
+---
+16. [Introdução ao Haskell](#introdução-ao-haskell)
+
+# Java
 
 ## Introdução a Linguagem Java
 
@@ -1357,3 +1361,169 @@ public class AutomovelFactory extends VeiculoFactory {
 
 Objeto observado
 Observador Observador Observador Observador Observador -> dependentes
+
+---
+
+# Haskell
+
+## Introdução ao Haskell
+
+### Paradigma Funcional
+
+Surgiu por volta de 1990 com objetivo de ser a primeira linguagem *puramente* funcional.
+
+#### Características
+
+1. Utiliza ***funções puras***
+    * Ao executar uma função X com a mesma entrada, sempre se obtém a mesma resposta.
+    * São funções que não apresentam efeito colateral, tudo que ela faz é retornar um valor baseado em seus argumentos.
+        * Efeito colateral: ocorre quando uma função altera algum estado global do sistema, ex: alterar uma variável global, ler entrada de dados, imprimir algo na tela.
+    * Vantagens:
+        * Se o resultado da expressão pura não for utilizado, ele não precisa ser calculado.
+        * É possível computar expressões em qualquer ordem (ou até em paralelo).
+    * Haskell deixa as impurezas (interação com usuário) para o ambiente de execução.
+    * Programação sem bugs: se compilou, o código está correto.
+
+2. Códigos curtos e declarativos
+    * Programas muito menores.
+    * O programador declara **o que** o programa faz e não como deve ser feito.
+    * Ex: a seguinte instrução não mostra:
+        * Faça um for para percorrer a lista e pegar os 100 primeiros elementos.
+        * Faça um if para selecionar os números naturais que são primos.
+
+    ```haskell
+    take 100[x | x <- nat, primo x]
+    ```
+
+3. Dados imutáveis
+    * Não existe o conceito de variável, apenas nomes e declarações (constantes). Uma vez declarado, não pode sofrer alterações.
+
+4. Funções recursivas
+    * Com a imutabilidade, o conceito de laços de repetição não existe. São implementados por meio de funções recursivas.
+
+    ```c
+    // Iteração
+    int x = 1;
+    for (int i = 1; i <= 10; i++)
+        x = x * 2;
+    printf("%d\n", x);
+    ```
+
+    ```haskell
+    -- Recursão
+    f 0 = 1 -- base
+    f n = 2 * f (n - 1)
+    print(f 10)
+    ```
+
+5. Avaliação preguiçosa
+    * Também conhecida como avaliação sob demanda ou *lazy evaluation*.
+    * Ao aplicar uma função, o resultado só será computado quando requisitado.
+    * Evita computação desnecessária e permite a criação de listas infinitas. `[2 * i | i <- [0..]]`
+
+6. Uso de funções lambda (anônimas) 
+    * Cálculo Lambda: conjunto de regras e símbolos que nos ajudam a fazer "coisas" com funções. Ex:
+        * Criar funções sem dar um nome específico (funções anônimas)
+        * Criar funções que retornam outras funções (funções de alta ordem)
+        * Transformar uma função que recebe vários argumentos em uma sequência de funções que recebe um único argumento (currying)
+    * A letra lambda (λ) é usada para definir funções.
+    * Ex: Função lambda que soma dois números
+
+    ```haskell
+    -- Le-se: a funcao lambda recebe dois argumentos e retorna a soma deles
+    (λx.λy.x+y)
+
+    -- Aplicando a funcao lambda aos valores 3 e 5
+    ((λx.λy.x+y)3 5)
+    -- Resultado: 3 + 5 = 8
+    ```
+
+    Sintaxe do Haskell troca:
+    * **λ por \\**
+    * **. por ->**
+
+    Logo,
+    * `(λx.λy.x+y)` vira `(\x -> \y -> x+y)`
+
+A plataforma Haskell é formada por:
+* Compilador GHC (The Glasgow Haskelll Compiler)
+    * Compilador de linha de comando
+    * Ambiente iterativo GHCi
+* Várias bibliotecas prontas para uso
+
+#### Módulos
+
+* Programas em Haskell são organizados em módulos, que é formado por um conjunto de definições (tipos, funções, etc.).
+* O módulo principal carrega outros módulos para fazer algo de útil.
+
+```haskell
+module Main where
+main :: IO ()
+main = do
+    putStrLn "Hello world"
+```
+
+#### Biblioteca Padrão
+
+* É formada por um conjunto de módulos desponíveis automaticamente para um todos os programas em Haskell.
+* A biblioteca Prelude.hs ofere um grande número de funções definidas através do módulo Prelude, que é importado automaticamente em todos módulos de uma aplicação Haskell.
+* Definições do módulo Prelude podem ser listadas no GHCI usando *:browse Prelude*.
+* Oferece funções aritméticas, para manipulação de listas e outras estruturas de dados.
+* Exemplos:
+```haskell
+-- sqrt :: a -> a
+sqrt 25
+> 5
+
+-- mod :: a -> a -> a
+mod 10 3
+> 1
+
+-- length: calcula o tamanho da lista
+length [1, 2, 3, 4, 5]
+> 5
+ 
+-- !!: seleciona o n-ésimo elemento de uma lista
+[1, 2, 3, 4, 5] !! 2
+> 3
+
+-- take: seleciona os primeiros n elementos de uma lista
+take 3 [1, 2, 3, 4, 5]
+> [1, 2, 3]
+
+-- drop: remove os primeiros n elementos de uma lista
+drop 3 [1, 2, 3, 4, 5]
+> [4, 5]
+```
+
+#### Aplicação de Função
+
+Matemática: `f(a,b) + cd`
+Haskell: `f a b + c * d`
+
+* Formato das declaração de funções:
+    `<nome><lista de parâmetros> = <expressão>`
+    `multiplica x y = x * y`
+
+#### Funções em Scripts
+
+* É possível a criação de módulos com suas funções, com a extensão ".hs" (Haskelll Script).
+
+```haskell
+module Operacoes where
+multiplica x y = x * y
+soma x y = x + y
+```
+
+* Se importa funções usando *import* 
+ 
+```haskell
+module Main where
+import Operacoes
+
+main :: IO()
+main = do
+    let resp = soma 20 50
+    print resp
+```
+
