@@ -1526,4 +1526,104 @@ main = do
     let resp = soma 20 50
     print resp
 ```
+##### Convenções
+
+* Função: iniciar com letra minúscula: `soma, quadrado', maiorQue, calcula_Area`
+* Parâmetros: todas letras minúsculas: `x, num1, valor_2`
+
+#### Tipos
+
+**1. Numéricos**
+
+* Int: valores inteiros de precisão fixa, de -2<sup>63</sup> até 2<sup>63</sup>-1 : `750`
+* Integer: valores inteiros de precisão arbitrária, ilimitado : `7543621365432`
+* Float: valores em ponto-flutuante de precisão simples (32 bits), em média, números até 7 dígitos : `4.56`
+* Double: valores em ponto-flutuante de precisão dupla (64 bits), em média, números com quase 16 dígitos : `7842.5`
+
+**2. Lógico**
+
+* Bool: contém os valores lógicos True e False : `True, False`
+
+**3. Caractere**
+
+* Char: contém todos caracteres Unicode. : `B, \n`
+ 
+**3. Lista**
+
+* [t]: sequência de valores do mesmo tipo : `['O', 'L', 'A'] [Char], [1, 2, 3, 4] [Int]`
+* String: sequência de caracteres delimitados por aspas duplas, sinônimo de [Char] : `UFPR`
+
+**4. Tupla**
+
+* (t<sub>1</sub>...t<sub>2</sub>): sequência de valores possivelmente de tipos diferentes. Não existe tupla de um único componente : `('O', 'I'), ("Joel", 22, 'M')`
+
+#### Assinaturas de Tipo
+
+* Qualquer expressão pode ter seu tipo anotado.
+```haskell
+'a'             :: Char
+"joao da silva" :: String
+45              :: Int
+2 > 7           :: Bool
+```
+
+* :type (:t) exibe o tipo de uma expressão
+
+#### Tipos e Funções
+
+* Sinal de igual **=** representa definição.
+
+```haskell
+x :: Int
+x = 3
+```
+
+* Pode ser interpretado como: *"x é uma função que não recebe parâmetros e retorna um inteiro constante"*
+* Ao definir uma função, seu tipo pode ser anotado.
+
+```haskell 
+x :: Int -> Float ->  Bool -> Int
+{-
+    "x" é o nome da função
+    o último tipo especificado identifica o tipo de retorno
+    os três tipos do meio são os tipos dos argumentos
+-}
+
+module Operacoes where
+
+multiplica :: Int -> Int -> Int
+multiplica x y = x * y
+```
+
+* Algumas funções podem operar sobre vários tipos de dados. Por exemplo, a função **head** recebe uma lista e retorna o primeiro elemento, não importa o tipo do elemento.
+
+```haskell
+head ['B', 'O', 'L', 'A']
+> B
+head ['1', '2', '3', '4']
+> 1
+```
+#### Variáveis de Tipo
+
+* Quando um tipo pode ser qualquer tipo da linguagem, ele é representado por uma variável de tipo.
+* Na função *head*, *a* representa o tipo dos elementos da lista passados como argumento. 
+`head :: [a] -> a`
+* Devem começar com letra minúscula e são geralmente a, b, c, etc.
+ 
+#### Função Polimórfica
+
+* Funções em que seu tipo contém uma ou mais variáveis de tipo.
+* Muitas funções definidas no Prelude são polimórficas.
+
+```haskell
+fst :: (a, b) -> a -- seleciona o 1 item de um par
+snd :: (a, b) -> b -- seleciona o 2 item de um par
+```
+
+#### Checagem de Tipos
+
+* Haskell é uma linguagem fortemente tipada, com um sistema de tipos avançado.
+* Todos erros possíveis de tipo são encontrados em tempo de compilação (tipagem estática).
+
+
 
