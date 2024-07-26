@@ -19,6 +19,8 @@
 15. [Padrão de Projeto](#padrão-de-projeto)
 ---
 16. [Introdução ao Haskell](#introdução-ao-haskell)
+17. [Condicionais e Recursão](#condicionais-e-recursão)
+18. [Lista e Tupla](#lista-e-tupla)
 
 # Java
 
@@ -1624,6 +1626,187 @@ snd :: (a, b) -> b -- seleciona o 2 item de um par
 
 * Haskell é uma linguagem fortemente tipada, com um sistema de tipos avançado.
 * Todos erros possíveis de tipo são encontrados em tempo de compilação (tipagem estática).
+
+## Condicionais e Recursão
+
+Estruturas condicionais podem ser feitas de duas formas:
+1. Usando **if-then-else**
+
+    ```haskell
+    maior :: Int -> Int -> Int
+    maior a b = if a >= b
+        then a
+        else b
+    ```
+
+    * Pode ser escrito em uma única linha.
+    * A cláusula else não é opcional, omiti-la é um erro.
+    * Uso dos parênteses na condição é opcional.
+
+2. Usando **guardas** '|'
+
+    ```haskell
+    maiorG :: Int -> Int -> Int
+    maiorG a b
+        | a >=b = a
+        | b > a = b
+        ou
+        | otherwise = 0
+    ```
+
+    * Pode ou não conter a palavra *otherwise* como a última condição em uma expressão condicional.
+    * Com guardas, a primeira expressão avaliada como verdadeira determina o valor da função.
+    * Identação é relevante, linhas de código no mesmo nível pertencem a um mesmo bloco.
+    * O uso do **where** permite a definição de "variáveis locais", por exemplo:
+
+    ```haskell
+    -- Função que verifica a possibilidade de existência de um triângulo
+    podeTri :: Int -> Int -> Int -> Bool
+    podeTri a b c
+        | somaAB > c && somaAC > b && somaBC > a = True
+        | otherwise = False
+        where
+            somaAB = a + b
+            somaAC = a + c
+            somaBC = b + c
+    ```
+
+### Função Recursiva
+
+Em Haskell, como não é possível controlar o estado do programa ou de variáveis de controle, não existe estrutura de repetição. Toda repetição deve ser feita por meio de recursão.
+
+Uma função recursiva é formada por duas partes:
+* Caso base
+* Passo recursivo
+
+Exemplos:
+
+* Calcular o fatorial de um número
+
+```haskell
+-- Usando gurdas
+fatorialG :: Int -> Int
+fatorialG n
+    | n == 0 = 1                 -- Caso base
+    | n > 0 = n * fatorial (n-1) -- Passo recursivo
+
+-- Sem guardas
+fatorial :: Int -> Int
+fatorial 0 = 1 
+fatorial n = n * fatorial (n-1)
+```
+
+* Calcular a potência de x^n, sendo x > 0 e n >= 0
+
+```haskell
+-- Usando gurdas
+potG :: Int -> Int -> Int
+potG x n
+  | n == 0 = 1
+  | n > 0 = x * potG x (n - 1)
+
+-- Sem gurdas
+pot :: Int -> Int -> Int
+pot x 0 = 1
+pot x n = x * pot x (n - 1)
+```
+
+* Calcular o somatório em um intervalo [0, y], sendo y números inteiros e y > 0
+
+```haskell
+-- Usando gurdas
+somatorioG :: Int -> Int
+somatorioG n
+  | n == 0 = 0
+  | otherwise = n + somatorio (n - 1)
+
+-- Sem gurdas
+somatorio :: Int -> Int
+somatorio 0 = 0
+somatorio n = n + somatorio (n - 1)
+```
+
+## Lista e Tupla
+
+### Lista
+
+* Coleção de elementos do mesmo tipo.
+* Declaração da lista: 
+
+```haskell
+listanum :: [Int]
+```
+
+* Definição dos elementos:
+
+```haskell
+listanum = [1,2,3,4,5]
+listachar = ['a', 'b', 'c', 'd']
+listavazia = []
+```
+
+* Listas de listas:
+```haskell
+listadelista = [[1,2],[3,4],[5,6]] -- [[Int]]
+```
+
+* Listas preenchidas automaticamente, por meio de reconhecimento de padrões
+
+```haskell
+lista1 = [1 .. 10]    -- [1,2,3,4,5,6,7,8,9,10]
+lista2 = [1, 3 .. 10] -- [1,3,5,7,9]
+lista3 = [10, 8 .. 0] -- [10,8,6,4,2,0]
+```
+
+* Existem dois operadores básicos para construção e manipulação de listas
+    1. Operador interfixado **":"** : usado para construção de uma lista, elemento por elemento 
+    `<elemento>:<lista>`, tendo <elemento> adicionado na primeira posição da <lista>.
+
+        ```haskell
+        > 8:[]
+        [8]
+
+        > 4:[6, 8]
+        [4, 6, 8]
+
+        > 6: 8: []
+        [6, 8]
+        ```
+
+    2. Operador de concatenação **"++"** : usado para *concatenar* duas listas. `<lista>++<lista>`
+
+        ```haskell
+        > [1, 2, 3] ++ [4, 5, 6]
+        [1, 2, 3, 4, 5, 6]
+
+        > pares = [2, 4 .. 10]
+        > impares = [1, 3 .. 11]
+        > pares ++ impares
+        [2, 4, 6, 8, 10, 1, 3, 5, 7, 9, 11]
+        ```
+
+* No haskell, uma lista é dividida em cabeça (*head*) e cauda (*tail*).
+    * head: primeiro elemento
+    * tail: todos elementos da lista com exceção do primeiro
+
+```haskell
+-- Funções do Prelude
+> head [2,4,6,8,10] = 2
+> tail [2,4,6,8,10]
+[4,6,8,10]
+```
+
+#### Lista e Função Recursiva
+
+Em geral, usa-se:
+* Lista vazia
+* Lista com cabeça (h) seguida de cauda (t)
+
+Para representar uma lista com cabeça e cauda utiliza-se ":", ou seja, [1,2,3] pode ser escrito como 1: [2,3]
+
+
+
+
 
 
 
