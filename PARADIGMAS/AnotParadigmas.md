@@ -1804,9 +1804,136 @@ Em geral, usa-se:
 
 Para representar uma lista com cabeça e cauda utiliza-se ":", ou seja, [1,2,3] pode ser escrito como 1: [2,3]
 
+Exemplos:
 
+1. Função que calcula o **comprimento** de uma lista formada por inteiros
 
+```haskell
+comp :: [Int] -> Int
+comp [] = 0
+comp (h:t) = 1 + comp t
 
+> lista1 = [1 .. 20]
+> comp lista1
+20
 
+>lista2 = [2, 4 .. 100]
+> comp lista2
+50
+```
 
+2. Recebe uma lista de inteiros e devolva outra com valores da primeira elevados ao cubo
 
+```haskell
+-- calcula o cubo de um valor
+cubo :: Int -> Int
+cubo x = x * x * x
+
+-- calcula o cubo dos elementos da lista
+aoCubo :: [Int] -> [Int]
+aoCubo [] = []
+aoCubo (h:t) = cubo h : aoCubo t
+
+>lista3 = [1,2,3,4,5,6,7,8,9]
+>aoCubo lista3
+[1, 8, 27, 64, 125, 216, 343, 512, 729]
+```
+3. Verifica se uma string possui o caractere informado
+
+```haskell
+possuiChar :: [Char] -> Char -> Bool
+possuiChar [] ch = False
+possuiChar (cabeca:cauda) ch
+    | cabeca == ch = True
+    | otherwise = possuiChar cauda ch
+
+>possuiChar "Joao" 'a'
+True
+```
+#### Listas por Compreensão
+
+É uma forma de gerar listas de acordo com um critério, ou seja, é uma lista definida por um "gerador":
+
+```haskell
+> numPares = [2*x | x <- [0..10]]
+> numPares
+[0,2,4,6,8,10,12,14,16,18,20]
+```
+
+* Lê-se: *numPares é uma lista 2x, tal que x representa cada um dos elementos de uma lista que vai de 0 a 10.*
+
+Geração de uma lista infinita
+`listaInfinita = [2*x | x <- [0, 1..]]`
+
+* Por causa da "**avaliação preguiçosa**", a lista só realiza o cálculo até onde for necessário.
+
+É possível colocar **condições** no gerador de listas
+`[x | x <- [1..n], mod n x == 0]`
+
+```haskell
+-- Retorna uma lista com os 10 primeiros multiplos de n
+multiplos :: Int -> [Int]
+multiplos n = [n*x | x <- [1..10]]
+```
+
+#### Quicksort
+
+Usando **listas por compreensão** e **concatenação**, é possível implementar o algoritmo de ordenação Quicksort.
+
+Passos do algoritmo:
+
+1. Escolhe um elemento do vetor (pivô)
+2. Particiona o vetor de maneira que todos elementos anteriores ao pivô sejam menores que ele, e todos posteriores sejam maiores
+3. Ordena recursivamente os vetores com elementos menores e maiores
+
+* **Caso base**: são os vetores de tamanho 0 ou 1, pois já se encontram ordenados.
+* **Passo recursivo**: a cada chamada, um elemento é colocado na posição correta do vetor, e não será mais manipulado no passo seguinte.
+
+```haskell
+qsort :: [Int] -> [Int]
+qsort [] = []
+qsort (h:t) = qsort[y | y <- t, y < h>]   -- < pivô
+            ++[h]                         -- o próprio pivô
+            ++ qsort[y | y <- t, y >= h]  -- > pivô
+```
+
+### Tuplas
+
+* Coleção de valores que podem ou não ser de tipos diferentes.
+* Os valores são colocados entre parênteses e separados por vírgulas. `("Maria", 22)`
+* A ordem dos elementos importa. `(27, "José") != ("José", 27)`
+* Quando a tupla possui apenas dois elementos, ela é chamada de "par" ou "2-upla".
+* Algumas funções do Prelude só podem ser usadas com 2-uplas:
+    * **fst**: acessa o primeiro elemento de um par
+    * **snd**: acessa o segundo elemento de um par
+
+Exemplo de uso:
+
+* Função recursiva que recebe uma lista de números inteiros e retorna uma tupla contendo a quantidade de elementos pares e a quantidade de elementos ímpares presentes na lista.
+
+```haskell
+contar :: [Int] -> (Int, Int)
+contar [] = (0, 0)
+contar (h:t)
+    | mod h 2 == 0 = (pares + 1, impares)
+    | otherwise = (pares, impares + 1)
+    where
+        (pares, impares) = contar t
+
+> contar [1,2,3,4,5,6,7]
+(3,4)
+```
+
+##### Type
+
+Permite a ciração de um "apelido" para um tipo já existente, não cria um novo tipo.
+
+```haskell
+type NomeAluno = String
+type mediaNota = Int
+type Aluno = (NomeAluno, MediaNota)
+type Turma = [Aluno]
+
+aprovados :: Turma -> Int -> [NomeAluno]
+aprovados tma nota = [nome | (nome, media) <- tma, meda >= nota]
+```
