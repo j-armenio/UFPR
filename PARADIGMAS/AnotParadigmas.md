@@ -21,6 +21,7 @@
 16. [Introdução ao Haskell](#introdução-ao-haskell)
 17. [Condicionais e Recursão](#condicionais-e-recursão)
 18. [Lista e Tupla](#lista-e-tupla)
+19. [Casamento de Padrões](#casamento-de-padrões)
 
 # Java
 
@@ -1937,3 +1938,7 @@ type Turma = [Aluno]
 aprovados :: Turma -> Int -> [NomeAluno]
 aprovados tma nota = [nome | (nome, media) <- tma, meda >= nota]
 ```
+
+## Casamento de Padrões
+
+
