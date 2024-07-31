@@ -22,6 +22,7 @@
 17. [Condicionais e Recursão](#condicionais-e-recursão)
 18. [Lista e Tupla](#lista-e-tupla)
 19. [Casamento de Padrões](#casamento-de-padrões)
+20. [Funções de Alta Ordem](#funções-de-alta-ordem)
 
 # Java
 
@@ -2028,7 +2029,7 @@ map :: (a -> b) -> [a] -> [b]
 > map (True &&) [True, False]
 ```
 
-#### Filter 
+#### Filter
 
 ```haskell
 filter :: (a -> Bool) -> [a] -> [a]
