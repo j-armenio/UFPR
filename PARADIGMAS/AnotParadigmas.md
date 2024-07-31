@@ -1941,4 +1941,141 @@ aprovados tma nota = [nome | (nome, media) <- tma, meda >= nota]
 
 ## Casamento de Padrões
 
+Não entendi oque é o casamento de padrões...
+
+### Padrão Curinga
+
+* O padrão curinga **"_"** é usado para represnetar dados indefinidos que não estão sendo utilizados pelo programa.
+
+* É usado muitas vezes como alternativa para estruturas condicionais muito grandes.
+
+```haskell
+-- Exemplo com guardas:
+f1 :: Int -> Int -> Int -> Int
+f1 x y z | x == 1 = 10
+         | y == 2 = 20
+         | z == 3 = 30
+         | otherwise = 0
+
+-- Exemplo sem guardas:
+f1 :: Int -> Int -> Int -> Int
+f1 1 _ _ = 10
+f1 _ 2 _ = 20
+f1 _ _ 3 = 30
+f1 _ _ _ = 0
+```
+
+### Funções de Alta Ordem
+
+* Funções que podem receber outra função como argumento ou retornar uma como resultado.
+* Para ilustrar, veremos duas funções de processamento de listas:
+
+    1. #### Mapeamento
+        * Recebe uma lista e aplica uma operação sobre todos elementos daquela lista.
+        * É possível implementar uma função de alta ordem que recebe uma função coomo argumento e aplica essa função em todos os elementos da lista, retornando uma outra lista.
+            * Nome de função: **mapLista**
+            * Argumento:
+                * função f do tipo (Int -> Int)
+                * lista de inteiros
+        
+        ```haskell
+        cubo :: Int -> Int
+        cubo x = x * x * x
+
+        quadrado :: Int -> Int
+        quadrado x = x * x
+
+        -- Função de Alta ordem
+        mapLista :: (Int -> Int) -> [Int] -> [Int]
+        mapLista _ [] = []
+        mapLista f (h:t) = (f h) : (mapLista f t)
+
+        -- As chamadas podem ser feitas usando:
+        > mapLista cubo [1, 2, 3, 4]
+        > mapLista quadrado [1, 2, 3, 4]
+        ```
+
+    2. #### Filtro
+        * Recebe uma função de teste e seleciona os elementos da lista que satisfazem a condição desejada.
+        
+        ```haskell
+        par :: Int -> Bool
+        par x = (mod x 2 == 0)
+
+        impar :: Int -> Bool
+        impar x = (mod x 2 == 1)
+
+        -- Função de Alta Ordem
+        filtro :: (Int -> Bool) -> [Int] -> [Int]
+        filtro _ [] = []
+        filtro f (h:t) =
+            | (f h) == True = h : (filtro f t)
+            | otherwise = filtro f t
+        
+        -- As chamadas podem ser feitas usando:
+        > filtro par [1, 2, 3, 4]
+        > filtro impar [1, 2, 3, 4]
+        ```
+
+* Existem funções próprias do Haskell para mapeamento e filtragem: **map** e **filter**.
+
+#### Map
+
+```haskell
+map :: (a -> b) -> [a] -> [b]
+
+> map (+7) [1, 2, 3]
+> map (True &&) [True, False]
+```
+
+#### Filter 
+
+```haskell
+filter :: (a -> Bool) -> [a] -> [a]
+
+> filter isDigit "123-ab4"
+> filter even [1, 8, 10, 48, 5, -3]
+```
+
+### Módulo Principal
+
+* É o ***Main.hs***.
+* Pode importar outros módulos.
+
+```haskell
+module Operacoes where
+multiplica x y = x * y
+
+---
+
+module Main where
+import Operacoes
+
+main :: IO ()
+main = do
+    putStrLn "Hello"
+```
+
+#### Função - Saída de Dados
+
+1. putStrLn: exibe uma string na saída padrão, seguida de uma nova linha
+`putStrLn "Hello"`
+
+2. print: converte um valor para uma string e exibe na saída padrão, seguida de uma nova linha
+`let numero = 42`
+`print numero`
+
+3. putStr: exibe uma string na saída padrão, sem a nova linha
+`putStr "Hello"`
+
+#### Função - Entrada de Dados
+
+1. getLine: lê a entrada digitada pelo usuário como uma string
+`nome <- getLine`
+
+2. readLn: lê a entrada digitada pelo usuário e converte automaticamente para o tipo especificado.
+`numero <- readLn :: IO Int`
+
+3. getChar: lê um caractere digitado pelo usuário.
+`letra <- getChar`
 
