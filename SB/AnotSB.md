@@ -1,96 +1,136 @@
 # Software Básico
 
-### Linux: processos
-**03/09**
----
+## 1. Tradução e Execução de Programas
 
-* Processo = programa em execução.
-* Entrega a seus programas em execução uma grande quantidade de memória virtual, podendo endereçar até 64bits (2<sup>64</sup> endereços), mas usando apenas 2<sup>48</sup> deles.
+### Linux
+* Um processo pode endereçar até 64 bits(2<sup>64</sup> endereços) de memória virtual, mas usa "somente" 2<sup>48</sup> endereços.
 
-* Modelo **ELF** (Executable and Linkable Format): 
+### Modelo ELF (Executable and Linkable Format)
+* Formato dos arquivos objeto e executáveis.
 <img src="imgs/modelo-elf.png" width="900">
 
-### Assembly Intel AMD64
-**05/09**
----
+## 2. A Seção Código e Dados
 
-#### Esqueleto de programa em Assembly
+Trata das seções *text* e *data*.
+* *text* começa no endereço virtual `0x0000 0000 0040 0000`, mas não tem um endereço de término indicado.
+* *data* não tem um endereço de início e fim especificados.
+
+### Esqueleto de programa em assembly AMD64
 
 ```c
-int main (long int argc, char **argv) {
-    return 13;
-}
+int main (long int argc, char **argv) { return 13; }
 ```
-* Retorno pode ser visto após execução com `echo $?`.
+* Compile, execute e acesse o retorno usando:
+```shell
+> gcc esqueletoC.c -o esqueletoC
+> ./esqueletoC
+> echo $? # variável de ambiente
+13
+```
 
-```nasm
-.section .data ; lista de variáveis globais do programa, sempre a primeira section
-.section .text ; antecede os comandos em Assembly
-.global _start ; símbolos que seguem devem ser conhecidos externamente
-_start:        ; rótulo do endereço da primeira instrução
+Programa equivalente em assembly:
+
+```asm
+.section .data ; variáveis globais do programa
+.section .text ; daqui seguem os comandos assembly
+.globl _start  ; _start é um rótulo que deve sempre estar no inicio do programa
+_start:  ; corresponde ao endereço da primeira instrução
     movq $60, %rax
     movq $13, %rdi
     syscall
 ```
+* A tradução de um código C para assembly não é literal.
 
-* A tradução do código **não** é literal.
-* Execute usando:
+* Comandos para gerar o executável:
 ```shell
-> as esqueletoS.s -o esqueletoS.o
-> ld esqueletoS.o -o esqueletoS
-> ./esqueleto
+> as esqueletoS.s -o esqueletoS.o # converte o programa num arquivo objeto
+> ld esqueletoS.o -o esqueletoS   # GNU linker: combina arquivos objeto e gera um executável
+> ./esqueletoS
 > echo $?
+13
 ```
 
-#### Expressões Aritméticas
+#### Detalhes importantes:
 
-##### Alguns registradores:
-0 - %rax
-1 - %rcx
-2 - %rdx
-3 - %rbx
+* `%rax`: usado para retornar valores de funções ou chamadas de sistemas. A instrução `movq $60, %rax` signifca a chamada de sistema para `exit`.
+* `%rdi`: usado para saída do valor de um programa.
 
-##### Algumas instruções:
-
-``` nasm
-movq %rax, %rbx    ; é uma função de cópia, do registrador %rax para o %rbx.
-    movq $10, %rbx ; insere a CONSTANTE 10 em %rbx
-    movq 10, %rbx  ; usa o ENDEREÇO de memória 10
-addq %rax, %rbx    ; %rbx <- %rax + %rbx
-    addq %rax, A   ; VARIÁVEL A <- %rax + A
-subq %rax, %rbx    ; %rbx <- %rax - %rbx
-```
-
-##### Exemplo de conversão:
+### Expressões Aritméticas
 
 ```c
 long int a, b;
-int main (long int argc, char **argv) {
-    a = 7;
-    b = 6; 
-    b = a + b;
+int main(long int argc, char **argv) {
+    a=7;
+    b=6;
+    b = a+b;
     return b;
 }
 ```
 
-```nasm
+```asm
 .section .data
-    A: .quad 0       ; quad/quadword reserva 64 bits, com valor inicial 0
-    B: .quad 0
+    A: .quad 0 ; reserva um espaço inteiro de 64 bits (um quadword: conjunto de 4 palavras)
+    B: .quad 0 ; o 0 é necessário para que A e B sejam colocados em endereços diferentes
 .section .text
-.global _start
+.globl _start
 _start:
     movq $7, A
     movq $6, B
     movq A, %rax
     movq B, %rbx
-    addq %rax, %rbx
-    movq $60, %rax   ; inserir $60 no %rax significa finalização do programa
+    addq %rax, %rbx ; %rbx := %rbx + %rax
+    movq $60, %rax
     movq %rbx, %rdi
     syscall
 ```
-* Os valores são passados para %rax e %rbx pois só é possível um acesso de memória por instrução, logo `addq B, A` não funciona.
 
-* Na declaração das variáveis, a inclusão de um valor é necessária para que A e B sejam colocados em endereços diferentes, mas não é possível inicializar valores ali, pois aquele valor serve apenas **alocação de dados**.
+* `%rax` é o registrador de acumulação (repetição) e que retorna chamadas de sistema. Nesse caso, é configurado para 60, que é o número da chamada de sistema para `exit`.
+* `%rdi` é o registrador usado, nesse caso, para receber o resultado do programa.
 
+> Vamos usar `gdb` para depuração!
 
+### Comandos Repetitivos
+
+Instruções assembly que permitem desviar o fluxo de execução utilizam rótulos como destino.
+
+<img src="imgs/while_repeat.png">
+
+##### Exemplo:
+
+```asm
+.section .text
+.globl _start
+_start:
+    movq $0, %rax
+    movq $10, %rbx
+loop:
+    cmpq %rbx, %rax  ; compara %rax com %rbx
+    jg fim_loop
+    add $1, %rax
+    jmp loop         ; salto incondicional para inicio do loop
+fim_loop:
+    movq $60, %rax
+    movq %rax, %rdi
+    syscall
+```
+
+O programa tem três rótulos, *_start*, *loop* e *fim_loop*.
+
+O **cmpq** compara o **segundo** argumento com o primeiro, colocando o resultado em uma flag, que contém informações sobre a última instrução executada. Esse bit guardado no registrador da flag pode ser testado, usando:
+* jg  (jump if greater)
+* jge (jump if greater or equal)
+* jl  (jump if less)
+* jle (jump if less or equal)
+* jee (jump if equal)
+* jne (jump if not equal)
+
+O comando de jump **sempre** deve ser utilizado em seguida do de comparação.
+Frequentemente se acaba utilizando a condição inversa daquela que deseja para manter a estrutura do loop, por exemplo, continuar enquanto `i <= 10`, use `jg` (menor ou igual => maior).
+
+### Comandos Condicionais
+
+Usa a mesma lógica de rótulos dos comandos repetitivos.
+
+```asm
+
+```
