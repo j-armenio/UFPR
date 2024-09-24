@@ -131,6 +131,100 @@ Frequentemente se acaba utilizando a condição inversa daquela que deseja para 
 
 Usa a mesma lógica de rótulos dos comandos repetitivos.
 
-```asm
+Exemplo:
+```c
+long int i , a ;
+int main ( long int argc , char ** argv ) {
+    i = 0;
+    a = 0;
+    while ( i <10 ) {
+        a += i;
+        i ++;
+    }
+    return a;
+}
+```
 
+```asm
+.section .data
+    A: .quad 0
+    B: .quad 0
+    
+.section .text
+.globl _start
+_start:
+    movq $4, A
+    movq $5, B
+
+    movq A, %rax
+    movq B, %rbx
+
+    cmpq %rbx, %rax
+    jle else
+
+    addq %rbx, %rax
+    movq %rax, A
+    jmp fim_if
+
+else:
+    subq %rbx, %rax
+    movq %rax, A
+
+fim_if:
+    movq A, %rax
+    movq %rax, %rdi
+    movq $60, %rax
+    syscall
+```
+
+### Vetores
+
+O  programa exemplo contém um vetor (fixo) de dados. O vetor não tem um número fixo de elementos, para isso, se usa um "sentinela", um elemento com valor fixo (no caso, 0).
+
+```c
+long int data_items[]={3, 67, 34, 222, 45, 75, 54, 34, 44, 33, 22, 11, 66, 0};
+long int i, maior;
+
+// Função que pega o maior valor de um vetor
+int main(long int argc, char **argv) {
+    maior = data_items[0];
+    i = 1;
+    while (data_items[i] != 0) { // Enquanto não chegar ao final
+        if (data_items[i] > maior)
+            maior = data_items[i];
+        i++;
+    }
+    return maior;
+}
+```
+
+```asm
+.section .data
+    I: .quad 0
+    MAIOR: .quad 0
+    DATA_ITEMS: .quad 3, 67, 34, 222, 45, 75, 54, 34, 44, 33, 22, 11, 66, 0
+
+.section .text
+.globl _start
+_start:
+    movq $0, %rdi
+    movq DATA_ITEMS(, %rdi, 8), %rbx
+    movq $1, %rdi
+
+loop:
+    movq DATA_ITEMS(, %rdi, 8), %rax
+    cmpq $0, %rax
+    je fim_loop
+    cmpq %rbx, %rax
+    jle fim_if
+    movq %rax, %rbx
+
+fim_if:
+    addq $1, %rdi
+    jmp loop
+
+fim_loop:
+    movq %rbx, %rdi
+    movq $60, %rax
+    syscall
 ```
