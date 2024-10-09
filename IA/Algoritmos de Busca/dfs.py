@@ -1,4 +1,5 @@
-# BrFS (Breadth-first Search) - Busca em Largura
+# Depth-first Search - Busca em Profundidade
+# Igual a bfs, só muda o tipo de fila
 
 from collections import deque
 
@@ -12,7 +13,6 @@ def backtrace(parent, start, end):
     path.reverse()
     return path
 
-# Retorna verdadeiro se o child esta na borda ou no explorados
 def check_border_and_explored(child, border, explored):
     # verifica fila
     for n in border:
@@ -27,18 +27,17 @@ def check_border_and_explored(child, border, explored):
     return True
 
 # Recebe o estado inicial do problema
-def bfs(problem):
+def dfs(problem):
     node = problem.initial_state
     if problem.objective_test(node):
         return [node]
     
-    border = deque([node]) # fila FIFO
+    border = [node]      # fila LIFO
     explored = set()       # conjunto de nos explorados
     parent = {}
-    n=1
 
     while border:
-        node = border.popleft()
+        node = border.pop()
         explored.add(node)
 
         for child in node.get_actions():
@@ -47,10 +46,8 @@ def bfs(problem):
 
                 if problem.objective_test(child):
                     return backtrace(parent, problem.initial_state, child)
-                border.append(child)  
-
-        if n >= 1000000:
-            print("ta paia")
-            break
+                border.append(child)
 
     return None
+
+    
