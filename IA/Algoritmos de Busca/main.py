@@ -2,6 +2,7 @@
 
 from problem import Problem, Node
 from bfs import bfs
+from ucs import ucs
 
 initial_state = Node([
     [7, 2, 4],
@@ -11,7 +12,7 @@ initial_state = Node([
 
 problem = Problem(initial_state)
 
-solution_path = bfs(problem)
+solution_path = ucs(problem)
 
 for i in solution_path:
     print(i)

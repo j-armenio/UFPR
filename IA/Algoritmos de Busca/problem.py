@@ -1,5 +1,3 @@
-import copy
-
 class Problem:
     FINAL_STATE = [
         [0, 1, 2],
@@ -57,9 +55,9 @@ class Node:
                 new_board[zero_pos[0]][zero_pos[1]] = new_board[new_i][new_j]
                 new_board[new_i][new_j] = 0
 
-                new_cost = self.cost.copy()
+                new_cost = self.cost
                 new_cost += 1
 
-                actions.append(Node(new_board, new_cost))
+                actions.append(Node(new_board))
 
         return actions
