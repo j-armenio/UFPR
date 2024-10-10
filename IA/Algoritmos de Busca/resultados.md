@@ -8,11 +8,20 @@
 || 5 | 0 | 6 |
 || 8 | 3 | 1 |
 
-##### Resultados
+##### Estado objetivo:
+
+|||||
+|--|--|--|-- |
+|| 0 | 1 | 2 |
+|| 3 | 4 | 5 |
+|| 6 | 7 | 8 |
+
+#### Resultados
 
 | Algotimo | Tempo  |
 | ---      | ---    |
 | BFS      | 52m55s |
 | UCS      |        |
 | DFS      |        |
-| IDS      |        |
+| A* (h1)  |        |
+| A* (h2)  |        |
