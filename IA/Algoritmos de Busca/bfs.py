@@ -35,7 +35,6 @@ def bfs(problem):
     border = deque([node]) # fila FIFO
     explored = set()       # conjunto de nos explorados
     parent = {}
-    n=1
 
     while border:
         node = border.popleft()
@@ -48,9 +47,5 @@ def bfs(problem):
                 if problem.objective_test(child):
                     return backtrace(parent, problem.initial_state, child)
                 border.append(child)  
-
-        if n >= 1000000:
-            print("ta paia")
-            break
 
     return None
