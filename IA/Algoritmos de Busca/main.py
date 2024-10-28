@@ -13,7 +13,7 @@ initial_state = Node([
 
 problem = Problem(initial_state)
 
-solution_path = a_star(problem)
+solution_path = ucs(problem)
 
 for i in solution_path:
     print(i)

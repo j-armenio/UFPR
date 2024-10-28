@@ -65,7 +65,7 @@ def check_border_and_explored(child, border, explored):
 def check_border_cost(child, border, problem):
     for i, (cur_cost, node) in enumerate(border):
         if node.board == child.board:
-            child_cost = node.cost + heuristic1(node, problem)
+            child_cost = node.cost + heuristic2(node, problem)
             if child_cost < cur_cost:
                 # remove nó antigo e adiciona novo
                 border[i] = (child_cost, child)
@@ -80,7 +80,7 @@ def a_star(problem):
         return [node]
 
     border = []
-    heapq.heappush(border, (node.cost + heuristic1(node, problem), node))
+    heapq.heappush(border, (node.cost + heuristic2(node, problem), node))
     explored = set()
     parent = {}
 
@@ -95,7 +95,7 @@ def a_star(problem):
         for child in node.get_actions():
             if check_border_and_explored(child, border, explored):
                 parent[child] = node
-                heapq.heappush(border, (node.cost + heuristic1(child, problem), child))
+                heapq.heappush(border, (node.cost + heuristic2(child, problem), child))
             else:
                 check_border_cost(child, border, problem)
 

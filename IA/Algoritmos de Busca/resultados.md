@@ -21,7 +21,7 @@
 | Algotimo | Tempo  |
 | ---      | ---    |
 | BFS      | 52m55s |
-| UCS      |        |
-| DFS      |        |
-| A* (h1)  |        |
-| A* (h2)  |        |
+| UCS      | 53m34s |
+| DFS      | 47m34s |
+| A* (h1)  | 14m02s |
+| A* (h2)  | 04m45s |
