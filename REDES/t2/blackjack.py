@@ -41,5 +41,6 @@ def main():
         # Sempre reenvia a mensagem que recebe
 
         send_message(transmit_socket, json.dumps(message), next_ip, next_port, player_id)
-
+        time.sleep(1)
+        
 main() 

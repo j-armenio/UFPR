@@ -19,6 +19,7 @@ def setup_sockets(player_id):
     return receive_socket, transmit_socket, next_ip, next_port
 
 def send_message(transmit_socket, message, next_ip, next_port, player_id):
+    print(f"{message}, {next_ip}, {next_port}, {player_id}")
     transmit_socket.sendto(message.encode(), (next_ip, next_port))
 
 def receive_message(receive_socket, player_id):
