@@ -7,26 +7,28 @@ def main():
     player_id = int(sys.argv[1])
     receive_socket, transmit_socket, next_ip, next_port = setup_sockets(player_id)
 
+    my_port = next_port - 1
+    print(f"MEU ENDEREÇO: \nEU ({player_id}) ESTOU LOCALIZADO EM {my_port}")
+    print("----------\n")
 
     # Player 0 inicia com o bastão e mensagem vazia
     if player_id == 0:
-        message = {
-            "Origem": player_id,
-            "Tipo": "BASTAO",
-            "Dados": "!!!BASTAO!!!"
-        }
+        # message = {
+        #     "Origem": player_id,
+        #     "Tipo": "BASTAO",
+        #     "Dados": "!!!BASTAO!!!"
+        # }
+        message = "!!!BASTAO!!!"
 
         # Primeira mensagem da execução, solta o bastão na rede
-        send_message(transmit_socket, json.dumps(message), next_ip, next_port, player_id)
-        print(f"Primeira mensagem enviada: {message['Dados']}")
+        send_message(transmit_socket, message, next_ip, next_port, player_id)
 
     # Sempre rodando, pronto para receber mensagens
     while True:
-        print("entrou no loop.")
+        print("Entrei no loop\n")
         # Recebe a mensagem e converte de volta para dicionario
-        received_data = receive_message(receive_socket, player_id)
-        message = json.loads(received_data)
-        print(f"Player {player_id}: {message['Dados']}")
+        message = receive_message(receive_socket)
+        print(f"Player {player_id}: {message}\n")
 
         # AQUI: Insere/altera/remove algo da mensagem
         
@@ -39,8 +41,8 @@ def main():
         #     send_message(transmit_socket, str(message), next_ip, next_port, player_id)
         
         # Sempre reenvia a mensagem que recebe
+        send_message(transmit_socket, message, next_ip, next_port, player_id)
 
-        send_message(transmit_socket, json.dumps(message), next_ip, next_port, player_id)
         time.sleep(1)
         
 main() 
