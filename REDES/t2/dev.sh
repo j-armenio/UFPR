@@ -10,5 +10,4 @@ tmux new-session -d -s blackjack_ring \; \
     split-window -h \; \
     send-keys 'clear' C-m 'python3 blackjack.py 3' C-m \; \
     select-layout tiled \; \
-    setw synchronize-panes on \; \
     attach-session -t blackjack_ring

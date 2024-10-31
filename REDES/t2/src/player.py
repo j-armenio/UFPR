@@ -1,30 +1,45 @@
 import socket
+import json
 
-# Configuração de IP e portas
-ports = [5001, 5002, 5003, 5004]
-local_ip = "127.0.0.1"
+PORTS = [2000, 2001, 2002, 2003]
+LOCAL_IP = "127.0.0.1"
+NEXT_IP = "127.0.0.1"
 
-# Recebe um id e retorna as informações da rede do jogador equivalente
+# Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
-    local_receive_port = ports[player_id]
-    next_ip = "127.0.0.1"
-    next_port = ports[(player_id + 1) % len(ports)] # Garante que 3 aponta para 0
+    local_receive_port = PORTS[player_id]
+    next_port = PORTS[(player_id + 1) % len(PORTS)]
 
     # Criação dos sockets de recebimento e transmissão
     receive_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    receive_socket.bind((local_ip, local_receive_port))
+    receive_socket.bind((LOCAL_IP, local_receive_port))
 
     transmit_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    return receive_socket, transmit_socket, next_ip, next_port
+    print(f"Player {player_id} localizado em {local_receive_port}\n")
+    return receive_socket, transmit_socket, NEXT_IP, next_port
 
-def send_message(transmit_socket, message, next_ip, next_port, player_id):
-    print(f"{player_id} ENVIANDO '{message}' PARA {next_port}")
-    transmit_socket.sendto(message.encode(), (next_ip, next_port))
+def send_message(transmit_socket, next_ip, next_port, message):
+    print(f"Enviando para {next_port}: {message}\n")
+    transmit_socket.sendto(json.dumps(message).encode(), (next_ip, next_port))
 
 def receive_message(receive_socket):
     data, addr = receive_socket.recvfrom(1024)
-    message = data.decode()
+    message = json.loads(data.decode())
 
-    print(f"RECEBENDO {message}")
+    print(f"Recebeu {message}\n")
     return message
+
+def player_process(player_id, money, transmit_socket, next_ip, next_port, message):
+    match message["type"]:
+        case "players-bet":
+            bet = int(input("Quanto deseja apostar?\n"))
+            message["data"][player_id] = bet
+            message["acks"][player_id] = 1
+            money = money - bet
+
+            send_message(transmit_socket, next_ip, next_port, message)
+
+            return money
+
+    return
