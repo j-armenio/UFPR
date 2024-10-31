@@ -5,6 +5,8 @@ NUM_PLAYERS = 4
 class Dealer:
     def __init__(self):
         self.bets = [None] * 4
+        self.hand = {}
+        self.deck = []
 
 # Gera um baralho embaralhado
 def generate_deck():
@@ -42,6 +44,16 @@ def dealer_process(dealer, transmit_socket, next_ip, next_port, message):
                 if bet is not None:
                     dealer.bets[i] = bet
             
-            print(f"Apostas recebidas. {dealer.bets}")
+            print(f"Apostas recebidas: {dealer.bets}")
+
+            # Dealer cria o baralho e distribui as cartas
+            dealer.deck = generate_deck()
+            player_cards = distribute_cards(dealer.deck)
+
+            message["type"] = "distribute-cards"
+            dealer.hand = player_cards[0]
+
+            message["data"] = player_cards
+            message["acks"] = [1, 0, 0, 0]
         
     return

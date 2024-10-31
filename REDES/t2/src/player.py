@@ -34,10 +34,13 @@ def player_process(player_id, money, transmit_socket, next_ip, next_port, messag
     match message["type"]:
         case "players-bet":
             bet = int(input("Quanto deseja apostar?\n"))
+            if bet > money:
+                input("Você não tem tanto dinheiro. Insira novamente:\n")
+
             message["data"][player_id] = bet
-            message["acks"][player_id] = 1
             money = money - bet
 
+            message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
 
             return money

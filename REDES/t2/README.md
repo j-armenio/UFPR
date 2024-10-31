@@ -78,7 +78,6 @@ Se o delaer ultrapassar 21 pontos, ele estoura, e todos jogadores que ainda est�
 2. Caso normal = loop de mensagens até todos jogadores precisarem dar *Stand*.
 Dealer manda mensagem perguntando quais são as ações de cada jogador.
 
-
 3. 
 
 # Tipos de mensagem
@@ -92,9 +91,11 @@ Protocolo:
     }
 
 - players-bet
-    * Conteúdo data: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
+    * Data: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
 
-- inform-players
+- distribute-cards
+    * Data: Um dicionario com as cartas de cada jogador, usando o player_id como chave
+
 - inform-blackjack
 - get-actions
 - inform-result

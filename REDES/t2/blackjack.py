@@ -3,7 +3,7 @@
 import sys
 import time
 from src.player import setup_sockets, send_message, receive_message, player_process
-from src.dealer import Dealer, generate_deck, distribute_cards, dealer_process
+from src.dealer import Dealer, dealer_process
 
 def main():
     player_id = int(sys.argv[1])
@@ -37,7 +37,10 @@ def main():
         if message["from"] == player_id: # Apenas o DEALER envia mensagens!
             dealer_process(dealer, transmit_socket, next_ip, next_port, message)
         else:
-            money = player_process(player_id, money, transmit_socket, next_ip, next_port, message)
-            print(f"Seu dinheiro atual:{money}")
+            match message["type"]:
+                case "players-bet":
+                    money = player_process(player_id, money, transmit_socket, next_ip, next_port, message)
+                    print(f"Seu dinheiro atual:{money}")
+
 
 main()
