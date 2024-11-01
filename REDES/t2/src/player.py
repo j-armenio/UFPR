@@ -13,6 +13,7 @@ class Player:
     def __init__(self):
         self.money = START_MONEY
         self.hand = {}
+        self.players_hands = {}
 
 # Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
@@ -62,6 +63,7 @@ def player_process(
 
         case "distribute-cards":
             player.hand = message["data"][str(player_id)]
+            player.players_hands = message["data"]
 
             print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]}\n")
 

@@ -97,7 +97,7 @@ Protocolo:
     * DATA: Um dicionario com as cartas de cada jogador, usando o player_id como chave
 
 - inform-turn
-    * DATA: informa quais são as cartas do Dealer. Usado quando o Dealer vira a carta dele.
+    * DATA: informa quais são as cartas do Dealer. Usado quando o Dealer desvira a carta dele.
 
 - get-actions
 - inform-result

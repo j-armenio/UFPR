@@ -45,7 +45,7 @@ def distribute_cards(deck):
     # dicionario de listas de dicionarios
     return players_cards
 
-# Verifica se algum jogador ganhou um blackjack 'natural'
+# Retorna uma lista com os jogadores que ganharam um blackjack 'natural'
 def verify_blackjack(player_hands):
     blackjack_players = []
 
@@ -58,7 +58,7 @@ def verify_blackjack(player_hands):
 
         # Ajusta a pontuação, mudando o valor dos Ases de 11 para 1, se necessário
         while points > 21 and n_ases > 0:
-            points -= 10 # Reduz 10 pontos por Ás
+            points -= 10
             n_ases -= 1
         
         # Verifica se a soma é 21 com exatamente duas cartas
@@ -67,7 +67,7 @@ def verify_blackjack(player_hands):
 
     return blackjack_players
 
-# Soma os pontos de uma mao
+# Soma os pontos de uma mao e os retorna
 def sum_points(hand):
     # calcula a soma dos pontos considerando ases como 11
     points = sum(card['points'] for card in hand)
@@ -125,11 +125,19 @@ def dealer_process(
             # Agora o dealer precisa checar se houve algum blackjack
             blackjack_players = verify_blackjack(dealer.player_hands)
 
-            # if (blackjack_players):
-            #     # dealer verifica se ele teve um blackjack
-            #     if sum_points(dealer.player_hands[str(DEALER_ID)]) >= 17:
-                    
+            # 1. CASO BLACKJACK NATURAL
+            if (blackjack_players):
+                print(f"Player que fizeram Blackjack: {blackjack_players}\n")
 
+                # Dealer desvira carta dele
+                dealer.dealer_hand = copy.deepcopy(dealer.player_hands[DEALER_ID])
+
+                while sum_points(dealer.dealer_hand) <= 17:
+                    # deve continuar puxando cartas do baralho
+                    dealer.dealer_hand.append(dealer.deck.pop)
+                
+                print(f"Mao do dealer após puxadas: {dealer.dealer_hand}\n")
+        
 
             message["acks"] = [1, 0, 0, 0]
             # send_message(transmit_socket, next_ip, next_port, message)
