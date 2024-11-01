@@ -30,7 +30,10 @@ def receive_message(receive_socket):
     print(f"Recebeu {message}\n")
     return message
 
-def player_process(player_id, money, transmit_socket, next_ip, next_port, message):
+def player_process(
+        player_id, money, hand, 
+        transmit_socket, next_ip, next_port, 
+        message):
     match message["type"]:
         case "players-bet":
             bet = int(input("Quanto deseja apostar?\n"))
@@ -44,5 +47,13 @@ def player_process(player_id, money, transmit_socket, next_ip, next_port, messag
             send_message(transmit_socket, next_ip, next_port, message)
 
             return money
+        
+        case "distribute-cards":
+            hand = message["data"].get(player_id) # Erro ta aqui
+            print(player_id)
+            print(hand)
+
+            message["acks"][player_id] = 1
+            return hand
 
     return

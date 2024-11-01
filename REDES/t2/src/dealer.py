@@ -1,4 +1,5 @@
 import random
+from src.player import send_message
 
 NUM_PLAYERS = 4
 
@@ -29,7 +30,7 @@ def generate_deck():
 def distribute_cards(deck):
     players_cards = {}
 
-    for i in range(0, NUM_PLAYERS-1):
+    for i in range(0, NUM_PLAYERS):
         # Tira duas cartas para cada jogador
         hand = [deck.pop(), deck.pop()]
         players_cards[i] = hand
@@ -37,7 +38,10 @@ def distribute_cards(deck):
     return players_cards
 
 # Função que processa a mensagem recebida
-def dealer_process(dealer, transmit_socket, next_ip, next_port, message):
+def dealer_process(
+        dealer, 
+        transmit_socket, next_ip, next_port, 
+        message):
     match message["type"]:
         case "players-bet": # Dealer processa as apostas do 1 round
             for i, bet in enumerate(message["data"]):
@@ -52,8 +56,11 @@ def dealer_process(dealer, transmit_socket, next_ip, next_port, message):
 
             message["type"] = "distribute-cards"
             dealer.hand = player_cards[0]
-
+            
             message["data"] = player_cards
             message["acks"] = [1, 0, 0, 0]
-        
+
+            # Mensagem com quais cartas cada jogador tem
+            send_message(transmit_socket, next_ip, next_port, message)
+
     return
