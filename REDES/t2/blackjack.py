@@ -1,16 +1,15 @@
 # blACKjACK
 import sys
 import time
-from src.player import setup_sockets, send_message, receive_message, player_process
+from src.player import Player, setup_sockets, send_message, receive_message, player_process
 from src.dealer import Dealer, dealer_process
 
 def main():
     player_id = int(sys.argv[1])
     receive_socket, transmit_socket, next_ip, next_port = setup_sockets(player_id)
 
-    # Inicializa variaveis do jogador
-    money = 1000
-    hand = {}
+    # Incializa objeto do jogador
+    player = Player()
 
     # Mensagem em que o Dealer inicializa a rede
     if player_id == 0:
@@ -38,13 +37,14 @@ def main():
 
         else: # PLAYER
             match message["type"]:
-                case "players-bet":
-                    money = player_process(player_id, money, hand, transmit_socket, next_ip, next_port, message)
-                    print(f"Seu dinheiro atual:{money}\n")
-                case "distribute-cards":
-                    hand = player_process(player_id, money, hand, transmit_socket, next_ip, next_port, message)
-                    print(hand)
 
+                case "players-bet":
+                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
+                    print(f"Seu dinheiro atual:{player.money}\n")
+
+                case "distribute-cards":
+                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
+                    print(f"Suas cartas: {player.hand}\n")
 
 
 main()

@@ -5,6 +5,15 @@ PORTS = [2000, 2001, 2002, 2003]
 LOCAL_IP = "127.0.0.1"
 NEXT_IP = "127.0.0.1"
 
+NUM_PLAYERS = 4
+DEALER_ID = 0
+START_MONEY = 1000
+
+class Player:
+    def __init__(self):
+        self.money = START_MONEY
+        self.hand = {}
+
 # Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
     local_receive_port = PORTS[player_id]
@@ -20,40 +29,45 @@ def setup_sockets(player_id):
     return receive_socket, transmit_socket, NEXT_IP, next_port
 
 def send_message(transmit_socket, next_ip, next_port, message):
-    print(f"Enviando para {next_port}: {message}\n")
+    # print(f"Enviando para {next_port}: {message}\n")
     transmit_socket.sendto(json.dumps(message).encode(), (next_ip, next_port))
 
 def receive_message(receive_socket):
     data, addr = receive_socket.recvfrom(1024)
     message = json.loads(data.decode())
 
-    print(f"Recebeu {message}\n")
+    # print(f"Recebeu {message}\n")
     return message
 
 def player_process(
-        player_id, money, hand, 
+        player_id, player, 
         transmit_socket, next_ip, next_port, 
         message):
     match message["type"]:
+
         case "players-bet":
-            bet = int(input("Quanto deseja apostar?\n"))
-            if bet > money:
+            # bet = int(input("Quanto deseja apostar?\n")) Comentado só p acelerar testes
+            bet = 10
+
+            if bet > player.money:
                 input("Você não tem tanto dinheiro. Insira novamente:\n")
 
             message["data"][player_id] = bet
-            money = money - bet
+            player.money = player.money - bet
 
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
 
-            return money
-        
+            return
+
         case "distribute-cards":
-            hand = message["data"].get(player_id) # Erro ta aqui
-            print(player_id)
-            print(hand)
+            player.hand = message["data"][str(player_id)]
+
+            print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]}\n")
 
             message["acks"][player_id] = 1
-            return hand
+            send_message(transmit_socket, next_ip, next_port, message)
+
+            return
 
     return

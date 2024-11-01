@@ -91,12 +91,14 @@ Protocolo:
     }
 
 - players-bet
-    * Data: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
+    * DATA: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
 
 - distribute-cards
-    * Data: Um dicionario com as cartas de cada jogador, usando o player_id como chave
+    * DATA: Um dicionario com as cartas de cada jogador, usando o player_id como chave
 
-- inform-blackjack
+- inform-turn
+    * DATA: informa quais são as cartas do Dealer. Usado quando o Dealer vira a carta dele.
+
 - get-actions
 - inform-result
 - payment
