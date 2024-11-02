@@ -50,14 +50,19 @@ Data/command frame
 
 1. **Distribuição inicial das cartas**: Cada jogador (incluindo o delaer) recebe duas cartas iniciais. As cartas dos jogadores são geralmente visíveis para todos, enquanto o dealer tem uma carta virada para cima e uma carta virada para baixo.
 
-2. **Checagem de Blackjack**: Se algum jogador ou o dealer tiver uma pontuação de 21 com as duas cartas iniciais (um Blackjack "natural"), essa pessoa ganha a rodada imediatamente, exceto se o dealer também tiver um Blackjack, caso em que é um empate ("push").
+2. **Checagem de Blackjack**: Checa para ver se algum jogador tiver uma pontuação de 21 com as duas cartas iniciais (um Blackjack "natural").
 
-3. **Turno de cada jogador**: Cada jogado toma decisões até *Stand* ou "Estourar"(ultrapassar 21 pontos).
+3. **Turno de cada jogador**: Cada jogado toma decisões até *Stand* ou "Estourar"(ultrapassar 21 pontos). O jogador com blackjack natural não joga.
 
 4. **Turno do dealer**: Após os jogadores finalizarem suas jogadas, o dealer revela a carta oculta. O dealer deve seguir regras fixas:
     - Hit alcanca no mínimo 17 pontos.
     - Stand ao alcançar 17 pontos ou mais
-Se o delaer ultrapassar 21 pontos, ele estoura, e todos jogadores que ainda estão no jogo ganham a rodada.
+Se o dealer ultrapassar 21 pontos, ele estoura, e todos jogadores que ainda estão no jogo ganham a rodada.
+
+Caso alguem tenha, o seguinte acontece: O Dealer checa **secretamente** a carta dele. 
+    * Se for um **blackjack**, ele revela a todos, *empata*(push) com os jogadores que tiveram um blackjack natural e ganha dos demais.
+    * Se não for um **blackjack**, o jogador com o bj natural ganha o round, a segunda carta continua escondida, e os demais jogam normalmente.
+
 
 5. **Comparação de mão e pagamento**: As mãos dos jogadores são comparadas à mão do dealer.
     - Vitória do Jogador: Se o jogador tiver uma pontuação mais alta que o dealer sem ultrapassar 21, ele vence e recebe o pagamento. Nesse caso o jogador ganha um valor igual a aposta. (aposta $10 recebe $20)
@@ -80,6 +85,11 @@ Dealer manda mensagem perguntando quais são as ações de cada jogador.
 
 3. 
 
+# Destaques
+
+* O único campo da mensagem que os jogadores podem alterar é a *data* e *acks*, de resto apenas o Dealer altera.
+* Apenas o Dealer coloca e retira mensagens da rede.
+
 # Tipos de mensagem
 
 Protocolo:
@@ -100,8 +110,15 @@ Protocolo:
     * DATA: informa quais são as cartas do Dealer. Usado quando o Dealer desvira a carta dele.
 
 - get-actions
-- inform-result
-- payment
+    * DATA: um vetor, onde cada indice i contém uma tupla (ação, card=None), card só é atualizado pelo Dealer, e quando vem a ação HIT
+    Códigos de ação:
+        STAND,
+        HIT,
+        SURRENDER,
+        NATURAL : avisa que o jogador ganhou com um bj natural
+
+- result-payment
+    * DATA: um vetor, onde cada indice contém uma tupla (resultado, pagamento)
 
 # Estados do Dealer
 

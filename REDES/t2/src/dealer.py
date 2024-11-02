@@ -1,6 +1,17 @@
 import random
 import copy
 from src.player import NUM_PLAYERS, DEALER_ID, send_message
+from src.utils import sum_points
+
+#
+# === Estruturas ===
+#
+# player_hands := dicionario de lista de dicionarios
+#   { 
+#       0: [{"value": "A", "suit": "♠", "points": "11"}, {"value": "J", "suit": "♠", "points": "10"}],
+#       1: [{"value": "K", "suit": "♠", "points": "10"}, {"value": "5", "suit": "♠", "points": "5"}],
+#   }
+#
 
 class Dealer:
     def __init__(self):
@@ -9,11 +20,20 @@ class Dealer:
         self.dealer_hand = []
         self.deck = []
 
-# Função que verifica se a mensagem está com todos acks ligados
+# Retorna 0 se a mensagem está com todos acks ligados e 1 caso tenha algum ack errado
 def check_acks(acks):
+    not_flag = 0
+
     for i, value in enumerate(acks):
         if value == 0:
             print(f"A máquina {i} não recebeu a mensagem corretamente.\n")
+            not_flag = 1
+    
+    if not_flag:
+        return 1
+    else:
+        return 0
+
 
 # Gera um baralho embaralhado
 def generate_deck():
@@ -51,7 +71,8 @@ def verify_blackjack(player_hands):
 
     for player_id, hand in player_hands.items():
         # Calcula a pontuação inicial assumindo que todos os Ases valem 11
-        points = sum(card['points'] for card in hand)
+        points = sum(int(card['points']) for card in hand)
+
 
         # Conta quantos Ases existem na mão
         n_ases = sum(1 for card in hand if card['value'] == 'A')
@@ -60,26 +81,12 @@ def verify_blackjack(player_hands):
         while points > 21 and n_ases > 0:
             points -= 10
             n_ases -= 1
-        
+
         # Verifica se a soma é 21 com exatamente duas cartas
         if points == 21 and len(hand) == 2:
             blackjack_players.append(player_id)
 
     return blackjack_players
-
-# Soma os pontos de uma mao e os retorna
-def sum_points(hand):
-    # calcula a soma dos pontos considerando ases como 11
-    points = sum(card['points'] for card in hand)
-
-    # ajusta o valor dos ases de 11 para 1, se necessário
-    n_ases = sum(1 for card in hand if card['value'] == 'A')
-
-    while points > 21 and n_ases > 0:
-        points -= 10
-        n_ases -= 1
-
-    return points
 
 # Função que processa a mensagem recebida. Pode retornar diferentes coisas dependendo do tipo da msg
 def dealer_process(
@@ -100,6 +107,9 @@ def dealer_process(
             # Dealer cria o baralho e distribui as cartas
             dealer.deck = generate_deck()
             player_cards = distribute_cards(dealer.deck) 
+            
+            # TESTE: forçar blackjack natural para o Dealer
+            player_cards[0] = [{"value": "A", "suit": "♠", "points": "11"}, {"value": "3", "suit": "♠", "points": "3"}]
 
             dealer.player_hands = player_cards
             
@@ -112,34 +122,39 @@ def dealer_process(
             print(f"Cartas do Dealer: {dealer.dealer_hand}\nA segunda está oculta aos jogadores!\n")
 
             message["type"] = "distribute-cards"
-            
+
+            # TESTE: BLACKJACK NATURAL
+            player_cards[1] = [{"value": "A", "suit": "♠", "points": "11"}, {"value": "J", "suit": "♠", "points": "10"}]
+
             message["data"] = player_cards
             message["acks"] = [1, 0, 0, 0]
 
             # Mensagem com quais cartas cada jogador tem
             send_message(transmit_socket, next_ip, next_port, message)
+            return
 
         case "distribute-cards":
             check_acks(message["acks"])
+            print("Cartas distribuidas com sucesso.\n")
 
-            # Agora o dealer precisa checar se houve algum blackjack
-            blackjack_players = verify_blackjack(dealer.player_hands)
-
-            # 1. CASO BLACKJACK NATURAL
-            if (blackjack_players):
-                print(f"Player que fizeram Blackjack: {blackjack_players}\n")
-
-                # Dealer desvira carta dele
-                dealer.dealer_hand = copy.deepcopy(dealer.player_hands[DEALER_ID])
-
-                while sum_points(dealer.dealer_hand) <= 17:
-                    # deve continuar puxando cartas do baralho
-                    dealer.dealer_hand.append(dealer.deck.pop)
-                
-                print(f"Mao do dealer após puxadas: {dealer.dealer_hand}\n")
-        
+            message["type"] = "get-actions"
+            message["data"] = [(None, None)] * NUM_PLAYERS
 
             message["acks"] = [1, 0, 0, 0]
-            # send_message(transmit_socket, next_ip, next_port, message)
+            send_message(transmit_socket, next_ip, next_port, message)
+            return
+
+        case "get-actions":
+            
+            
+
+            return
+
+        case "result-payment":
+            check_acks(message["acks"])
+
+            print("Rodada concluida!")
+            print("--------------\n")
+            return
 
     return

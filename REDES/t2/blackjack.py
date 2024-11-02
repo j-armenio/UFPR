@@ -1,6 +1,5 @@
 # blACKjACK
 import sys
-import time
 from src.player import Player, setup_sockets, send_message, receive_message, player_process
 from src.dealer import Dealer, dealer_process
 
@@ -20,8 +19,8 @@ def main():
 
         message = {
             "type": "players-bet",
-            "from": player_id,
             "data": bets,
+            "from": player_id,
             "acks": [1, 0, 0, 0]
         }
 
@@ -45,6 +44,13 @@ def main():
                 case "distribute-cards":
                     player_process(player_id, player, transmit_socket, next_ip, next_port, message)
                     print(f"Suas cartas: {player.hand}\n")
+
+                case "get-actions":
+                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
+
+                case "result-payment":
+                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
+                    print(f"Meu resultado resultado:\n{message}")
 
 
 main()
