@@ -133,20 +133,26 @@ def player_process(
                     if player.f_first_round:
                         print("3.SURRENDER\n")
                     
-                    play = input()
-                    try:
-                        play = int(play)
-                        if play == 1:
-                            message["data"][player_id] = ["HIT", None]
-                        elif play == 2:
-                            message["data"][player_id] = ["STAND", None]
-                            player.f_stand = 1
-                        elif play == 3 and player.f_first_round:
-                            player.f_surrender = 1
-                            message["data"][player_id] = ["SURRENDER", None]
+                    while True: 
+                        play = input()
+                        try:
+                            play = int(play)
+                            if play == 1:
+                                message["data"][player_id] = ["HIT", None]
+                                break
+                            elif play == 2:
+                                message["data"][player_id] = ["STAND", None]
+                                player.f_stand = 1
+                                break
+                            elif play == 3 and player.f_first_round:
+                                player.f_surrender = 1
+                                message["data"][player_id] = ["SURRENDER", None]
+                                break
+                            else:
+                                print("Opção inválida! Por favor, insira uma das opções.")
 
-                    except ValueError:
-                        print("Entrada inválida! Por favor, insira uma das opções.")
+                        except ValueError:
+                            print("Entrada inválida! Por favor, insira uma das opções.")
 
             if player.f_first_round:
                 player.f_first_round = 0

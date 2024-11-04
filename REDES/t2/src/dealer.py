@@ -158,7 +158,8 @@ def dealer_process(
 
                 while dealer_points < 17:
                     new_card = dealer.deck.pop()
-                    dealer.dealer_hand.append(new_card)
+                    # dealer.dealer_hand.append(new_card)
+                    dealer.dealer_hand.append({'value': 'Q', 'suit': '♥', 'points': 10})
                     dealer_points = sum_points(dealer.dealer_hand)
 
                 print("Mão do dealer após jogar:")
@@ -177,14 +178,16 @@ def dealer_process(
                 # Tratar cada resultado
                 for i, action in enumerate(final_actions):
                     if dealer_bust: # todos que não estouraram ou deram surrender ganham
-                        if action[0] == None: # Ação do Dealer
-                            pass
-                        elif action[0] != "BUST" or action[0] != "SURRENDER":                            
+                        if action[0] == "STAND":
                             message["data"][i] = ["WIN", dealer.bets[i] * 2]
-                        elif action == "BUST":
-                            message["data"][i] = ["LOSE", 0]
-                        elif action[0] == "SURRENDER":                            
+                        elif action[0] == "NATURAL":
+                            message["data"][i] = ["WIN", dealer.bets[i] * 2]
+                        elif action[0] == "SURRENDER":
                             message["data"][i] = ["SURRENDER", dealer.bets[i] / 2]
+                        elif action[0] == "BUST":
+                            message["data"][i] = ["LOSE", 0]
+                        else: # Ação do dealer
+                            pass
 
                     elif dealer_points == 21:
                         if action[0] == "STAND" or action[0] == "BUST":
@@ -221,6 +224,10 @@ def dealer_process(
                             case "NATURAL":
                                 print("Calculando Natural...")
                                 message["data"][i] = ["WIN", dealer.bets[i] * 2]
+
+                            case "BUST":
+                                print("Calculando Bust...")
+                                message["data"][i] = ["LOSE", 0]
 
                             case _: # ação do Dealer
                                 print("Ação dealer...")
