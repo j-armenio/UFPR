@@ -1,3 +1,25 @@
+# Retorna uma lista com os jogadores que ganharam um blackjack 'natural'
+def verify_blackjack(players_hand):
+    blackjack_players = []
+
+    for player_id, hand in players_hand.items():
+        # Calcula a pontuação inicial assumindo que todos os Ases valem 11
+        points = sum(int(card['points']) for card in hand)
+
+        # Conta quantos Ases existem na mão
+        n_ases = sum(1 for card in hand if card['value'] == 'A')
+
+        # Ajusta a pontuação, mudando o valor dos Ases de 11 para 1, se necessário
+        while points > 21 and n_ases > 0:
+            points -= 10
+            n_ases -= 1
+
+        # Verifica se a soma é 21 com exatamente duas cartas
+        if points == 21 and len(hand) == 2:
+            blackjack_players.append(player_id)
+
+    return blackjack_players
+
 # Agora o dealer precisa checar se houve algum blackjack
 blackjack_players = verify_blackjack(dealer.player_hands)
 
@@ -36,4 +58,3 @@ if (blackjack_players):
 # else:
 
 # Dealer tem que desvirar a carta dele e jogar
-# Os jogadores tem q verificar se estouraram antes de ter as possibilidades

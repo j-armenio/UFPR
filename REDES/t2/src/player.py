@@ -15,11 +15,13 @@ class Player:
     def __init__(self):
         self.money = START_MONEY
         self.hand = {}
-        self.players_hands = {}
+        self.players_hand = {}
 
         # flags
         self.f_natural_bj = 0
         self.f_first_round = 1
+        self.f_surrender = 0
+        self.f_stand = 0
 
 # Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
@@ -78,7 +80,7 @@ def player_process(
 
         case "distribute-cards":
             player.hand = message["data"][str(player_id)]
-            player.players_hands = message["data"]
+            player.players_hand = message["data"]
 
             print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]}\n")
 
@@ -96,45 +98,54 @@ def player_process(
             for i, action in enumerate(message["data"]):
                 if action[1] is not None: # É uma segundo envio, Dealer respondeu com algo
                     if player_id == i: # É o indice do jogador
-                        print("ESSA CARTA É MINHA!!!")
                         card = action[1]
-                        print(card)
+                        print(f"Carta recebida: {card}\n")
                         
-                        if card not in player.hand: # Tava dando bug de ponteiro no append, isso resolve
+                        if card not in player.hand:
                             player.hand.append(card.copy())
-                            print(f"player.hand 1: {player.hand}\n")
                         
-                        if card not in player.players_hands[str(player_id)]:
-                            player.players_hands[str(player_id)].append(card.copy())
+                        # Tava dando bug de ponteiro no append, `not in` resolve
+                        if card not in player.players_hand[str(player_id)]:
+                            player.players_hand[str(player_id)].append(card.copy())
 
                         action[1] = None
+                        print(f"Mão atual: {player.hand}\n")
 
-                        print(f"player.hand 2: {player.hand}\n")
-                        print(f"players_hand[player_id]: {player.players_hands[str(player_id)]}")
+            if player.f_surrender:
+                print("Você se rendeu e não joga até o fim do round.\n")
+            elif player.f_stand:
+                print("Você deu 'stand' e não joga até o fim do round.\n")
 
-            if player.f_natural_bj == 1:
-                message["data"][player_id] = ("NATURAL", None)
-                print("Você possui um Blackjack natural, você não joga esse round.\n")
+            elif sum_points(player.hand) > 21: # bust
+                print("Você estorou! Perdeu.\n")
+                message["data"][player_id] = ["BUST", None]
+
             else:
-                print("Insira o número de sua jogada?")
-                print("1.HIT")
-                print("2.STAND")
+                if player.f_natural_bj == 1:
+                    message["data"][player_id] = ["NATURAL", None]
+                    print("Você possui um Blackjack natural, você não joga esse round.\n")
+                else:
+                    print("Insira o número de sua jogada?")
+                    print("1.HIT")
+                    print("2.STAND")
 
-                if player.f_first_round:
-                    print("3.SURRENDER\n")
-                
-                play = input()
-                try:
-                    play = int(play)
-                    if play == 1:
-                        message["data"][player_id] = ("HIT", None)
-                    elif play == 2:
-                        message["data"][player_id] = ("STAND", None)
-                    elif play == 3 and player.f_first_round:
-                        message["data"][player_id] = ("SURRENDER", None)
+                    if player.f_first_round:
+                        print("3.SURRENDER\n")
+                    
+                    play = input()
+                    try:
+                        play = int(play)
+                        if play == 1:
+                            message["data"][player_id] = ["HIT", None]
+                        elif play == 2:
+                            message["data"][player_id] = ["STAND", None]
+                            player.f_stand = 1
+                        elif play == 3 and player.f_first_round:
+                            player.f_surrender = 1
+                            message["data"][player_id] = ["SURRENDER", None]
 
-                except ValueError:
-                    print("Entrada inválida! Por favor, insira uma das opções.")
+                    except ValueError:
+                        print("Entrada inválida! Por favor, insira uma das opções.")
 
             if player.f_first_round:
                 player.f_first_round = 0
@@ -144,8 +155,8 @@ def player_process(
             return
         
         case "result-payment":
-            payment = message["data"][player_id]
-            print(f"Meu resultado: {payment}\n")
+            # payment = message["data"][player_id]
+            # print(f"Meu resultado: {payment}\n")
         
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)

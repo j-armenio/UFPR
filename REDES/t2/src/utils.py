@@ -1,4 +1,4 @@
-# Soma os pontos de uma mao e os retorna. NAO TENHO CTZ SE ISSO FUNCIONA
+# Soma os pontos de uma mao e os retorna
 def sum_points(hand):
     # calcula a soma dos pontos considerando ases como 11
     points = sum(int(card['points']) for card in hand)

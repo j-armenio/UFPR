@@ -38,11 +38,9 @@ Data/command frame
 |Start delimiter|Access control|Frame control|Destination address|Source address|Data|FCS|End delimiter|Frame status|
 
 ---
-### Meu protocolo (temporário)
+### Meu protocolo
 
-| Origem | Tipo | Dados |
-
-!! LEMBRAR DO PIGBACK (ACKS) NO FINAL !!
+| type | data | from | acks |
 
 ---
 
@@ -62,7 +60,6 @@ Se o dealer ultrapassar 21 pontos, ele estoura, e todos jogadores que ainda est�
 Caso alguem tenha, o seguinte acontece: O Dealer checa **secretamente** a carta dele. 
     * Se for um **blackjack**, ele revela a todos, *empata*(push) com os jogadores que tiveram um blackjack natural e ganha dos demais.
     * Se não for um **blackjack**, o jogador com o bj natural ganha o round, a segunda carta continua escondida, e os demais jogam normalmente.
-
 
 5. **Comparação de mão e pagamento**: As mãos dos jogadores são comparadas à mão do dealer.
     - Vitória do Jogador: Se o jogador tiver uma pontuação mais alta que o dealer sem ultrapassar 21, ele vence e recebe o pagamento. Nesse caso o jogador ganha um valor igual a aposta. (aposta $10 recebe $20)
@@ -115,25 +112,30 @@ Protocolo:
         STAND,
         HIT,
         SURRENDER,
-        NATURAL : avisa que o jogador ganhou com um bj natural
+        NATURAL : avisa que o jogador ganhou com um bj natural,
+        BUST: avisa que o jogador estorou os pontos (>21)
 
 - result-payment
-    * DATA: um vetor, onde cada indice contém uma tupla (resultado, pagamento)
+    * DATA: um vetor, onde cada indice contém uma tupla (resultado, pagamento). O indice do dealer, possui a mão do Dealer no final da rodada.
+    Códigos de resultado:
+        SURRENDER : retorna metade do valor da aposta,
+        WIN : retorna 200% do valor da bet,
+        LOSE : retorna 0,
+        TIE : retorna bet
 
-# Estados do Dealer
+5. **Comparação de mão e pagamento**: As mãos dos jogadores são comparadas à mão do dealer.
+    - Vitória do Jogador: Se o jogador tiver uma pontuação mais alta que o dealer sem ultrapassar 21, ele vence e recebe o pagamento. Nesse caso o jogador ganha um valor igual a aposta. (aposta $10 recebe $20)
+    - Derrota do Jogador: Se o dealer tiver uma pontuação maior, o jogador perde sua aposta. Perde tudo.
+    - Empate (push): Se a pontuação do jogador for igual a do dealer, o jogador recupera sua aposta inicial.
+    - Blackjack: Se um jogador tiver um 21, ele ganha 1,5 vezes sua aposta, exceto se o dealer também tiver um Blackjack, caso em que é um empate. 
 
-- waiting
-- setting-up-game
-- 
 
-# Estados do Player
+# Ações do Player
 
-- waiting
 - chosing action
     - *Stand*(parar): Se o jogador está satisfeito com sua mão e não quer pedir mais cartas.
     - *Hit*(acertar): Se o jogador deseja mais uma carta
     - *Double*(dobrar)(OPCIONAL): Se o jogador sentir que necessita de uma e somente uma carta adicional, então pode dobrar sua aposta e receber mais uma carta, boa ou ruim. Esta opção é oferecida somente nas duas primeiras cartas, e às vezes nas duas primeiras cartas após *split*.
     - *Split*(dividir)(OPCIONAL): Se as primeiras duas cartas do jogador forem de mesmo valor em pontos, ele pode dividi-las em duas mãos. Neste envento cada carta é a primeira carta de uma mão nova. O jogador deve também fazer uma outra aposta de valor igual à primeira para a seguinda mão. O jogador pode geralmente dividir até duas ou três vezes consecutivas se aparecer a oportunidade. Dobrar após dividir pode ser permitido, mas nem sempre é o caso.
     - *Surrender*(rendição)(OPCIONAL): Alguns cassinos oferecem ao jogador a opção de rendição nas primeiras duas cartas. Se o jogador não gostar das duas cartas pode perder metade do valor da aposta assim como suas cartas. Esta opção geralmente é oferecida somente depois que o negociante verifica se há o blackjack.
-- surrendered
-
+ 

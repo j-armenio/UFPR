@@ -43,14 +43,16 @@ def main():
 
                 case "distribute-cards":
                     player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-                    print(f"Suas cartas: {player.hand}\n")
+                    print(f"Suas cartas:")
+                    for card in player.hand:
+                        print(f"{card["points"]}")
 
                 case "get-actions":
                     player_process(player_id, player, transmit_socket, next_ip, next_port, message)
 
                 case "result-payment":
-                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-                    print(f"Meu resultado resultado:\n{message}")
-
+                    player_process(player_id, player, transmit_socket, 
+                    next_ip, next_port, message)
+                    print(f"Meu pagamento é {message["data"][player_id]}")
 
 main()
