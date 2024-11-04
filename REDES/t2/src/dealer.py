@@ -145,9 +145,59 @@ def dealer_process(
             return
 
         case "get-actions":
-            
+            check_acks(message["acks"])
+
+            # data: [ [None, None], ['NATURAL', None], ['STAND', None], ['HIT', None] ] 
+
             
 
+            print("Processando ações:")
+            
+            has_hit = 0
+            for action in message["data"]:
+                if action[0] == "HIT":
+                    has_hit = 1
+
+            if has_hit:
+                for action in message["data"]:
+                    match action[0]:
+
+                            case "HIT":
+                                print("HITOU")
+                                action[1] = dealer.deck.pop()
+                            
+                            case "STAND":
+                                print("STANDOU")
+                            
+                            case "SURRENDER":
+                                print("SURRENDOU")
+
+                            case "NATURAL":
+                                print("NATUROU")
+
+                            case None:
+                                print("Ação do Dealer")
+
+            else: # Acabou as escolhas do round, Dealer precisa ver quem venceu
+                message["type"] = "result-payment"
+
+                # Tratar cada resultado
+                for action in message["data"]:
+                    match action[0]:
+
+                        case "STAND":
+                            print("Calculando Stand...")
+                        
+                        case "SURRENDER":
+                            print("Calculando Surrender...")
+
+                        case "NATURAL":
+                            print("Calculando Natural...")
+
+            
+            message["acks"] = [1, 0, 0, 0]
+            print(message)
+            send_message(transmit_socket, next_ip, next_port, message)
             return
 
         case "result-payment":

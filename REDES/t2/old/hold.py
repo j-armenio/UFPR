@@ -34,3 +34,6 @@ if (blackjack_players):
 
 # 2. CASO NORMAL
 # else:
+
+# Dealer tem que desvirar a carta dele e jogar
+# Os jogadores tem q verificar se estouraram antes de ter as possibilidades

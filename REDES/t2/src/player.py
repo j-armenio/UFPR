@@ -1,5 +1,6 @@
 import socket
 import json
+import copy
 from src.utils import sum_points
 
 PORTS = [2000, 2001, 2002, 2003]
@@ -92,19 +93,37 @@ def player_process(
             return
         
         case "get-actions":
+            for i, action in enumerate(message["data"]):
+                if action[1] is not None: # É uma segundo envio, Dealer respondeu com algo
+                    if player_id == i: # É o indice do jogador
+                        print("ESSA CARTA É MINHA!!!")
+                        card = action[1]
+                        print(card)
+                        
+                        if card not in player.hand: # Tava dando bug de ponteiro no append, isso resolve
+                            player.hand.append(card.copy())
+                            print(f"player.hand 1: {player.hand}\n")
+                        
+                        if card not in player.players_hands[str(player_id)]:
+                            player.players_hands[str(player_id)].append(card.copy())
+
+                        action[1] = None
+
+                        print(f"player.hand 2: {player.hand}\n")
+                        print(f"players_hand[player_id]: {player.players_hands[str(player_id)]}")
+
             if player.f_natural_bj == 1:
                 message["data"][player_id] = ("NATURAL", None)
                 print("Você possui um Blackjack natural, você não joga esse round.\n")
             else:
-                print("Insira o número de sua jogada?\n\
-                1. HIT\n\
-                2.STAND\n")
-                
+                print("Insira o número de sua jogada?")
+                print("1.HIT")
+                print("2.STAND")
+
                 if player.f_first_round:
                     print("3.SURRENDER\n")
                 
                 play = input()
-
                 try:
                     play = int(play)
                     if play == 1:
