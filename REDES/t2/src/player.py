@@ -1,7 +1,7 @@
 import socket
 import json
 import copy
-from src.utils import sum_points
+from src.utils import sum_points, print_hand
 
 PORTS = [2000, 2001, 2002, 2003]
 LOCAL_IP = "127.0.0.1"
@@ -38,14 +38,14 @@ def setup_sockets(player_id):
     return receive_socket, transmit_socket, NEXT_IP, next_port
 
 def send_message(transmit_socket, next_ip, next_port, message):
-    print(f"Enviando para {next_port}: {message}\n")
+    # print(f"Enviando para {next_port}: {message}\n")
     transmit_socket.sendto(json.dumps(message).encode(), (next_ip, next_port))
 
 def receive_message(receive_socket):
     data, addr = receive_socket.recvfrom(1024)
     message = json.loads(data.decode())
 
-    print(f"Recebeu {message}\n")
+    # print(f"Recebeu {message}\n")
     return message
 
 def player_process(
@@ -57,7 +57,7 @@ def player_process(
         case "players-bet":
             while True:
                 try:
-                    # bet = float(input("Quanto deseja apostar?\n")) Comentado só p acelerar testes
+                    # bet = float(input("Quanto deseja apostar?\n"))
                     bet = 10
 
                     if bet > player.money:
@@ -82,7 +82,7 @@ def player_process(
             player.hand = message["data"][str(player_id)]
             player.players_hand = message["data"]
 
-            print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]}\n")
+            print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]["points"]} {message["data"][str(DEALER_ID)][0]["suit"]} XX")
 
             # Ativa a flag de blackjack natural
             player_points = sum_points(player.hand)
@@ -98,8 +98,8 @@ def player_process(
             for i, action in enumerate(message["data"]):
                 if action[1] is not None: # É uma segundo envio, Dealer respondeu com algo
                     if player_id == i: # É o indice do jogador
-                        card = action[1]
-                        print(f"Carta recebida: {card}\n")
+                        card = action[1]                        
+                        print(f"Você recebeu: {card["points"]} {card["suit"]}\n")
                         
                         if card not in player.hand:
                             player.hand.append(card.copy())
@@ -109,7 +109,8 @@ def player_process(
                             player.players_hand[str(player_id)].append(card.copy())
 
                         action[1] = None
-                        print(f"Mão atual: {player.hand}\n")
+                        print(f"Mão atual:")
+                        print_hand(player.hand)
 
             if player.f_surrender:
                 print("Você se rendeu e não joga até o fim do round.\n")
@@ -155,8 +156,12 @@ def player_process(
             return
         
         case "result-payment":
-            # payment = message["data"][player_id]
-            # print(f"Meu resultado: {payment}\n")
+            print("Mão final do dealer: ")
+            print_hand(message["data"][DEALER_ID])
+            print("Sua mão final:")
+            print_hand(player.hand)
+
+            print(f"Meu pagamento é {message["data"][player_id]}")
         
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)

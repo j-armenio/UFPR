@@ -2,6 +2,7 @@
 import sys
 from src.player import Player, setup_sockets, send_message, receive_message, player_process
 from src.dealer import Dealer, dealer_process
+from src.utils import print_hand
 
 def main():
     player_id = int(sys.argv[1])
@@ -13,6 +14,7 @@ def main():
     # Mensagem em que o Dealer inicializa a rede
     if player_id == 0:
         input("Aperte alguma tecla para iniciar: \n")
+        print("============== LOG DO ROUND ==============\n")
 
         dealer = Dealer()
         bets = [None] * 4
@@ -44,8 +46,7 @@ def main():
                 case "distribute-cards":
                     player_process(player_id, player, transmit_socket, next_ip, next_port, message)
                     print(f"Suas cartas:")
-                    for card in player.hand:
-                        print(f"{card["points"]}")
+                    print_hand(player.hand)
 
                 case "get-actions":
                     player_process(player_id, player, transmit_socket, next_ip, next_port, message)
@@ -53,6 +54,5 @@ def main():
                 case "result-payment":
                     player_process(player_id, player, transmit_socket, 
                     next_ip, next_port, message)
-                    print(f"Meu pagamento é {message["data"][player_id]}")
 
 main()

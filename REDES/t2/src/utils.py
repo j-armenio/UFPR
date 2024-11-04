@@ -11,3 +11,9 @@ def sum_points(hand):
 
     return points
 
+# Imprime as cartas de uma mão
+def print_hand(hand):
+    for card in hand:
+        print(f"{card["points"]} {card["suit"]}")    
+    
+    print("\n")

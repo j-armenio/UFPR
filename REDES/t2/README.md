@@ -116,7 +116,7 @@ Protocolo:
         BUST: avisa que o jogador estorou os pontos (>21)
 
 - result-payment
-    * DATA: um vetor, onde cada indice contém uma tupla (resultado, pagamento). O indice do dealer, possui a mão do Dealer no final da rodada.
+    * DATA: um vetor, onde cada indice contém uma lista [resultado, pagamento]. O indice do dealer, possui a mão do Dealer no final da rodada.
     Códigos de resultado:
         SURRENDER : retorna metade do valor da aposta,
         WIN : retorna 200% do valor da bet,
