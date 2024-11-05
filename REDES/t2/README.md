@@ -97,6 +97,9 @@ Protocolo:
         "acks": [0, 0, 0, 0]
     }
 
+- inform-dealer
+    * DATA: um int que diz o id do dealer atual
+
 - players-bet
     * DATA: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
 
@@ -122,6 +125,9 @@ Protocolo:
         WIN : retorna 200% do valor da bet,
         LOSE : retorna 0,
         TIE : retorna bet
+
+- line-open: serve apenas para informar que todo processamento do round acabou, e o próximo dealer pode iniciar o próximo round
+    * DATA: vazia
 
 5. **Comparação de mão e pagamento**: As mãos dos jogadores são comparadas à mão do dealer.
     - Vitória do Jogador: Se o jogador tiver uma pontuação mais alta que o dealer sem ultrapassar 21, ele vence e recebe o pagamento. Nesse caso o jogador ganha um valor igual a aposta. (aposta $10 recebe $20)

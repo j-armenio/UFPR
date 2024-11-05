@@ -8,7 +8,6 @@ LOCAL_IP = "127.0.0.1"
 NEXT_IP = "127.0.0.1"
 
 NUM_PLAYERS = 4
-DEALER_ID = 0
 START_MONEY = 1000
 
 class Player:
@@ -16,12 +15,14 @@ class Player:
         self.money = START_MONEY
         self.hand = {}
         self.players_hand = {}
+        self.dealer_id = -1
 
         # flags
-        self.f_natural_bj = 0
         self.f_first_round = 1
+        self.f_natural_bj = 0
         self.f_surrender = 0
         self.f_stand = 0
+        self.f_dealer_round = 0
 
 # Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
@@ -38,23 +39,41 @@ def setup_sockets(player_id):
     return receive_socket, transmit_socket, NEXT_IP, next_port
 
 def send_message(transmit_socket, next_ip, next_port, message):
-    # print(f"Enviando para {next_port}: {message}\n")
+    print(f"Enviando para {next_port}: {message}\n")
     transmit_socket.sendto(json.dumps(message).encode(), (next_ip, next_port))
 
 def receive_message(receive_socket):
     data, addr = receive_socket.recvfrom(1024)
     message = json.loads(data.decode())
 
-    # print(f"Recebeu {message}\n")
+    print(f"Recebeu {message}\n")
     return message
 
 def player_process(
-        player_id, player, 
+        player_id, player,
         transmit_socket, next_ip, next_port, 
         message):
     match message["type"]:
+        
+        case "line-open":
+            message["acks"][player_id] = 1
+            send_message(transmit_socket, next_ip, next_port, message)
+            return
+
+        case "inform-dealer":
+            player.dealer_id = message["data"]
+
+            if player.dealer_id == player_id:
+                print("Você é o novo Dealer!\n")
+                player.f_dealer_round = 1
+
+            message["acks"][player_id] = 1
+            send_message(transmit_socket, next_ip, next_port, message)
 
         case "players-bet":
+            if player.f_dealer_round:
+                player.f_dealer_round = 0
+
             while True:
                 try:
                     # bet = float(input("Quanto deseja apostar?\n"))
@@ -82,7 +101,7 @@ def player_process(
             player.hand = message["data"][str(player_id)]
             player.players_hand = message["data"]
 
-            print(f"Cartas do Dealer: {message["data"][str(DEALER_ID)][0]["points"]} {message["data"][str(DEALER_ID)][0]["suit"]} XX")
+            print(f"Cartas do Dealer: {message["data"][str(player.dealer_id)][0]["points"]} {message["data"][str(player.dealer_id)][0]["suit"]} XX")
 
             # Ativa a flag de blackjack natural
             player_points = sum_points(player.hand)
@@ -163,7 +182,7 @@ def player_process(
         
         case "result-payment":
             print("Mão final do dealer: ")
-            print_hand(message["data"][DEALER_ID])
+            print_hand(message["data"][player.dealer_id])
             print("Sua mão final:")
             print_hand(player.hand)
 
