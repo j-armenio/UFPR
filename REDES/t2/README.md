@@ -97,9 +97,6 @@ Protocolo:
         "acks": [0, 0, 0, 0]
     }
 
-- inform-dealer
-    * DATA: um int que diz o id do dealer atual
-
 - players-bet
     * DATA: Uma lista onde cada elemento é uma aposta de um jogador. Jogador i aposta no `data[i]`.
 
@@ -125,6 +122,12 @@ Protocolo:
         WIN : retorna 200% do valor da bet,
         LOSE : retorna 0,
         TIE : retorna bet
+
+- inform-dealer
+    * DATA: um int que diz o id do dealer atual
+
+- baton: Apenas uma marcador para passar o bastão da rede em anel. !! Essa é a única mensagem que não precisa ser retirada por quem enviou !!
+    * DATA: None
 
 - line-open: serve apenas para informar que todo processamento do round acabou, e o próximo dealer pode iniciar o próximo round
     * DATA: vazia

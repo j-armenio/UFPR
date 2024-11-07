@@ -1,17 +1,7 @@
 import random
 import copy
 from src.player import NUM_PLAYERS, send_message
-from src.utils import sum_points, print_hand
-
-#
-# === Estruturas a lembrar ===
-#
-# players_hand := dicionario de lista de dicionarios
-#   { 
-#       0: [{"value": "A", "suit": "♠", "points": "11"}, {"value": "J", "suit": "♠", "points": "10"}],
-#       1: [{"value": "K", "suit": "♠", "points": "10"}, {"value": "5", "suit": "♠", "points": "5"}],
-#   }
-#
+from src.utils import sum_points, print_hand, debug_print
 
 class Dealer:
     def __init__(self):
@@ -20,10 +10,6 @@ class Dealer:
         self.dealer_hand = []
         self.deck = []
         self.dealer_id = -1
-        
-        # flags
-        self.f_end_round = 0
-
 
 # Retorna 0 se a mensagem está com todos acks ligados e 1 caso tenha algum ack errado
 def check_acks(acks):
@@ -38,7 +24,6 @@ def check_acks(acks):
         return 1
     else:
         return 0
-
 
 # Gera um baralho embaralhado
 def generate_deck():
@@ -60,62 +45,59 @@ def generate_deck():
 
 # Distribui cartas para cada jogador
 def distribute_cards(deck):
-    players_cards = {}
+    player_cards = {}
 
     for i in range(0, NUM_PLAYERS):
         # Tira duas cartas para cada jogador
         hand = [deck.pop(), deck.pop()]
-        players_cards[i] = hand
-    
-    # dicionario de listas de dicionarios
-    return players_cards
+        player_cards[i] = hand
+
+    return player_cards
 
 # Função que processa a mensagem recebida. Pode retornar diferentes coisas dependendo do tipo da msg
 def dealer_process(
-        dealer, 
-        transmit_socket, next_ip, next_port, 
+        game_state,
+        dealer, player,
+        transmit_socket, next_ip, next_port,
         message):
-    print(f"Recebi: {message}\n")
     match message["type"]:
-
-        case "line-open":
-            check_acks(message["acks"])
-
-            print("Você não é mais o Dealer!")
-            print("Aguardando inicio do próximo round...\n ")
-            return
-
+        
         case "inform-dealer":
-            check_acks(message["acks"])
-            if dealer.f_end_round == 1:
-                message = {
-                    "type" : "line-open",
-                    "data": None,
-                    "from": dealer.dealer_id
-                }
-                message["acks"] = [0, 0, 0, 0]
-                message["acks"][dealer.dealer_id] = 1
-
-                dealer.dealer_id = (dealer.dealer_id + 1) % NUM_PLAYERS
-                dealer.f_end_round = 0
-
-                print(f"Enviei: {message}")
-                send_message(transmit_socket, next_ip, next_port, message)
-                return
-
             check_acks(message["acks"])
 
             bets = [None] * 4
-
             message["type"] = "players-bet"
             message["data"] = bets
-            message["acks"] = [0, 0, 0, 0]
+            message["acks"] = [0] * 4
 
             message["acks"][dealer.dealer_id] = 1
 
-            print(f"Enviei: {message}")
+            print("Solicitando apostas dos jogadores...\n")
+            debug_print(f"Pedido de apostas: {message}\n")
+            
             send_message(transmit_socket, next_ip, next_port, message)
-            return
+
+        case "result-payment":
+            check_acks(message["acks"])
+
+            print("Rodada concluida!")
+            print("--------------\n")
+
+            print(f"Passando Dealer para jogador {(dealer.dealer_id + 1) % NUM_PLAYERS}")
+
+            message = {
+                "type": "baston",
+                "data": None,
+                "from": dealer.dealer_id,
+                "acks": [0] * 4
+            }
+            message["acks"][dealer.dealer_id] = 1
+
+            dealer.dealer_id = (dealer.dealer_id + 1) % NUM_PLAYERS
+            player.dealer_id = dealer.dealer_id
+
+            debug_print(message)
+            send_message(transmit_socket, next_ip, next_port, message)
 
         case "players-bet": # Dealer processa as apostas do 1 round
             check_acks(message["acks"])
@@ -130,6 +112,11 @@ def dealer_process(
             dealer.deck = generate_deck()
             player_cards = distribute_cards(dealer.deck) 
             
+            # players_hand := dicionario de lista de dicionarios
+            #   { 
+            #       0: [{"value": "A", "suit": "♠", "points": "11"}, {"value": "J", "suit": "♠", "points": "10"}],
+            #       1: [{"value": "K", "suit": "♠", "points": "10"}, {"value": "5", "suit": "♠", "points": "5"}],
+            #   }
             dealer.players_hand = player_cards
             
             # Insere as duas primeiras cartas para a mao do dealer
@@ -149,9 +136,7 @@ def dealer_process(
             message["acks"][dealer.dealer_id] = 1
 
             # Mensagem com quais cartas cada jogador tem
-            print(f"Enviei: {message}")
             send_message(transmit_socket, next_ip, next_port, message)
-            return
 
         case "distribute-cards":
             check_acks(message["acks"])
@@ -162,9 +147,7 @@ def dealer_process(
 
             message["acks"] = [0, 0, 0, 0]
             message["acks"][dealer.dealer_id] = 1
-            print(f"Enviei: {message}")
             send_message(transmit_socket, next_ip, next_port, message)
-            return
 
         case "get-actions": # data: [[None, None], ['NATURAL', None], ['STAND', None], ['HIT', None]]
             check_acks(message["acks"])
@@ -284,29 +267,6 @@ def dealer_process(
 
             message["acks"] = [0, 0, 0, 0]
             message["acks"][dealer.dealer_id] = 1
-            print(f"Enviei: {message}")
             send_message(transmit_socket, next_ip, next_port, message)
-            return
-
-        case "result-payment":
-            check_acks(message["acks"])
-
-            print("Rodada concluida!")
-            print("--------------\n")
-
-            print(f"Passa Dealer para {(dealer.dealer_id + 1) % NUM_PLAYERS}")
-
-            message = {
-                "type": "inform-dealer",
-                "data": (dealer.dealer_id + 1) % NUM_PLAYERS,
-                "from": dealer.dealer_id,
-                "acks": [0, 0, 0, 0]
-            }
-            message["acks"][dealer.dealer_id] = 1
-
-            dealer.f_end_round = 1
-
-            send_message(transmit_socket, next_ip, next_port, message)
-            return
-
-    return
+            
+    return 'RUNNING'

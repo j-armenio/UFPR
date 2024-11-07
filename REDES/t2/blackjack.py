@@ -1,72 +1,71 @@
 # blACKjACK
 import sys
+import time
 from src.player import Player, setup_sockets, send_message, receive_message, player_process
 from src.dealer import Dealer, dealer_process
-from src.utils import print_hand
+from src.utils import debug_print
+
+def start_round(dealer, transmit_socket, next_ip, next_port):
+        message = {
+        "type": "inform-dealer",
+        "data": dealer.dealer_id,
+        "from": dealer.dealer_id,
+        "acks": [0] * 4
+        }
+        message["acks"][dealer.dealer_id] = 1
+        
+        print("[DEALER] Você é o Dealer!")
+        print("[DEALER] Enviando aviso de quem é o Dealer aos outros jogadores.\n")
+        send_message(transmit_socket, next_ip, next_port, message)
 
 def main():
-    player_id = int(sys.argv[1])
+    PLAYER_ID = int(sys.argv[1])
 
-    dealer_id = -1
-    if len(sys.argv) > 2 and sys.argv[2] == "-d":
-        dealer_id = player_id
+    receive_socket, transmit_socket, next_ip, next_port = setup_sockets(PLAYER_ID)
 
-    receive_socket, transmit_socket, next_ip, next_port = setup_sockets(player_id)
-
-    # Incializa objeto do jogador e do dealer
+    # Inicializa objeto Player e Dealer dentro de todos jogadores. 
     player = Player()
     dealer = Dealer()
 
-    # Mensagem em que o Dealer inicializa a rede
-    if player_id == dealer_id:
+    # Pode ter os estados: 'STARTING', 'ENDING' e 'RUNNING'
+    game_state = 'RUNNING'
+
+    # Ações do Dealer inicial, deve inicializar a rede
+    if len(sys.argv) > 2 and sys.argv[2] == "-d":   
+        player.dealer_id = PLAYER_ID
+        dealer.dealer_id = PLAYER_ID
+
         input("Aperte alguma tecla para iniciar: \n")
-        print("============== LOG DO ROUND ==============\n")
+        print("============================= LOG DO ROUND =============================\n")
 
-        dealer.dealer_id = dealer_id
-
-        message = {
-            "type": "inform-dealer",
-            "data": dealer_id,
-            "from": dealer_id,
-            "acks": [0, 0, 0, 0]
-        }
-        message["acks"][dealer_id] = 1
-
-        # Manda mensagem pedindo as apostas de cada jogador
-        send_message(transmit_socket, next_ip, next_port, message)
+        start_round(dealer, transmit_socket, next_ip, next_port)
 
     # Loop principal do jogo
     while True:
-        if not player.f_dealer_round:
-            print("Aguardando...")
+        debug_print(game_state)
+        debug_print(f"player.dealer_id: {player.dealer_id}, dealer.dealer_id: {dealer.dealer_id}")
+
+        if game_state == 'RUNNING':
+            print("Aguardando...\n")
+            if dealer.dealer_id == PLAYER_ID:
+                debug_print("Aguardando...(DEALER)\n")
+            else:
+                debug_print("Aguardando...(PLAYER)\n")
+
             message = receive_message(receive_socket)
+            input("PRESSIONE PARA CONTINUAR...")
 
-        if dealer.dealer_id == player_id: # DEALER
-            dealer_process(dealer, transmit_socket, next_ip, next_port, message)
+        elif game_state == 'STARTING': # Só é usado quando Dealer é passado
+            dealer.dealer_id = player.dealer_id
+            start_round(dealer, transmit_socket, next_ip, next_port)
+            game_state = 'RUNNING'
 
-        else: # PLAYER
-            
-            match message["type"]:
+        if dealer.dealer_id == PLAYER_ID: # DEALER
+            debug_print("DEALER PROCESS\n")
+            game_state = dealer_process(game_state, dealer, player, transmit_socket, next_ip, next_port, message)
+        else:                             # PLAYER
+            debug_print("PLAYER PROCESS\n")
+            game_state = player_process(game_state, PLAYER_ID, player, dealer, transmit_socket, next_ip, next_port, message)
 
-                case "inform-dealer":
-                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-                    print(f"ID do Dealer guardado: {player.dealer_id}\n")
-
-                case "players-bet":
-                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-                    print(f"Seu dinheiro atual:{player.money}\n")
-
-                case "distribute-cards":
-                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-                    print(f"Suas cartas:")
-                    print_hand(player.hand)
-
-                case "get-actions":
-                    player_process(player_id, player, transmit_socket, next_ip, next_port, message)
-
-                case "result-payment":
-                    player_process(player_id, player, transmit_socket, 
-                    next_ip, next_port, message)
-
-while True:
+if __name__ == "__main__":
     main()

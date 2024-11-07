@@ -1,7 +1,6 @@
 import socket
 import json
-import copy
-from src.utils import sum_points, print_hand
+from src.utils import sum_points, print_hand, debug_print
 
 PORTS = [2000, 2001, 2002, 2003]
 LOCAL_IP = "127.0.0.1"
@@ -22,7 +21,6 @@ class Player:
         self.f_natural_bj = 0
         self.f_surrender = 0
         self.f_stand = 0
-        self.f_dealer_round = 0
 
 # Retorna as referências de rede de um jogador
 def setup_sockets(player_id):
@@ -39,45 +37,50 @@ def setup_sockets(player_id):
     return receive_socket, transmit_socket, NEXT_IP, next_port
 
 def send_message(transmit_socket, next_ip, next_port, message):
-    print(f"Enviando para {next_port}: {message}\n")
+    debug_print(f"Enviando para {next_port}: {message}\n")
     transmit_socket.sendto(json.dumps(message).encode(), (next_ip, next_port))
 
 def receive_message(receive_socket):
     data, addr = receive_socket.recvfrom(1024)
     message = json.loads(data.decode())
 
-    print(f"Recebeu {message}\n")
+    debug_print(f"Recebi: {message}\n")
     return message
 
 def player_process(
-        player_id, player,
+        game_state,
+        player_id, player, dealer,
         transmit_socket, next_ip, next_port, 
         message):
     match message["type"]:
         
-        case "line-open":
-            message["acks"][player_id] = 1
-            send_message(transmit_socket, next_ip, next_port, message)
-            return
+        case "baston":
+            print("Você é o novo Dealer.\n")
+            player.dealer_id = player_id
+            dealer.dealer_id = player_id
 
+            return 'STARTING'
+        
         case "inform-dealer":
             player.dealer_id = message["data"]
+            dealer.dealer_id = player.dealer_id
 
-            if player.dealer_id == player_id:
-                print("Você é o novo Dealer!\n")
-                player.f_dealer_round = 1
+            print(f"O Dealer é o player {dealer.dealer_id}!\n")
+
+            # Resetando as flags para inicio do round
+            player.f_first_round = 1
+            player.f_natural_bj = 0
+            player.f_surrender = 0
+            player.f_stand = 0
 
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
+            return 'RUNNING'
 
         case "players-bet":
-            if player.f_dealer_round:
-                player.f_dealer_round = 0
-
             while True:
                 try:
-                    # bet = float(input("Quanto deseja apostar?\n"))
-                    bet = 10
+                    bet = float(input("Quanto deseja apostar?\n"))
 
                     if bet > player.money:
                         print("Você não tem tanto dinheiro assim. Insira novamente.")
@@ -94,14 +97,16 @@ def player_process(
 
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
-
-            return
+            return 'RUNNING'
 
         case "distribute-cards":
             player.hand = message["data"][str(player_id)]
             player.players_hand = message["data"]
 
             print(f"Cartas do Dealer: {message["data"][str(player.dealer_id)][0]["points"]} {message["data"][str(player.dealer_id)][0]["suit"]} XX")
+
+            print("Suas cartas: ")
+            print_hand(player.hand)
 
             # Ativa a flag de blackjack natural
             player_points = sum_points(player.hand)
@@ -110,8 +115,7 @@ def player_process(
 
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
-
-            return
+            return 'RUNNING'
         
         case "get-actions":
             for i, action in enumerate(message["data"]):
@@ -164,8 +168,8 @@ def player_process(
                                 player.f_stand = 1
                                 break
                             elif play == 3 and player.f_first_round:
-                                player.f_surrender = 1
                                 message["data"][player_id] = ["SURRENDER", None]
+                                player.f_surrender = 1
                                 break
                             else:
                                 print("Opção inválida! Por favor, insira uma das opções.")
@@ -178,7 +182,7 @@ def player_process(
 
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
-            return
+            return 'RUNNING'
         
         case "result-payment":
             print("Mão final do dealer: ")
@@ -187,9 +191,9 @@ def player_process(
             print_hand(player.hand)
 
             print(f"Meu pagamento é {message["data"][player_id]}")
+            print("========================================================\n")
         
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)
-            return 
-        
+            return 'RUNNING'        
     return

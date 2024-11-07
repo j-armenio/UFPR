@@ -1,3 +1,10 @@
+# Ative para prints de depuração
+DEBUG = False
+
+def debug_print(*args, **kwargs):
+    if DEBUG:
+        print(*args, **kwargs)
+
 # Soma os pontos de uma mao e os retorna
 def sum_points(hand):
     # calcula a soma dos pontos considerando ases como 11
@@ -14,6 +21,6 @@ def sum_points(hand):
 # Imprime as cartas de uma mão
 def print_hand(hand):
     for card in hand:
-        print(f"{card["points"]} {card["suit"]}")    
+        print(f"{card['points']} {card['suit']}")    
     
     print("\n")
