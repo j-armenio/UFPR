@@ -36,7 +36,7 @@ def main():
         dealer.dealer_id = PLAYER_ID
 
         input("Aperte alguma tecla para iniciar: \n")
-        print("============================= LOG DO ROUND =============================\n")
+        print("============================ LOG DO ROUND ============================\n")
 
         start_round(dealer, transmit_socket, next_ip, next_port)
 
@@ -46,14 +46,16 @@ def main():
         debug_print(f"player.dealer_id: {player.dealer_id}, dealer.dealer_id: {dealer.dealer_id}")
 
         if game_state == 'RUNNING':
-            print("Aguardando...\n")
             if dealer.dealer_id == PLAYER_ID:
-                debug_print("Aguardando...(DEALER)\n")
+                print("[DEALER] Aguardando...\n")
             else:
-                debug_print("Aguardando...(PLAYER)\n")
+                print("Aguardando...\n")
 
             message = receive_message(receive_socket)
-            input("PRESSIONE PARA CONTINUAR...")
+
+            # input("PRESSIONE PARA CONTINUAR...")
+            print("Recebi mensagem.\n")
+            time.sleep(2)
 
         elif game_state == 'STARTING': # Só é usado quando Dealer é passado
             dealer.dealer_id = player.dealer_id

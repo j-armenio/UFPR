@@ -72,16 +72,15 @@ def dealer_process(
 
             message["acks"][dealer.dealer_id] = 1
 
-            print("Solicitando apostas dos jogadores...\n")
+            print("[DEALER] Solicitando apostas dos jogadores...\n")
             debug_print(f"Pedido de apostas: {message}\n")
-            
+
             send_message(transmit_socket, next_ip, next_port, message)
 
         case "result-payment":
             check_acks(message["acks"])
 
-            print("Rodada concluida!")
-            print("--------------\n")
+            print("============================ RODADA CONCLUIDA ============================")
 
             print(f"Passando Dealer para jogador {(dealer.dealer_id + 1) % NUM_PLAYERS}")
 
@@ -102,11 +101,12 @@ def dealer_process(
         case "players-bet": # Dealer processa as apostas do 1 round
             check_acks(message["acks"])
 
+            print("[DEALER] Apostas dos jogadores:")
             for i, bet in enumerate(message["data"]):
                 if bet is not None:
                     dealer.bets[i] = bet
-            
-            print(f"Apostas recebidas: {dealer.bets}\n")
+                    print(f"[DEALER] Player {i}: {bet}")
+            print()
 
             # Dealer cria o baralho e distribui as cartas
             dealer.deck = generate_deck()
@@ -117,6 +117,7 @@ def dealer_process(
             #       0: [{"value": "A", "suit": "♠", "points": "11"}, {"value": "J", "suit": "♠", "points": "10"}],
             #       1: [{"value": "K", "suit": "♠", "points": "10"}, {"value": "5", "suit": "♠", "points": "5"}],
             #   }
+
             dealer.players_hand = player_cards
             
             # Insere as duas primeiras cartas para a mao do dealer
@@ -125,7 +126,8 @@ def dealer_process(
             # Remove a segunda carta da visão dos jogadores
             dealer.players_hand[dealer.dealer_id].pop()
 
-            print(f"Cartas do dealer: A segunda está oculta aos jogadores!\n")        
+            print(f"[DEALER] Mão do Dealer (a segunda está oculta aos jogadores!):")
+            print("[DEALER]", end=" ") # Prefixo da linha
             print_hand(dealer.dealer_hand)
 
             message["type"] = "distribute-cards"
@@ -140,7 +142,7 @@ def dealer_process(
 
         case "distribute-cards":
             check_acks(message["acks"])
-            print("Cartas distribuidas com sucesso.\n")
+            print("[DEALER] Cartas distribuidas com sucesso.\n")
 
             message["type"] = "get-actions"
             message["data"] = [[None, None] for _ in range(NUM_PLAYERS)]  # [action, card]
@@ -152,7 +154,7 @@ def dealer_process(
         case "get-actions": # data: [[None, None], ['NATURAL', None], ['STAND', None], ['HIT', None]]
             check_acks(message["acks"])
 
-            print("Processando ações:")
+            print("[DEALER] Processando ações:")
             
             has_hit = 0
             for i, action in enumerate(message["data"]):
@@ -192,18 +194,21 @@ def dealer_process(
                     dealer.dealer_hand.append({'value': 'Q', 'suit': '♥', 'points': 10})
                     dealer_points = sum_points(dealer.dealer_hand)
 
-                print("Mão do dealer após jogar:")
+                print("[DEALER] Mão do dealer após jogar:")
+                print("[DEALER]", end=" ")
                 print_hand(dealer.dealer_hand)
-                print("\n")
+                print()
 
                 dealer_bust = 0
                 if dealer_points > 21:
                     dealer_bust = 1
-                    print("Dealer estorou!\n")
+                    print("[DEALER] Dealer estorou!\n")
 
                 final_actions = copy.deepcopy(message["data"]) # guarda as ações p ultima iteração sobre
 
                 message["data"] = [[None, None] for _ in range(NUM_PLAYERS)]  # [result, payment]
+
+                print("[DEALER] Calculando resultados.")
 
                 # Tratar cada resultado
                 for i, action in enumerate(final_actions):
@@ -231,16 +236,16 @@ def dealer_process(
 
                     else: # Caso padrão -- sem 21 e sem bust                        
                         player_points = sum_points(dealer.players_hand[i])
-                        print(f"player_points: {player_points}")
+                        debug_print(f"player_points: {player_points}")
 
                         match action[0]:
 
                             case "SURRENDER":
-                                print("Calculando Surrender...")
+                                debug_print("Calculando Surrender...")
                                 message["data"][i] = ["SURRENDER", dealer.bets[i] / 2]                                
 
                             case "STAND":
-                                print("Calculando Stand...")
+                                debug_print("Calculando Stand...")
 
                                 if player_points == dealer_points:
                                     message["data"][i] = ["TIE", dealer.bets[i]]                                    
@@ -252,16 +257,18 @@ def dealer_process(
                                     message["data"][i] = ["LOSE", 0]
 
                             case "NATURAL":
-                                print("Calculando Natural...")
+                                debug_print("Calculando Natural...")
                                 message["data"][i] = ["WIN", dealer.bets[i] * 2]
 
                             case "BUST":
-                                print("Calculando Bust...")
+                                debug_print("Calculando Bust...")
                                 message["data"][i] = ["LOSE", 0]
 
                             case _: # ação do Dealer
-                                print("Ação dealer...")
+                                debug_print("Ação dealer...")
                                 pass
+                            
+                print("[DEALER] Enviando resultados para jogadores.\n")
             
             message["data"][dealer.dealer_id] = dealer.dealer_hand
 

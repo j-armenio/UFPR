@@ -78,6 +78,7 @@ def player_process(
             return 'RUNNING'
 
         case "players-bet":
+            print(f"Seu crédito atual: {player.money}\n")
             while True:
                 try:
                     bet = float(input("Quanto deseja apostar?\n"))
@@ -103,10 +104,15 @@ def player_process(
             player.hand = message["data"][str(player_id)]
             player.players_hand = message["data"]
 
-            print(f"Cartas do Dealer: {message["data"][str(player.dealer_id)][0]["points"]} {message["data"][str(player.dealer_id)][0]["suit"]} XX")
+            print(f"Mão do Dealer:\n{message["data"][str(player.dealer_id)][0]["points"]}{message["data"][str(player.dealer_id)][0]["suit"]} XX")
+            print()
 
-            print("Suas cartas: ")
-            print_hand(player.hand)
+            print("Mãos dos jogadores:")
+            for i, hand in player.players_hand.items():
+                if int(i) != player.dealer_id:
+                    print(f"Player {i}:", end=" ")
+                    print_hand(hand)
+            print()
 
             # Ativa a flag de blackjack natural
             player_points = sum_points(player.hand)
@@ -149,7 +155,7 @@ def player_process(
                     message["data"][player_id] = ["NATURAL", None]
                     print("Você possui um Blackjack natural, você não joga esse round.\n")
                 else:
-                    print("Insira o número de sua jogada?")
+                    print("Insira o número de sua jogada.\n")
                     print("1.HIT")
                     print("2.STAND")
 
@@ -185,13 +191,32 @@ def player_process(
             return 'RUNNING'
         
         case "result-payment":
-            print("Mão final do dealer: ")
+            print("Mão final do dealer:")
             print_hand(message["data"][player.dealer_id])
+            print()
+
             print("Sua mão final:")
             print_hand(player.hand)
+            print()
 
-            print(f"Meu pagamento é {message["data"][player_id]}")
-            print("========================================================\n")
+            match message["data"][player_id][0]:
+                case "SURRENDER":
+                    print("Você se rendeu.")
+                case "WIN":
+                    print("Você venceu.")
+                case "LOSE":
+                    print("Você perdeu.")
+                case "TIE":
+                    print("Você empatou.")
+                case _:
+                    print("Erro.")
+            
+            print(f"Seu pagamento: {message["data"][player_id][1]}\n")
+            player.money -= int(message["data"][player_id][1])
+
+            print(f"Crédito atual: {player.money}\n")
+
+            print("============================ FIM DE ROUND ============================\n")
         
             message["acks"][player_id] = 1
             send_message(transmit_socket, next_ip, next_port, message)

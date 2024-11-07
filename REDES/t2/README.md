@@ -129,9 +129,6 @@ Protocolo:
 - baton: Apenas uma marcador para passar o bastão da rede em anel. !! Essa é a única mensagem que não precisa ser retirada por quem enviou !!
     * DATA: None
 
-- line-open: serve apenas para informar que todo processamento do round acabou, e o próximo dealer pode iniciar o próximo round
-    * DATA: vazia
-
 5. **Comparação de mão e pagamento**: As mãos dos jogadores são comparadas à mão do dealer.
     - Vitória do Jogador: Se o jogador tiver uma pontuação mais alta que o dealer sem ultrapassar 21, ele vence e recebe o pagamento. Nesse caso o jogador ganha um valor igual a aposta. (aposta $10 recebe $20)
     - Derrota do Jogador: Se o dealer tiver uma pontuação maior, o jogador perde sua aposta. Perde tudo.
