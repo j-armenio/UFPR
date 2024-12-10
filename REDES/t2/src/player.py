@@ -30,6 +30,7 @@ def setup_sockets(player_id):
 
     # Criação dos sockets de recebimento e transmissão
     receive_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    print(IPS[player_id])
     receive_socket.bind((IPS[player_id], local_receive_port))
 
     transmit_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -105,7 +106,7 @@ def player_process(
             player.hand = message["data"][str(player_id)]
             player.players_hand = message["data"]
 
-            print(f"Mão do Dealer:\n{message["data"][str(player.dealer_id)][0]["points"]}{message["data"][str(player.dealer_id)][0]["suit"]} XX")
+            print(f"Mão do Dealer:\n{message['data'][str(player.dealer_id)][0]['points']}{message['data'][str(player.dealer_id)][0]['suit']} XX")
             print()
 
             print("Mãos dos jogadores:")
