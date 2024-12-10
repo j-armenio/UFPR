@@ -3,8 +3,9 @@ import json
 from src.utils import sum_points, print_hand, debug_print
 
 PORTS = [7000, 7001, 7002, 7003]
-LOCAL_IP = "127.0.0.1"
-NEXT_IP = "127.0.0.1"
+IPS = ["10.254.223.71", "10.254.223.69", "10.254.223.70", "10.254.223.80"]
+# LOCAL_IP = "127.0.0.1"
+# NEXT_IP = "127.0.0.1"
 
 NUM_PLAYERS = 4
 START_MONEY = 1000
@@ -29,12 +30,12 @@ def setup_sockets(player_id):
 
     # Criação dos sockets de recebimento e transmissão
     receive_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    receive_socket.bind((LOCAL_IP, local_receive_port))
+    receive_socket.bind((IPS[player_id], local_receive_port))
 
     transmit_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     print(f"Player {player_id} localizado em {local_receive_port}\n")
-    return receive_socket, transmit_socket, NEXT_IP, next_port
+    return receive_socket, transmit_socket, IPS[(player_id+1) % len(IPS)], next_port
 
 def send_message(transmit_socket, next_ip, next_port, message):
     debug_print(f"Enviando para {next_port}: {message}\n")
