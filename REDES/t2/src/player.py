@@ -30,7 +30,6 @@ def setup_sockets(player_id):
 
     # Criação dos sockets de recebimento e transmissão
     receive_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    print(IPS[player_id])
     receive_socket.bind((IPS[player_id], local_receive_port))
 
     transmit_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
