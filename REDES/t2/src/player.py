@@ -2,7 +2,7 @@ import socket
 import json
 from src.utils import sum_points, print_hand, debug_print
 
-PORTS = [2000, 2001, 2002, 2003]
+PORTS = [7000, 7001, 7002, 7003]
 LOCAL_IP = "127.0.0.1"
 NEXT_IP = "127.0.0.1"
 
@@ -85,8 +85,8 @@ def player_process(
 
                     if bet > player.money:
                         print("Você não tem tanto dinheiro assim. Insira novamente.")
-                    elif bet < 0:
-                        print("Ue, quer ficar devendo mano? Coloca um valor certo.")
+                    elif bet <= 0:
+                        print("Ue, quer ficar devendo? Coloca um valor certo.")
                     else:
                         break
 
@@ -212,7 +212,7 @@ def player_process(
                     print("Erro.")
             
             print(f"Seu pagamento: {message["data"][player_id][1]}\n")
-            player.money -= int(message["data"][player_id][1])
+            player.money += int(message["data"][player_id][1])
 
             print(f"Crédito atual: {player.money}\n")
 
