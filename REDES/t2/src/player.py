@@ -130,7 +130,7 @@ def player_process(
                 if action[1] is not None: # É uma segundo envio, Dealer respondeu com algo
                     if player_id == i: # É o indice do jogador
                         card = action[1]                        
-                        print(f"Você recebeu: {card["points"]} {card["suit"]}\n")
+                        print(f"Você recebeu: {card['points']} {card['suit']}\n")
                         
                         if card not in player.hand:
                             player.hand.append(card.copy())
@@ -213,7 +213,7 @@ def player_process(
                 case _:
                     print("Erro.")
             
-            print(f"Seu pagamento: {message["data"][player_id][1]}\n")
+            print(f"Seu pagamento: {message['data'][player_id][1]}\n")
             player.money += int(message["data"][player_id][1])
 
             print(f"Crédito atual: {player.money}\n")
