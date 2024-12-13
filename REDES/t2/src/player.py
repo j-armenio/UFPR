@@ -217,6 +217,10 @@ def player_process(
 
             print(f"Crédito atual: {player.money}\n")
 
+            if player.money == 0:
+                player.money = START_MONEY
+                print("Você zerou. Tome seu dinheiro de volta.\n")
+
             print("============================ FIM DE ROUND ============================\n")
         
             message["acks"][player_id] = 1

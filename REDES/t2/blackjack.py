@@ -27,11 +27,11 @@ def main():
     player = Player()
     dealer = Dealer()
 
-    # Pode ter os estados: 'STARTING', 'ENDING' e 'RUNNING'
+    # Pode ter os estados: 'STARTING' e 'RUNNING'
     game_state = 'RUNNING'
 
     # Ações do Dealer inicial, deve inicializar a rede
-    if len(sys.argv) > 2 and sys.argv[2] == "-d":   
+    if len(sys.argv) > 2 and sys.argv[2] == "-d":  
         player.dealer_id = PLAYER_ID
         dealer.dealer_id = PLAYER_ID
 
