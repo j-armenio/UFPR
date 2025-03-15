@@ -1,3 +1,2 @@
 # UFPR
-Minha vida no curso Ciência da Computação na UFPR
-(nada funciona direito)
+Arquivos referentes a minha vida no curso de Ciência da Computação na UFPR.
