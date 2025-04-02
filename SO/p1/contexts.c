@@ -75,16 +75,8 @@ void BodyPong (void * arg)
 int main (int argc, char *argv[])
 {
    // Ponteiro para stack do contexto. É em char pois char tem 1 byte
-   char *stack ;
-
-   // Print que sinaliza inicio do contexto Main
-   printf ("main: inicio\n") ;
-
-   // Salva o contexto atual da execução na variável ContextPing
-   getcontext (&ContextPing) ;
-
    // Aloca memória para a pilha do contexto
-   stack = malloc (STACKSIZE) ;
+   char *stack = malloc (STACKSIZE) ;
    if (stack)
    { // Se a alocação deu certo
       ContextPing.uc_stack.ss_sp = stack ; // ss_sp é o stack pointer (base da pilha)
@@ -97,6 +89,12 @@ int main (int argc, char *argv[])
       perror ("Erro na criação da pilha: ") ;
       exit (1) ;
    }
+
+   // Print que sinaliza inicio do contexto Main
+   printf ("main: inicio\n") ;
+
+   // Salva o contexto atual da execução na variável ContextPing
+   getcontext (&ContextPing) ;
 
    // Ajusta o ContextPing para executar a função BodyPing com o parâmetro "   Ping" quando inicializado. 1 é a quantidade de argumentos de BodyPing
    makecontext (&ContextPing, (void*)(*BodyPing), 1, "    Ping") ;
