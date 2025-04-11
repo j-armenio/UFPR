@@ -4,11 +4,12 @@
 #include "ppos_data.h"
 #include "ppos.h"
 
-#define DEBUG
+// #define DEBUG
 
 long long int task_counter;
 task_t main_task;
 task_t *current_task;
+task_t *finished_task;
 
 // Inicializa o sistema operacional; deve ser chamada no inicio do main()
 void ppos_init()
@@ -71,7 +72,7 @@ int task_init (task_t *task,			// descritor da nova tarefa
     task->status = 0;
 
     #ifdef DEBUG
-    printf("PPOS: task %d (%p) created by task %d\n", task->id, stack, current_task->id);
+    printf("PPOS: task %d created by task %d\n", task->id, current_task->id);
     #endif
 
     return task->id;
@@ -81,14 +82,12 @@ int task_init (task_t *task,			// descritor da nova tarefa
 void task_exit(int exit_code)
 {
     #ifdef DEBUG
-    printf("PPOS: exiting task %d (%p)\n", current_task->id, current_task->context.uc_stack.ss_sp);
+    printf("PPOS: exiting task %d\n", current_task->id);
     #endif
 
-    task_switch(&main_task);
+    finished_task = current_task;
 
-    if (current_task->id != 0){ // Não liberar stack da main_task
-        //free(current_task->context.uc_stack.ss_sp);
-    }
+    task_switch(&main_task);
 }
 
 // Alterna a execução para a tarefa indicada
@@ -105,6 +104,14 @@ int task_switch(task_t *task)
         perror("PPOS: Erro ao trocar de contexto\n");
         return -1;
     }
+
+    // Aqui é seguro liberar a stack, pois ela não está mais em execução
+    if (finished_task != NULL) {
+        free(finished_task->context.uc_stack.ss_sp);
+        finished_task->context.uc_stack.ss_sp = NULL;
+        finished_task = NULL;
+    }
+
     return 0;
 }
 

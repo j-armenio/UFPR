@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "ppos.h"
 
-#define MAXTASK 4
+#define MAXTASK 1000
 
 task_t task[MAXTASK+1] ;
 
@@ -20,13 +20,7 @@ void BodyTask (void * arg)
    printf ("Iniciei  tarefa %5d\n", task_id()) ;
 
    // passa o controle para a proxima tarefa
-   //next = (task_id() < MAXTASK) ? task_id() + 1 : 1 ;
-
-   if (task_id() < MAXTASK)
-      next = task_id() + 1;
-   else
-      next  = 1;
-
+   next = (task_id() < MAXTASK) ? task_id() + 1 : 1 ;
    task_switch (&task[next]);
 
    printf ("Encerrei tarefa %5d\n", task_id()) ;
