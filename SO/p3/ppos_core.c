@@ -5,88 +5,206 @@
 #include "ppos.h"
 #include "queue.h"
 
-#define DEBUG
+//#define DEBUG
+#ifdef DEBUG
+#define DEBUG_PRINT(fmt, ...) fprintf(stderr, "PPOS: " fmt, ##__VA_ARGS__)
+#else 
+#define DEBUG_PRINT(fmt, ...)
+#endif
 
-long long int task_counter;
-task_t main_task;
-task_t *current_task;
-task_t *finished_task;
+/* =========== VARIAVEIS GLOBAIS =========== */
 
+long long int task_counter; // contador de id de tarefa
+int user_tasks;             // contador de tarefas ativas do usuário
+
+task_t main_task;           // tarefa do contexto main
+task_t dispatcher_task;     // tarefa do dispachante
+task_t *current_task;       // tarefa atual
+task_t *ready_queue;        // fila de tarefas prontas
+
+/* =========== FUNCOES AUXILIARES =========== */
+
+// Implementação de impressão para biblioteca de fila
+void print_task(void *ptr) 
+{
+    task_t *elem = ptr;
+
+    if (!elem)
+        return;
+    
+    elem->prev ? printf ("%d", elem->prev->id) : printf ("*") ;
+    printf("<%d>", elem->id);
+    elem->next ? printf("%d", elem->next->id) : printf("*") ;
+}
+
+/* =========== FUNCOES DE DESPACHAMENTO E ESCALONAMENTO =========== */
+
+// Coloca tarefa atual no fim da fila de prontas e devolve CPU ao dispatcher
 void task_yield()
 {
+    queue_append((queue_t **) &ready_queue, (queue_t *) current_task);
+    user_tasks++;
 
+    current_task->status = READY;
+    
+    dispatcher_task.status = RUNNING;
+    task_switch(&dispatcher_task);
 }
 
-void dispatcher()
+// Varre a fila e pega a primeira task, depois pega a próxima primeira e assim vai indo
+task_t *scheduler()
 {
+    if (!ready_queue){
+        printf("Fila de tarefas prontas vazia\n");
+        return NULL;
+    }
 
+    // elemento a ser removido (primeiro da fila)
+    task_t *next_task = ready_queue;
+    queue_remove((queue_t **) &ready_queue, (queue_t *) next_task);
+    user_tasks--;
+
+    return next_task;
 }
+
+// Determina qual a proxima tarefa a executar a cada troca de contexto
+void dispatcher()
+{   
+    DEBUG_PRINT("dispatcher no controle\n");
+    dispatcher_task.status = RUNNING;
+
+    // retira o dispatcher da fila de prontas, para evitar que ele ative a si proprio
+    queue_remove((queue_t **) &ready_queue, (queue_t *) &dispatcher_task);
+    user_tasks--;
+
+    // enquanto houveren tarefas de usuário
+    while ( user_tasks > 0 ) {
+        DEBUG_PRINT("tasks de usuario restantes: %d\n", user_tasks);
+        #ifdef DEBUG
+        queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
+        #endif
+
+        // escolher a próxima tarefa a executar
+        task_t *next_task = scheduler();
+
+        // escalonador escolheu uma tarefa?
+        if ( next_task ) {
+            dispatcher_task.status = SUSPENDED;
+
+            // transfere o controle para a próxima tarefa
+            task_switch(next_task);
+
+            switch (next_task->status)
+            {
+            case READY:
+                break;
+            
+            case FINISHED:                
+                // aqui é seguro liberar a stack, pois ela nao está mais em execucao
+                free(next_task->context.uc_stack.ss_sp);
+                VALGRIND_STACK_DEREGISTER(next_task->context.uc_stack.ss_sp); // valgrind config
+                next_task->context.uc_stack.ss_sp = NULL;
+                next_task = NULL;
+                break;
+
+            case SUSPENDED:
+                break;
+
+            case RUNNING:
+                break;
+
+            default:
+                printf("task em estado estranho: %d\n", next_task->status);
+                break;
+            }
+        }
+    }
+
+    // encera a tarefa dispatcher
+    task_exit(0);
+}
+
+/* =========== FUNCOES GERAIS =========== */
 
 // Inicializa o sistema operacional; deve ser chamada no inicio do main()
 void ppos_init()
-{
-    #ifdef DEBUG 
-    printf("PPOS: init\n");
-    #endif
+{ 
+    DEBUG_PRINT("init\n");
 
     // desativa o buffer da saida padrao (stdout), usado pela função printf
     setvbuf(stdout, 0, _IONBF, 0);
 
-    task_counter=0;
+    // configura variáveis globais de sistema
+    task_counter = 0;
+    user_tasks = 0;
+    ready_queue = NULL;
 
+    // configura task main
     if (getcontext(&main_task.context) == -1){
-        perror("PPOS: Erro ao salvar o contexto atual\n");
+        perror("Erro ao salvar o contexto atual\n");
         return;
     }
-
     main_task.id = task_counter++;
     main_task.prev = main_task.next = NULL;
-
-    // makecontext(&main_task.context, NULL, 1, NULL);
-
-    main_task.status = READY;
+    main_task.status = RUNNING;
 
     current_task = &main_task;
 
-    // Cria dispatcher
-    task_init();
+    // inicializa dispatcher
+    task_init(&dispatcher_task, dispatcher, NULL);
+
+    DEBUG_PRINT("main task %d\n", main_task.id);
+    DEBUG_PRINT("dispatcher task %d\n", dispatcher_task.id);
 }
+
+/* =========== GERENCIAMENTO DE TAREFAS =========== */
 
 // Inicializa uma nova tarefa. Retorna um ID> 0 ou erro.
 int task_init (task_t *task,			// descritor da nova tarefa
                void  (*start_func)(void *),	// funcao corpo da tarefa
                void   *arg)			// argumentos para a tarefa
 {
+    if (task == NULL || start_func == NULL) {
+        perror("Parametro de criação de task nulo\n");
+        return -1;
+    }
+
+    // salva contexto
     if (getcontext(&task->context) == -1){
-        perror("PPOS: Erro ao salvar o contexto atual\n");
+        perror("Erro ao salvar o contexto atual\n");
         return -1;
     }
 
     // aloca memória para pilha do contexto
     char *stack = malloc(STACKSIZE);
     if (!stack) {
-        perror("PPOS: Erro ao alocar pilha de contexto\n");
-    }
-
-    if (stack) { // configura stack para o contexto
-        task->context.uc_stack.ss_sp = stack;
-        task->context.uc_stack.ss_size = STACKSIZE;
-        task->context.uc_stack.ss_flags = 0;
-        task->context.uc_link = 0;
-    } else {
-        perror("PPOS: Erro na criação da pilha de contexto\n");
+        perror("Erro ao alocar pilha de contexto\n");
         return -1;
     }
 
-    task->id = task_counter++;
-    task->prev = task->next = NULL;
-
+    // inicializa variaveis de contexto
+    task->context.uc_stack.ss_sp = stack;
+    task->context.uc_stack.ss_size = STACKSIZE;
+    task->context.uc_stack.ss_flags = 0;
+    task->context.uc_link = 0;
+    
     makecontext(&task->context, (void*)(*start_func), 1, arg);
 
+    task->id = task_counter++;
+    task->prev = task->next = NULL;
     task->status = READY;
 
+    task->vg_id = VALGRIND_STACK_REGISTER(task->context.uc_stack.ss_sp, task->context.uc_stack.ss_sp + STACKSIZE); // valgrind config
+
+    DEBUG_PRINT("task %d created by task %d\n", task->id, current_task->id);
+
+    // adiciona task no fim da fila de tarefas prontas
+    queue_append((queue_t **) &ready_queue, (queue_t *) task);
+    user_tasks++;
+
+    DEBUG_PRINT("task %d added to ready queue\n", task->id);
     #ifdef DEBUG
-    printf("PPOS: task %d created by task %d\n", task->id, current_task->id);
+    queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
     #endif
 
     return task->id;
@@ -95,39 +213,54 @@ int task_init (task_t *task,			// descritor da nova tarefa
 // Termina a tarefa corrente com um status de encerramento
 void task_exit(int exit_code)
 {
-    #ifdef DEBUG
-    printf("PPOS: exiting task %d\n", current_task->id);
-    #endif
+    DEBUG_PRINT("exiting task %d\n", current_task->id);
 
-    finished_task = current_task;
+    switch (exit_code)
+    {
+    case 0: 
+        if (current_task == &dispatcher_task) { // liberar dispatcher no fim do programa
+            free(((&dispatcher_task)->context.uc_stack.ss_sp));
+            VALGRIND_STACK_DEREGISTER(&dispatcher_task.context.uc_stack.ss_sp); // valgrind config
+            dispatcher_task.context.uc_stack.ss_sp = NULL;
 
-    task_switch(&main_task);
+            DEBUG_PRINT("liberando PPOS dispatcher\n");
+
+            exit(exit_code);
+        } 
+        else // finaliza task e passa controle para o dispatcher
+        {
+            current_task->status = FINISHED;
+            task_switch(&dispatcher_task);
+            break;
+        }
+    
+    default:
+        break;
+    }
 }
 
 // Alterna a execução para a tarefa indicada
 int task_switch(task_t *task)
-{   
-    #ifdef DEBUG
-    printf("PPOS: switch task %d -> task %d\n", current_task->id, task->id);
-    #endif
+{
+    if (!task) {
+        perror("tentando trocar para task null\n");
+        return -1;
+    }
+
+    DEBUG_PRINT("switch task %d -> task %d\n", current_task->id, task->id);
+
+    task->status = RUNNING;
 
     task_t *aux = current_task;
     current_task = task;
 
     if (swapcontext(&aux->context, &task->context) == -1){
-        perror("PPOS: Erro ao trocar de contexto\n");
+        perror("Erro ao trocar de contexto\n");
         return -1;
-    }
-
-    // Aqui é seguro liberar a stack, pois ela não está mais em execução
-    if (finished_task != NULL) {
-        free(finished_task->context.uc_stack.ss_sp);
-        finished_task->context.uc_stack.ss_sp = NULL;
-        finished_task = NULL;
     }
 
     return 0;
 }
 
-// retorna o identificador da tarefa corrente (main deve ser 0)
+// Retorna o identificador da tarefa corrente (main deve ser 0)
 int task_id() { return current_task->id; }

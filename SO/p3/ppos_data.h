@@ -4,15 +4,16 @@
 #define __PPOS_DATA__
 
 #include <ucontext.h>		// biblioteca POSIX de trocas de contexto
+#include <valgrind/valgrind.h>
+
 
 #define STACKSIZE 64*1024   // Tamanho da stack de cada tarefa
 
 // Macros para status da task
-#define NEW       0
-#define READY     1
-#define RUNNING   2
-#define SUSPENDED 3
-#define FINISHED  4
+#define READY     0
+#define RUNNING   1
+#define SUSPENDED 2
+#define FINISHED  3
 
 // Estrutura que define um Task Control Block (TCB)
 typedef struct task_t
@@ -22,6 +23,7 @@ typedef struct task_t
   ucontext_t context ;			// contexto armazenado da tarefa
   short status ;			// pronta, rodando, suspensa, ...
   // ... (outros campos serão adicionados mais tarde)
+  int vg_id;
 } task_t ;
 
 // estrutura que define um semáforo
