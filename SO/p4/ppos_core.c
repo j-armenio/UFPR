@@ -5,7 +5,7 @@
 #include "ppos.h"
 #include "queue.h"
 
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG
 #define DEBUG_PRINT(fmt, ...) fprintf(stderr, "PPOS: " fmt, ##__VA_ARGS__)
 #else 
@@ -66,7 +66,10 @@ task_t *scheduler()
             
     // escolhe a tarefa com a menor prioridade dinamica
     do {
-        if (aux->prio_d < ret_task->prio_d)
+        if (
+            (aux->prio_d < ret_task->prio_d) || 
+            ((aux->prio_d == ret_task->prio_d) && (aux->prio_e < ret_task->prio_e))  // criterio de desempate usa prio_e
+        )
             ret_task = aux;
 
         aux = aux->next;
@@ -80,7 +83,7 @@ task_t *scheduler()
 
     if (ready_queue == NULL)
         printf("[]\n");
-    printf("PPOS: READY-PRIO: [");
+    printf("PPOS: PRIO: [");
     aux = ready_queue;
     do {
         printf("%d(%d,%d)", aux->id, aux->prio_e, aux->prio_d);
