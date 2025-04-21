@@ -33,23 +33,23 @@ int main (int argc, char *argv[])
   ppos_init () ;
 
   // task 2
-  task_init (&Pang, Body, "    Pang") ;
+  task_init (&Pang, Body, "    Pang(2)") ;
   task_setprio (&Pang, 0);
 
   // task 3
-  task_init (&Peng, Body, "        Peng") ;
+  task_init (&Peng, Body, "        Peng(3)") ;
   task_setprio (&Peng, 2);
 
   // task 4
-  task_init (&Ping, Body, "            Ping") ;
+  task_init (&Ping, Body, "            Ping(4)") ;
   task_setprio (&Ping, 4);
 
   // task 5
-  task_init (&Pong, Body, "                Pong") ;
+  task_init (&Pong, Body, "                Pong(5)") ;
   task_setprio (&Pong, 6);
 
   // task 6
-  task_init (&Pung, Body, "                    Pung") ;
+  task_init (&Pung, Body, "                    Pung(6)") ;
   task_setprio (&Pung, 8);
 
   printf ("main: fim\n");

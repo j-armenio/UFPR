@@ -14,7 +14,7 @@ main: fim
                 Pong: 0
     Pang: 4
                     Pung: inicio (prioridade 8)
-                    Pung: 0
+                    Pung: 0 ATÉ AQ TA CERTO
     Pang: 5
         Peng: 2
             Ping: 1

@@ -72,7 +72,26 @@ task_t *scheduler()
         aux = aux->next;
     } while (aux != ready_queue);
 
-    // "aging" adicionar -1 em todas tarefas da fila de prontas
+    DEBUG_PRINT("tarefa escolhida da fila de prontas: %d, prio_e: %d, prio:_d: %d\n", ret_task->id, ret_task->prio_e, ret_task->prio_d);
+
+    #ifdef DEBUG // impressao da fila de prontos e suas prioridades
+    queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
+
+
+    if (ready_queue == NULL)
+        printf("[]\n");
+    printf("PPOS: READY-PRIO: [");
+    aux = ready_queue;
+    do {
+        printf("%d(%d,%d)", aux->id, aux->prio_e, aux->prio_d);
+        aux = aux->next;
+        if (aux != ready_queue)
+            printf(" "); // separador
+    } while (aux != ready_queue);
+    printf("]\n");
+    #endif
+
+    // "Aging" adicionar -1 em todas tarefas da fila de prontas
     aux = ready_queue;
     do {
         if (aux != ret_task)
@@ -88,22 +107,6 @@ task_t *scheduler()
 
     if (ret_task != NULL) 
         ret_task->prio_d = ret_task->prio_e; // rejuvenescimento
-
-    #ifdef DEBUG
-    if (ready_queue == NULL)
-        printf("[]\n");
-    printf("PPOS: READY-PRIO: [");
-    aux = ready_queue;
-    do {
-        printf("%d(%d,%d)", aux->id, aux->prio_e, aux->prio_d);
-        aux = aux->next;
-        if (aux != ready_queue)
-            printf(" "); // separador
-    } while (aux != ready_queue);
-    printf("]\n");
-    #endif
-
-    DEBUG_PRINT("tarefa escolhida da fila de prontas: %d, prio_e: %d, prio:_d: %d\n", ret_task->id, ret_task->prio_e, ret_task->prio_d);
 
     return ret_task;
 }
@@ -121,9 +124,6 @@ void dispatcher()
     // enquanto houveren tarefas de usuário
     while ( user_tasks > 0 ) {
         DEBUG_PRINT("tasks de usuario restantes: %d\n", user_tasks);
-        #ifdef DEBUG
-        queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
-        #endif
 
         // escolher a próxima tarefa a executar
         task_t *next_task = scheduler();
@@ -173,7 +173,7 @@ void dispatcher()
 // Inicializa o sistema operacional; deve ser chamada no inicio do main()
 void ppos_init()
 { 
-    DEBUG_PRINT("init\n");
+    DEBUG_PRINT("iniciando...\n");
 
     // desativa o buffer da saida padrao (stdout), usado pela função printf
     setvbuf(stdout, 0, _IONBF, 0);
@@ -265,7 +265,7 @@ int task_init (task_t *task,			// descritor da nova tarefa
 
     task->vg_id = VALGRIND_STACK_REGISTER(task->context.uc_stack.ss_sp, task->context.uc_stack.ss_sp + STACKSIZE); // valgrind config
 
-    DEBUG_PRINT("task %d created by task %d\n", task->id, current_task->id);
+    DEBUG_PRINT("task %d criada pela task %d\n", task->id, current_task->id);
 
     task->status = READY;
     // adiciona task no fim da fila de tarefas prontas
@@ -273,7 +273,7 @@ int task_init (task_t *task,			// descritor da nova tarefa
     queue_append((queue_t **) &ready_queue, (queue_t *) task);
     user_tasks++;
 
-    DEBUG_PRINT("task %d added to ready queue\n", task->id);
+    DEBUG_PRINT("task %d adicionada a fila de prontos\n", task->id);
     #ifdef DEBUG
     queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
     #endif
