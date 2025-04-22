@@ -5,7 +5,7 @@
 #include "ppos.h"
 #include "queue.h"
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #define DEBUG_PRINT(fmt, ...) fprintf(stderr, "PPOS: " fmt, ##__VA_ARGS__)
 #else 
@@ -79,8 +79,6 @@ task_t *scheduler()
 
     #ifdef DEBUG // impressao da fila de prontos e suas prioridades
     queue_print("PPOS: READY", (queue_t *) ready_queue, print_task);
-
-
     if (ready_queue == NULL)
         printf("[]\n");
     printf("PPOS: PRIO: [");
