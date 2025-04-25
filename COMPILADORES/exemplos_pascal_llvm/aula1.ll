@@ -1,19 +1,19 @@
 declare i32 @printf(ptr noundef, ...)
 declare i32 @scanf(ptr noundef, ...)
 @read_int = private unnamed_addr constant [3 x i8] c"%d\00", align 1
-@write_int = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@write_int = private unnamed_addr constant [4 x i8] c"%d\A0\00", align 1
 
 @x = global i32 0
 @y = global i32 0
 @z = global i32 0
 
-define i32 @soma(i32 %0, i32 %1){
+define i32 @soma(i32 %0, i32 %1) {
 entry:
     %a = alloca i32
     store i32 %0, ptr %a
     %b = alloca i32
     store i32 %1, ptr %b
-    %soma = alloca i32 
+    %soma = alloca i32
     %2 = load i32, ptr %a
     %3 = load i32, ptr %b
     %4 = add i32 %2, %3
