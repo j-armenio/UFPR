@@ -3,10 +3,10 @@ CC = gcc
 # Flags de compilação
 CFLAGS = -Wall -g
 # Nome do executável
-TARGET = pingpong-preempcao
+TARGET = pingpong-preempcao-stress
 
 # Arquivos objeto
-OBJS = pingpong-preempcao.o ppos_core.o queue.o
+OBJS = pingpong-preempcao-stress.o ppos_core.o queue.o
 
 # Regra padrão
 all: $(TARGET)
@@ -16,7 +16,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Regras de compilação para cada arquivo fonte
-pingpong-preempcao.o: pingpong-preempcao.c ppos.h
+pingpong-preempcao-stress.o: pingpong-preempcao-stress.c ppos.h
 	$(CC) $(CFLAGS) -c $<
 
 ppos_core.o: ppos_core.c ppos_data.h ppos.h queue.h
