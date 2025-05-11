@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ucontext.h>
+#include <signal.h>
+#include <sys/time.h>
 #include "ppos_data.h"
 #include "ppos.h"
 #include "queue.h"
+
+#define _POSIX_C_SOURCE 200809L // necesssário para compilar o signal
 
 //#define DEBUG
 #ifdef DEBUG
@@ -14,13 +18,17 @@
 
 /* =========== VARIAVEIS GLOBAIS =========== */
 
-long long int task_counter; // contador de id de tarefa
-int user_tasks;             // contador de tarefas ativas do usuário
+long long int task_counter;    // contador de id de tarefa
+int user_tasks;                // contador de tarefas ativas do usuário
 
-task_t main_task;           // tarefa do contexto main
-task_t dispatcher_task;     // tarefa do dispachante
-task_t *current_task;       // tarefa atual
-task_t *ready_queue;        // fila de tarefas prontas
+task_t main_task;              // tarefa do contexto main
+task_t dispatcher_task;        // tarefa do dispachante
+task_t *current_task;          // tarefa atual
+task_t *ready_queue;           // fila de tarefas prontas
+
+struct sigaction action;       // estrutura de tratamento de sinal
+struct itimerval timer;        // estrutura de temporizador
+short int quantum;   // quantum de tempo para cada tarefa
 
 /* =========== FUNCOES AUXILIARES =========== */
 
@@ -35,6 +43,19 @@ void print_task(void *ptr)
     elem->prev ? printf ("%d", elem->prev->id) : printf ("*") ;
     printf("<%d>", elem->id);
     elem->next ? printf("%d", elem->next->id) : printf("*") ;
+}
+
+// Rotina de tratamento de sinal para o temporizador (ticks)
+void timer_handler(int signum)
+{
+    // preempção por tempo apenas para tarefas de usuário
+    if (current_task->task_type == USER) {
+        quantum--;
+        if (quantum <= 0) {
+            quantum = QUANTUM;
+            task_yield();
+        }
+    }
 }
 
 /* =========== FUNCOES DE DESPACHAMENTO E ESCALONAMENTO =========== */
@@ -174,7 +195,7 @@ void dispatcher()
 // Inicializa o sistema operacional; deve ser chamada no inicio do main()
 void ppos_init()
 { 
-    DEBUG_PRINT("iniciando...\n");
+    DEBUG_PRINT("iniciando PPOS [DEBUG MODE]...\n");
 
     // desativa o buffer da saida padrao (stdout), usado pela função printf
     setvbuf(stdout, 0, _IONBF, 0);
@@ -183,6 +204,28 @@ void ppos_init()
     task_counter = 0;
     user_tasks = 0;
     ready_queue = NULL;
+    quantum = QUANTUM;
+
+    // registra a ação para o sinal de timer SIGALRM (sinal do timer)
+    action.sa_handler = timer_handler;
+    sigemptyset(&action.sa_mask);
+    action.sa_flags = 0;
+    if (sigaction(SIGALRM, &action, 0) < 0) {
+        perror("Erro em sigaction: ");
+        exit(1);
+    }
+
+    // ajusta valores do temporizador
+    timer.it_value.tv_usec = 1000;          // primeiro disparo, em micro-segundos
+    timer.it_value.tv_sec  = 0;    // primeiro disparo, em segundos
+    timer.it_interval.tv_usec = 1000;       // disparos subsequentes, em micro-segundos
+    timer.it_interval.tv_sec  = 0; // disparos subsequentes, em segundos
+
+    // arma o temporizador ITIMER_REAL
+    if (setitimer(ITIMER_REAL, &timer, 0) < 0) {
+        perror("Erro em setitimer: ");
+        exit(1);
+    }
 
     // configura task main
     if (getcontext(&main_task.context) == -1){
@@ -198,8 +241,9 @@ void ppos_init()
 
     // inicializa dispatcher
     task_init(&dispatcher_task, dispatcher, NULL);
+    dispatcher_task.task_type = DISPATCHER;
 
-    DEBUG_PRINT("main task id %d, dispatcher task id %d\n", main_task.id, dispatcher_task.id);
+    DEBUG_PRINT("init: main task id %d, dispatcher task id %d\n", main_task.id, dispatcher_task.id);
 }
 
 /* =========== GERENCIAMENTO DE TAREFAS =========== */
@@ -263,14 +307,15 @@ int task_init (task_t *task,			// descritor da nova tarefa
     task->id = task_counter++;
     task->prev = task->next = NULL;
     task->prio_e = task->prio_d = 0; // prioridade padrão
+    task->task_type = USER; // tipo de tarefa
 
     task->vg_id = VALGRIND_STACK_REGISTER(task->context.uc_stack.ss_sp, task->context.uc_stack.ss_sp + STACKSIZE); // valgrind config
 
     DEBUG_PRINT("task %d criada pela task %d\n", task->id, current_task->id);
 
     task->status = READY;
-    // adiciona task no fim da fila de tarefas prontas
 
+    // adiciona task no fim da fila de tarefas prontas
     queue_append((queue_t **) &ready_queue, (queue_t *) task);
     user_tasks++;
 
