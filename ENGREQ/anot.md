@@ -30,3 +30,16 @@ https://campusmap.ufpr.br/dev/github/UCM-SitePrincipal/ (Campus Map)
 https://moovitapp.com/pt-br (Moovit)
 
 
+## Especificação de Requisitos
+
+É a descrição sistemática e abstrata **do que o software deve fazer** a partir daquilo que foi analisado anteriormente.
+Apresenta a **solução** de como os problemas levantados na análise devem ser resolvidos pelo software em desenvolvimento.
+É a **forma de comunicação** direta entre o analista e a equipe de desenvolvimento de software.
+Especificar um requisito implica em **compreender exatamente o que deve ser feito e que se espera receber como resultado**.
+Existem diferentes tipo de especificação ao longo do desenvolvimento e em vários níveis.
+* Cenários
+* Requisitos (com maior nível de detalhes)
+* User Story
+* Casos de uso
+* Protótipos
+
