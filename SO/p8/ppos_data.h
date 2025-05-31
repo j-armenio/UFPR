@@ -39,7 +39,7 @@ typedef struct task_t
   int time_proc;         // tempo de processamento útil da tarefa
   int time_proc_start;   // inicio tempo de processamento 
   int activations;       // contagem de ativações
-  task_t *wait_queue;    // fila de tarefas suspensas
+  struct task_t *wait_queue;    // fila de tarefas suspensas
   int exit_code;         // código de saída da tarefa
 
   int vg_id; // valgrind config

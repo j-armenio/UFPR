@@ -9,7 +9,7 @@
 
 #define _POSIX_C_SOURCE 200809L // necesssário para compilar o signal
 
-#define DEBUG
+// #define DEBUG
 #ifdef DEBUG
 #define DEBUG_PRINT(fmt, ...) fprintf(stderr, "PPOS: " fmt, ##__VA_ARGS__)
 #else 
@@ -33,6 +33,22 @@ short int quantum;             // quantum de tempo para cada tarefa
 long long int clock;           // relógio interno do sistema
 
 /* =========== FUNCOES AUXILIARES =========== */
+
+// Funções para evitar condições de disputa por preempção
+static void lock_timer() 
+{
+    sigset_t mask;
+    sigemptyset(&mask);
+    sigaddset(&mask, SIGALRM);
+    sigprocmask(SIG_BLOCK, &mask, NULL);
+}
+static void unlock_timer() 
+{
+    sigset_t mask;
+    sigemptyset(&mask);
+    sigaddset(&mask, SIGALRM);
+    sigprocmask(SIG_UNBLOCK, &mask, NULL);
+}
 
 // Implementação de impressão para biblioteca de fila
 void print_task(void *ptr) 
@@ -68,21 +84,42 @@ unsigned int systime() { return clock; }
 // Permite a uma tarefa suspender-se para esperar a conclusão de outra
 int task_wait(task_t *task)
 {
-    /*
-    Faz com que a tarefa atual seja suspensa até a conclusão da tarefa b.
-    Mais tarde, quando a tarefa b encerrar(task_exit), a tarefa suspensa deve retornar
-     à fila de tarefas prontas.
-    Lembre-se, várias tarefas podem ficar aguardando, então todas devem ser acordadas quando isso ocorrer.
-    */
+    if (!task) return -1;
 
-    task_suspend(task->wait_queue);
+    DEBUG_PRINT("task %d waiting for task %d\n", current_task->id, task->id);
+
+    lock_timer();
+    if (task->status == FINISHED) {
+        int code = task->exit_code;
+        unlock_timer();
+        return code;
+    }
+    unlock_timer();
+
+    task_suspend(&task->wait_queue);
+
+    return task->exit_code;
 }
 
 // Suspende a tarefa atual e manda para queue
 void task_suspend(task_t **queue)
 {
+    lock_timer();
+
+    DEBUG_PRINT("Suspending task %d\n", current_task->id);
+
+    if (current_task->status == READY) {
+        queue_remove((queue_t **) &ready_queue, (queue_t *) current_task);
+        user_tasks--;
+    }
+    
     current_task->status = SUSPENDED;
-    queue_append((queue_t **) &queue, (queue_t *) current_task);
+
+    if (queue){
+        queue_append((queue_t **) queue, (queue_t *) current_task);
+    }
+
+    unlock_timer();
 
     dispatcher_task.status = RUNNING;
     task_switch(&dispatcher_task);
@@ -91,12 +128,18 @@ void task_suspend(task_t **queue)
 // Acorda uma tarefa que está suspensa em uma dada fila
 void task_awake(task_t *task, task_t **queue)
 {
-    if (queue)
-        queue_remove((queue_t **) &queue, (queue_t *) task);
+    lock_timer();
+
+    DEBUG_PRINT("Waking task %d\n", task->id);
+    
+    if (queue) 
+        queue_remove((queue_t **) queue, (queue_t *) task);
     
     task->status = READY;
     queue_append((queue_t **) &ready_queue, (queue_t *) task);
     user_tasks++;
+
+    unlock_timer();
 }
 
 /* =========== FUNCOES DE DESPACHAMENTO E ESCALONAMENTO =========== */
@@ -363,10 +406,12 @@ int task_init (task_t *task,			// descritor da nova tarefa
     task->time_born = systime();
     task->time_proc = 0;
     task->activations = 0;
+    task->wait_queue = NULL;
+    task->exit_code = 0;
 
     task->vg_id = VALGRIND_STACK_REGISTER(task->context.uc_stack.ss_sp, task->context.uc_stack.ss_sp + STACKSIZE); // valgrind config
 
-    //DEBUG_PRINT("task %d criada pela task %d\n", task->id, current_task->id);
+    DEBUG_PRINT("task %d criada pela task %d\n", task->id, current_task->id);
 
     task->status = READY;
 
@@ -385,36 +430,34 @@ int task_init (task_t *task,			// descritor da nova tarefa
 // Termina a tarefa corrente com um status de encerramento
 void task_exit(int exit_code)
 {
-    //DEBUG_PRINT("exiting task %d\n", current_task->id);
+    DEBUG_PRINT("exiting task %d\n", current_task->id);
 
-    switch (exit_code)
-    {
-    case 0: 
-        if (current_task == &dispatcher_task) { // liberar dispatcher no fim do programa
-            printf("Task %d exit: execution time %d ms, processor time %d ms, %d activations\n", 
-                current_task->id,
-                systime() - current_task->time_born,
-                current_task->time_proc, 
-                current_task->activations);
+    current_task->exit_code = exit_code;
 
-            free(((&dispatcher_task)->context.uc_stack.ss_sp));
-            VALGRIND_STACK_DEREGISTER(&dispatcher_task.context.uc_stack.ss_sp); // valgrind config
-            dispatcher_task.context.uc_stack.ss_sp = NULL;
+    task_t *waiting;
+    while ((waiting = current_task->wait_queue))
+        task_awake(waiting, &current_task->wait_queue);
 
-            DEBUG_PRINT("liberando PPOS dispatcher\n");
+    // liberar dispatcher no fim do programa
+    if (current_task == &dispatcher_task) {
+        printf("Task %d exit: execution time %d ms, processor time %d ms, %d activations\n", 
+            current_task->id,
+            systime() - current_task->time_born,
+            current_task->time_proc, 
+            current_task->activations);
 
-            exit(exit_code);
-        } 
-        else // finaliza task e passa controle para o dispatcher
-        {
-            current_task->status = FINISHED;
-            task_switch(&dispatcher_task);
-            break;
-        }
-    
-    default:
-        break;
+        free(((&dispatcher_task)->context.uc_stack.ss_sp));
+        VALGRIND_STACK_DEREGISTER(&dispatcher_task.context.uc_stack.ss_sp); // valgrind config
+        dispatcher_task.context.uc_stack.ss_sp = NULL;
+
+        DEBUG_PRINT("liberando PPOS dispatcher\n");
+
+        exit(exit_code);
     }
+
+    // finaliza task e passa controle para o dispatcher
+    current_task->status = FINISHED;
+    task_switch(&dispatcher_task);
 }
 
 // Alterna a execução para a tarefa indicada
