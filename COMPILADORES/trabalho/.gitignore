@@ -1,0 +1,4 @@
+compilador.log
+lex.yy.c
+compilador.tab.c
+compilador.tab.h
