@@ -1,0 +1,8 @@
+grafo: P5
+5 vertices
+4 arestas
+1 componentes
+bipartido
+diâmetros: 4
+vértices de corte: b c d
+arestas de corte: a b b c c d d e

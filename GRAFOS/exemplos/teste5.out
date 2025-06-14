@@ -1,0 +1,8 @@
+grafo: Desordenado
+10 vertices
+7 arestas
+4 componentes
+não bipartido
+diâmetros: 0 2 10 13
+vértices de corte: a zzz
+arestas de corte: 1 2 3 a aaa zzz abc zzz

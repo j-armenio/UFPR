@@ -1,0 +1,18 @@
+Desordenado
+
+// Componente 1
+zzz -- abc 12
+aaa -- zzz 1 
+
+
+// Componente 2
+sozinho
+
+// Componente 3 
+1 -- 2 10
+
+// Componente 4
+aac -- aab 1
+a -- aab 1
+a -- aac 1
+a -- 3 1
