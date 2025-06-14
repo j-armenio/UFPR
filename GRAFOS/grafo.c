@@ -5,6 +5,11 @@
 #include <ctype.h>
 #include "grafo.h"
 
+typedef struct aresta {
+    char *nome_u;
+    char *nome_v;
+} aresta;
+
 typedef struct vizinho {
     int v;
     int peso;
@@ -283,19 +288,50 @@ char* diametros(grafo* g) {
 
 // ================ // 
 
-// wrapper p strcmp
-int compara_strings(const void *a, const void *b) { return strcmp(*(const char**)a, *(const char**)b); }
-
-void dfs_vertices_corte(grafo *g, int v, int *pre, int *low, int *pai, int *corte, int *tempo)
-{
-    int filhos = 0;
-    pre[v] = low[v] = ++(*tempo);
-
-    
+static int compara_strings(const void *a, const void *b) 
+{ 
+    char *const *s1 = a;
+    char *const *s2 = b;
+    return strcmp(*s1, *s2);
 }
 
-// devolve uma "string" com os nomes dos vértices de corte de g em
-// ordem alfabética, separados por brancos
+static void dfs_vertices_corte(
+    grafo *g, 
+    int r, 
+    int *pre, 
+    int *low, 
+    int *pai, 
+    int *corte, 
+    int *tempo)
+{
+    int filhos = 0;
+    pre[r] = low[r] = ++(*tempo);
+
+    // percorre vizinhança de r
+    for (vizinho *v_vizinho = g->vertices[r]->adj; v_vizinho != NULL; v_vizinho = v_vizinho->prox) {
+        int v = v_vizinho->v;
+
+        if (pre[v] == -1) { // vertice ainda nao visitado
+            filhos++;
+            pai[v] = r;
+            dfs_vertices_corte(g, v, pre, low, pai, corte, tempo);
+
+            // atualiza low de r com ancestral mais alto
+            low[r] = (low[r] < low[v]) ? low[r] : low[v];
+
+            // eh vertice de corte se:
+            // eh raiz com mais de um filho OU 
+            // nao eh raiz e low de filho eh maior ou igual
+            if ((pai[r] == -1 && filhos > 1) || (pai[r] != -1 && low[v] >= pre[r]))
+                corte[r] = 1;
+        }
+
+        else if (v != pai[r]) // vertice ja visitado (menos pai)
+            low[r] = (low[r] < pre[v]) ? low[r] : pre[v];
+    }
+}
+
+// Retorna um array ordenado com os vertices de corte
 char *vertices_corte(grafo *g) 
 {
     if (!g || g->n == 0) return strdup("");
@@ -307,22 +343,22 @@ char *vertices_corte(grafo *g)
     int *pai = malloc(n * sizeof(int));
     int *corte = calloc(n, sizeof(int));
 
-    for (unsigned int i=0; i < n; ++i) {
+    for (unsigned int i=0; i < n; i++) {
         pre[i] = -1; // nao visitado
         pai[i] = -1;
     }
 
-    for (unsigned int i=0; i < n; ++i) {
+    for (unsigned int i=0; i < n; i++) {
         if (pre[i] == -1)
             dfs_vertices_corte(g, (int)i, pre, low, pai, corte, &tempo);
     }
 
     // formata saida
     char **nomes_corte = NULL;
-    int n_corte = 0;
+    size_t n_corte = 0;
     size_t tam_string = 1; // \0
 
-    for (unsigned int i=0; i < n; ++i) {
+    for (unsigned int i=0; i < n; i++) {
         if (corte[i]) {
             n_corte++;
             nomes_corte = realloc(nomes_corte, n_corte * sizeof(char*));
@@ -339,7 +375,7 @@ char *vertices_corte(grafo *g)
     char *str_final = malloc(tam_string);
     str_final[0] = '\0';
 
-    for (int i=0; i < n_corte; ++i) {
+    for (size_t i=0; i < n_corte; i++) {
         strcat(str_final, nomes_corte[i]);
         if (i < n_corte - 1)
             strcat(str_final, " ");
@@ -354,11 +390,115 @@ char *vertices_corte(grafo *g)
     return str_final;
 }
 
-// devolve uma "string" com as arestas de corte de g em ordem alfabética, separadas por brancos
-// cada aresta é o par de nomes de seus vértices em ordem alfabética, separadas por brancos
-//
-// por exemplo, se as arestas de corte são {z, a}, {x, b} e {y, c}, a resposta será a string
-// "a z b x c y"
-char *arestas_corte(grafo *g) {
-    
+static int compara_arestas(const void *a, const void *b)
+{
+    const aresta *aresta_a = (const aresta *)a;
+    const aresta *aresta_b = (const aresta *)b;
+
+    int cmp = strcmp(aresta_a->nome_u, aresta_b->nome_u);
+    if (cmp != 0) 
+        return cmp;
+    return strcmp(aresta_a->nome_v, aresta_b->nome_v);
 }
+
+static void dfs_arestas_corte(
+    grafo *g, 
+    int r, 
+    int *pre, 
+    int *low, 
+    int *pai, 
+    int *tempo, 
+    aresta **pontes, 
+    size_t *n_pontes) 
+{
+    pre[r] = low[r] = ++(*tempo);
+
+    for (vizinho *v_vizinho = g->vertices[r]->adj; v_vizinho != NULL; v_vizinho = v_vizinho->prox) {
+        int v = v_vizinho->v;
+
+        if (v == pai[r]) // ignora pai
+            continue;
+
+        if (pre[v] == -1) {
+            pai[v] = r;
+            dfs_arestas_corte(g, v, pre, low, pai, tempo, pontes, n_pontes);
+
+            low[r] = (low[r] < low[v]) ? low[r] : low[v];
+
+            if (low[v] > pre[r]) { // condição de ponte
+                (*n_pontes)++;
+                *pontes = realloc(*pontes, (*n_pontes) * sizeof(aresta));
+                (*pontes)[*n_pontes - 1] = (aresta){g->vertices[r]->nome, g->vertices[v]->nome};
+            }
+        } else { // aresta de retorno
+            low[r] = (low[r] < pre[v]) ? low[r] : pre[v];
+        }
+    }
+}
+
+// Retorna um array ordenado com as arestas de corte
+char *arestas_corte(grafo *g) 
+{
+    if (!g || g->n < 2) return strdup("");
+
+    int tempo = 0;
+    unsigned int n = g->n;
+    int *pre = malloc(n * sizeof(int));
+    int *low = malloc(n * sizeof(int));
+    int *pai = malloc(n * sizeof(int));
+
+    aresta *pontes = NULL;
+    size_t n_pontes = 0;
+
+    for (unsigned int i=0; i < n; i++) {
+        pre[i] = -1;
+        pai[i] = -1;
+    }
+
+    for (unsigned int i=0; i < n; i++) {
+        if (pre[i] == -1)
+            dfs_arestas_corte(g, (int)i, pre, low, pai, &tempo, &pontes, &n_pontes);
+    }
+
+    // ordena u e v da aresta
+    for (size_t i=0; i < n_pontes; i++) {
+        if (strcmp(pontes[i].nome_u, pontes[i].nome_v) > 0) {
+            char *temp = pontes[i].nome_u;
+            pontes[i].nome_u = pontes[i].nome_v;
+            pontes[i].nome_v = temp;
+        }
+    }
+
+    // ordena lista de arestas
+    if (n_pontes > 0)
+        qsort(pontes, n_pontes, sizeof(aresta), compara_arestas);
+
+    // formata string
+    size_t tam_string = 1;
+    for (size_t i=0; i < n_pontes; i++) {
+        tam_string += strlen(pontes[i].nome_u) + 1;
+        tam_string += strlen(pontes[i].nome_v) + 1; 
+    }
+
+    char *str_final = malloc(tam_string);
+    if (!str_final) return NULL;
+
+    str_final[0] = '\0';
+
+    for (size_t i=0; i < n_pontes; i++) {
+        strcat(str_final, pontes[i].nome_u);
+        strcat(str_final, " ");
+        strcat(str_final, pontes[i].nome_v);
+        if (i < n_pontes - 1) {
+            strcat(str_final, " ");
+        }
+    }   
+
+    free(pre);
+    free(low);
+    free(pai);
+    free(pontes);
+
+    return str_final;
+}
+ 
