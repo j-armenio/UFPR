@@ -1,112 +1,87 @@
-#include <openssl/conf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
+#include <vector>
 #include <string>
 #include <iostream>
+#include <iomanip>
+#include <cstdlib>
 
-void handleErrors(void) {
+typedef unsigned char byte;
+
+static void handle_errors() {
     ERR_print_errors_fp(stderr);
-    abort();
+    std::abort();
 }
 
-int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key,
-            unsigned char *iv, unsigned char *ciphertext) 
+void aes256_encrypt(const unsigned char key[32], const unsigned char iv[16],
+                    const std::vector<unsigned char> &plaintext)
 {
-    EVP_CIPHER_CTX *ctx;
-    int len;
-    int ciphertext_len;
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) handle_errors();
+    // inicializa encrypt
+    if (EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1)
+        handle_errors();
 
-    // cria e inicializa o contexto
-    if (!(ctx = EVP_CIPHER_CTX_new()))
-        handleErrors();
+    // Espaço suficiente: tamanho do plaintext + tamanho do bloco para o padding
+    int block_size = EVP_CIPHER_block_size(EVP_aes_256_cbc());
+    std::vector<unsigned char> ciphertext(plaintext.size() + block_size);
 
-    // inicializa a operacao de encriptacao
-    if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
-        handleErrors();
+    int out_len1 = 0;
+    if (EVP_EncryptUpdate(ctx, ciphertext.data(), &out_len1, plaintext.data(), static_cast<int>(plaintext.size())) != 1)
+        handle_errors();
 
-    // pega mensagem a ser criptografada e obtem o output. Pode ser chamada multiplas vezes.
-    if (1 != EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plaintext_len))
-        handleErrors();
-    ciphertext_len = len;
+    int out_len2 = 0;
+    if (EVP_EncryptFinal_ex(ctx, ciphertext.data() + out_len1, &out_len2) != 1)
+        handle_errors();
 
-    if (1 != EVP_EncryptFinal_ex(ctx, ciphertext+len, &len))
-        handleErrors();
-    ciphertext_len += len;
-
-    // finaliza
+    ciphertext.resize(out_len1 + out_len2);
     EVP_CIPHER_CTX_free(ctx);
 
-    return ciphertext_len;
+    return ciphertext;
 }
 
-int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key,
-            unsigned char *iv, unsigned char *plaintext)
+void aes256_decrypt(const unsigned char key[32], const unsigned char iv[16],
+                    const std::vector<unsigned char> &plaintext)
 {
-    EVP_CIPHER_CTX *ctx;
-    int len;
-    int plaintext_len;
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) handle_errors();
+    // inicializa decrypt
+    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1)
+        handle_errors();
 
-    // cria e inicializa o contexto
-    if(!(ctx = EVP_CIPHER_CTX_new()))
-        handleErrors();
+    // Tamanho do plaintext será <= tamanho do ciphertext
+    std::vector<unsigned char> plaintext(ciphertext.size());
 
-    // inicializa a descriptografia
-    if(1 != EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
-        handleErrors();
+    int out_len1 = 0;
+    if (EVP_DecryptUpdate(ctx, plaintext.data(), &out_len1, ciphertext.data(), static_cast<int>(ciphertext.size())) != 1)
+        handle_errors();
 
-    // recebe a mensagem criptografada, e obtem o output
-    if(1 != EVP_DecryptUpdate(ctx, plaintext, &len, ciphertext, ciphertext_len))
-        handleErrors();
-    plaintext_len = len;
+    int out_len2 = 0;
+    if (EVP_DecryptFinal_ex(ctx, plaintext.data() + out_len1, &out_len2) != 1)
+        handle_errors();
 
-    // finaliza a decriptacao
-    if(1 != EVP_DecryptFinal_ex(ctx, plaintext + len, &len))
-        handleErrors();
-    plaintext_len += len;
-
-    // limpa
+    plaintext.resize(out_len1 + out_len2);
     EVP_CIPHER_CTX_free(ctx);
-
-    return plaintext_len;
+    return plaintext;
 }
 
-int main(void) 
+int main()
 {
-    // chave exemplo de 256 bits
-    unsigned char *key = { 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
-                           0x38, 0x39, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35,
-                           0x36, 0x37, 0x38, 0x39, 0x30, 0x31, 0x32, 0x33,
-                           0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x30, 0x31
-                         };
+    // chave de 256 bits
+    const unsigned char key[32] = { 
+        0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
+        0x38, 0x39, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35,
+        0x36, 0x37, 0x38, 0x39, 0x30, 0x31, 0x32, 0x33,
+        0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x30, 0x31
+    };
 
-    // IV (vetor de inicialização) exemplo de 128 bits
-    unsigned char *iv = { 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
-                          0x38, 0x39, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35
-                        };
+    // IV(vetor de inicialização) de 128 bits
+    const unsigned char iv[16] = { 
+        0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
+        0x38, 0x39, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35
+    };
 
-    // mensagem a ser encriptada
-    unsigned char *plaintext = 
-                        (unsigned char *)"The quick brown fox jumps over the lazy dog";
-
-    /* Buffer para texto cifrado. Deve ser grande suficiente para que o texto cifrado seja
-    maior doque o plaintext, dependendo do algoritmo e do modo. */
-    unsigned char ciphertext[128];
-
-    unsigned char decryptedtext_len, ciphertext_len;
-
-    // Criptografa o plaintext
-    ciphertext_len = encrypt(plaintext, strlen((char *)plaintext), key, iv, ciphertext);
-
-    std::cout << "Texto original:\n" << plaintext << std::endl;
-    std::cout << "Texto encriptado:\n" << ciphertext << std::endl;
-
-    // Descriptografa o ciphertext
-    decryptedtext_len = decrypt(ciphertext, ciphertext_len, key, iv, decryptedtext);
-
-    // Adiciona terminador nulo de string, espera-se texto printavel
-    decryptedtext[decryptedtext_len] = '\0';
-
-    std::cout << "Texto decriptado:\n" << decryptedtext << std::endl;
-
-    return 0;
+    // mensagem a ser encrypted
+    std::string plaintext = "The quick brown fox jumps over the lazy dog";
+    
 }
