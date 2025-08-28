@@ -5,64 +5,80 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <memory>
+#include <stdexcept>
 
 typedef unsigned char byte;
 
-static void handle_errors() {
-    ERR_print_errors_fp(stderr);
-    std::abort();
-}
+using EVP_CIPHER_CTX_ptr = std::unique_ptr<EVP_CIPHER_CTX, decltype(&::EVP_CIPHER_CTX_free)>;
 
-void aes256_encrypt(const unsigned char key[32], const unsigned char iv[16],
-                    const std::vector<unsigned char> &plaintext)
+void aes256_encrypt(const byte key[32], 
+                const byte iv[16], 
+                const std::vector<unsigned char> &plaintext, 
+                std::vector<unsigned char> &ciphertext)
 {
-    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (!ctx) handle_errors();
-    // inicializa encrypt
-    if (EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1)
-        handle_errors();
+    // inicializacoes de contexto e init
+    EVP_CIPHER_CTX_ptr ctx(EVP_CIPHER_CTX_new(), ::EVP_CIPHER_CTX_free);
+    if (!ctx)
+        throw std::runtime_error("EVP_CIPHER_CTX_new failed");
+    int rc = EVP_EncryptInit_ex(ctx.get(), EVP_aes_256_cbc(), NULL, key, iv);
+    if (rc != 1)
+        throw std::runtime_error("EVP_EncryptInit_ex failed");
 
-    // Espaço suficiente: tamanho do plaintext + tamanho do bloco para o padding
-    int block_size = EVP_CIPHER_block_size(EVP_aes_256_cbc());
-    std::vector<unsigned char> ciphertext(plaintext.size() + block_size);
-
+    // pre-dimensiona plaintext +1 bloco para paddings
+    ciphertext.resize(plaintext.size() + 16); // 16 eh o tamanho do bloco AES
+    
     int out_len1 = 0;
-    if (EVP_EncryptUpdate(ctx, ciphertext.data(), &out_len1, plaintext.data(), static_cast<int>(plaintext.size())) != 1)
-        handle_errors();
+    const byte *in_ptr = plaintext.empty() ? nullptr : (const byte *)&plaintext[0];
 
-    int out_len2 = 0;
-    if (EVP_EncryptFinal_ex(ctx, ciphertext.data() + out_len1, &out_len2) != 1)
-        handle_errors();
+    rc = EVP_EncryptUpdate(ctx.get(), (byte*)&ciphertext[0], &out_len1, 
+                            in_ptr, (int)plaintext.size());
+    if (rc != 1)
+      throw std::runtime_error("EVP_EncryptUpdate failed");
+   
+    int out_len2 = (int)ciphertext.size() - out_len1;
+    rc = EVP_EncryptFinal_ex(ctx.get(), (byte*)&ciphertext[0]+out_len1, &out_len2);
+    if (rc != 1)
+      throw std::runtime_error("EVP_EncryptFinal_ex failed");
 
+    // ajusta tamanho final do texto cifrado
     ciphertext.resize(out_len1 + out_len2);
-    EVP_CIPHER_CTX_free(ctx);
-
-    return ciphertext;
 }
 
-void aes256_decrypt(const unsigned char key[32], const unsigned char iv[16],
-                    const std::vector<unsigned char> &plaintext)
+void aes256_decrypt(const byte key[32], 
+                const byte iv[16], 
+                const std::vector<unsigned char> &ciphertext, 
+                std::vector<unsigned char> &decryptedtext)
 {
-    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (!ctx) handle_errors();
-    // inicializa decrypt
-    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1)
-        handle_errors();
+    // inicializacoes de contexto e init
+    EVP_CIPHER_CTX_ptr ctx(EVP_CIPHER_CTX_new(), ::EVP_CIPHER_CTX_free);
+    if (!ctx)
+        throw std::runtime_error("EVP_CIPHER_CTX_new failed");
 
-    // Tamanho do plaintext será <= tamanho do ciphertext
-    std::vector<unsigned char> plaintext(ciphertext.size());
+    int rc = EVP_DecryptInit_ex(ctx.get(), EVP_aes_256_cbc(), NULL, key, iv);
+    if (rc != 1)
+        throw std::runtime_error("EVP_DecryptInit_ex failed");
+
+    // decryptedtext <= ciphertext (padding sera removido no final)
+    decryptedtext.resize(ciphertext.size());
 
     int out_len1 = 0;
-    if (EVP_DecryptUpdate(ctx, plaintext.data(), &out_len1, ciphertext.data(), static_cast<int>(ciphertext.size())) != 1)
-        handle_errors();
+    const byte* in_ptr = ciphertext.empty() ? nullptr : (const byte*)&ciphertext[0];
 
-    int out_len2 = 0;
-    if (EVP_DecryptFinal_ex(ctx, plaintext.data() + out_len1, &out_len2) != 1)
-        handle_errors();
+    rc = EVP_DecryptUpdate(ctx.get(),
+                           (byte*)&decryptedtext[0], &out_len1,
+                           in_ptr, (int)ciphertext.size());
+    if (rc != 1)
+        throw std::runtime_error("EVP_DecryptUpdate failed");
 
-    plaintext.resize(out_len1 + out_len2);
-    EVP_CIPHER_CTX_free(ctx);
-    return plaintext;
+    int out_len2 = (int)decryptedtext.size() - out_len1;
+    rc = EVP_DecryptFinal_ex(ctx.get(),
+                             (byte*)&decryptedtext[0] + out_len1, &out_len2);
+    if (rc != 1)
+        throw std::runtime_error("EVP_DecryptFinal_ex failed");
+
+    // ajusta tamanho final do texto plano (pos-remocao do padding)
+    decryptedtext.resize(out_len1 + out_len2);
 }
 
 int main()
@@ -82,6 +98,27 @@ int main()
     };
 
     // mensagem a ser encrypted
-    std::string plaintext = "The quick brown fox jumps over the lazy dog";
+    std::string msg = "The quick brown fox jumps over the lazy dog";
+    std::vector<unsigned char> plaintext(msg.begin(), msg.end());
+
+    std::vector<unsigned char> ciphertext;
+    std::vector<unsigned char> decryptedtext;
+
+    // criptografa
+    aes256_encrypt(key, iv, plaintext, ciphertext);
+
+    // descriptografa
+    aes256_decrypt(key, iv, ciphertext, decryptedtext);
+
+    std::cout << "Original: " << msg << "\n";
+
+    std::cout << "Cifrado (hex): ";
+    for (unsigned char c : ciphertext)
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)c;
+    td::cout << std::dec << "\n";
+
+    std::string recovered(decryptedtext.begin(), decryptedtext.end());
+    std::cout << "Decifrado: " << recovered << "\n";
     
+    return 0;
 }
