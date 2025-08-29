@@ -115,7 +115,7 @@ int main()
     std::cout << "Cifrado (hex): ";
     for (unsigned char c : ciphertext)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)c;
-    td::cout << std::dec << "\n";
+    std::cout << std::dec << "\n";
 
     std::string recovered(decryptedtext.begin(), decryptedtext.end());
     std::cout << "Decifrado: " << recovered << "\n";
