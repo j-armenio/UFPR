@@ -1,0 +1,94 @@
+Redes 2 Lista 2
+1. A abertura de uma conexão TCP é feita usando o three-way-handshake, onde a máquina A envia uma mensagem do com a flag SYN e um número de sequência inicial para a máquina B, B então responde com uma outra mensagem SYN-ACK, também com seu número de sequência inicial, para a primeira mensagem. Por fim, para confirmar a conexão, A retorna uma ultima mensagem com ACK confirmando a abertura da conexão TCP. O TCP-SYN-Flooding consiste de um ataque onde são enviadas inúmeras mensagens inicias de SYN pedindo abertura de conexão, mas nunca é enviada uma mensagem de confirmação final para o three-way-handshake, consumindo recursos, fazendo com que o receptor seja sobrecarregado e novos clientes não possam abrir novas conexões.
+
+2. O controle de fluxo do TCP define a melhor taxa que dois processos podem se comunicar, evita que o emissor envie dados mais rapidamente do que o receptor é capaz de receber, processar e armazenar no seu buffer.
+
+3. Porta de origem: porta do processo que enviou. 
+Porta do destino: porta do processo que vai receber. 
+SEQ: número de sequência do primeiro byte de dados desse segmento no fluxo TCP. 
+ACK: indica próximo byte que o host espera receber. 
+Tam. Header: tamanho total do header. 
+Reservados para uso futuro: reservados para uso futuro. 
+URG: flag que indica dados urgentes, uso definido na camada de aplicação. 
+ACK: flag para confirmação de recepção de dados. 
+PSH: flag que indica dados que devem ser entregues diretamente a aplicação. 
+RST: flag de reset, é uma resposta a segmentos sem sentido. 
+SYN: flag usada no three-way-handshake para sincronizar números de sequência na abertura da conexão. 
+FIN: flag que indica fim de comunicação TCP. 
+WIN: janela de controle de fluxo, indica o número de bytes livres no buffer do receptor. 
+Checksum: checksum para verificação da consistência dos dados. 
+Apontados de Dados urgentes: usado quando tem dados urgentes(flag URG), aponta para algum byte do payload, os dados até esse byte, tem a leitura priorizada.
+Opcionais: campo de tamanho variável, usado para recursos adicionais do TCP, por exemplo: SACK(informa possíveis lacunas de pacotes), MSS(Maximum Segment Size), Timestamps. 
+Padding: preenche dados pois o tamanho do pacote deve ser múltiplo de 32 bits. 
+
+4. Congestionamento em uma rede de computadores ocorre quando pacotes chegam em uma taxa maior que a capacidade de processamento desses dados causando descarte de pacotes por falta de espaço em buffer. No congestionamento de carros, carros não são descartados, só param ou andam mais devagar.
+
+5. Slow-Start TCP(TCP Tahoe): inicialmente a JCONG(janela de congestionamento) é definida para 1 MSS(Maximum Segment Size), e é enviada uma mensagem. A cada ACK recebido, a JCONG é dobrada, e a próxima mensagem é enviada, e esse processo segue até que, o timeout estore antes de um ACK, isso indica um possível congestionamento na rede. Quando isso acontece, é definido um threshold de metade do tamanho da JCONG no momento do estouro, e JCONG recebe 1 novamente. O processo se repete, mas dessa vez, ao chegar no threshold, a janela começa a crescer de 1 em 1, até um próximo timeout, um threshold novo é definido e o processo se repete. 
+
+6. O TCP não usa um timeout fixo, ele é calculcado dinamicamente toda vez que você manda um segmento e é confirmado um ACK sem retransmissão, recebendo um tempo de RTT novo. A fórmula para calcular o timeout é:
+RTO = RTT_medio + β * Desvio_medio, geralmente β=4 
+Sendo que
+RTT_medio = α * RTT_medio + (1-α) * Novo_RTT, geralmente α=7/8 ou 0.9
+Desvio_medio = α * Desvio_medio + (1-α)*Novo_desvio
+Novo_desvio = |RTT_medio - Novo_RTT|
+Inicialmente Desvio_medio começa como RTT/2, e o RTT inicial é calculado pelo tempo entre A ter enviado e recebido uma mensagem.
+
+Calcular o timeout corretamente é essencial pois caso ele seja muito grande, vai demorar muito para reenviar os pacotes, e caso ele seja muito pequeno, vai causar muitos reenvios de pacotes desncessários.
+
+7. Fast Retransmission(TCP Reno): O receptor TCP usa um ACK acumulativo, se ele recebe segmentos fora de ordem ele continua enviando ACKs do último byte que recebeu em ordem, assim, se ainda não foi processado um pacote de SEQ anterior, o servidor pode retransmitir vários ACKs duplicados. Aí entra a retransmissão rápida, quando chegam 3 ACKs duplicados, de um mesmo pacote, é possível supor que o pacote seguinte se perdeu na transmissão, logo é necessário retransmiti-lo, sem esperar o timeout.
+Ele ajuda a manter o desempenho da conexão pois permite detectar e corrigir perdas de forma muito mais rápida do que esperar o tempo do timeout expirar.
+
+8. Retransmission Timer (Timeout): temporizador para detectar perda de segmentos. Se não chegar um ACK antes do vencimento do timer, o segmento assume que os dados se perderam e os retransmite. 
+Persistent Timer: quando uma mensagem de WIN > 0 é enviada, e não recebe uma resposta, se esse timer expirar, envia outra mensagem igual, para evitar deadlocks.
+Keep Alive Timer: timer para quando a conexão fica muito tempo em silêncio, o TCP envia segmentos de teste, caso não haja resposta, a conexão é considerada interrompida e é fechada.
+
+9. O algoritmo de Nagle e a solução de Clarke servem para resolver o problema da Silly Window Syndrome, que contece quando a conexão TCP começa a trabalhar com janelas e segmentos muito pequenos.
+Algoritmo de Nagle: é a solução do lado do emissor, que evita enviar pacotes muito pequenos. Regra: o primeiro byte é enviado sem espera nenhuma, após isso, ele não envia segmentos pequenso e acumula dados no buffer, até: receber um ACK dos anteriores ou ter dados suficientes para encher um segmento inteiro (>=MSS) ou ter metade do buffer cheio. 
+Solução de Clark: é a solução do lado do receptor, que evita ficar anunciando janelas muito pequenas. Regra: só anuncia aumento de janela quando houver espaço para pelo menos 1 MSS de dados ou pelo menos metade do buffer de recepção livre.
+
+10. O TCP é full-duplex, tendo fluxo de dados para os dois lados. Cada fluxo é encerrado por meio de um FIN + ACK. Cada finalização é feita independentemente, e mesmo após confirmar um FIN, um lado pode continuar comunicando.
+É impossível fazer um encerramento TCP 100% garantido, pois quando A manda o último ACK, ele nunca tem certeza absoluta que ele chegou em B, para lidar com isso A entra em um tempo de espera e continua conectado por um tempo após o encerramento da conexão.
+
+11. Cliente-Servidor é um modelo de comunicação entre hosts, em que o Servidor é um processo que está sempre executando e em modo de escuta, e o cliente é quem manda solicitações de conexão ao servidor. O servidor oferece um serviço e o cliente consome esse serviço, normalmente encerrando sua execução após a interação com o servidor, que continua ativo.
+
+12. Cliente-Servidor iterativo atende um cliente por vez, funciona de forma que pedidos de conexão de clientes chegam, entram em uma fila, e são tratados sequencialmente.
+Cliente-Servidor concorrente atende vários clientes ao mesmo tempo, ele cria um processo novo toda vez que chega um pedido de conexão, e para os usuários, as conexões são atendidas simultaneamente.
+
+13. TCP pode ser iterativo ou concorrente, como ele é orientado a conexão, essas conexões podem ser feitas entre processos em paralelo ou sequencialmente sem problemas. Já o UDP é um protocolo não orientado a conexão, então não faz sentido uma comunicação UDP que seja concorrente, pois o servidor recebe datagramas avulsos em um único socket e responde.
+
+14. A definição de socket começou como uma abstração a comunicação de processos, e posteriormente uma API para programação de comunicação de processos. No linux, um socket possui um descritor como identificador que aponta para uma tabela com informações sobre esse socket. 
+Em relação aos protocolos TCP/IP, a API do socket é a interface que as aplicações usam para usar protocolos TCP/IP. No caso de um servidor TCP, sempre que há uma nova conexão, um novo socket é aberto para atede-la.
+
+15. 16. CÓDIGO
+
+17. Quem vai dentro do loop é o accept, que bloqueia esperando chegar um pedido de conexão, que quando chega é removido da fila de pendentes e retorna uma novo socket, o listen transforma o socket em formato de escuta, e é chamado apenas uma vez.
+
+18. O BOOTP é um protocolo da camada de aplicação, enquanto o RARP é da camada de enlace, oque o torna dependente da tecnologia física. Além disso, enquanto o RARP retorna apenas o endereço IP, o BOOTP retorna várias informações extras como a máscara de subrede, endereço do roteador local, endereço do servidor DNS, etc.
+
+19. BOOTP é um protocolo onde a tabela de endereços do servidor BOOTP deve ser preenchida manualmente por um administrador, causando um assinalamento estático dos endereços. O DHCP, que é um sucessor/expansão do BOOTP, é um protocolo que faz um assinalamento dinâmico temporário de endereços, não precisa de uma pré-configuração. Ambos tem o mesmo formato, então um mesmo servidor pode responder a ambos.
+
+20. O DNS foi divido em dois RFCs pois envolve dois aspectos diferentes: a arquitetura lógica de nomes e o protocolo e formato das mensagens.
+1) Define os nomes em sí, e como são construídos sobre uma árvore única de nomes DNS.
+2) Define o padrão de comunicação entre os clientes(resolvedores) e servidores (servidor de nomes DNS).
+
+21. Em uma consulta recursiva, o resolvedor do host, envia uma consulta a um servidor DNS recursivo, pedindo que ele obtenha a resposta completa. Esse servidor assume a responsabilidade de continuar o processo de resolução, e se necessário, consulta outros servidores até encontrar o registro solicitado, só então devolve ao cliente a reposta final.
+Já nas consultas iterativas, cada servidor de nomes responde apenas o que sabe, se não tiver as informações, ele devolve ao resolvedor uma referência para seguir. O resolvedor então pergunta ao próximo servidor e assim por diante.
+Na prática, como o resolvedor do host é leve, ele normamente envia uma única consulta recursiva ao servidor DN, e esse servidor realiza a sequência de consultas iterativas aos demais servidores.
+
+22. A DNS organiza seus nomes em uma estrutura hierarquica de árvore chamada árvore de nomes DNS. No topo dessa árvore existe uma raiz(root), e abaixo dela estão os domínios, a partir deles, podem ser criados sucessivos subdomínios e nomes de máquinas. Cada nome DNS é composto por uma sequência de labels, separados por pontos, escrita do domínio mais local para o mais global.
+
+23. Sistema Autônomo (AS) é um conjunto de redes e roteadores sob uma mesma administração que compartilham uma política de roteamente. Roteamento interno é dentro de uma mesma AS, seu objetivo principal é escolher rotas eficientes dentro da rede. Já roteamento externo acontece entre diferentes AS, ela que garante a escalabilidade global da internet.
+
+24. Em roteamento, um algoritmo é um passo a passo usado pelo roteador para calcular a "melhor" rota para cada destino, com base em métricas da tecnologia. Já um protocolo de roteamento é um conjunto de regras e formatos de mensagens que determina como os roteadores trocam mensagens entre si.
+
+25. Bellman-Ford é um algoritmo aplicado a roteamento por vetor de distâncias que funciona de forma distribuída e em rodadas. Incialmente cada roteador conhece apenas seus vizinhos imediatos e o custo estimado para chegar em cada destino, em sua tabela de roteamento. Após a 1a rodada, os roteadores trocam suas tabelas com seus vizinhos, e cada roteador aumenta/atualiza sua tabela. Isso se repete pelas próximas rodadas, e caso um caminho de custo menor que o anterior seja encontrado, ele é atualizado na tabela de roteamento. Suas desvantagens é que ele é muito custoso, com alta latência, é caro computacionalmente compartilhar tabelas toda rodada, caso a rede seja dinâmica é difícil estabilizar as tabelas, e é demorado pois demora para refletir alterações na topologia em todas as rotas. Sua grande vantagem na internet é que, como não precisa de uma topologia pré-conhecida, é uma estratégia válida para roteamento externo na internet, onde cada domínio tem sua própria administração.
+
+26. O OSPF é um padrão baseado no algoritmo de Djikstra para calcular caminhos mínimos. Para isso, cada roteador precisa ter uma visão completa da topologia do domínio onde ele opera. Se fosse usado para roteamento externo, entre AS da internet, isso exigiria que os roteadores mantessem uma visão global da topologia da Internet, para que pudessem calcular o caminho mínimo antes de enviar uma mensagem.
+
+27.
+
+28.
+
+29.
+
+30.
