@@ -1,0 +1,52 @@
+----------------------------------------------------------------------------------------------------------------------
+P2 - 2023/3
+1. 
+A) O TCP mantém duas janelas, a de controle de fluxo, anunciada pelo receptor e indica quantos bytes adicionais o receptor ainda pode receber em seu buffer, e a janela de controle de congestionamento, mantida pelo emissor e limita quantos bytes podem ficar em trânsito na rede sem causar congestionamento. Antes de transmitir ele sempre compara esses dois valores, isto é, compara o limite imposto pelo receptor com o limite imposto pela rede.
+B) Nessa comparação, o TCP define a janela efetiva de envio usando o mínimo entre a janela de controle de fluxo e a janela de controle de congestionameto, e envia dados até essa quantidade.
+
+2. Ambas estratégias resolvem o problema do TCP trabalhar com segmentos e janelas muito pequenas.
+O algoritmo de Nagle faz com que não sejam enviados segmentos muito pequenos, e vai juntando pequenas mensagens até pelo menos tenha tamanho MSS ou o buffer esteja cheio pela metade. Isso evita envio excessivo de mensagens muito pequenas.
+A solução de Clark atua na recepção, e faz com que o receptor não envie atualizações de tamanho de janela para cada byte recebido, e sim envie apenas caso tenha recebido pelo menos MSS ou tenha metade do seu buffer cheio. Isso evita envio em excesso de mensagens atualizando o tamanho do buffer livre do receptor.
+
+3. Essa afirmação é falsa, é impossível ter 100% de certeza que a conexão foi fechada com sucesso. Como o TCP funciona sobre uma camada de rede não confiável (IP), não é possível garantir que a ultima mensagem ACK-FIN foi entregue, confirmando o fechamento foi comunicada com sucesso, para reduzir esse problema o emissor do FIN fica mais um período de tempo ainda escutando.
+
+4. Em um servidor concorrente todos processos se comunicam por uma mesma porta, mas as conexões são identificadas pelo conjunto (IP_origem, porta_origem, IP_destino, porta_destino). Como o endereço IP e a porta do destino são as mesmas para todos processos do servidor, o que distingue é a porta e endereço da origem, do cliente.
+
+5. São criados 6 processos no total.
+Saída: dois "i=1" e seis "i=2". A ordem vária pois os processos não vão ser necessariamente executados sequencialmente. 
+
+6. Little e big endian são convenções para ordenação de bytes na memória para representar valores que ocupam mais do que um byte. Big endian o byte mais significativo é armazenado primeiro, por exemplo, o número 0x123456 armazena 12 34 56, já o Little endian armazena o byte menos significativo primeiro, armazenado na ordem 56 34 12.
+Isso é importante na Internet pois ela conecta diferentes redes com diferentes arquiteturas internas. A Internet em sí adota o padrão Big endian, para que protocolos possam se comunicar entre sí. Assim, todos campos de cabeçalhos de protocolos devem ser enviados em big endian, independentemente de como os dados são armazenados internamente.
+
+7. O NAT permite que vários hosts de uma rede privada compartilhem um único endereço público atráves de um dispositivo NAT. Ele usa portas de forma que, quando um host interno envia um segmento para a Internet, uma porta é assinalada para a transmissão deste host com a Internet, e esta porta é usada como identificador para esse host. 
+
+8. O header do IPv6 foi organizado de forma a ser extensível, permitindo uma sequência variável de headers. O cabeçalho básico tem tamanho fixo, porém contem um campo apontador Next Header, que possibilita uma cadeia de cabeçalhos de extensão.
+
+9. O DHCP é implementado na camada de aplicação, diferentemente do protocolo RARP que é na camada de enlace, logo é dependente da tecnologia. O RARP envia apenas o endereço IP, enquanto o DHCP envia várias informações extra, como a máscara de subrede, endereço do servidor de nomes DNS, endereço do roteador local, etc. Por fim, o DHCP permite um endereçamento flexível temporário, onde hosts podem receber um endereço novo temporariamente para uma rede. 
+
+10. O protocolo IP atua na camada de rede e faz o endereçamento lógico e encaminhamento de pacotes com base na tabela de roteamento. Os protocolos de roteamento servem para trocar informações e preencher e manter esta tabela atualizada e com as melhores rotas. Existem diferentes tipos de protocolos de roteamento para diferentes situações, como os de roteamento interno (RIP, OSPF) e roteamento externo (BGP).
+
+----------------------------------------------------------------------------------------------------------------------
+
+P2 - 2019/1
+1. Um cliente é um processo que envia requisições a um servidor, faz seus pedidos e geralmente, desliga sua conexão após cumprir seu objetivo. Um servidor é um processo que está sempre em execução, em modo de escuta até receber um pedido de conexão, ao receber um, trata do pedido e responde ao cliente, em seguida volta a ficar em modo de escuta.
+
+2. Um servidor iterativo abre um socket para escuta, já que ele sempre deve estar escutando por novas conexões e caso ele já esteja comunicando esse pedido de conexão vai a uma fila, e um socket para comunicação, onde ele está ativamente comunicando com um cliente.
+
+3. 13 vezes.
+
+4. O NAT usa um único endereço público para comunicação de vários hosts de uma rede interna, ele faz isso por meio de sessões NAT identificadas por portas, cada porta indica uma sessão de um host diferentes. Devido a isso, só é possível que a comunicação seja iniciada de forma interna.
+
+5. O header do IPv6 tem tamanho fixo, porém foi definido de forma a ser extensível, tendo um campo Next Header que permite uma cadeia de headers de extensão, logo se for necessário alguma adição ao header, basta adicionar um header novo nesta cadeia.
+
+6. RARP é um protocolo da camada de enlace, sendo dependente da tecnologia, enquanto BOOTP é um protocolo da camada de aplicação, não tendo essa dependência. RARP envia apenas um mapeamento MAC para endereço IP, enquanto o BOOTP envia várias informações extras como máscara de subrede, endereço do roteador local, endereço do servidor de nomes DNS, etc.
+
+7. O RARP e o BOOTP fazem mapeamentos de endereços estáticos definidos previamente por um administrador de sistema, e como em aeroportos e shopping hosts mudam muito é necessário uma forma de mapeamento dinâmico. Nesse caso se usa o protocolo DHCP, que permite endereçamento dinâmico e temporário, onde é atribuído um endereço IP temporário a um host de uma rede, possibilitando reutilização de endereços quando os hosts se desconectarem.
+
+8. Exitem consultas iterativas, onde o próprio resolvedor faz suas consultas em buscas de endereço, e consultas recursivas, onde o resolvedor pede a um servidor, e caso ele não possua as informações, ele vai fazer essa busca atráves de outros servidores de nomes.
+Servidores raiz não executam consultas recursivas, apenas iterativas. Eles são o topo da hierarquia do DNS e respondem com indicações de servidores responsáveis, não para resolver os nomes até o fim.
+
+9. Djikstra é um algoritmo que precisa da topologia inteira da rede para funcionar, ele funciona de forma que os nodos mantém e comunicam informações sobre o estados dos seus enlaces, armazenando sempre o menor caminho possível. Isso faz com que quando há uma mudança na topologia, é enviado um novo anúncio de estado e cada roteador recalcula as rotas, reagindo de forma rápida e consistente a alterações.
+Bellman-Ford é mais flexível, sendo que não precisa conhecer previamente a topologia da rede, ele atua com base que cada nodo conhece apenas seus vizinhos. A cada rodada desse algoritmo os vizinhos compartilham suas tabelas entre si, atualizando suas rotas caso encontrem um caminho melhor. Este algoritmo sofre bastante com alterações na topologia, pois é demorado e custoso refletir as alterações, sendo que se a rede é muito dinâmica, pode nunca se estabilizar.
+
+10. Comutaçao de circuitos trabalha com fluxos no lugar de pacotes individuais. Ela permite que não seja necessário fazer o roteamento individual de pacotes, mas sim um roteamento único para cada fluxo, que é definido pelo conjunto porta_origem, ip_origem, porta_destino, ip_destino. Essa economia no calculo do roteamento torna essa opção muito mais eficiente.
