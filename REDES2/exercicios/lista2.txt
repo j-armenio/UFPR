@@ -83,12 +83,14 @@ Na prática, como o resolvedor do host é leve, ele normamente envia uma única 
 
 25. Bellman-Ford é um algoritmo aplicado a roteamento por vetor de distâncias que funciona de forma distribuída e em rodadas. Incialmente cada roteador conhece apenas seus vizinhos imediatos e o custo estimado para chegar em cada destino, em sua tabela de roteamento. Após a 1a rodada, os roteadores trocam suas tabelas com seus vizinhos, e cada roteador aumenta/atualiza sua tabela. Isso se repete pelas próximas rodadas, e caso um caminho de custo menor que o anterior seja encontrado, ele é atualizado na tabela de roteamento. Suas desvantagens é que ele é muito custoso, com alta latência, é caro computacionalmente compartilhar tabelas toda rodada, caso a rede seja dinâmica é difícil estabilizar as tabelas, e é demorado pois demora para refletir alterações na topologia em todas as rotas. Sua grande vantagem na internet é que, como não precisa de uma topologia pré-conhecida, é uma estratégia válida para roteamento externo na internet, onde cada domínio tem sua própria administração.
 
-26. O OSPF é um padrão baseado no algoritmo de Djikstra para calcular caminhos mínimos. Para isso, cada roteador precisa ter uma visão completa da topologia do domínio onde ele opera. Se fosse usado para roteamento externo, entre AS da internet, isso exigiria que os roteadores mantessem uma visão global da topologia da Internet, para que pudessem calcular o caminho mínimo antes de enviar uma mensagem.
+26. O OSPF(Open Shortest Path First) é um padrão baseado no algoritmo de Djikstra para calcular caminhos mínimos. Para isso, cada roteador precisa ter uma visão completa da topologia do domínio onde ele opera. Se fosse usado para roteamento externo, entre AS da internet, isso exigiria que os roteadores mantessem uma visão global da topologia da Internet, para que pudessem calcular o caminho mínimo antes de enviar uma mensagem.
 
-27.
+27. O protocolo RIP(Routing Information Protocol) usa o algoritmo de vetor de distâncias, sua convergência lenta é por causa de que, quando um enlace ou rota cai, os roteadores podem levar muitas rodadas de atualizações para perceber que aquele destino se tornou inalcançável.  
+Uma solução é o roteador não anunciar de volta uma rota para um vizinho que a ensinou, ou indicar que aquele caminho não deve ser usado.
 
-28.
+28. No protocolo HELLO, a métrica de atraso é sensível à carga e introduz um efeito de que quando um caminho fica ligeiramente mais rápido, todo o tráfego migra de novo, gerando um desbalanceamento e oscilações. Já com a métrica de hops, o custo não depende da carga, é estático e mais estável.
 
-29.
+29. O BGP (Border Gateway Protocol) é o principal protocolo de roteamento externo entre AS, e usa um algoritmo Bellman-Ford, onde inicialmente cada nodo conhece apenas seus vizinhos, e funciona por rodadas, com os roteadores compartilhando seus vizinhos entre sí. É virtualmente o único protocolo usado na Internet pois não precisa da topologia completa da rede para funcionar. Entre SA não se divulga a topologia, apenas destinos alcançaveis e custos.
 
-30.
+30. Fluxo é uma sequência de pacotes que tem em comum (ip_origem, porta_origem, protocolo, ip_destino, porta_destino) e por exemplo, no IPv6, permite que a rede trate de fluxos e não de pacotes individuais, esses pacotes podem ser tratados pela rede como uma unidade lógica única, em vez de serem encaminhados independentemente.
+Com MPLS e comutação baseada em fluxos, não é necesário que roteamentos completos sejam feitos para cada pacote, e sim uma vez por fluxo. Basta olhar um label do fluxo quando for enviar, o que é muito mais rápido e eficiente.
