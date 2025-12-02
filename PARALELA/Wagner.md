@@ -189,7 +189,7 @@ for (i=0; i < n; i++)
 
 Um algoritmo de **árvore de redução paralela** realiza N-1 operações em log(N) passos.
 
-![árvore de reduçao paralela](assets/image.png)
+![árvore de reduçao paralela](imgs/image.png)
 
 Para fazer em Log(N) passos precisa de N/2 processadores, mas na prática, isso nem sempre é viável.  
 Por exemplo, para implementar a redução paralela, podemos dividir a computação em t grupos de elementos e fazer uma computação sequencial em cada grupo dentro de cada thread. Ao final temos de fazer a redução de t elementos, obtendo o resultado.
@@ -227,3 +227,4 @@ scan(out, temp); // aplica o Scan
 ---
 
 # MPI
+
