@@ -1,6 +1,6 @@
 # Programação Paralela
 
-## Tipos de computadores paralelos:
+## Tipos de computadores paralelos
 
 1. **Multicomputadores: Cluster de Máquinas (Memória Distribuída)**
 Conjunto de computadores completos e independentes, interligados por rede.
@@ -14,4 +14,7 @@ A comunicação entre os processos/threads é feita por meio de variáveis compa
 - NUMA (Non-Uniform Memory Access): A memória é dividida em módulos e cada módulo está associado a um/grupo de processadores. Existe uma interconexão entre esses espaços de memória dos processadores, que é muito mais rápida que trocar por mensagens na rede.
 - UMA (Uniform Memory Access): Todos processadores tem acesso uniforme a qualquer posição da memória compartilhada.
 
+
 ## Modelo PRAM
+
+Modelos formais para demonstrar que algoritmos são ótimos, permite relacionar a complexidade de um algoritmo sequencial com um paralelo.
