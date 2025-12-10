@@ -224,145 +224,125 @@ scan(out, temp); // aplica o Scan
 
 Útil para algoritmos paralelos: Radix sort, Quicksort, comparação de strings, análise lexica, comparação de fluxos(stream), avaliar polinomios, resolver recorrências, operações em árvores, histogramas, ...
 
-### Implementação do Algoritmo
+---
+
+# MPI (Message-Passing Interface)
+
+Programação com memória distribuida: As aplicações são vistas como um conjunto de programas executados de forma independente em diferentes processadores de diferentes computadores. 
+
+A sincronização e o funcionamento é responsabilidade do programador.
+
+**MPI** é a especificação para programação paralela com memória distribuida com diferentes implementações.  
+`#include <mpi.h>`
+
+**Single Program Multiple Data (SPMD)**: Modelo de programação onde cada processo executa uma cópia de um único executável. Utilizam condições de teste sobre o ranking dos processos, diferentes processos executam diferentes partes.
+
 ```c
-// Prefix Sum de Float
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <string.h>
-
-#define MAX_THREADS 64
-#define N_TIMES 1000
-
-int n_threads;                  // número efetivo de threads
-int n_total_elements;           // número total de elementos
-float *vector;                  // vetor para os calculos
-float partial_sum[MAX_THREADS]; //
-pthread_barrier_t barrier;      // barreira
-
-void *thread_work(void *arg)
-{
-    int tid = *(int *)arg;
-
-    while (1) {
-        long base  = n_total_elements / n_threads;
-        long rem   = n_total_elements % n_threads;
-        long start = tid * base + (tid < rem ? tid : rem);
-        long len   = base + (tid < rem ? 1 : 0);
-        long end   = start + len;
-
-        // barreira para sincronizar inicio da rodada
-        pthread_barrier_wait(&barrier);
-
-        // calculo da soma parcial
-        float my_partial = 0;
-
-        long i = start;
-        for (; i + 3 < end; i += 4)
-            my_partial += vector[i] + vector[i+1] + vector[i+2] + vector[i+3];
-        for (; i < end; i++)
-            my_partial += vector[i];
-        
-        partial_sum[tid] = my_partial;
-
-        // barreira para sincronizar fim dos calculos partial_sum
-        pthread_barrier_wait(&barrier);
-
-        // calcular prefixo acumulado
-        float my_prefix_sum = 0;
-        for (int j=0; j < tid; j++)
-            my_prefix_sum += partial_sum[j];
-        
-        // sobreescrever inplace
-        float acc = my_prefix_sum;
-
-        i = start;
-        for (; i + 3 < end; i += 4) {
-            acc += vector[i];
-            vector[i] = acc;
-            acc += vector[i+1];
-            vector[i+1] = acc;
-            acc += vector[i+2];
-            vector[i+2] = acc;
-            acc += vector[i+3];
-            vector[i+3] = acc;
-        }
-        for (; i < end; i++) {
-            acc += vector[i];
-            vector[i] = acc;
-        }
-
-        // barreira para sincronizar fim da escrita de todos
-        pthread_barrier_wait(&barrier);
-
-        // thread 0 retorna ao fim da rodada, as demais ficam vivas esperando
-        if (tid == 0)
-            return NULL;
-    }
-}
-
-void parallelPrefixSumPth(void)
-{
-    static int initialized = 0;
-    static pthread_t threads[MAX_THREADS];
-    static int tid[MAX_THREADS]; // thread id
-
-    if (!initialized ) {
-        // inicializa barreira para n_threads
-        pthread_barrier_init(&barrier, NULL, n_threads);
-
-        for (int i=1; i < n_threads; i++) {
-            tid[i] = i;
-            pthread_create(&threads[i], NULL, thread_work, &tid[i]);
-        }
-
-        tid[0] = 0;
-        initialized = 1;
-    }
-
-    thread_work(&tid[0]);
-}
-
-int main(int argc, char **argv) 
-{
-    n_total_elements = atoi(argv[1]);
-    n_threads = atoi(argv[2]);
-
-    // aloca vetor original, não será alterado
-    float *init_vector = (float *) malloc(n_total_elements * sizeof(float));
-    if (init_vector == NULL) {
-        printf("Erro ao alocar vetor inicial de %d elementos\n", n_total_elements);
-        return 1;
-    }        
-
-    // aloca o vetor que vai ser processado pelas threads
-    vector = (float *) malloc(n_total_elements * sizeof(float));
-    if (vector == NULL) {
-        printf("Erro ao alocar vetor de %d elementos\n", n_total_elements);
-        return 1;
-    }        
-
-    // preenche o vetor inicial com valores aleatorios
-    int r;
-    for (long i=0; i < n_total_elements; i++) {
-        r = rand();
-        init_vector[i] = (r % 10);
-    }
-
-    // processa algoritmo N_TIMES
-    for (int i=0; i < N_TIMES; i++) {
-        memcpy((float *)vector, (float *)init_vector, n_total_elements * sizeof(float));
-
-        // chama algoritmo de processamento paralelo N_TIMES
-        parallelPrefixSumPth();
-    }
-
-    return 0;
+if (my_rank == 0) {
+    // código da tarefa 0
+} else if (my_rank == N) {
+    // código da tarefa N
 }
 ```
 
----
+**Iniciar e Terminar ambiente de execução do MPI**  
+`MPI_Init(int *argc, char **argv)` inicia o ambiente de execução MPI.  
+`MPI_Finalize(void)` termina o ambiente.
 
-# MPI
+- Todas funções MPI retornam 0 se OK, valor positivo se ERRO.
 
+### Comunicadores
+Uma aplicação MPI vê seu ambiente de execução como um conjunto de grupos de processos. O Comunicador é a estrutura de dados MPI que abstrai o conceito de gruo e define quais processos podem trocar mensagens.
+
+Por padrão, existe o comunicador universal (`MPI_COMM_WORLD`) que engloba todos processos em execução. 
+
+Todos processos possuem um identificador único (rank) que determina sua posição (0 a N-1) no comunicador.
+
+`MPI_Comm_rank(MPI_Comm comm, int *rank)` devolve em rank a posição do processo corrente no comunicador comm.
+`MPI_Comm_size()` devolve em size o total de processos do comunicador comm.
+
+## Comunicação
+
+**Mensagens MPI**  
+São pacotes de informação trocados entre processos, geralmente é designada como uma sequência de tipo de dados.  
+`MPI_CHAR, MPI_SHORT, MPI_INT, MPI_LONG, MPI_UNSIGNED_CHAR, ...`
+
+**Envio Standard de Mensagens**  
+`MPI_Send(void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm)`  
+Funcionalidade básica para envio de mensagens.
+- buf: endereço inicial dos dados a enviar;
+- count: número de elementos do tipo datatype;
+- datatype: tipo de dados;
+- dest: posição do processo no comunicador comm;
+- tag: marca que identifica a mensagem;
+- comm: comunicador dos processos envolvidos na comunicação;
+
+**Recepção Standard de Mensagens**  
+`MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status)`  
+Funcionalidade básica para recepção de mensagens.
+- buf: endereço onde devem ser colocados os dados recebidos;
+- count: número máximo de elementos datatype a receber;
+- datatype: tipo de dados;
+- source: posição do processo no comunicador comm. Pode ser `MPI_ANY_SOURCE` para receber de qualquer processo de comm.
+- tag: marca que identifica mensagem. Pode ser `MPI_ANY_TAG` para receber qualquer mensagem;
+- comm: comunicador envolvido com os processos;
+- status: devolve informações sobre o processo emissor;
+
+**Outros relativos a recepção**  
+`MPI_Get_count(MPI_Status *status, MPI_Datatype datatype, int *count)` devolve em count o número de elementos do tipo datatype recebidos na mensagem associada com status.  
+`MPI_Probe(int source, int tag, MPI_Comm comm, MPI_Status *status)` sincroniza a recepção da próxima mensagem, retornando em status informação sobre a mesma contudo sem proceder sua recepção.
+
+*Exemplo*: I'm alive
+```c
+#include <mpi.h>
+#define STD_TAG 0
+main (int argc, char **argv) {
+    int i, my_rank, n_procs; char msg[100]; MPI_Status;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &n_procs);
+
+    if (my_rank != 0) {
+        sprintf(msg, "I'm alive");
+        MPI_Send(msg, strlen(msg) + 1, MPI_CHAR, 0, STD_TAG, MPI_COMM_WORLD);
+    } else {
+        for (i=1; i < n_procs; i++) {
+            MPI_Recv(msg, 100, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+            printf("Proc %d: %s\n", status.MPI_SOURCE, msg);
+        }
+    }
+    MPI_Finalize();
+}
+```
+
+## Comunicações Coletivas
+
+São combinações ou variações de 4 operações primitivas: **Broadcast, Reduce, Scatter, Gather**.  
+Todos os processos deverão chamar a mesma rotina (o processo raiz e os demais).
+
+**Broadcast (difundir)**  
+`MPI_Bcast(void *buf, int count, MPI_Datatype datatype, int root, MPI_Comm comm)`  
+Faz chegar uma mensagem de um processo a todos os outros processos no comunicador.
+- root: é a posição do processo, em comm, que possui a mensagem a enviar.
+
+**Reduce (reduzir)**  
+`MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_OP op, int root, MPI_Comm comm)`   
+Permite realizar operações globais de resumo fazneod chegar mensagens de todos os processos a um único processo no comunicador. É quando eu tenho vários subtotais e quero acumular em um lugar só.
+- sendv: end. inicial dos dados a enviar;
+- recvbuf: end. onde devem ser colocados os dados recebidos (só importante no root);
+- op: operação de redução a aplicar aos dados recebidos (`MPI_MAX, MPI_MIN, MPI_SUM, MPI_PROD, ...`);
+
+Uma variação é o `MPI_Allreduce()` onde todos recebem o resultado da redução.
+
+**Scatter (espalhar)**  
+`MPI_Scatter(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)`  
+Divide em partes iguais os dados de uma mensagem e distribui ordenadamente cada uma das partes por cada um dos processos.
+
+**Gather (reunir)**  
+`MPI_Gather(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)`    
+Recolhe ordenadamente num único processo um conjunto de mensagens oriundo de todos os processos no comunicador.
+
+Uma variação é o `MPI_Allgather()` onde todos recebem os dados de todos os processos.
+
+**Outras variações**  
+`MPI_SCATTERV` e `MPI_GATHERV` permitem número variável de dados a serem enviados para cada processo.
