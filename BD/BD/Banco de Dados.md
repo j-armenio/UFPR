@@ -1,4 +1,4 @@
-# Introdução
+# Modelo relacional
 
 **Modelo relacional** é composto por:
 - Conjunto de objetos e relações
@@ -22,6 +22,7 @@
 
 ---
 # Instruções SQL
+
 - Não tem distinção entre maiúscula e minúscula.
 - Podem estar em uma ou mais linhas.
 
@@ -432,4 +433,28 @@ EXCEPT
 SELECT p_retailprice
 FROM part;
 ```
+
+---
+
+# Dependências funcionais
+
+Pense um banco de dados descrito por um único esquema de relação **universal** (mega-relação) `R = {A_1, A_2, ..., A_n}`, sendo `A_1..A_n` atributos do banco.
+
+Uma **dependência funcional (DF)** indicada por `X -> Y`, entre dois conjuntos de atributos `X` e `Y` que são subconjuntos de `R`, especifica uma *restrição* sobre possíveis tuplas que podem formar um estado de relação `r` de `R`. Isso significa que os valores de `Y` de uma tupla `r` dependem dos valores do componente `X`.
+Ou seja, se dois registros tem o mesmo valor em `X`, eles **devem** ter o mesmo valor em `Y`.
+
+O conjunto de atributos de `X` é chamado de **lado esquerdo** da DF, e `Y` é chamado de **lado direito**.
+
+Uma DF é uma propriedade **semântica** ou **significado dos atributos**. Em geral, o projetista do esquema especifica as dependências funcionais que são *semanticamente óbvias*, as outras DFs podem ser deduzidas.
+
+Não é possível confirmar uma DF a menos que saibamos *todos os estados legais possíveis* de `X`, mas com apenas *um único contraexemplo* é possível refutar uma DF.
+
+Dados os conjuntos `X` e `Y`, e um atributo `A ∈ X`, seguem algumas definições:
+- `X -> Y` é DF parcial se `(X-{A}) -> Y`.
+- `X -> Y` é uma DF trivial se `Y⊆X`.
+- `X -> Y` é uma DF transitiva se existe `X -> Z` e `Z -> Y`, e `Z` não é parte da chave primária.
+
+## Normalização
+
+
 
