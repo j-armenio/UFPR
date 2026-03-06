@@ -26,7 +26,7 @@
       "version": 77,
       "versionNonce": 1903080037,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772734203048,
       "link": null,
       "locked": false,
@@ -63,7 +63,7 @@
       "version": 775,
       "versionNonce": 243790891,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772731787093,
       "link": null,
       "locked": false,
@@ -102,7 +102,7 @@
       "version": 88,
       "versionNonce": 2062772773,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772731494769,
       "link": null,
       "locked": false,
@@ -125,10 +125,10 @@
     {
       "id": "Wk15aIgOHK8td6lmAd9Sa",
       "type": "line",
-      "x": 690.1402676471587,
-      "y": 337.4165500415646,
-      "width": 192.1166425407888,
-      "height": 2.054723449634082,
+      "x": 670.7645852626997,
+      "y": 336.0325802704688,
+      "width": 165.12906702142402,
+      "height": 1.4052207760649935,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -144,11 +144,11 @@
         "type": 2
       },
       "seed": 1443380075,
-      "version": 48,
-      "versionNonce": 440124613,
+      "version": 116,
+      "versionNonce": 1354732568,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772731609818,
+      "boundElements": [],
+      "updated": 1772757993303,
       "link": null,
       "locked": false,
       "points": [
@@ -157,8 +157,8 @@
           0
         ],
         [
-          192.1166425407888,
-          2.054723449634082
+          165.12906702142402,
+          -1.4052207760649935
         ]
       ],
       "lastCommittedPoint": null,
@@ -170,8 +170,8 @@
     {
       "id": "Tc6Ov3NSZfpc9-eCakG5I",
       "type": "line",
-      "x": 596.6503506888068,
-      "y": 377.48365730942965,
+      "x": 567.5868139134786,
+      "y": 375.4076960534661,
       "width": 68.31955470033404,
       "height": 0.5136808624085347,
       "angle": 0,
@@ -189,11 +189,11 @@
         "type": 2
       },
       "seed": 1800342091,
-      "version": 39,
-      "versionNonce": 1761349445,
+      "version": 68,
+      "versionNonce": 554287208,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772731605763,
+      "boundElements": [],
+      "updated": 1772757995960,
       "link": null,
       "locked": false,
       "points": [
@@ -235,7 +235,7 @@
       "version": 56,
       "versionNonce": 574013829,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732047789,
       "link": null,
       "locked": false,
@@ -269,8 +269,8 @@
       "index": "a8",
       "roundness": null,
       "seed": 62667397,
-      "version": 545,
-      "versionNonce": 1396901899,
+      "version": 547,
+      "versionNonce": 1753188376,
       "isDeleted": false,
       "boundElements": [
         {
@@ -278,7 +278,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1772732595138,
+      "updated": 1772758009194,
       "link": null,
       "locked": false,
       "text": "Ao se coletar dados sobre uma variável alvo (Target):\n- Inclua todas características que suspeita serem preditivas da target. \n\nAjuste o modelo até uma acurácia suficiente, caso contrário, expanda o\nconjunto de características. Caso ainda não seja o suficiente, execute\num algoritmo de seleção de características para escolher o melhor e mais\npreditivo subconjunto expandido.",
@@ -294,10 +294,10 @@
     {
       "id": "jZ4QOT6wGIQ8Itp1JTOjn",
       "type": "line",
-      "x": 763.4661924645136,
-      "y": 609.5362466205772,
-      "width": 78.97641430384851,
-      "height": 0,
+      "x": 715.0269733047264,
+      "y": 611.6122606710999,
+      "width": 69.28858631025878,
+      "height": 0.691925491668826,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -313,11 +313,11 @@
         "type": 2
       },
       "seed": 17900901,
-      "version": 43,
-      "versionNonce": 1227626123,
+      "version": 194,
+      "versionNonce": 649956632,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772731880732,
+      "boundElements": [],
+      "updated": 1772758031537,
       "link": null,
       "locked": false,
       "points": [
@@ -326,8 +326,8 @@
           0
         ],
         [
-          78.97641430384851,
-          0
+          69.28858631025878,
+          -0.691925491668826
         ]
       ],
       "lastCommittedPoint": null,
@@ -341,7 +341,7 @@
       "type": "line",
       "x": 398.7621003947086,
       "y": 689.7968302626998,
-      "width": 306.91647184747666,
+      "width": 274.39301724372893,
       "height": 0.6420846691370343,
       "angle": 0,
       "strokeColor": "#e03131",
@@ -358,11 +358,11 @@
         "type": 2
       },
       "seed": 400147531,
-      "version": 44,
-      "versionNonce": 1452138821,
+      "version": 66,
+      "versionNonce": 163890968,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772732003700,
+      "boundElements": [],
+      "updated": 1772758040650,
       "link": null,
       "locked": false,
       "points": [
@@ -371,7 +371,7 @@
           0
         ],
         [
-          306.91647184747666,
+          274.39301724372893,
           0.6420846691370343
         ]
       ],
@@ -404,7 +404,7 @@
       "version": 58,
       "versionNonce": 1171800107,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732043413,
       "link": null,
       "locked": false,
@@ -441,7 +441,7 @@
       "version": 355,
       "versionNonce": 1503086917,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732173127,
       "link": null,
       "locked": false,
@@ -478,7 +478,7 @@
       "version": 112,
       "versionNonce": 1286882597,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732358391,
       "link": null,
       "locked": false,
@@ -515,7 +515,7 @@
       "version": 53,
       "versionNonce": 714758277,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732358391,
       "link": null,
       "locked": false,
@@ -558,7 +558,7 @@
       "version": 126,
       "versionNonce": 2087272939,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732368279,
       "link": null,
       "locked": false,
@@ -669,7 +669,7 @@
       "version": 318,
       "versionNonce": 1165927333,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732518637,
       "link": null,
       "locked": false,
@@ -686,10 +686,10 @@
     {
       "id": "LVe1IpYrHdmh-cOSmYQE7",
       "type": "line",
-      "x": 622.0067690107611,
-      "y": 591.9992830121455,
-      "width": 166.74577962780393,
-      "height": 0.6085612395174849,
+      "x": 597.0951811446396,
+      "y": 591.3073047259173,
+      "width": 142.52614365063073,
+      "height": 0.7754217302182269,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -705,11 +705,11 @@
         "type": 2
       },
       "seed": 773925157,
-      "version": 41,
-      "versionNonce": 94340811,
+      "version": 129,
+      "versionNonce": 27081576,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772732543361,
+      "boundElements": [],
+      "updated": 1772758034486,
       "link": null,
       "locked": false,
       "points": [
@@ -718,8 +718,8 @@
           0
         ],
         [
-          166.74577962780393,
-          -0.6085612395174849
+          142.52614365063073,
+          0.7754217302182269
         ]
       ],
       "lastCommittedPoint": null,
@@ -731,8 +731,8 @@
     {
       "id": "eH4ZGUo1C-6nucBgcgLu-",
       "type": "text",
-      "x": 662.780372058436,
-      "y": 518.9719342700415,
+      "x": 609.4971993059346,
+      "y": 530.043798027926,
       "width": 85.6132649205459,
       "height": 29.885037961766944,
       "angle": 6.144882273117416,
@@ -748,8 +748,8 @@
       "index": "aR",
       "roundness": null,
       "seed": 1058012549,
-      "version": 155,
-      "versionNonce": 1617034955,
+      "version": 302,
+      "versionNonce": 1657937000,
       "isDeleted": false,
       "boundElements": [
         {
@@ -757,7 +757,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1772732595138,
+      "updated": 1772758012682,
       "link": null,
       "locked": false,
       "text": "o que você\nquer prever",
@@ -773,10 +773,10 @@
     {
       "id": "cLUiOJi201L3SZYQQdg06",
       "type": "arrow",
-      "x": 740.6762107166801,
-      "y": 527.4917916232869,
-      "width": 21.299643383113562,
-      "height": 42.59928676622735,
+      "x": 693.7369705997613,
+      "y": 541.2406045023015,
+      "width": 32.25548467058536,
+      "height": 28.15854839554379,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -792,11 +792,11 @@
         "type": 2
       },
       "seed": 1413283435,
-      "version": 34,
-      "versionNonce": 1626205547,
+      "version": 284,
+      "versionNonce": 1713524584,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772732595138,
+      "boundElements": [],
+      "updated": 1772758012682,
       "link": null,
       "locked": false,
       "points": [
@@ -805,24 +805,24 @@
           0
         ],
         [
-          14.605469748420774,
-          17.03971470649094
+          19.333374473442973,
+          8.134881817469932
         ],
         [
-          21.299643383113562,
-          42.59928676622735
+          32.25548467058536,
+          28.15854839554379
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "eH4ZGUo1C-6nucBgcgLu-",
-        "focus": -0.6989165449837118,
-        "gap": 7.16703557964172
+        "focus": -0.5621749609453397,
+        "gap": 1.2527298445852466
       },
       "endBinding": {
         "elementId": "CllfZ_CmHuV_LnyLAvgDg",
-        "focus": 0.414334733625458,
-        "gap": 1.3571567223375496
+        "focus": 0.35550012255932517,
+        "gap": 2.0490822140064893
       },
       "startArrowhead": null,
       "endArrowhead": "arrow",
@@ -851,7 +851,7 @@
       "version": 93,
       "versionNonce": 2031046251,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772732650280,
       "link": null,
       "locked": false,
@@ -885,8 +885,8 @@
       "index": "aW",
       "roundness": null,
       "seed": 128100069,
-      "version": 543,
-      "versionNonce": 581333605,
+      "version": 566,
+      "versionNonce": 467435112,
       "isDeleted": false,
       "boundElements": [
         {
@@ -894,7 +894,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1772732925636,
+      "updated": 1772758049537,
       "link": null,
       "locked": false,
       "text": "Depende da complexidade do problema:\n- Exigência de acurácia: 60% de acurácia eixge menos dados de\ntreinamento que 95%\n- Dimensionalidade do espaço de variáveis: 2 dimensões exigem menos\nque 2000 variáveis.\n- Qualidade do conjunto de treinamento: se a acurácia inicial é válida e\npode ocorrer concept drift.",
@@ -910,10 +910,10 @@
     {
       "id": "ERlMqMXeCC8-_K5h2-ujG",
       "type": "line",
-      "x": 485.15045372488976,
-      "y": 1272.0691256342827,
-      "width": 105.8404956591828,
-      "height": 1.3569294315279876,
+      "x": 475.94746580557376,
+      "y": 1272.8693887715601,
+      "width": 93.436470454507,
+      "height": 0.1565423574866145,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -929,11 +929,11 @@
         "type": 2
       },
       "seed": 1390860427,
-      "version": 17,
-      "versionNonce": 463434795,
+      "version": 58,
+      "versionNonce": 1806402152,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772732844002,
+      "boundElements": [],
+      "updated": 1772758051995,
       "link": null,
       "locked": false,
       "points": [
@@ -942,8 +942,8 @@
           0
         ],
         [
-          105.8404956591828,
-          1.3569294315279876
+          93.436470454507,
+          0.1565423574866145
         ]
       ],
       "lastCommittedPoint": null,
@@ -955,7 +955,7 @@
     {
       "id": "SY-5je9Dv3npK83PlEnb_",
       "type": "text",
-      "x": 587.5986258052525,
+      "x": 584.7977124566563,
       "y": 1261.213690182059,
       "width": 239.9633527285436,
       "height": 80,
@@ -972,11 +972,11 @@
       "index": "aZ",
       "roundness": null,
       "seed": 660529803,
-      "version": 283,
-      "versionNonce": 1869329547,
+      "version": 288,
+      "versionNonce": 192890392,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1772732926867,
+      "updated": 1772758053436,
       "link": null,
       "locked": false,
       "text": "quando o conjunto de\ntreinamento não é mais\nrepresentativo do problema,\nleva a defasagem dos modelos",
@@ -992,10 +992,10 @@
     {
       "id": "V8KMtsBcfBeppuiizYMaS",
       "type": "arrow",
-      "x": 536.035307,
-      "y": 1276.1399139288667,
-      "width": 65.13261312053237,
-      "height": 25.103194483267316,
+      "x": 536.0353070000001,
+      "y": 1276.139913928867,
+      "width": 65.13261312053226,
+      "height": 25.10319448326709,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -1011,11 +1011,11 @@
         "type": 2
       },
       "seed": 2091997701,
-      "version": 46,
-      "versionNonce": 1488644907,
+      "version": 70,
+      "versionNonce": 328233320,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772732926867,
+      "boundElements": [],
+      "updated": 1772758049537,
       "link": null,
       "locked": false,
       "points": [
@@ -1024,12 +1024,12 @@
           0
         ],
         [
-          18.997012448581017,
-          20.353941472919814
+          18.997012448580904,
+          20.353941472919587
         ],
         [
-          65.13261312053237,
-          25.103194483267316
+          65.13261312053226,
+          25.10319448326709
         ]
       ],
       "lastCommittedPoint": null,
@@ -1083,8 +1083,8 @@
     {
       "id": "kKa4poJhDpDnmAycBhdc3",
       "type": "line",
-      "x": 1628.8640447894263,
-      "y": 204.31816201147302,
+      "x": 1630.683667764159,
+      "y": 213.57123316521785,
       "width": 0,
       "height": 1365.5394748485674,
       "angle": 0,
@@ -1102,11 +1102,11 @@
         "type": 2
       },
       "seed": 5617739,
-      "version": 136,
-      "versionNonce": 310611237,
+      "version": 199,
+      "versionNonce": 785178904,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1772732957111,
+      "updated": 1772758073628,
       "link": null,
       "locked": false,
       "points": [
@@ -1148,7 +1148,7 @@
       "version": 659,
       "versionNonce": 1726583429,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772733148558,
       "link": null,
       "locked": false,
@@ -1185,7 +1185,7 @@
       "version": 94,
       "versionNonce": 1658420709,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772733162492,
       "link": null,
       "locked": false,
@@ -1222,7 +1222,7 @@
       "version": 498,
       "versionNonce": 607927781,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772734165256,
       "link": null,
       "locked": false,
@@ -1259,7 +1259,7 @@
       "version": 73,
       "versionNonce": 382874155,
       "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1772734184213,
       "link": null,
       "locked": false,
@@ -1276,10 +1276,10 @@
     {
       "id": "glj6RAfd9yVYK8nwmk_x4",
       "type": "text",
-      "x": 961.0230591790241,
+      "x": 960.4243262041125,
       "y": 580.4848133534751,
       "width": 656.0535367865748,
-      "height": 280,
+      "height": 260,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ced4da",
@@ -1293,14 +1293,19 @@
       "index": "ai",
       "roundness": null,
       "seed": 1399906981,
-      "version": 734,
-      "versionNonce": 627917867,
+      "version": 771,
+      "versionNonce": 488018712,
       "isDeleted": false,
-      "boundElements": [],
-      "updated": 1772734622145,
+      "boundElements": [
+        {
+          "id": "zORj7tvYlz5RSheLwK6NP",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1772758080944,
       "link": null,
       "locked": false,
-      "text": "Transforma cada categoria em um vetor binário (0 ou 1), em que somente uma\nposição do vetor é 1 (hot).\nEx:\n    vermelho (1,0,0)\n    azul      (0,1,0)\n    verde     (0,1,0)\n\nTambém é possível codificação com 1 bit.\nEx:\n    feminino:  0 -> feminino  (0,1)\n    masculino: 1 -> masculino (1,0)\n\nEvitar vetores (one-hot) de altas dimensões, muitas categorias, por exemplo,\ncódigo postal.",
+      "text": "Transforma cada categoria em um vetor binário (0 ou 1), em que somente uma posição do\nvetor é 1 (hot).\nEx:\n    vermelho (1,0,0)\n    azul      (0,1,0)\n    verde     (0,1,0)\n\nTambém é possível codificação com 1 bit.\nEx:\n    feminino:  0 -> feminino  (0,1)\n    masculino: 1 -> masculino (1,0)\n\nEvitar vetores (one-hot) de altas dimensões, muitas categorias, por exemplo, código postal.",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "left",
@@ -1313,8 +1318,8 @@
     {
       "id": "4DF8ViIWscF-HO4jStKzN",
       "type": "text",
-      "x": 1256.4673789594135,
-      "y": 742.4369527974986,
+      "x": 1270.014861277411,
+      "y": 743.055742557763,
       "width": 266.2022926605748,
       "height": 60,
       "angle": 0.000625398008658351,
@@ -1330,19 +1335,14 @@
       "index": "aj",
       "roundness": null,
       "seed": 1579639851,
-      "version": 277,
-      "versionNonce": 1267903211,
+      "version": 346,
+      "versionNonce": 974994536,
       "isDeleted": false,
-      "boundElements": [
-        {
-          "id": "zORj7tvYlz5RSheLwK6NP",
-          "type": "arrow"
-        }
-      ],
-      "updated": 1772734443272,
+      "boundElements": [],
+      "updated": 1772758085891,
       "link": null,
       "locked": false,
-      "text": "melhor para classificadores\nbaseados em distância, pois eles\npodem interpretar o 1 > 0",
+      "text": "melhor para classificadores baseados\nem distância, pois eles podem\ninterpretar o 1 > 0",
       "fontSize": 16,
       "fontFamily": 5,
       "textAlign": "center",
@@ -1355,10 +1355,10 @@
     {
       "id": "zORj7tvYlz5RSheLwK6NP",
       "type": "arrow",
-      "x": 1273.553315525026,
-      "y": 756.6752332688429,
-      "width": 52.68163774397317,
-      "height": 17.08593656561277,
+      "x": 1270.5135298795992,
+      "y": 764.6913035310765,
+      "width": 49.64185209854645,
+      "height": 9.368689675109863,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ced4da",
@@ -1374,11 +1374,11 @@
         "type": 2
       },
       "seed": 734627467,
-      "version": 43,
-      "versionNonce": 1810072165,
+      "version": 166,
+      "versionNonce": 1728671592,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772734446351,
+      "boundElements": [],
+      "updated": 1772758085891,
       "link": null,
       "locked": false,
       "points": [
@@ -1387,21 +1387,21 @@
           0
         ],
         [
-          -22.78124875415051,
-          1.4238280471342932
+          -24.620439479856714,
+          -0.2988233717306912
         ],
         [
-          -52.68163774397317,
-          17.08593656561277
+          -49.64185209854645,
+          9.069866303379172
         ]
       ],
       "lastCommittedPoint": null,
-      "startBinding": {
-        "elementId": "4DF8ViIWscF-HO4jStKzN",
-        "focus": 0.5992745090891586,
-        "gap": 14.310839230158308
+      "startBinding": null,
+      "endBinding": {
+        "elementId": "glj6RAfd9yVYK8nwmk_x4",
+        "focus": 0,
+        "gap": 14
       },
-      "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
       "elbowed": false
@@ -1447,7 +1447,7 @@
       "id": "TvTDSKw96tWArGobbJdIP",
       "type": "text",
       "x": 962.6974408307581,
-      "y": 897.0270296598108,
+      "y": 900.5473796330026,
       "width": 653.0581050917322,
       "height": 40,
       "angle": 0,
@@ -1463,11 +1463,11 @@
       "index": "ao",
       "roundness": null,
       "seed": 26124741,
-      "version": 148,
-      "versionNonce": 1325814789,
+      "version": 152,
+      "versionNonce": 2102154344,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1772734626970,
+      "boundElements": [],
+      "updated": 1772758103465,
       "link": null,
       "locked": false,
       "text": "Converte características categóricas em um vetor de tamanho fixo, usando uma\ntabela hash.",
