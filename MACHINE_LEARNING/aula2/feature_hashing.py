@@ -40,9 +40,10 @@ hasher = FeatureHasher(n_features=10, input_type='dict', alternate_sign=False)
 # 3. marca aquele indice como valor encontrado no dicionario
 hashed_features = hasher.transform(zip_dicts).toarray()
 
-# Mostra como DataFrame
+# Monta como DataFrame de hashes
 hashed_df = pd.DataFrame(hashed_features, columns=[f'hash_{i}' for i in range(10)])
+# Concatena as tabelas para exibir
 result_df = pd.concat([data, hashed_df], axis=1)
 
-# Mostra exemplo
+# Mostra resultado
 print(result_df.head(15))
