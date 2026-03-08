@@ -13,4 +13,16 @@ cep_list = [
 unique_ceps = list(set(cep_list))
 # enumera os ceps
 cep_to_idx = {cep_code: idx for idx, cep_code in enumerate(unique_ceps)}
-print(cep_to_idx)
+# pega a lista e transforma em um Tensor (estrutura otimizada de ML) 
+cep_indices = torch.tensor([cep_to_idx[cep_code] for cep_code in cep_list])
+
+# define tamanho do vetor
+embedding_dim = 10
+# cria a Lookup Table/Camada de Embedding, onde cada linha representa um CEP e
+# cada coluna uma das 10 dimensões
+embedding = nn.Embedding(num_embeddings=len(unique_ceps), embedding_dim=embedding_dim)
+
+# gera os embeddings
+cep_embeddings = embedding(cep_indices)
+
+print(cep_embeddings)
