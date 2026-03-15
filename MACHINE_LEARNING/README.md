@@ -1,3 +1,5 @@
+# Inicializar ambiente
+
 1. Cria o ambiente.
 ```
 conda env create -f environment.yml
@@ -9,6 +11,8 @@ conda activate ml_ufpr
 ```
 
 ---
+
+# Configurar
 
 - Instalar novo pacote.
 ```
