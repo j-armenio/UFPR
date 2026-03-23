@@ -24,8 +24,8 @@ OUTPUT_DIR = "features_csv"
 # 1 - MobileNetV3 Small
 # 2 - EfficientNetV2 Small
 # 3 - DinoV2 Base
-# 4 - 
-MODEL_CHOICE = 1
+# 4 - KimiaNet
+MODEL_CHOICE = 3
 
 DEVICE = (
     "mps" if torch.backends.mps.is_available()
@@ -48,6 +48,11 @@ MODEL_PATHS = {
         "name": "dinov2",
         "train_csv": "train_features_dinov2.csv",
         "test_csv": "test_features_dinov2.csv",
+    },
+    4: {
+        "name": "kimianet",
+        "train_csv": "train_features_kimianet.csv",
+        "test_csv": "test_features_kimianet.csv",
     }
 }
 
@@ -87,6 +92,23 @@ elif MODEL_CHOICE == 3:
     config = resolve_data_config({}, model=model)
     transform = create_transform(**config)
 
+elif MODEL_CHOICE == 4:
+    model = models.densenet121(pretrained=False)
+
+    state_dict = torch.load("../weights/KimiaNet.pth", map_location="cpu")
+    model.load_state_dict(state_dict, strict=False)
+    model.classifier = nn.Identity()
+
+    transform = transforms.Compose([
+        transforms.Resize(224),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225]
+        )
+    ])
+
 else:
     raise ValueError("Modelo inválido.")
 
@@ -125,6 +147,10 @@ def extract_features(loader):
         for images, lbls in tqdm(loader, desc="Extracting features", unit="batch"):
             images = images.to(DEVICE)
             feats = model(images)
+
+            if feats.dim() > 2:
+                feats = feats.mean(dim=1)
+
             features.append(feats.cpu().numpy())
             labels.append(lbls.cpu().numpy())
 
@@ -157,8 +183,8 @@ print("Test features shape:", X_test.shape)
 paths = MODEL_PATHS.get(MODEL_CHOICE)
 if paths is None:
     raise ValueError("Modelo inválido.")
-OUTPUT_TRAIN_CSV = config["train_csv"] 
-OUTPUT_TEST_CSV = config["test_csv"]
+OUTPUT_TRAIN_CSV = paths["train_csv"] 
+OUTPUT_TEST_CSV = paths["test_csv"]
 
 save_csv(
     X_train,

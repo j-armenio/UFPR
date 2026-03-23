@@ -11,8 +11,8 @@ from sklearn.decomposition import PCA
 # --------------------------------------------------
 # Configuration
 # --------------------------------------------------
-TRAIN_CSV = "features_csv/train_features_dinov2.csv"
-TEST_CSV = "features_csv/test_features_dinov2.csv"
+TRAIN_CSV = "features_csv/train_features_kimianet.csv"
+TEST_CSV = "features_csv/test_features_kimianet.csv"
 N_NEIGHBORS = 7
 METRIC = "euclidean"
 
