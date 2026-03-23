@@ -7,7 +7,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 
 # carrega e organiza o dataset ECG5000
-data = pd.read_csv('media/ECG5000.txt', header=None, sep=r'\s+')
+data = pd.read_csv('../datasets/ECG5000.txt', header=None, sep=r'\s+')
 
 y = data.iloc[:, 0].values   
 X = data.iloc[:, 1:].values  

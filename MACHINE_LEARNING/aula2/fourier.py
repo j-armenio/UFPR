@@ -7,7 +7,7 @@ from skfda.representation import FDataGrid
 from skfda.representation.basis import FourierBasis
 
 # carrega e organiza o dataset ECG5000
-data = pd.read_csv('media/ECG5000.txt', header=None)
+data = pd.read_csv('../datasets/ECG5000.txt', header=None)
 X = data.iloc[:, :-1].values
 y_raw = data.iloc[:, -1].values
 
