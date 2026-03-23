@@ -70,7 +70,7 @@ train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 # --------------------------------------------------
-# MobileNetV3 Small feature extractor (576-D)
+# MobileNetV3 Small
 # --------------------------------------------------
 weights = MobileNet_V3_Small_Weights.IMAGENET1K_V1
 model = mobilenet_v3_small(weights=weights)
@@ -85,7 +85,7 @@ for p in model.parameters():
     p.requires_grad = False
 
 # --------------------------------------------------
-# Feature extraction
+# Feature extraction (576-D)
 # --------------------------------------------------
 def extract_features(loader):
     features, labels = [], []

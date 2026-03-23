@@ -11,12 +11,12 @@ from sklearn.decomposition import PCA
 # --------------------------------------------------
 # Configuration
 # --------------------------------------------------
-TRAIN_CSV = "features_csv/train_features_mobilenet.csv"
-TEST_CSV = "features_csv/test_features_mobilenet.csv"
+TRAIN_CSV = "features_csv/train_features_dinov2.csv"
+TEST_CSV = "features_csv/test_features_dinov2.csv"
 N_NEIGHBORS = 7
 METRIC = "euclidean"
 
-PCA = False
+PCA_REDUCTION = True
 N_COMPONENTS = 0.9
 
 # --------------------------------------------------
@@ -49,7 +49,7 @@ X_test = scaler.transform(X_test)
 # --------------------------------------------------
 # PCA (dimensionality reduction)
 # --------------------------------------------------
-if PCA:
+if PCA_REDUCTION:
     pca = PCA(n_components=N_COMPONENTS)
 
     X_train = pca.fit_transform(X_train)
