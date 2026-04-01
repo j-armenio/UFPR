@@ -3,6 +3,8 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
@@ -11,9 +13,32 @@ from sklearn.decomposition import PCA
 # --------------------------------------------------
 # Configuration
 # --------------------------------------------------
-TRAIN_CSV = "features_csv/train_features_kimianet.csv"
-TEST_CSV = "features_csv/test_features_kimianet.csv"
-N_NEIGHBORS = 7
+FEATURES_PATHS = {
+    1: {
+        "name": "mobilenetv3",
+        "train_csv": "features_csv/train_features_mobilenetv3.csv",
+        "test_csv": "features_csv/test_features_mobilenetv3.csv",
+    },
+    2: {
+        "name": "efficientnetv2",
+        "train_csv": "features_csv/train_features_efficientnetv2.csv",
+        "test_csv": "features_csv/test_features_efficientnetv2.csv",
+    },
+    3: {
+        "name": "kimianet",
+        "train_csv": "features_csv/train_features_kimianet.csv",
+        "test_csv": "features_csv/test_features_kimianet.csv",
+    }
+}
+
+# 1 - MobileNetV3 Small
+# 2 - EfficientNetV2 Small
+# 3 - KimiaNet
+FEATURES_CHOICE = 3
+
+TRAIN_CSV = FEATURES_PATHS[FEATURES_CHOICE]["train_csv"]
+TEST_CSV = FEATURES_PATHS[FEATURES_CHOICE]["test_csv"]
+N_NEIGHBORS = 3
 METRIC = "euclidean"
 
 PCA_REDUCTION = True

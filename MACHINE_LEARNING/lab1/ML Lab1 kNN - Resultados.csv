@@ -1,0 +1,65 @@
+mobilenetV3 S,,,,,,EfficientnetV2 S,,,,,,KimiaNet,,,,
+,,,,,,,,,,,,,,,,
+,"Train Split (10-90), neighbors=3",,,,,,"Train Split (10-90), neighbors=3",,,,,,"Train Split (10-90), neighbors=3",,,
+Classification report,,,,,,Classification report,,,,,,Classification report,,,,
+,precision,recall,f1-score,support,,,precision,recall,f1-score,support,,,precision,recall,f1-score,support
+lymph_cll,0.62,0.85,0.72,4467,,lymph_cll,0.83,0.93,0.87,4467,,lymph_cll,0.93,0.96,0.95,4467
+lymph_fl,0.79,0.69,0.74,4504,,lymph_fl,0.90,0.89,0.89,4504,,lymph_fl,0.96,0.97,0.97,4504
+lymph_mcl,0.74,0.56,0.64,4529,,lymph_mcl,0.91,0.82,0.86,4529,,lymph_mcl,0.95,0.91,0.93,4529
+,,,,,,,,,,,,,,,,
+accuracy,,,0.70,13500,,accuracy,,,0.88,13500,,accuracy,,,0.95,13500
+macro avg,0.72,0.70,0.70,13500,,macro avg,0.88,0.88,0.88,13500,,macro avg,0.95,0.95,0.95,13500
+weighted avg,0.72,0.70,0.70,13500,,weighted avg,0.88,0.88,0.88,13500,,weighted avg,0.95,0.95,0.95,13500
+,,,,,,,,,,,,,,,,
+Confusion matrix,,,,,,Confusion matrix,,,,,,Confusion matrix,,,,
+3818,23,426,,,,4133,145,189,,,,4296,49,122,,
+937,3109,458,,,,330,3995,179,,,,47,4371,86,,
+1401,579,2549,,,,528,300,3701,,,,273,121,4135,,
+,,,,,,,,,,,,,,,,
+,"Com PCA, n_components=0.9, neighbors=3",,,,,,"Com PCA, n_components=0.9, neighbors=3",,,,,,"Com PCA, n_components=0.9, neighbors=3",,,
+Classification report,,,,,,Classification report,,,,,,Classification report,,,,
+,precision,recall,f1-score,support,,,precision,recall,f1-score,support,,,precision,recall,f1-score,support
+lymph_cll,0.80,0.91,0.85,1984,,lymph_cll,0.96,0.98,0.97,1984,,lymph_cll,0.98,0.99,0.99,1984
+lymph_fl,0.89,0.88,0.89,1960,,lymph_fl,0.97,0.98,0.97,1960,,lymph_fl,0.99,0.99,0.99,1960
+lymph_mcl,0.89,0.77,0.82,2056,,lymph_mcl,0.98,0.95,0.96,2056,,lymph_mcl,0.99,0.99,0.99,2056
+,,,,,,,,,,,,,,,,
+accuracy,,,0.85,6000,,accuracy,,,0.97,6000,,accuracy,,,0.99,6000
+macro avg,0.86,0.86,0.85,6000,,macro avg,0.97,0.97,0.97,6000,,macro avg,0.99,0.99,0.99,6000
+weighted avg,0.86,0.85,0.85,6000,,weighted avg,0.97,0.97,0.97,6000,,weighted avg,0.99,0.99,0.99,6000
+,,,,,,,,,,,,,,,,
+Confusion matrix,,,,,,Confusion matrix,,,,,,Confusion matrix,,,,
+1813,55,116,,,,1950,15,19,,,,1970,6,8,,
+143,1728,89,,,,25,1917,18,,,,7,1949,4,,
+317,156,1583,,,,62,48,1946,,,,26,4,2026,,
+,,,,,,,,,,,,,,,,
+,neighbors=3,,,,,,neighbors=3,,,,,,neighbors=3,,,
+Classification report,,,,,,Classification report,,,,,,Classification report,,,,
+,precision,recall,f1-score,support,,,precision,recall,f1-score,support,,,precision,recall,f1-score,support
+lymph_cll,0.80,0.93,0.86,1984,,lymph_cll,0.96,0.98,0.97,1984,,lymph_cll,0.98,0.99,0.99,1984
+lymph_fl,0.90,0.89,0.89,1960,,lymph_fl,0.97,0.99,0.98,1960,,lymph_fl,1.00,0.99,0.99,1960
+lymph_mcl,0.90,0.78,0.84,2056,,lymph_mcl,0.99,0.95,0.97,2056,,lymph_mcl,0.99,0.98,0.99,2056
+,,,,,,,,,,,,,,,,
+accuracy,,,0.86,6000,,accuracy,,,0.97,6000,,accuracy,,,0.99,6000
+macro avg,0.87,0.86,0.86,6000,,macro avg,0.97,0.97,0.97,6000,,macro avg,0.99,0.99,0.99,6000
+weighted avg,0.87,0.86,0.86,6000,,weighted avg,0.97,0.97,0.97,6000,,weighted avg,0.99,0.99,0.99,6000
+,,,,,,,,,,,,,,,,
+Confusion matrix,,,,,,Confusion matrix,,,,,,Confusion matrix,,,,
+1838,49,97,,,,1954,15,15,,,,1973,3,8,,
+140,1735,85,,,,17,1932,11,,,,12,1941,7,,
+311,135,1610,,,,56,1962,1962,,,,34,1,2021,,
+,,,,,,,,,,,,,,,,
+,"576-D, neighbors=7",,,,,,"1280-D, neighbors=7",,,,,,"1024-D, neighbors=7",,,
+Classification report,,,,,,Classification report,,,,,,Classification report,,,,
+,precision,recall,f1-score,support,,,precision,recall,f1-score,support,,,precision,recall,f1-score,support
+lymph_cll,0.82,0.93,0.87,1984,,lymph_cll,0.96,0.99,0.97,1984,,lymph_cll,0.98,0.99,0.99,1984
+lymph_fl,0.86,0.90,0.88,1960,,lymph_fl,0.97,0.98,0.97,1960,,lymph_fl,0.99,0.99,0.99,1960
+lymph_mcl,0.90,0.75,0.82,2056,,lymph_mcl,0.99,0.95,0.97,2056,,lymph_mcl,0.99,0.98,0.99,2056
+,,,,,,,,,,,,,,,,
+accuracy,,,0.86,6000,,accuracy,,,0.97,6000,,accuracy,,,0.99,6000
+macro avg,0.86,0.86,0.86,6000,,macro avg,0.97,0.97,0.97,6000,,macro avg,0.99,0.99,0.99,6000
+weighted avg,0.86,0.86,0.86,6000,,weighted avg,0.97,0.97,0.97,6000,,weighted avg,0.99,0.99,0.99,6000
+,,,,,,,,,,,,,,,,
+Confusion matrix,,,,,,Confusion matrix,,,,,,Confusion matrix,,,,
+1843,59,82,,,,1955,16,13,,,,1968,5,11,,
+110,1765,85,,,,22,1924,14,,,,4,1949,7,,
+285,220,1551,,,,55,52,1949,,,,33,5,2018,,

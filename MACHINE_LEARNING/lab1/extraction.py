@@ -14,25 +14,6 @@ from timm.data.transforms_factory import create_transform
 # --------------------------------------------------
 # Configuration
 # --------------------------------------------------
-DATA_DIR = "../datasets/Multi_Cancer_Lymphoma"
-BATCH_SIZE = 32
-TRAIN_SPLIT = 0.6
-SEED = 42
-OUTPUT_DIR = "features_csv"
-
-# Model to extract the feature vector
-# 1 - MobileNetV3 Small
-# 2 - EfficientNetV2 Small
-# 3 - DinoV2 Base
-# 4 - KimiaNet
-MODEL_CHOICE = 3
-
-DEVICE = (
-    "mps" if torch.backends.mps.is_available()
-    else "cuda" if torch.cuda.is_available()
-    else "cpu"
-)
-
 MODEL_PATHS = {
     1: {
         "name": "mobilenetv3",
@@ -55,6 +36,25 @@ MODEL_PATHS = {
         "test_csv": "test_features_kimianet.csv",
     }
 }
+
+# Model to extract the feature vector
+# 1 - MobileNetV3 Small
+# 2 - EfficientNetV2 Small
+# 3 - DinoV2 Base == NÃO USADO NO EXPERIMENTO ==
+# 4 - KimiaNet
+MODEL_CHOICE = 4
+
+DATA_DIR = "../datasets/Multi_Cancer_Lymphoma"
+BATCH_SIZE = 32
+TRAIN_SPLIT = 0.6
+SEED = 42
+OUTPUT_DIR = "features_csv"
+
+DEVICE = (
+    "mps" if torch.backends.mps.is_available()
+    else "cuda" if torch.cuda.is_available()
+    else "cpu"
+)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
