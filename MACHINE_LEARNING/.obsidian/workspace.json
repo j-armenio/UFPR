@@ -8,15 +8,15 @@
         "type": "tabs",
         "children": [
           {
-            "id": "fc2177f8eaab1981",
+            "id": "4975ff8440d90bbc",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula4/benchmark_avaliacao_continua.excalidraw.md"
+                "file": "aula5/aprendizagem_instancias.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "benchmark_avaliacao_continua.excalidraw"
+              "title": "aprendizagem_instancias.excalidraw"
             }
           }
         ]
@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -179,23 +180,28 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "fc2177f8eaab1981",
+  "active": "4975ff8440d90bbc",
   "lastOpenFiles": [
+    "Pasted Image 20260403235147_198.png",
+    "Pasted Image 20260403234922_199.png",
+    "aula5/aprendizagem_instancias.excalidraw.md",
+    "Pasted Image 20260403234748_675.png",
+    "Pasted Image 20260403233755_846.png",
+    "Pasted Image 20260403232331_252.png",
+    "Pasted Image 20260403232015_586.png",
+    "Pasted Image 20260403231635_334.png",
+    "Pasted Image 20260403231356_026.png",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "Excalidraw",
     "aula4/metricas.excalidraw",
     "aula4/bias-variance.excalidraw",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "media/Pasted Image 20260403224750_271.png",
     "media/Pasted Image 20260403225513_003.png",
     "media/Pasted Image 20260403225419_294.png",
-    "media/Pasted Image 20260403225108_782.png",
-    "media/Pasted Image 20260403224956_172.png",
     "aula4/benchmark_avaliacao_continua.excalidraw",
-    "media/Pasted Image 20260403224412_832.png",
     "media",
-    "media/Pasted Image 20260403224207_228.png",
     "aula5",
     "aula4/validacao.excalidraw",
-    "Excalidraw",
     "Untitled.md"
   ]
 }
