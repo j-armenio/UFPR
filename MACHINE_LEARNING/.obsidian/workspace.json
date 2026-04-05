@@ -4,23 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "883b92fd819de6c4",
+        "id": "475314d63b12974a",
         "type": "tabs",
         "children": [
           {
-            "id": "4975ff8440d90bbc",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula5/classificacao_instancias.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "classificacao_instancias.excalidraw"
-            }
-          },
-          {
-            "id": "34c4a85a59290d07",
+            "id": "90885473f1dfa060",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -31,8 +19,7 @@
               "title": "bayesiana.excalidraw"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -89,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -193,12 +179,16 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "34c4a85a59290d07",
+  "active": "90885473f1dfa060",
   "lastOpenFiles": [
-    "Pasted Image 20260404195334_356.png",
-    "Pasted Image 20260404194707_696.png",
     "aula5/classificacao_instancias.excalidraw.md",
+    "media/Pasted Image 20260404194707_696.png",
     "aula6/bayesiana.excalidraw.md",
+    "media/Pasted Image 20260405151558_999.png",
+    "media/Pasted Image 20260405123338_670.png",
+    "media/Pasted Image 20260405122127_283.png",
+    "media/Pasted Image 20260405012749_316.png",
+    "media/Pasted Image 20260404195334_356.png",
     "media/Pasted Image 20260404191107_047.png",
     "Excalidraw",
     "Untitled.md",
@@ -206,11 +196,6 @@
     "media/Pasted Image 20260404191045_093.png",
     "media/Pasted Image 20260404191000_133.png",
     "media/Pasted Image 20260404190629_003.png",
-    "media/Pasted Image 20260404190605_292.png",
-    "media/Pasted Image 20260404190542_247.png",
-    "media/Pasted Image 20260404174236_541.png",
-    "media/Pasted Image 20260404131013_805.png",
-    "Pasted Image 20260404130510_593.png",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "aula4/metricas.excalidraw",
     "aula4/bias-variance.excalidraw",
