@@ -141,16 +141,16 @@
       "strokeColor": "#000000",
       "backgroundColor": "transparent",
       "fillStyle": "hachure",
-      "strokeWidth": 0,
+      "strokeWidth": 0.2,
       "roughness": 0,
       "penOptions": {
         "highlighter": false,
         "constantPressure": false,
         "hasOutline": false,
-        "outlineWidth": 1,
+        "outlineWidth": 0,
         "options": {
           "thinning": 0.6,
-          "smoothing": 0.5,
+          "smoothing": 0.25,
           "streamline": 0.5,
           "easing": "easeOutSine",
           "start": {
@@ -446,7 +446,7 @@
       }
     }
   ],
-  "numberOfCustomPens": 0,
+  "numberOfCustomPens": 1,
   "pdfScale": 4,
   "pdfBorderBox": true,
   "pdfFrame": false,
