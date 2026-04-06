@@ -11,10 +11,12 @@
             "id": "1acc89267ac4b84e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "excalidraw",
+              "state": {
+                "file": "aula8/classificadores_lineares.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "classificadores_lineares.excalidraw"
             }
           }
         ]
@@ -74,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -177,19 +180,22 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "18ae20b36d79e108",
+  "active": "1acc89267ac4b84e",
   "lastOpenFiles": [
+    "Pasted Image 20260405213436_868.png",
+    "Pasted Image 20260405213327_859.png",
+    "aula8/classificadores_lineares.excalidraw.md",
+    "Pasted Image 20260405213309_743.png",
+    "Pasted Image 20260405212841_596.png",
+    "Pasted Image 20260405212658_137.png",
+    "Pasted Image 20260405212456_574.png",
+    "Pasted Image 20260405212340_255.png",
+    "Pasted Image 20260405212018_959.png",
+    "Pasted Image 20260405211540_848.png",
+    "Pasted Image 20260405211255_019.png",
+    "Pasted Image 20260405210741_998.png",
     "aula7/gaussian_mixture_models.excalidraw.md",
-    "media/Pasted Image 20260405185647_135.png",
-    "media/Pasted Image 20260405185630_361.png",
-    "media/Pasted Image 20260405185611_228.png",
-    "media/Pasted Image 20260405185453_832.png",
-    "media/Pasted Image 20260405184252_321.png",
-    "Pasted Image 20260405184041_652.png",
-    "media/Pasted Image 20260405183909_509.png",
-    "media/Pasted Image 20260405183759_433.png",
-    "media/Pasted Image 20260405181809_963.png",
-    "media/Pasted Image 20260405181904_714.png",
+    "aula8",
     "aula6/bayesiana.excalidraw.md",
     "aula7",
     "aula5/classificacao_instancias.excalidraw.md",
