@@ -11,12 +11,12 @@
             "id": "0ee5a895affbd0bb",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "image",
               "state": {
-                "file": "aula9/support_vector_machines.excalidraw.md"
+                "file": "media/Pasted Image 20260406001735_585.png"
               },
-              "icon": "excalidraw-icon",
-              "title": "support_vector_machines.excalidraw"
+              "icon": "lucide-image",
+              "title": "Pasted Image 20260406001735_585"
             }
           }
         ]
@@ -42,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -76,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -170,31 +169,31 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "0ee5a895affbd0bb",
+  "active": "18ae20b36d79e108",
   "lastOpenFiles": [
-    "Pasted Image 20260406005237_265.png",
+    "media/Pasted Image 20260406002246_952.png",
     "aula9/support_vector_machines.excalidraw.md",
-    "Pasted Image 20260406005221_320.png",
-    "Pasted Image 20260406003906_261.png",
-    "Pasted Image 20260406003408_149.png",
-    "Pasted Image 20260406002246_952.png",
-    "Pasted Image 20260406001735_585.png",
+    "media/Pasted Image 20260406015642_392.png",
+    "media/Pasted Image 20260406015215_742.png",
+    "media/Pasted Image 20260406012154_375.png",
+    "media/Pasted Image 20260406005237_265.png",
+    "media/Pasted Image 20260406005221_320.png",
+    "media/Pasted Image 20260406003906_261.png",
+    "media/Pasted Image 20260406003408_149.png",
+    "media/Pasted Image 20260406001735_585.png",
     "aula8/classificadores_lineares.excalidraw.md",
     "aula9",
     "media/Pasted Image 20260405190548_082.png",
-    "media/Pasted Image 20260405213436_868.png",
-    "Pasted Image 20260405213327_859.png",
-    "media/Pasted Image 20260405213309_743.png",
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula8",
     "aula6/bayesiana.excalidraw.md",
