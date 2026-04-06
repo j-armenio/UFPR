@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "bf6876a55801e1a1",
+        "id": "ca946b665a76765f",
         "type": "tabs",
         "children": [
           {
-            "id": "1acc89267ac4b84e",
+            "id": "0ee5a895affbd0bb",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula8/classificadores_lineares.excalidraw.md"
+                "file": "aula9/support_vector_machines.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "classificadores_lineares.excalidraw"
+              "title": "support_vector_machines.excalidraw"
             }
           }
         ]
@@ -180,20 +180,21 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "1acc89267ac4b84e",
+  "active": "0ee5a895affbd0bb",
   "lastOpenFiles": [
-    "Pasted Image 20260405213436_868.png",
-    "Pasted Image 20260405213327_859.png",
+    "Pasted Image 20260406005237_265.png",
+    "aula9/support_vector_machines.excalidraw.md",
+    "Pasted Image 20260406005221_320.png",
+    "Pasted Image 20260406003906_261.png",
+    "Pasted Image 20260406003408_149.png",
+    "Pasted Image 20260406002246_952.png",
+    "Pasted Image 20260406001735_585.png",
     "aula8/classificadores_lineares.excalidraw.md",
-    "Pasted Image 20260405213309_743.png",
-    "Pasted Image 20260405212841_596.png",
-    "Pasted Image 20260405212658_137.png",
-    "Pasted Image 20260405212456_574.png",
-    "Pasted Image 20260405212340_255.png",
-    "Pasted Image 20260405212018_959.png",
-    "Pasted Image 20260405211540_848.png",
-    "Pasted Image 20260405211255_019.png",
-    "Pasted Image 20260405210741_998.png",
+    "aula9",
+    "media/Pasted Image 20260405190548_082.png",
+    "media/Pasted Image 20260405213436_868.png",
+    "Pasted Image 20260405213327_859.png",
+    "media/Pasted Image 20260405213309_743.png",
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula8",
     "aula6/bayesiana.excalidraw.md",
@@ -207,7 +208,6 @@
     "aula4/bias-variance.excalidraw",
     "aula4/benchmark_avaliacao_continua.excalidraw",
     "media",
-    "aula5",
-    "aula4/validacao.excalidraw"
+    "aula5"
   ]
 }
