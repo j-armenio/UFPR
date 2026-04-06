@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "ca946b665a76765f",
+        "id": "2cd17efc8647cb68",
         "type": "tabs",
         "children": [
           {
-            "id": "0ee5a895affbd0bb",
+            "id": "c22ea61d6b625e75",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "excalidraw",
               "state": {
-                "file": "media/Pasted Image 20260406001735_585.png"
+                "file": "aula9/support_vector_machines.excalidraw.md"
               },
-              "icon": "lucide-image",
-              "title": "Pasted Image 20260406001735_585"
+              "icon": "excalidraw-icon",
+              "title": "support_vector_machines.excalidraw"
             }
           }
         ]
@@ -76,7 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -179,34 +179,35 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "18ae20b36d79e108",
+  "active": "c22ea61d6b625e75",
   "lastOpenFiles": [
-    "media/Pasted Image 20260406002246_952.png",
+    "Screenshot_20260406_164559.png",
+    "Screenshot_20260406_164336.png",
     "aula9/support_vector_machines.excalidraw.md",
+    "Screenshot_20260406_163704.png",
+    "Screenshot_20260406_153802.png",
+    "Screenshot_20260406_163401.png",
+    "aula8/classificadores_lineares.excalidraw.md",
+    "aula7/gaussian_mixture_models.excalidraw.md",
+    "aula6/bayesiana.excalidraw.md",
+    "aula5/classificacao_instancias.excalidraw.md",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "aula4/validacao.excalidraw",
+    "aula4/metricas.excalidraw",
+    "aula4/bias-variance.excalidraw",
+    "aula3/representacao-texto.excalidraw",
+    "aula3/representacao-imagem.excalidraw",
+    "aula3/representacao-audio.excalidraw",
+    "aula2/engenharia_de_caracteristicas.excalidraw",
+    "Screenshot_20260406_152823.png",
+    "media/Pasted Image 20260406001735_585.png",
+    "media/Pasted Image 20260406002246_952.png",
     "media/Pasted Image 20260406015642_392.png",
     "media/Pasted Image 20260406015215_742.png",
     "media/Pasted Image 20260406012154_375.png",
-    "media/Pasted Image 20260406005237_265.png",
-    "media/Pasted Image 20260406005221_320.png",
-    "media/Pasted Image 20260406003906_261.png",
-    "media/Pasted Image 20260406003408_149.png",
-    "media/Pasted Image 20260406001735_585.png",
-    "aula8/classificadores_lineares.excalidraw.md",
     "aula9",
-    "media/Pasted Image 20260405190548_082.png",
-    "aula7/gaussian_mixture_models.excalidraw.md",
     "aula8",
-    "aula6/bayesiana.excalidraw.md",
     "aula7",
-    "aula5/classificacao_instancias.excalidraw.md",
-    "Excalidraw",
-    "Untitled.md",
-    "aula6",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
-    "aula4/metricas.excalidraw",
-    "aula4/bias-variance.excalidraw",
-    "aula4/benchmark_avaliacao_continua.excalidraw",
-    "media",
-    "aula5"
+    "Untitled.md"
   ]
 }
