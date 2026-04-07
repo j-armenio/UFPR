@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "8ef7b62d75685815",
+        "id": "0d1ddb7521242ef6",
         "type": "tabs",
         "children": [
           {
-            "id": "94762f054cda4fbb",
+            "id": "f03a0958019548d1",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula10/arvore_decisao.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "arvore_decisao.excalidraw"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
             }
           }
         ]
@@ -76,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -180,34 +177,35 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "94762f054cda4fbb",
+  "active": "f03a0958019548d1",
   "lastOpenFiles": [
-    "Screenshot_20260407_151111.png",
+    "aula3/representacao-texto.excalidraw",
+    "aula3/representacao-imagem.excalidraw",
+    "aula3/representacao-audio.excalidraw",
+    "aula4/metricas.excalidraw",
+    "aula5/classificacao_instancias.excalidraw.md",
+    "aula4/validacao.excalidraw",
+    "aula4/bias-variance.excalidraw",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "aula2/engenharia_de_caracteristicas.excalidraw.md",
+    "aula2/engenharia_de_caracteristicas.excalidraw",
+    "Screenshot_20260407_170118.png",
+    "Screenshot_20260407_170054.png",
+    "Screenshot_20260407_170031.png",
+    "Screenshot_20260407_170010.png",
+    "Screenshot_20260407_165902.png",
+    "Screenshot_20260407_165844.png",
+    "Screenshot_20260407_165809.png",
+    "Screenshot_20260407_165746.png",
+    "Screenshot_20260407_165719.png",
+    "Screenshot_20260407_165630.png",
     "aula10/arvore_decisao.excalidraw.md",
-    "Screenshot_20260407_152034.png",
-    "Screenshot_20260407_151621.png",
-    "Screenshot_20260407_151326.png",
-    "Screenshot_20260407_151159.png",
-    "Screenshot_20260407_151027.png",
-    "Screenshot_20260407_150947.png",
-    "Screenshot_20260407_150908.png",
-    "Screenshot_20260407_150730.png",
-    "Screenshot_20260407_150601.png",
     "aula9/support_vector_machines.excalidraw.md",
     "Excalidraw",
     "aula10",
     "aula8/classificadores_lineares.excalidraw.md",
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
-    "aula5/classificacao_instancias.excalidraw.md",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
-    "aula4/validacao.excalidraw",
-    "aula4/metricas.excalidraw",
-    "aula4/bias-variance.excalidraw",
-    "aula3/representacao-texto.excalidraw",
-    "aula3/representacao-imagem.excalidraw",
-    "aula3/representacao-audio.excalidraw",
-    "aula2/engenharia_de_caracteristicas.excalidraw",
     "aula9",
     "Untitled.md"
   ]

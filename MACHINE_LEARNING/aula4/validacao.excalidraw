@@ -8,7 +8,7 @@
 			"type": "text",
 			"x": 358.5888247702962,
 			"y": 220.5611654831682,
-			"width": 155.443359375,
+			"width": 158.90406799316406,
 			"height": 45,
 			"angle": 0,
 			"strokeColor": "#e03131",
@@ -133,7 +133,7 @@
 			"type": "text",
 			"x": 355.6736703715799,
 			"y": 289.5507348265138,
-			"width": 96.509765625,
+			"width": 103.71243286132812,
 			"height": 35,
 			"angle": 0,
 			"strokeColor": "#2f9e44",
@@ -278,7 +278,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "K-Fold Cross-Validation"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "yQzx6qsO",
@@ -312,11 +313,12 @@
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Dividir os dados de treinamento em k partes iguais.\n- O treinamento é realizado com k-1 partes.\n- O processo é repetido k vezes.\n- A parte não utilizada no treinamento é utilizada para validação.",
+			"originalText": "Dividir os dados de\ntreinamento em k partes iguais.\n- O treinamento é realizado\ncom k-1 partes.\n- O processo é repetido k\nvezes.\n- A parte não utilizada no\ntreinamento é utilizada para\nvalidação.",
 			"autoResize": false,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Dividir os dados de treinamento em k partes iguais.\n- O treinamento é realizado com k-1 partes.\n- O processo é repetido k vezes.\n- A parte não utilizada no treinamento é utilizada para validação."
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "E6AYnnM5",
@@ -341,7 +343,7 @@
 			"version": 394,
 			"versionNonce": 1644658115,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"link": null,
 			"locked": false,
@@ -351,7 +353,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "FrtxIB0v",
@@ -376,20 +379,21 @@
 			"version": 612,
 			"versionNonce": 1484311907,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"locked": false,
 			"text": "- O erro médio é uma estimativa do erro no teste.\n\n- Computacionalmente mais caro que o holdout, especialmente para\ngrandes bases.\n- Após a validação, você não mantém os k modelos. Você usa a média\ndo desempenho para avaliar o quão bem o modelo generaliza.\n- Para o modelo de produção, você treina novamente usando o\nconjunto de dados completo após escolher a melhor configuração.",
-			"rawText": "- O erro médio é uma estimativa do erro no teste.\n\n- Computacionalmente mais caro que o holdout, especialmente para grandes bases.\n- Após a validação, você não mantém os k modelos. Você usa a média do desempenho para avaliar o quão bem o modelo generaliza.\n- Para o modelo de produção, você treina novamente usando o conjunto de dados completo após escolher a melhor configuração.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "- O erro médio é uma estimativa do erro no teste.\n\n- Computacionalmente mais caro que o holdout, especialmente para grandes bases.\n- Após a validação, você não mantém os k modelos. Você usa a média do desempenho para avaliar o quão bem o modelo generaliza.\n- Para o modelo de produção, você treina novamente usando o conjunto de dados completo após escolher a melhor configuração.",
+			"originalText": "- O erro médio é uma estimativa do erro no teste.\n\n- Computacionalmente mais caro que o holdout, especialmente para\ngrandes bases.\n- Após a validação, você não mantém os k modelos. Você usa a média\ndo desempenho para avaliar o quão bem o modelo generaliza.\n- Para o modelo de produção, você treina novamente usando o\nconjunto de dados completo após escolher a melhor configuração.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "k6DiQFPZqe97XtSvV80MH",
@@ -416,7 +420,7 @@
 			"version": 157,
 			"versionNonce": 1472362605,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256667528,
 			"link": null,
 			"locked": false,
@@ -434,7 +438,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "K02UXUss",
@@ -472,7 +478,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Stratified K-Fold Cross-Validation"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "magHg9U7",
@@ -497,20 +504,21 @@
 			"version": 441,
 			"versionNonce": 1085604931,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"locked": false,
 			"text": "Variação do k-Fold para o problema de desbalanceamento de classes.\n- Garante que cada fold preserve a proporção de classes do\nconjunto de dados original.",
-			"rawText": "Variação do k-Fold para o problema de desbalanceamento de classes.\n- Garante que cada fold preserve a proporção de classes do conjunto de dados original.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Variação do k-Fold para o problema de desbalanceamento de classes.\n- Garante que cada fold preserve a proporção de classes do conjunto de dados original.",
+			"originalText": "Variação do k-Fold para o problema de desbalanceamento de classes.\n- Garante que cada fold preserve a proporção de classes do\nconjunto de dados original.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "JfTSEY9GnkBHR9ZLfoDlB",
@@ -537,7 +545,7 @@
 			"version": 111,
 			"versionNonce": 1152484323,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"link": null,
 			"locked": false,
@@ -555,7 +563,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "XTjqrB3r",
@@ -593,7 +603,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Leave one Out"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "AMkioVo2",
@@ -627,11 +638,12 @@
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Caso extremo do k-Fold, em que k = número total de amostras na base de aprendizagem.\n- Separa apenas uma única amostra como conjunto de testes.",
+			"originalText": "Caso extremo do k-Fold, em\nque k = número total de\namostras na base de\naprendizagem.\n- Separa apenas uma única\namostra como conjunto de\ntestes.",
 			"autoResize": false,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Caso extremo do k-Fold, em que k = número total de amostras na base de aprendizagem.\n- Separa apenas uma única amostra como conjunto de testes."
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "XMTZvRc4",
@@ -656,7 +668,7 @@
 			"version": 318,
 			"versionNonce": 455822019,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"link": null,
 			"locked": false,
@@ -666,7 +678,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "CTcbLkG4FGqndhpVlFXQi",
@@ -693,7 +706,7 @@
 			"version": 142,
 			"versionNonce": 899349091,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"link": null,
 			"locked": false,
@@ -711,7 +724,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "aFEKhgbrRpDpDSlADdM1f",
@@ -738,7 +753,7 @@
 			"version": 111,
 			"versionNonce": 833861123,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"link": null,
 			"locked": false,
@@ -756,7 +771,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "TWNw8pvu",
@@ -781,11 +798,10 @@
 			"version": 190,
 			"versionNonce": 242482595,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"locked": false,
 			"text": "- Indicado para pequenas bases de dados.\n- Muito lento para grandes bases.",
-			"rawText": "- Indicado para pequenas bases de dados.\n- Muito lento para grandes bases.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -794,7 +810,9 @@
 			"originalText": "- Indicado para pequenas bases de dados.\n- Muito lento para grandes bases.",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "aChZxaL3",
@@ -832,7 +850,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Nested Cross-Validation"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "ayd39Gv9",
@@ -857,11 +876,10 @@
 			"version": 706,
 			"versionNonce": 1825911011,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256443189,
 			"locked": false,
 			"text": "Possui duas camadas de validação.\n    - primeira: seleção do modelo, estima o erro da generalização,\n    - segunda: otimização dos hiper-parâmetros.\n- Alto custo computacional.\n- Evita over-fitting.",
-			"rawText": "Possui duas camadas de validação.\n    - primeira: seleção do modelo, estima o erro da generalização,\n    - segunda: otimização dos hiper-parâmetros.\n- Alto custo computacional.\n- Evita over-fitting.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -870,13 +888,15 @@
 			"originalText": "Possui duas camadas de validação.\n    - primeira: seleção do modelo, estima o erro da generalização,\n    - segunda: otimização dos hiper-parâmetros.\n- Alto custo computacional.\n- Evita over-fitting.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "w8AzaX2Q",
 			"type": "image",
-			"x": 386.5040949914043,
-			"y": 1392.6639714606995,
+			"x": 384.68591317322245,
+			"y": 1391.7548805516085,
 			"width": 473.09379496596324,
 			"height": 293.00909663092955,
 			"angle": 0,
@@ -892,11 +912,11 @@
 			"index": "al",
 			"roundness": null,
 			"seed": 759946093,
-			"version": 274,
-			"versionNonce": 560143491,
+			"version": 275,
+			"versionNonce": 1369187430,
 			"isDeleted": false,
-			"boundElements": null,
-			"updated": 1775256443189,
+			"boundElements": [],
+			"updated": 1775592395226,
 			"link": null,
 			"locked": false,
 			"status": "pending",
@@ -905,7 +925,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "eVpgUOZW",
@@ -943,7 +964,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Bootstrap CV"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "DkF5hRgxHVut9yd_-3hpL",
@@ -1015,20 +1037,21 @@
 			"version": 400,
 			"versionNonce": 825891597,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256537387,
 			"locked": false,
 			"text": "Reamostragem com reposição: criar múltiplos novos conjuntos\nde dados (bootstrap samples) selecionando aleatoriamente\namostras do conjunto original com reposição.\nCada amostra tem o mesmo tamanho do conjunto original, mas\npode conter instâncias repetidas.",
-			"rawText": "Reamostragem com reposição: criar múltiplos novos conjuntos de dados (bootstrap samples) selecionando aleatoriamente amostras do conjunto original com reposição.\nCada amostra tem o mesmo tamanho do conjunto original, mas pode conter instâncias repetidas.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Reamostragem com reposição: criar múltiplos novos conjuntos de dados (bootstrap samples) selecionando aleatoriamente amostras do conjunto original com reposição.\nCada amostra tem o mesmo tamanho do conjunto original, mas pode conter instâncias repetidas.",
+			"originalText": "Reamostragem com reposição: criar múltiplos novos conjuntos\nde dados (bootstrap samples) selecionando aleatoriamente\namostras do conjunto original com reposição.\nCada amostra tem o mesmo tamanho do conjunto original, mas\npode conter instâncias repetidas.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "1381WfM6",
@@ -1068,7 +1091,11 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"customData": {
+				"legacyTextWrap": true
+			},
+			"hasTextLink": false
 		},
 		{
 			"id": "hHyKiz3g",
@@ -1102,7 +1129,6 @@
 			"updated": 1775256575053,
 			"locked": false,
 			"text": "Dados originais",
-			"rawText": "Dados originais",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -1111,7 +1137,12 @@
 			"originalText": "Dados originais",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"customData": {
+				"legacyTextWrap": true
+			},
+			"rawText": ""
 		},
 		{
 			"id": "eVeqtUOn",
@@ -1138,7 +1169,7 @@
 			"version": 196,
 			"versionNonce": 2089376515,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256585201,
 			"link": null,
 			"locked": false,
@@ -1160,7 +1191,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": "arrow",
-			"elbowed": false
+			"elbowed": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "PUMi1f8L",
@@ -1185,20 +1218,21 @@
 			"version": 1012,
 			"versionNonce": 148874787,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256873227,
 			"locked": false,
 			"text": "Treinar e avaliar: treinar o modelo em cada amostra bootstrap\ne testá-lo nos dados que não foram selecionados (chamados\nde out-of-bag).\n- Em média: 63% do dados são selecionados para treinamento.\nO restante é usado para teste.\nAgregação de resultados: calcular a média do desempenho\nconsiderando todas as amostras bootstrap.\n\n- Possui maior variância nas estimativas.\n- Instâncias podem se repetir e outras nunca aparecer, levando\na maior variabilidade nos resultados.\n- Pode superestimar o desempenho.\n- Maior custo computacional.\n- Número de reamostragem (B) afeta a precisão das\nestimativas.\n    - B = 100 a 1000\n- Uso quando os dados são limitados.",
-			"rawText": "Treinar e avaliar: treinar o modelo em cada amostra bootstrap e testá-lo nos dados que não foram selecionados (chamados de out-of-bag).\n- Em média: 63% do dados são selecionados para treinamento. O restante é usado para teste.\nAgregação de resultados: calcular a média do desempenho considerando todas as amostras bootstrap.\n\n- Possui maior variância nas estimativas.\n- Instâncias podem se repetir e outras nunca aparecer, levando a maior variabilidade nos resultados.\n- Pode superestimar o desempenho.\n- Maior custo computacional.\n- Número de reamostragem (B) afeta a precisão das estimativas.\n    - B = 100 a 1000\n- Uso quando os dados são limitados.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Treinar e avaliar: treinar o modelo em cada amostra bootstrap e testá-lo nos dados que não foram selecionados (chamados de out-of-bag).\n- Em média: 63% do dados são selecionados para treinamento. O restante é usado para teste.\nAgregação de resultados: calcular a média do desempenho considerando todas as amostras bootstrap.\n\n- Possui maior variância nas estimativas.\n- Instâncias podem se repetir e outras nunca aparecer, levando a maior variabilidade nos resultados.\n- Pode superestimar o desempenho.\n- Maior custo computacional.\n- Número de reamostragem (B) afeta a precisão das estimativas.\n    - B = 100 a 1000\n- Uso quando os dados são limitados.",
+			"originalText": "Treinar e avaliar: treinar o modelo em cada amostra bootstrap\ne testá-lo nos dados que não foram selecionados (chamados\nde out-of-bag).\n- Em média: 63% do dados são selecionados para treinamento.\nO restante é usado para teste.\nAgregação de resultados: calcular a média do desempenho\nconsiderando todas as amostras bootstrap.\n\n- Possui maior variância nas estimativas.\n- Instâncias podem se repetir e outras nunca aparecer, levando\na maior variabilidade nos resultados.\n- Pode superestimar o desempenho.\n- Maior custo computacional.\n- Número de reamostragem (B) afeta a precisão das\nestimativas.\n    - B = 100 a 1000\n- Uso quando os dados são limitados.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "BhgUPNzBK7cEzuWWmw6AC",
@@ -1225,7 +1259,7 @@
 			"version": 41,
 			"versionNonce": 564592941,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256674198,
 			"link": null,
 			"locked": false,
@@ -1243,7 +1277,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "R2c2a2_PKQO0PBZ2kn4Ef",
@@ -1270,7 +1306,7 @@
 			"version": 70,
 			"versionNonce": 690424845,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256749333,
 			"link": null,
 			"locked": false,
@@ -1288,7 +1324,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "1hbbOLB6p27MnOIdAXZr_",
@@ -1315,7 +1353,7 @@
 			"version": 77,
 			"versionNonce": 260894221,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256830881,
 			"link": null,
 			"locked": false,
@@ -1333,7 +1371,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "UJ_9PEuHtQYT-D0cpF-uP",
@@ -1360,7 +1400,7 @@
 			"version": 41,
 			"versionNonce": 1883894093,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256887488,
 			"link": null,
 			"locked": false,
@@ -1378,7 +1418,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "V1z8tPSy8ePTfvo1lwYWd",
@@ -1405,7 +1447,7 @@
 			"version": 56,
 			"versionNonce": 54931715,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775256890331,
 			"link": null,
 			"locked": false,
@@ -1423,7 +1465,9 @@
 			"endBinding": null,
 			"startArrowhead": null,
 			"endArrowhead": null,
-			"polygon": false
+			"polygon": false,
+			"lastCommittedPoint": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "PVlC01Pq",
@@ -1461,7 +1505,8 @@
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"hasTextLink": false,
-			"rawText": "Time Series Rolling Validation"
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "oBlpSZLt",
@@ -1486,20 +1531,21 @@
 			"version": 347,
 			"versionNonce": 1828797773,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257003586,
 			"locked": false,
 			"text": "Em séries temporais, são necessários validações diferentes\ndevido a natureza dos dados (tempo-dependente).\nDados devem manter uma ordem cronológica.",
-			"rawText": "Em séries temporais, são necessários validações diferentes devido a natureza dos dados (tempo-dependente).\nDados devem manter uma ordem cronológica.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Em séries temporais, são necessários validações diferentes devido a natureza dos dados (tempo-dependente).\nDados devem manter uma ordem cronológica.",
+			"originalText": "Em séries temporais, são necessários validações diferentes\ndevido a natureza dos dados (tempo-dependente).\nDados devem manter uma ordem cronológica.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "S1vScllr",
@@ -1524,11 +1570,10 @@
 			"version": 69,
 			"versionNonce": 833269123,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257082915,
 			"locked": false,
 			"text": "Growing Training Set",
-			"rawText": "Growing Training Set",
 			"fontSize": 20,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -1537,7 +1582,9 @@
 			"originalText": "Growing Training Set",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "lnvZFvx3",
@@ -1562,20 +1609,21 @@
 			"version": 306,
 			"versionNonce": 1221022829,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257080713,
 			"locked": false,
 			"text": "A janela de treinamento cresce, incorporando um novo exemplo\nna base de treinamento.\n- h=1, significa que o exemplo de teste é o próximo da janela.",
-			"rawText": "A janela de treinamento cresce, incorporando um novo exemplo na base de treinamento.\n- h=1, significa que o exemplo de teste é o próximo da janela.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "A janela de treinamento cresce, incorporando um novo exemplo na base de treinamento.\n- h=1, significa que o exemplo de teste é o próximo da janela.",
+			"originalText": "A janela de treinamento cresce, incorporando um novo exemplo\nna base de treinamento.\n- h=1, significa que o exemplo de teste é o próximo da janela.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "cRcQS0Vj",
@@ -1600,7 +1648,7 @@
 			"version": 287,
 			"versionNonce": 1462687203,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257162774,
 			"link": null,
 			"locked": false,
@@ -1610,7 +1658,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "06m3O0B9",
@@ -1635,20 +1684,21 @@
 			"version": 230,
 			"versionNonce": 1642823405,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257158467,
 			"locked": false,
 			"text": "- Porém, h pode assumir diferentes valores, caso seja\nnecessário testar a predição em um futuro mais distante.",
-			"rawText": "- Porém, h pode assumir diferentes valores, caso seja necessário testar a predição em um futuro mais distante.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "- Porém, h pode assumir diferentes valores, caso seja necessário testar a predição em um futuro mais distante.",
+			"originalText": "- Porém, h pode assumir diferentes valores, caso seja\nnecessário testar a predição em um futuro mais distante.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "WqER9KaA",
@@ -1673,7 +1723,7 @@
 			"version": 825,
 			"versionNonce": 360621133,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257288906,
 			"link": null,
 			"locked": false,
@@ -1683,7 +1733,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "v3En6304",
@@ -1708,7 +1759,7 @@
 			"version": 897,
 			"versionNonce": 2082378413,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257288906,
 			"link": null,
 			"locked": false,
@@ -1718,7 +1769,8 @@
 				1,
 				1
 			],
-			"crop": null
+			"crop": null,
+			"hasTextLink": false
 		},
 		{
 			"id": "O4anS9QU",
@@ -1743,11 +1795,10 @@
 			"version": 324,
 			"versionNonce": 963753229,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257288906,
 			"locked": false,
 			"text": "h = 2",
-			"rawText": "h = 2",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -1756,7 +1807,9 @@
 			"originalText": "h = 2",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "q2NPNvEO",
@@ -1785,7 +1838,6 @@
 			"updated": 1775257288906,
 			"locked": false,
 			"text": "h = 4",
-			"rawText": "h = 4",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -1794,7 +1846,9 @@
 			"originalText": "h = 4",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "gJxMbyiA",
@@ -1823,7 +1877,6 @@
 			"updated": 1775257309796,
 			"locked": false,
 			"text": "Janela fixa (Fixed Sliding Window)",
-			"rawText": "Janela fixa (Fixed Sliding Window)",
 			"fontSize": 20,
 			"fontFamily": 5,
 			"textAlign": "left",
@@ -1832,7 +1885,9 @@
 			"originalText": "Janela fixa (Fixed Sliding Window)",
 			"autoResize": true,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		},
 		{
 			"id": "ItJQ6LHB",
@@ -1857,20 +1912,21 @@
 			"version": 259,
 			"versionNonce": 364432067,
 			"isDeleted": false,
-			"boundElements": null,
+			"boundElements": [],
 			"updated": 1775257406374,
 			"locked": false,
 			"text": "Em alguns casos, dados mais recentes são mais importantes.\nNesses casos, usar uma janela de tamanho fixo pode ser mais\napropriado.\n- Mantém o tamanho dos conjuntos de treino e teste\nconstantes ao longo do tempo.",
-			"rawText": "Em alguns casos, dados mais recentes são mais importantes. Nesses casos, usar uma janela de tamanho fixo pode ser mais apropriado.\n- Mantém o tamanho dos conjuntos de treino e teste constantes ao longo do tempo.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Em alguns casos, dados mais recentes são mais importantes. Nesses casos, usar uma janela de tamanho fixo pode ser mais apropriado.\n- Mantém o tamanho dos conjuntos de treino e teste constantes ao longo do tempo.",
+			"originalText": "Em alguns casos, dados mais recentes são mais importantes.\nNesses casos, usar uma janela de tamanho fixo pode ser mais\napropriado.\n- Mantém o tamanho dos conjuntos de treino e teste\nconstantes ao longo do tempo.",
 			"autoResize": false,
 			"lineHeight": 1.25,
-			"hasTextLink": false
+			"hasTextLink": false,
+			"link": null,
+			"rawText": ""
 		}
 	],
 	"appState": {
@@ -1890,10 +1946,10 @@
 		"currentItemEndArrowhead": "arrow",
 		"currentItemArrowType": "round",
 		"currentItemFrameRole": null,
-		"scrollX": 436.7964694559897,
-		"scrollY": -783.4478152193046,
+		"scrollX": 627.0722098477887,
+		"scrollY": 123.05151057741,
 		"zoom": {
-			"value": 0.702718
+			"value": 0.477895
 		},
 		"currentItemRoundness": "round",
 		"gridSize": 20,
@@ -1926,6 +1982,7 @@
 		"isMidpointSnappingEnabled": true,
 		"boxSelectionMode": "contain"
 	},
+	"prevTextMode": "parsed",
 	"files": {
 		"3a8746c462762c1322d0cf043a6aa7159b3198bf": {
 			"mimeType": "image/png",
