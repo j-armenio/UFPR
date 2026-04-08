@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ac5e815bbebeb5fb",
+        "id": "06e16e3fa6c7c93a",
         "type": "tabs",
         "children": [
           {
-            "id": "cdadc0c82c84e55e",
+            "id": "e3f18edb8e133d05",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula5/classificacao_instancias.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "classificacao_instancias.excalidraw"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
             }
           }
         ]
@@ -76,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -180,60 +177,25 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "floating": {
-    "id": "bb8109b4785735d2",
-    "type": "floating",
-    "children": [
-      {
-        "id": "100b5f180d6def59",
-        "type": "window",
-        "children": [
-          {
-            "id": "61980d47c7554a49",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "4f580d645d523c31",
-                "type": "leaf",
-                "state": {
-                  "type": "excalidraw",
-                  "state": {
-                    "file": "estudo_p1.excalidraw.md"
-                  },
-                  "icon": "excalidraw-icon",
-                  "title": "estudo_p1.excalidraw"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": -1253,
-        "y": -200,
-        "width": 1253,
-        "height": 778,
-        "maximize": true,
-        "zoom": 0
-      }
-    ]
-  },
-  "active": "4f580d645d523c31",
+  "active": "e3f18edb8e133d05",
   "lastOpenFiles": [
-    "aula5/classificacao_instancias.excalidraw.md",
+    "aula4/bias-variance.excalidraw",
     "estudo_p1.excalidraw.md",
-    "media/Pasted Image 20260407204612_820.png",
-    "aula10/arvore_decisao.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
-    "aula8/classificadores_lineares.excalidraw.md",
-    "aula7/gaussian_mixture_models.excalidraw.md",
-    "aula9/support_vector_machines.excalidraw.md",
+    "aula5/classificacao_instancias.excalidraw.md",
     "aula4/validacao.excalidraw",
+    "aula4/metricas.excalidraw",
+    "aula9/support_vector_machines.excalidraw.md",
+    "aula7/gaussian_mixture_models.excalidraw.md",
+    "aula8/classificadores_lineares.excalidraw.md",
+    "aula10/arvore_decisao.excalidraw.md",
+    "aula3/representacao-imagem.excalidraw",
+    "Pasted Image 20260408113640_396.png",
+    "Pasted Image 20260408113053_885.png",
+    "media/Pasted Image 20260407204612_820.png",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "aula3/representacao-audio.excalidraw",
-    "aula3/representacao-imagem.excalidraw",
     "aula3/representacao-texto.excalidraw",
-    "aula4/metricas.excalidraw",
-    "aula4/bias-variance.excalidraw",
     "README.md",
     "media/Pasted Image 20260407204743_089.png",
     "media/Pasted Image 20260407204727_415.png",
@@ -242,8 +204,6 @@
     "media/Pasted Image 20260407204557_588.png",
     "Pasted Image 20260407204540_945.png",
     "media/Pasted Image 20260407204513_221.png",
-    "media/Pasted Image 20260407204302_659.png",
-    "media/Pasted Image 20260407204238_711.png",
     "Excalidraw",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "aula2/engenharia_de_caracteristicas.excalidraw",
