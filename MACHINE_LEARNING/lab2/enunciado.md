@@ -22,4 +22,3 @@ Qual é o impacto dos hiper-parâmetros dos classificadores nos seu resultados?
 O que você pode dizer a respeito das matrizes de confusão. Os erros são os mesmos para todos os classificadores quando todos eles utilizam toda a base de treinamento?
 
 Escreve um relatório (formato IEEE) de no máximo 3 páginas respondendo as questões acima. Envie somente o relatório PDF. Não é necessário enviar o código fonte. 
-
