@@ -4,16 +4,17 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.datasets import load_svmlight_file
+from matplotlib.colors import LogNorm
 import numpy as np
 import time
 import os
 import matplotlib.pyplot as plt
 
-# --------------------------------------------------
+# ======================================================
 # Carrega as bases
-# --------------------------------------------------
+# ======================================================
 path = "../datasets/lab2"
 train_path = os.path.join(path, "train.txt")
 test_path = os.path.join(path, "test.txt")
@@ -50,8 +51,6 @@ def get_classifier(name):
     elif name == 'dt':
         return DecisionTreeClassifier()
     elif name == 'svm':
-        # SVM pode ser lento com 20k exemplos, 
-        # dependendo do kernel escolhido (o padrão é 'rbf')
         return SVC()
     else:
         raise ValueError("Classificador não reconhecido")
@@ -133,12 +132,15 @@ step = 1000
 max_samples = X_train_full.shape[0] # 20000
 train_sizes = range(step, max_samples + 1, step)
 
+# Roda o experimento 1
 # block_model_comparator(models_to_run, train_sizes)
 
 # ======================================================
 # Experimento 2: Melhor desempenho com poucos dados
 # ======================================================
 train_sizes = [20, 100, 200, 500, 800, 1000]
+
+# Roda o experimento 2
 # block_model_comparator(models_to_run, train_sizes)
 
 # ======================================================
@@ -213,8 +215,87 @@ def time_comparator(models_list, train_size):
     
     print("\nExperimento concluído.")
 
+# Roda o experimento 3
 # time_comparator(models_to_run, max_samples)
 
 # ======================================================
 # Experimento 4: Impacto dos hiperparâmetros
 # ======================================================
+def check_param_impact(model_name, param_name, values):
+    print(f"\nAnalisando impacto de {param_name} no {model_name.upper()}")
+    print(f"{'Valor':<10} | {'Acc Treino':<12} | {'Acc Teste':<12} | {'F1-Score':<10}")
+    print("=" * 50)
+
+    for v in values:
+        params = {param_name: v}
+        
+        if model_name == 'knn':
+            clf = KNeighborsClassifier(**params)
+        elif model_name == 'dt':
+            clf = DecisionTreeClassifier(**params)
+        elif model_name == 'svm':
+            clf = SVC(**params)
+        elif model_name == 'lr':
+            clf = LogisticRegression(max_iter=2000, **params)
+        else:
+            continue
+
+        # treino
+        clf.fit(X_train_full, y_train_full)
+        
+        # predições
+        y_train_pred = clf.predict(X_train_full)
+        y_test_pred = clf.predict(X_test)
+        
+        # métricas
+        acc_train = accuracy_score(y_train_full, y_train_pred)
+        acc_test = accuracy_score(y_test, y_test_pred)
+        f1 = f1_score(y_test, y_test_pred, average='weighted') 
+
+        print(f"{str(v):<10} | {acc_train:<12.4f} | {acc_test:<12.4f} | {f1:<10.4f}")
+
+# Roda o experimento 4
+# check_param_impact('knn', 'n_neighbors', [1, 5, 7, 11, 21, 51])
+# check_param_impact('dt', 'max_depth', [2, 3, 5, 10, 20, None])
+# check_param_impact('lr', 'C', [0.01, 1.0, 100.0])
+# check_param_impact('svm', 'kernel', ['linear', 'rbf'])
+# check_param_impact('svm', 'C', [0.1, 1, 10])
+
+# ======================================================
+# Experimento 5: Matriz de confusão
+# ======================================================
+def generate_confusion_matrices(models_list, X_train, y_train, X_test, y_test):
+    fig, axes = plt.subplots(2, 3, figsize=(20, 12))
+    axes = axes.ravel()
+
+    for i, model_name in enumerate(models_list):
+        clf = get_classifier(model_name)
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
+        
+        cm = confusion_matrix(y_test, y_pred)
+        
+        print(f"\n{'-'*20} Matriz: {model_name.upper()} {'-'*20}")
+        print(cm)
+        
+        # Plotagem com Escala Logarítmica 
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+        
+        im = axes[i].imshow(cm + 1, interpolation='nearest', cmap='magma', norm=LogNorm(vmin=1, vmax=cm.max()))
+        
+        axes[i].set_title(f"Modelo: {model_name.upper()}")
+        fig.colorbar(im, ax=axes[i], fraction=0.046, pad=0.04)
+        
+        # Adiciona os números por cima (opcional, pode poluir se a matriz for gigante)
+        thresh = cm.max() / 2.
+        for row in range(cm.shape[0]):
+            for col in range(cm.shape[1]):
+                axes[i].text(col, row, format(cm[row, col], 'd'),
+                             ha="center", va="center",
+                             color="white" if cm[row, col] < thresh else "black")
+
+    plt.tight_layout()
+    plt.show()
+
+# Roda experimento 5
+# generate_confusion_matrices(models_to_run, X_train_full, y_train_full, X_test, y_test)

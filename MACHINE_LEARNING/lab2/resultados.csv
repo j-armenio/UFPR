@@ -1,0 +1,135 @@
+Experimento 1,,,,Experimento 2,,,,Experimento 3,,,,Experimento 4,,,,Experimento 5
+Base de Treino: 20000 exemplos com 132 atributos.,,,,,,,,Base de Treino: 20000 exemplos com 132 atributos.,,,,Base de Treino: 20000 exemplos com 132 atributos.,,,,
+Base de Teste: 58646 exemplos.,,,,,,,,Base de Teste: 58646 exemplos.,,,,Base de Teste: 58646 exemplos.,,,,Base de Treino: 20000 exemplos com 132 atributos.
+,,,,,,,,,,,,,,,,Base de Teste: 58646 exemplos.
+> Avaliando: KNN,,,,> Avaliando: KNN,,,,Tamanho para treino: 20000,,,,Analisando impacto de n_neighbors no KNN,,,,
+[knn] Tamanho 1000: Acc 0.7820: Tempo: 0.09,,,,[knn] Tamanho 20: Acc 0.2955: Tempo: 0.04,,,,,,,,Valor      | Acc Treino   | Acc Teste    | F1-Score,,,,-------------------- Matriz: KNN --------------------
+[knn] Tamanho 2000: Acc 0.8587: Tempo: 0.13,,,,[knn] Tamanho 100: Acc 0.5799: Tempo: 0.03,,,,> Avaliando: KNN,,,,-------------------------------------------------------,,,,[[5472    3    1   15    6    2   26    2   32    1]
+[knn] Tamanho 3000: Acc 0.8857: Tempo: 0.15,,,,[knn] Tamanho 200: Acc 0.6762: Tempo: 0.03,,,,[knn] Acc 0.9385: Tempo: 1.23,,,,1          | 1.0000       | 0.9400       | 0.9402,,,,[   0 6105  175  119   56    6   35   66   34   59]
+[knn] Tamanho 4000: Acc 0.8897: Tempo: 0.18,,,,[knn] Tamanho 500: Acc 0.7371: Tempo: 0.05,,,,,,,,5          | 0.9832       | 0.9385       | 0.9388,,,,[  12   11 5607  165    3    1   16   51   20    2]
+[knn] Tamanho 5000: Acc 0.8939: Tempo: 0.22,,,,[knn] Tamanho 800: Acc 0.7638: Tempo: 0.09,,,,> Avaliando: NB,,,,7          | 0.9805       | 0.9382       | 0.9384,,,,[   4    1   25 5646    2   51    1   53   20   16]
+[knn] Tamanho 6000: Acc 0.9169: Tempo: 0.26,,,,[knn] Tamanho 1000: Acc 0.7820: Tempo: 0.07,,,,[nb] Acc 0.8891: Tempo: 0.36,,,,11         | 0.9748       | 0.9346       | 0.9349,,,,[  12   11   13    3 5305    9  132   24   11  202]
+[knn] Tamanho 7000: Acc 0.9248: Tempo: 0.30,,,,,,,,,,,,21         | 0.9641       | 0.9277       | 0.9281,,,,[   9    3    9  489    4 4842   41   16   83   43]
+[knn] Tamanho 8000: Acc 0.9293: Tempo: 0.33,,,,> Avaliando: NB,,,,> Avaliando: LDA,,,,51         | 0.9526       | 0.9142       | 0.9150,,,,[  31   10    4    2    3   44 5724    0   40    0]
+[knn] Tamanho 9000: Acc 0.9326: Tempo: 0.37,,,,[nb] Tamanho 20: Acc 0.5291: Tempo: 0.29,,,,[lda] Acc 0.9279: Tempo: 0.01,,,,,,,,[   1   25   41  119   54    1    0 5773    7   76]
+[knn] Tamanho 10000: Acc 0.9348: Tempo: 0.40,,,,[nb] Tamanho 100: Acc 0.5400: Tempo: 0.29,,,,,,,,Analisando impacto de max_depth no DT,,,,[  36   24   42  114   32   38   50   27 5165  167]
+[knn] Tamanho 11000: Acc 0.9344: Tempo: 0.45,,,,[nb] Tamanho 200: Acc 0.4723: Tempo: 0.29,,,,> Avaliando: LR,,,,Valor      | Acc Treino   | Acc Teste    | F1-Score,,,,[  16    9   17  107   78    9    9  131   34 5403]]
+[knn] Tamanho 12000: Acc 0.9355: Tempo: 0.49,,,,[nb] Tamanho 500: Acc 0.5741: Tempo: 0.29,,,,[lr] Acc 0.9114: Tempo: 0.01,,,,-------------------------------------------------------,,,,
+[knn] Tamanho 13000: Acc 0.9358: Tempo: 0.54,,,,[nb] Tamanho 800: Acc 0.5860: Tempo: 0.29,,,,,,,,2          | 0.2784       | 0.2709       | 0.1733,,,,-------------------- Matriz: NB --------------------
+[knn] Tamanho 14000: Acc 0.9357: Tempo: 0.57,,,,[nb] Tamanho 1000: Acc 0.6744: Tempo: 0.29,,,,> Avaliando: DT,,,,3          | 0.4344       | 0.3933       | 0.3099,,,,[[5220    1   11   32    2    1   41    0  251    1]
+[knn] Tamanho 15000: Acc 0.9353: Tempo: 0.60,,,,,,,,[dt] Acc 0.8647: Tempo: 0.01,,,,5          | 0.7662       | 0.7249       | 0.7093,,,,[   1 5184  583  238   86   22   85  340   80   36]
+[knn] Tamanho 16000: Acc 0.9371: Tempo: 0.64,,,,> Avaliando: LDA,,,,,,,,10         | 0.9569       | 0.8657       | 0.8660,,,,[   9   24 5289  447    4    1    8   52   53    1]
+[knn] Tamanho 17000: Acc 0.9369: Tempo: 0.68,,,,[lda] Tamanho 20: Acc 0.4263: Tempo: 0.01,,,,> Avaliando: SVM,,,,20         | 0.9998       | 0.8678       | 0.8681,,,,[   2    1  212 5390    1   33    0  127   31   22]
+[knn] Tamanho 18000: Acc 0.9373: Tempo: 0.73,,,,[lda] Tamanho 100: Acc 0.4995: Tempo: 0.01,,,,[svm] Acc 0.9595: Tempo: 15.70,,,,None       | 1.0000       | 0.8689       | 0.8691,,,,[  14    2   44   12 5273    0   32   44   90  211]
+[knn] Tamanho 19000: Acc 0.9382: Tempo: 0.75,,,,[lda] Tamanho 200: Acc 0.6374: Tempo: 0.01,,,,,,,,,,,,[   9    6   29  103   31 4958   46    2  169  186]
+[knn] Tamanho 20000: Acc 0.9385: Tempo: 0.80,,,,[lda] Tamanho 500: Acc 0.6573: Tempo: 0.01,,,,,,,,Analisando impacto de C no SVM,,,,[  78    7   89    8   15   90 5286    0  285    0]
+,,,,[lda] Tamanho 800: Acc 0.6987: Tempo: 0.01,,,,,,,,Valor      | Acc Treino   | Acc Teste    | F1-Score,,,,[   1   47  175  426   21    1    1 5323   60   42]
+> Avaliando: NB,,,,[lda] Tamanho 1000: Acc 0.7873: Tempo: 0.01,,,,,,,,-------------------------------------------------------,,,,[ 175    5   53  182   23    7   38   13 5112   87]
+[nb] Tamanho 1000: Acc 0.6744: Tempo: 0.29,,,,,,,,,,,,0.1        | 0.9567       | 0.9352       | 0.9354,,,,[  25    5   62  151  221    4    0   55  184 5106]]
+[nb] Tamanho 2000: Acc 0.7820: Tempo: 0.29,,,,> Avaliando: LR,,,,,,,,1          | 0.9918       | 0.9595       | 0.9595,,,,
+[nb] Tamanho 3000: Acc 0.8384: Tempo: 0.29,,,,[lr] Tamanho 20: Acc 0.4656: Tempo: 0.01,,,,,,,,10         | 0.9999       | 0.9651       | 0.9651,,,,-------------------- Matriz: LDA --------------------
+[nb] Tamanho 4000: Acc 0.8449: Tempo: 0.29,,,,[lr] Tamanho 100: Acc 0.5508: Tempo: 0.01,,,,,,,,,,,,[[5358   10   11   15   19    0   47   17   80    3]
+[nb] Tamanho 5000: Acc 0.8551: Tempo: 0.29,,,,[lr] Tamanho 200: Acc 0.6067: Tempo: 0.01,,,,,,,,Analisando impacto de C no LR,,,,[   0 6027  222   85    9   22   38  199   31   22]
+[nb] Tamanho 6000: Acc 0.8694: Tempo: 0.29,,,,[lr] Tamanho 500: Acc 0.6706: Tempo: 0.01,,,,,,,,Valor      | Acc Treino   | Acc Teste    | F1-Score,,,,[  22   41 5605   12    1    0    4  175   27    1]
+[nb] Tamanho 7000: Acc 0.8742: Tempo: 0.29,,,,[lr] Tamanho 800: Acc 0.7157: Tempo: 0.01,,,,,,,,-------------------------------------------------------,,,,[   1   12   29 5470    1   19    1  247   23   16]
+[nb] Tamanho 8000: Acc 0.8825: Tempo: 0.29,,,,[lr] Tamanho 1000: Acc 0.7291: Tempo: 0.01,,,,,,,,0.01       | 0.8220       | 0.7337       | 0.7173,,,,[  20   71   42    0 5208    0   86    5   29  261]
+[nb] Tamanho 9000: Acc 0.8874: Tempo: 0.29,,,,,,,,,,,,1.0        | 0.9611       | 0.9114       | 0.9114,,,,[   9   11    6  314    4 5015   50   24   67   39]
+[nb] Tamanho 10000: Acc 0.8891: Tempo: 0.29,,,,> Avaliando: DT,,,,,,,,100.0      | 0.9895       | 0.9514       | 0.9515,,,,[  77   49   37   15   56   36 5460    0  125    3]
+[nb] Tamanho 11000: Acc 0.8874: Tempo: 0.29,,,,[dt] Tamanho 20: Acc 0.1872: Tempo: 0.01,,,,,,,,,,,,[   0   58   47    6   58    1    0 5882   22   23]
+[nb] Tamanho 12000: Acc 0.8864: Tempo: 0.29,,,,[dt] Tamanho 100: Acc 0.5526: Tempo: 0.01,,,,,,,,Analisando impacto de kernel no SVM,,,,[  80   59   38    5   51   29   54   57 4961  361]
+[nb] Tamanho 13000: Acc 0.8887: Tempo: 0.29,,,,[dt] Tamanho 200: Acc 0.5022: Tempo: 0.01,,,,,,,,Valor      | Acc Treino   | Acc Teste    | F1-Score,,,,[  34   31    9   91   69    7   16   98   29 5429]]
+[nb] Tamanho 14000: Acc 0.8855: Tempo: 0.29,,,,[dt] Tamanho 500: Acc 0.6030: Tempo: 0.01,,,,,,,,-------------------------------------------------------,,,,
+[nb] Tamanho 15000: Acc 0.8844: Tempo: 0.29,,,,[dt] Tamanho 800: Acc 0.6189: Tempo: 0.01,,,,,,,,linear     | 0.9765       | 0.9381       | 0.9382,,,,-------------------- Matriz: LR --------------------
+[nb] Tamanho 16000: Acc 0.8859: Tempo: 0.29,,,,[dt] Tamanho 1000: Acc 0.7103: Tempo: 0.01,,,,,,,,rbf        | 0.9918       | 0.9595       | 0.9595,,,,[[5377    5   18   12   15    4   71    6   51    1]
+[nb] Tamanho 17000: Acc 0.8864: Tempo: 0.29,,,,,,,,,,,,,,,,[   1 5581  121  269  205   78  182   72   72   74]
+[nb] Tamanho 18000: Acc 0.8881: Tempo: 0.29,,,,> Avaliando: SVM,,,,,,,,,,,,[  22   19 5585   90   12    1   33   82   43    1]
+[nb] Tamanho 19000: Acc 0.8885: Tempo: 0.29,,,,[svm] Tamanho 20: Acc 0.3992: Tempo: 0.10,,,,,,,,,,,,[   4    3   40 5591   15   39    1   75   21   30]
+[nb] Tamanho 20000: Acc 0.8891: Tempo: 0.29,,,,[svm] Tamanho 100: Acc 0.6201: Tempo: 0.44,,,,,,,,,,,,[  37    8   28    0 5311    2  106   41    9  180]
+,,,,[svm] Tamanho 200: Acc 0.7175: Tempo: 0.78,,,,,,,,,,,,[   6   12   27  494   80 4724   49   22   73   52]
+> Avaliando: LDA,,,,[svm] Tamanho 500: Acc 0.7705: Tempo: 1.64,,,,,,,,,,,,[  86   26    0    0   20   96 5519    0  111    0]
+[lda] Tamanho 1000: Acc 0.7873: Tempo: 0.01,,,,[svm] Tamanho 800: Acc 0.7876: Tempo: 2.16,,,,,,,,,,,,[   0   40   40  121  168    2    0 5603   15  108]
+[lda] Tamanho 2000: Acc 0.8733: Tempo: 0.01,,,,[svm] Tamanho 1000: Acc 0.8012: Tempo: 2.41,,,,,,,,,,,,[  81   43   47   53   84   46   57   55 5000  229]
+[lda] Tamanho 3000: Acc 0.8935: Tempo: 0.01,,,,,,,,,,,,,,,,[  56   23    8  143  252    0    4  149   17 5161]]
+[lda] Tamanho 4000: Acc 0.8854: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lda] Tamanho 5000: Acc 0.8905: Tempo: 0.01,,,,,,,,,,,,,,,,-------------------- Matriz: DT --------------------
+[lda] Tamanho 6000: Acc 0.9025: Tempo: 0.01,,,,,,,,,,,,,,,,[[5158    7   23   20   10    6   93   14  180   49]
+[lda] Tamanho 7000: Acc 0.9124: Tempo: 0.01,,,,,,,,,,,,,,,,[  20 5884  188   97   69   69   91  126   70   41]
+[lda] Tamanho 8000: Acc 0.9208: Tempo: 0.01,,,,,,,,,,,,,,,,[  25   72 5115  331   16   14   94  119   81   21]
+[lda] Tamanho 9000: Acc 0.9237: Tempo: 0.01,,,,,,,,,,,,,,,,[  12   13   97 5260    9  181   16  113   67   51]
+[lda] Tamanho 10000: Acc 0.9279: Tempo: 0.01,,,,,,,,,,,,,,,,[  59   56   60   23 4592   26  419   72  172  243]
+[lda] Tamanho 11000: Acc 0.9261: Tempo: 0.01,,,,,,,,,,,,,,,,[  11   20   40  302   47 4701  121   42   78  177]
+[lda] Tamanho 12000: Acc 0.9245: Tempo: 0.01,,,,,,,,,,,,,,,,[ 177   37   57   43   20   50 5309    3  108   54]
+[lda] Tamanho 13000: Acc 0.9242: Tempo: 0.01,,,,,,,,,,,,,,,,[  13   58  179  325   66   30    4 5168   11  243]
+[lda] Tamanho 14000: Acc 0.9220: Tempo: 0.01,,,,,,,,,,,,,,,,[ 119   24  151   83   80   63  168   43 4788  176]
+[lda] Tamanho 15000: Acc 0.9208: Tempo: 0.01,,,,,,,,,,,,,,,,[  82   14   12   92  173   49   85   71  185 5050]]
+[lda] Tamanho 16000: Acc 0.9211: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lda] Tamanho 17000: Acc 0.9231: Tempo: 0.01,,,,,,,,,,,,,,,,-------------------- Matriz: SVM --------------------
+[lda] Tamanho 18000: Acc 0.9251: Tempo: 0.01,,,,,,,,,,,,,,,,[[5458    3    4    9    1    1   37    2   45    0]
+[lda] Tamanho 19000: Acc 0.9264: Tempo: 0.01,,,,,,,,,,,,,,,,[   0 5978  105  209   52   28   45   87  118   33]
+[lda] Tamanho 20000: Acc 0.9279: Tempo: 0.01,,,,,,,,,,,,,,,,[  21   18 5651   81   12    0   17   42   46    0]
+,,,,,,,,,,,,,,,,[   4    4   33 5632    6   23    1   68   25   23]
+> Avaliando: LR,,,,,,,,,,,,,,,,[  26    3   33    2 5401    1   87   21    7  141]
+[lr] Tamanho 1000: Acc 0.7291: Tempo: 0.01,,,,,,,,,,,,,,,,[   9    8    8  294   28 4980   27   14   97   74]
+[lr] Tamanho 2000: Acc 0.7822: Tempo: 0.01,,,,,,,,,,,,,,,,[  85   16    2    0   16   35 5591    0  113    0]
+[lr] Tamanho 3000: Acc 0.8067: Tempo: 0.01,,,,,,,,,,,,,,,,[   0   29   41   94  105    1    0 5780   15   32]
+[lr] Tamanho 4000: Acc 0.8141: Tempo: 0.01,,,,,,,,,,,,,,,,[  50   33   47   43   35   20   39   35 5285  108]
+[lr] Tamanho 5000: Acc 0.8193: Tempo: 0.01,,,,,,,,,,,,,,,,[  48   18    8  127  183    1    4  101   61 5262]]
+[lr] Tamanho 6000: Acc 0.8420: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 7000: Acc 0.8622: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 8000: Acc 0.8805: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 9000: Acc 0.8886: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 10000: Acc 0.8962: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 11000: Acc 0.8952: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 12000: Acc 0.8960: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 13000: Acc 0.8991: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 14000: Acc 0.8980: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 15000: Acc 0.8978: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 16000: Acc 0.9011: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 17000: Acc 0.9048: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 18000: Acc 0.9083: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 19000: Acc 0.9093: Tempo: 0.01,,,,,,,,,,,,,,,,
+[lr] Tamanho 20000: Acc 0.9114: Tempo: 0.01,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+> Avaliando: DT,,,,,,,,,,,,,,,,
+[dt] Tamanho 1000: Acc 0.6932: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 2000: Acc 0.7668: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 3000: Acc 0.7758: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 4000: Acc 0.8177: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 5000: Acc 0.8095: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 6000: Acc 0.8358: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 7000: Acc 0.8478: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 8000: Acc 0.8594: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 9000: Acc 0.8603: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 10000: Acc 0.8614: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 11000: Acc 0.8641: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 12000: Acc 0.8643: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 13000: Acc 0.8621: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 14000: Acc 0.8652: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 15000: Acc 0.8628: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 16000: Acc 0.8685: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 17000: Acc 0.8698: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 18000: Acc 0.8655: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 19000: Acc 0.8700: Tempo: 0.01,,,,,,,,,,,,,,,,
+[dt] Tamanho 20000: Acc 0.8704: Tempo: 0.01,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+> Avaliando: SVM,,,,,,,,,,,,,,,,
+[svm] Tamanho 1000: Acc 0.8012: Tempo: 2.50,,,,,,,,,,,,,,,,
+[svm] Tamanho 2000: Acc 0.8978: Tempo: 3.82,,,,,,,,,,,,,,,,
+[svm] Tamanho 3000: Acc 0.9160: Tempo: 4.84,,,,,,,,,,,,,,,,
+[svm] Tamanho 4000: Acc 0.9162: Tempo: 5.95,,,,,,,,,,,,,,,,
+[svm] Tamanho 5000: Acc 0.9183: Tempo: 7.17,,,,,,,,,,,,,,,,
+[svm] Tamanho 6000: Acc 0.9394: Tempo: 8.21,,,,,,,,,,,,,,,,
+[svm] Tamanho 7000: Acc 0.9459: Tempo: 8.97,,,,,,,,,,,,,,,,
+[svm] Tamanho 8000: Acc 0.9496: Tempo: 9.81,,,,,,,,,,,,,,,,
+[svm] Tamanho 9000: Acc 0.9530: Tempo: 10.56,,,,,,,,,,,,,,,,
+[svm] Tamanho 10000: Acc 0.9554: Tempo: 11.25,,,,,,,,,,,,,,,,
+[svm] Tamanho 11000: Acc 0.9552: Tempo: 11.60,,,,,,,,,,,,,,,,
+[svm] Tamanho 12000: Acc 0.9556: Tempo: 12.45,,,,,,,,,,,,,,,,
+[svm] Tamanho 13000: Acc 0.9558: Tempo: 12.93,,,,,,,,,,,,,,,,
+[svm] Tamanho 14000: Acc 0.9559: Tempo: 13.80,,,,,,,,,,,,,,,,
+[svm] Tamanho 15000: Acc 0.9559: Tempo: 14.57,,,,,,,,,,,,,,,,
+[svm] Tamanho 16000: Acc 0.9568: Tempo: 15.02,,,,,,,,,,,,,,,,
+[svm] Tamanho 17000: Acc 0.9575: Tempo: 15.61,,,,,,,,,,,,,,,,
+[svm] Tamanho 18000: Acc 0.9583: Tempo: 16.06,,,,,,,,,,,,,,,,
+[svm] Tamanho 19000: Acc 0.9589: Tempo: 16.71,,,,,,,,,,,,,,,,
+[svm] Tamanho 20000: Acc 0.9595: Tempo: 17.26,,,,,,,,,,,,,,,,

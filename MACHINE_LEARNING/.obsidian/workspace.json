@@ -11,10 +11,12 @@
             "id": "e3f18edb8e133d05",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Nova aba"
+              "type": "excalidraw",
+              "state": {
+                "file": "aula8/classificadores_lineares.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "classificadores_lineares.excalidraw"
             }
           }
         ]
@@ -40,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de arquivos"
+              "title": "Files"
             }
           },
           {
@@ -167,26 +169,30 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir a troca rápida": false,
-      "graph:Abrir visualização em gráfico": false,
-      "canvas:Criar novo canvas": false,
-      "daily-notes:Abrir a nota de hoje": false,
-      "templates:Inserir modelo": false,
-      "command-palette:Abrir paleta de comandos": false,
-      "bases:Criar nova base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
   "active": "e3f18edb8e133d05",
   "lastOpenFiles": [
+    "lab2/Lab2_ML.pdf",
+    "lab2/resultados.csv",
+    "lab2/ML Lab2 - Página1.csv",
+    "lab2/media/matrizes_confusao.png",
+    "aula7/gaussian_mixture_models.excalidraw.md",
+    "aula5/classificacao_instancias.excalidraw.md",
+    "aula9/support_vector_machines.excalidraw.md",
     "aula4/bias-variance.excalidraw",
     "estudo_p1.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
-    "aula5/classificacao_instancias.excalidraw.md",
     "aula4/validacao.excalidraw",
     "aula4/metricas.excalidraw",
-    "aula9/support_vector_machines.excalidraw.md",
-    "aula7/gaussian_mixture_models.excalidraw.md",
     "aula8/classificadores_lineares.excalidraw.md",
     "aula10/arvore_decisao.excalidraw.md",
     "aula3/representacao-imagem.excalidraw",
@@ -203,12 +209,9 @@
     "media/Pasted Image 20260407204632_409.png",
     "media/Pasted Image 20260407204557_588.png",
     "Pasted Image 20260407204540_945.png",
-    "media/Pasted Image 20260407204513_221.png",
     "Excalidraw",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "aula2/engenharia_de_caracteristicas.excalidraw",
-    "aula10",
-    "aula9",
     "Untitled.md"
   ]
 }
