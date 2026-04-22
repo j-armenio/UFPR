@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "06e16e3fa6c7c93a",
+        "id": "9c3c5ccf32241096",
         "type": "tabs",
         "children": [
           {
-            "id": "e3f18edb8e133d05",
+            "id": "5a29a0b61e7bf13c",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "image",
               "state": {
-                "file": "aula8/classificadores_lineares.excalidraw.md"
+                "file": "media/Pasted Image 20260422154525_074.png"
               },
-              "icon": "excalidraw-icon",
-              "title": "classificadores_lineares.excalidraw"
+              "icon": "lucide-image",
+              "title": "Pasted Image 20260422154525_074"
             }
           }
         ]
@@ -42,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -169,18 +169,27 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "e3f18edb8e133d05",
+  "active": "18ae20b36d79e108",
   "lastOpenFiles": [
+    "aula11/redes_neurais.excalidraw.md",
+    "media/Pasted Image 20260422182820_478.png",
+    "aula8/classificadores_lineares.excalidraw.md",
+    "media/Pasted Image 20260422171747_478.png",
+    "media/Pasted Image 20260422171611_711.png",
+    "media/Pasted Image 20260422154525_074.png",
+    "aula10/arvore_decisao.excalidraw.md",
+    "Sem título.md",
+    "aula11",
     "lab2/Lab2_ML.pdf",
     "lab2/resultados.csv",
     "lab2/ML Lab2 - Página1.csv",
@@ -193,8 +202,6 @@
     "aula6/bayesiana.excalidraw.md",
     "aula4/validacao.excalidraw",
     "aula4/metricas.excalidraw",
-    "aula8/classificadores_lineares.excalidraw.md",
-    "aula10/arvore_decisao.excalidraw.md",
     "aula3/representacao-imagem.excalidraw",
     "Pasted Image 20260408113640_396.png",
     "Pasted Image 20260408113053_885.png",
@@ -205,13 +212,7 @@
     "README.md",
     "media/Pasted Image 20260407204743_089.png",
     "media/Pasted Image 20260407204727_415.png",
-    "media/Pasted Image 20260407204712_382.png",
-    "media/Pasted Image 20260407204632_409.png",
-    "media/Pasted Image 20260407204557_588.png",
-    "Pasted Image 20260407204540_945.png",
-    "Excalidraw",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
-    "aula2/engenharia_de_caracteristicas.excalidraw",
     "Untitled.md"
   ]
 }
