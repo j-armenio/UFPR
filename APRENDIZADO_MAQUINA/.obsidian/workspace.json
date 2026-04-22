@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "9c3c5ccf32241096",
+        "id": "ab42ff3ef15a2985",
         "type": "tabs",
         "children": [
           {
-            "id": "5a29a0b61e7bf13c",
+            "id": "996a8e9069f7b10b",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "excalidraw",
               "state": {
-                "file": "media/Pasted Image 20260422154525_074.png"
+                "file": "aula11/redes_neurais.excalidraw.md"
               },
-              "icon": "lucide-image",
-              "title": "Pasted Image 20260422154525_074"
+              "icon": "excalidraw-icon",
+              "title": "redes_neurais.excalidraw"
             }
           }
         ]
@@ -179,14 +179,14 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "18ae20b36d79e108",
+  "active": "996a8e9069f7b10b",
   "lastOpenFiles": [
+    "media/Pasted Image 20260422154525_074.png",
     "aula11/redes_neurais.excalidraw.md",
     "media/Pasted Image 20260422182820_478.png",
     "aula8/classificadores_lineares.excalidraw.md",
     "media/Pasted Image 20260422171747_478.png",
     "media/Pasted Image 20260422171611_711.png",
-    "media/Pasted Image 20260422154525_074.png",
     "aula10/arvore_decisao.excalidraw.md",
     "Sem título.md",
     "aula11",
