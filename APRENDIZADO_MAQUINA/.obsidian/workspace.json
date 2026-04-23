@@ -13,13 +13,26 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula11/redes_neurais.excalidraw.md"
+                "file": "aula11/perceptron_mlp.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "redes_neurais.excalidraw"
+              "title": "perceptron_mlp.excalidraw"
+            }
+          },
+          {
+            "id": "b40dd49a7bb9b320",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula11/cnn.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "cnn.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -180,19 +193,23 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "996a8e9069f7b10b",
+  "active": "b40dd49a7bb9b320",
   "lastOpenFiles": [
+    "aula11/perceptron_mlp.excalidraw.md",
+    "aula11/cnn.excalidraw.md",
+    "Sem título.md",
+    "Pasted Image 20260423142347_124.png",
+    "Pasted Image 20260423142254_030.png",
+    "Pasted Image 20260423142318_193.png",
     "aula11/perceptron",
     "aula11/perceptron.c",
     "Pasted Image 20260423095607_751.png",
     "media/Pasted Image 20260422154525_074.png",
-    "aula11/redes_neurais.excalidraw.md",
     "media/Pasted Image 20260422182820_478.png",
     "aula8/classificadores_lineares.excalidraw.md",
     "media/Pasted Image 20260422171747_478.png",
     "media/Pasted Image 20260422171611_711.png",
     "aula10/arvore_decisao.excalidraw.md",
-    "Sem título.md",
     "aula11",
     "lab2/Lab2_ML.pdf",
     "lab2/resultados.csv",
@@ -208,12 +225,8 @@
     "aula4/metricas.excalidraw",
     "aula3/representacao-imagem.excalidraw",
     "Pasted Image 20260408113640_396.png",
-    "Pasted Image 20260408113053_885.png",
-    "media/Pasted Image 20260407204612_820.png",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
-    "aula3/representacao-audio.excalidraw",
     "README.md",
-    "media/Pasted Image 20260407204743_089.png",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "Untitled.md"
   ]
