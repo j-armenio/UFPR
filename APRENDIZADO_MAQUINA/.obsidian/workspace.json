@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 242.5,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -181,6 +182,9 @@
   },
   "active": "996a8e9069f7b10b",
   "lastOpenFiles": [
+    "aula11/perceptron",
+    "aula11/perceptron.c",
+    "Pasted Image 20260423095607_751.png",
     "media/Pasted Image 20260422154525_074.png",
     "aula11/redes_neurais.excalidraw.md",
     "media/Pasted Image 20260422182820_478.png",
@@ -208,10 +212,8 @@
     "media/Pasted Image 20260407204612_820.png",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "aula3/representacao-audio.excalidraw",
-    "aula3/representacao-texto.excalidraw",
     "README.md",
     "media/Pasted Image 20260407204743_089.png",
-    "media/Pasted Image 20260407204727_415.png",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "Untitled.md"
   ]
