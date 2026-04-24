@@ -13,10 +13,22 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula2.excalidraw.md"
+                "file": "aula2-medindo_qubit.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula2.excalidraw"
+              "title": "aula2-medindo_qubit.excalidraw"
+            }
+          },
+          {
+            "id": "ff4c5ad6fd06c8d8",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula3.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "aula3.excalidraw"
             }
           },
           {
@@ -25,13 +37,14 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula1.excalidraw.md"
+                "file": "aula1-introducao.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula1.excalidraw"
+              "title": "aula1-introducao.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -105,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "aula2.excalidraw.md",
+                "file": "aula3.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +128,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para aula2.excalidraw"
+              "title": "Links inversos para aula3.excalidraw"
             }
           },
           {
@@ -124,12 +137,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "aula2.excalidraw.md",
+                "file": "aula3.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para aula2.excalidraw"
+              "title": "Links de saída para aula3.excalidraw"
             }
           },
           {
@@ -167,13 +180,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "aula2.excalidraw.md",
+                "file": "aula3.excalidraw.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de aula2.excalidraw"
+              "title": "Sumário de aula3.excalidraw"
             }
           }
         ]
@@ -195,10 +208,11 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "8ba50748b4895d5c",
+  "active": "ff4c5ad6fd06c8d8",
   "lastOpenFiles": [
-    "aula1.excalidraw.md",
-    "aula2.excalidraw.md",
+    "aula2-medindo_qubit.excalidraw.md",
+    "aula1-introducao.excalidraw.md",
+    "aula3.excalidraw.md",
     "Excalidraw",
     "aula1"
   ]
