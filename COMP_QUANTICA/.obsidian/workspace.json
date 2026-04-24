@@ -8,7 +8,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "32989677279f2cc7",
+            "id": "8ba50748b4895d5c",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula2.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "aula2.excalidraw"
+            }
+          },
+          {
+            "id": "5eebd76f5064d98f",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -93,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "aula1.excalidraw.md",
+                "file": "aula2.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +115,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para aula1.excalidraw"
+              "title": "Links inversos para aula2.excalidraw"
             }
           },
           {
@@ -112,12 +124,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "aula1.excalidraw.md",
+                "file": "aula2.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para aula1.excalidraw"
+              "title": "Links de saída para aula2.excalidraw"
             }
           },
           {
@@ -155,13 +167,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "aula1.excalidraw.md",
+                "file": "aula2.excalidraw.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de aula1.excalidraw"
+              "title": "Sumário de aula2.excalidraw"
             }
           }
         ]
@@ -183,9 +195,10 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "32989677279f2cc7",
+  "active": "8ba50748b4895d5c",
   "lastOpenFiles": [
     "aula1.excalidraw.md",
+    "aula2.excalidraw.md",
     "Excalidraw",
     "aula1"
   ]
