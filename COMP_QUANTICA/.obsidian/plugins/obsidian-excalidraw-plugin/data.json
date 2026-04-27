@@ -138,7 +138,7 @@
     {
       "type": "default",
       "freedrawOnly": false,
-      "strokeColor": "#000000",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "hachure",
       "strokeWidth": 0.3,
