@@ -13,13 +13,26 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula4.excalidraw.md"
+                "file": "aula4-2qubits.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula4.excalidraw"
+              "title": "aula4-2qubits.excalidraw"
+            }
+          },
+          {
+            "id": "41f6b2ad61485c98",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula5.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "aula5.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "aula4.excalidraw.md",
+                "file": "aula5.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +116,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para aula4.excalidraw"
+              "title": "Links inversos para aula5.excalidraw"
             }
           },
           {
@@ -112,12 +125,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "aula4.excalidraw.md",
+                "file": "aula5.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para aula4.excalidraw"
+              "title": "Links de saída para aula5.excalidraw"
             }
           },
           {
@@ -155,13 +168,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "aula4.excalidraw.md",
+                "file": "aula5.excalidraw.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de aula4.excalidraw"
+              "title": "Sumário de aula5.excalidraw"
             }
           }
         ]
@@ -183,12 +196,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "b52887bfdbd25937",
+  "active": "41f6b2ad61485c98",
   "lastOpenFiles": [
-    "Pasted Image 20260427185836_300.png",
+    "aula4-2qubits.excalidraw.md",
+    "aula5.excalidraw.md",
+    "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
     "aula2-medindo_qubit.excalidraw.md",
-    "aula4.excalidraw.md",
-    "aula3.excalidraw.md",
+    "Pasted Image 20260427185836_300.png",
     "aula1-introducao.excalidraw.md",
     "Excalidraw",
     "aula1"
