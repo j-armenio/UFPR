@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "996a8e9069f7b10b",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula11/perceptron_mlp.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "perceptron_mlp.excalidraw"
-            }
-          },
-          {
             "id": "b40dd49a7bb9b320",
             "type": "leaf",
             "state": {
@@ -31,8 +19,7 @@
               "title": "cnn.excalidraw"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -55,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de arquivos"
+              "title": "Files"
             }
           },
           {
@@ -89,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -183,13 +169,13 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir a troca rápida": false,
-      "graph:Abrir visualização em gráfico": false,
-      "canvas:Criar novo canvas": false,
-      "daily-notes:Abrir a nota de hoje": false,
-      "templates:Inserir modelo": false,
-      "command-palette:Abrir paleta de comandos": false,
-      "bases:Criar nova base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
@@ -197,24 +183,25 @@
   "lastOpenFiles": [
     "aula11/perceptron_mlp.excalidraw.md",
     "aula11/cnn.excalidraw.md",
+    "media/Pasted Image 20260423095607_751.png",
+    "media/Pasted Image 20260427215808_751.png",
+    "media/Pasted Image 20260427215750_798.png",
+    "media/Pasted Image 20260427215259_296.png",
+    "Pasted Image 20260427215209_601.png",
+    "media/Pasted Image 20260427214006_603.png",
+    "media/Pasted Image 20260427213920_175.png",
+    "media/Pasted Image 20260427213503_697.png",
+    "media/Pasted Image 20260427212933_505.png",
+    "media/Pasted Image 20260427212633_514.png",
     "Sem título.md",
-    "Pasted Image 20260423142347_124.png",
-    "Pasted Image 20260423142254_030.png",
-    "Pasted Image 20260423142318_193.png",
     "aula11/perceptron",
     "aula11/perceptron.c",
-    "Pasted Image 20260423095607_751.png",
-    "media/Pasted Image 20260422154525_074.png",
-    "media/Pasted Image 20260422182820_478.png",
     "aula8/classificadores_lineares.excalidraw.md",
-    "media/Pasted Image 20260422171747_478.png",
-    "media/Pasted Image 20260422171611_711.png",
     "aula10/arvore_decisao.excalidraw.md",
     "aula11",
     "lab2/Lab2_ML.pdf",
     "lab2/resultados.csv",
     "lab2/ML Lab2 - Página1.csv",
-    "lab2/media/matrizes_confusao.png",
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula5/classificacao_instancias.excalidraw.md",
     "aula9/support_vector_machines.excalidraw.md",
@@ -224,7 +211,6 @@
     "aula4/validacao.excalidraw",
     "aula4/metricas.excalidraw",
     "aula3/representacao-imagem.excalidraw",
-    "Pasted Image 20260408113640_396.png",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "README.md",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
