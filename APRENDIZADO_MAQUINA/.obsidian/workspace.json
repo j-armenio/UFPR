@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "b40dd49a7bb9b320",
+            "id": "268cd7e8760e5ca0",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -18,8 +18,33 @@
               "icon": "excalidraw-icon",
               "title": "cnn.excalidraw"
             }
+          },
+          {
+            "id": "15b14c59a20cfd22",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula12/gan.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "gan.excalidraw"
+            }
+          },
+          {
+            "id": "b23d068022521b14",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula10/arvore_decisao.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "arvore_decisao.excalidraw"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -42,7 +67,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -76,7 +101,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 242.5,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -169,35 +195,37 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "b40dd49a7bb9b320",
+  "active": "15b14c59a20cfd22",
   "lastOpenFiles": [
-    "aula11/perceptron_mlp.excalidraw.md",
+    "aula10/arvore_decisao.excalidraw.md",
+    "aula12/gan.excalidraw.md",
     "aula11/cnn.excalidraw.md",
-    "media/Pasted Image 20260423095607_751.png",
+    "aula12",
+    "aula11/perceptron_mlp.excalidraw.md",
     "media/Pasted Image 20260427215808_751.png",
     "media/Pasted Image 20260427215750_798.png",
     "media/Pasted Image 20260427215259_296.png",
-    "Pasted Image 20260427215209_601.png",
     "media/Pasted Image 20260427214006_603.png",
     "media/Pasted Image 20260427213920_175.png",
     "media/Pasted Image 20260427213503_697.png",
     "media/Pasted Image 20260427212933_505.png",
     "media/Pasted Image 20260427212633_514.png",
+    "media/Pasted Image 20260427212619_385.png",
+    "media/Pasted Image 20260427212112_813.png",
     "Sem título.md",
     "aula11/perceptron",
     "aula11/perceptron.c",
     "aula8/classificadores_lineares.excalidraw.md",
-    "aula10/arvore_decisao.excalidraw.md",
     "aula11",
     "lab2/Lab2_ML.pdf",
     "lab2/resultados.csv",
@@ -210,7 +238,6 @@
     "aula6/bayesiana.excalidraw.md",
     "aula4/validacao.excalidraw",
     "aula4/metricas.excalidraw",
-    "aula3/representacao-imagem.excalidraw",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "README.md",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
