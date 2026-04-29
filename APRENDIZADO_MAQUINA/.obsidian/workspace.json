@@ -32,6 +32,18 @@
             }
           },
           {
+            "id": "dd9a6d788ef77930",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula12/rnn.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "rnn.excalidraw"
+            }
+          },
+          {
             "id": "b23d068022521b14",
             "type": "leaf",
             "state": {
@@ -44,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -205,10 +217,14 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "15b14c59a20cfd22",
+  "active": "dd9a6d788ef77930",
   "lastOpenFiles": [
-    "aula10/arvore_decisao.excalidraw.md",
+    "Pasted Image 20260429170525_929.png",
+    "Pasted Image 20260429165721_309.png",
+    "Pasted Image 20260429164615_305.png",
     "aula12/gan.excalidraw.md",
+    "aula12/rnn.excalidraw.md",
+    "aula10/arvore_decisao.excalidraw.md",
     "aula11/cnn.excalidraw.md",
     "aula12",
     "aula11/perceptron_mlp.excalidraw.md",
@@ -220,8 +236,6 @@
     "media/Pasted Image 20260427213503_697.png",
     "media/Pasted Image 20260427212933_505.png",
     "media/Pasted Image 20260427212633_514.png",
-    "media/Pasted Image 20260427212619_385.png",
-    "media/Pasted Image 20260427212112_813.png",
     "Sem título.md",
     "aula11/perceptron",
     "aula11/perceptron.c",
