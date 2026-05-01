@@ -13,10 +13,10 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula11/cnn.excalidraw.md"
+                "file": "aula11/perceptron_mlp.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "cnn.excalidraw"
+              "title": "perceptron_mlp.excalidraw"
             }
           },
           {
@@ -55,8 +55,7 @@
               "title": "arvore_decisao.excalidraw"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -113,8 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -217,16 +215,19 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "dd9a6d788ef77930",
+  "active": "268cd7e8760e5ca0",
   "lastOpenFiles": [
+    "aula11/cnn.excalidraw.md",
+    "aula12/rnn.excalidraw.md",
+    "lab3/mnist_lab.ipynb",
+    "lab3",
+    "ç",
     "Pasted Image 20260430103820_204.png",
     "Pasted Image 20260429170525_929.png",
     "Pasted Image 20260429165721_309.png",
     "Pasted Image 20260429164615_305.png",
     "aula12/gan.excalidraw.md",
-    "aula12/rnn.excalidraw.md",
     "aula10/arvore_decisao.excalidraw.md",
-    "aula11/cnn.excalidraw.md",
     "aula12",
     "aula11/perceptron_mlp.excalidraw.md",
     "media/Pasted Image 20260427215808_751.png",
@@ -235,7 +236,6 @@
     "media/Pasted Image 20260427214006_603.png",
     "media/Pasted Image 20260427213920_175.png",
     "media/Pasted Image 20260427213503_697.png",
-    "media/Pasted Image 20260427212933_505.png",
     "Sem título.md",
     "aula11/perceptron",
     "aula11/perceptron.c",
@@ -247,11 +247,8 @@
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula5/classificacao_instancias.excalidraw.md",
     "aula9/support_vector_machines.excalidraw.md",
-    "aula4/bias-variance.excalidraw",
     "estudo_p1.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
-    "aula4/validacao.excalidraw",
-    "aula4/metricas.excalidraw",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "README.md",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
