@@ -4,55 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "ab42ff3ef15a2985",
+        "id": "1c81bdb0a9ed59f8",
         "type": "tabs",
         "children": [
           {
-            "id": "268cd7e8760e5ca0",
+            "id": "8f8fb2d65cb34740",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula11/perceptron_mlp.excalidraw.md"
+                "file": "aula13/transformers.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "perceptron_mlp.excalidraw"
-            }
-          },
-          {
-            "id": "15b14c59a20cfd22",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula12/gan.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "gan.excalidraw"
-            }
-          },
-          {
-            "id": "dd9a6d788ef77930",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula12/rnn.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "rnn.excalidraw"
-            }
-          },
-          {
-            "id": "b23d068022521b14",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula10/arvore_decisao.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "arvore_decisao.excalidraw"
+              "title": "transformers.excalidraw"
             }
           }
         ]
@@ -112,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 242.5,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -215,43 +180,46 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "268cd7e8760e5ca0",
+  "active": "8f8fb2d65cb34740",
   "lastOpenFiles": [
+    "Pasted Image 20260502202823_563.png",
+    "Pasted Image 20260502202616_478.png",
+    "outros/estudo_p1.excalidraw.md",
+    "media/Pasted Image 20260502184642_251.png",
+    "aula13/transformers.excalidraw.md",
+    "aula3/representacao-audio.excalidraw",
+    "aula12/rnn.excalidraw.md",
+    "aula12/gan.excalidraw.md",
     "aula11/perceptron_mlp.excalidraw.md",
     "aula11/cnn.excalidraw.md",
-    "aula12/rnn.excalidraw.md",
+    "aula10/arvore_decisao.excalidraw.md",
+    "aula9/support_vector_machines.excalidraw.md",
+    "aula8/classificadores_lineares.excalidraw.md",
+    "aula7/gaussian_mixture_models.excalidraw.md",
+    "aula6/bayesiana.excalidraw.md",
+    "aula5/classificacao_instancias.excalidraw.md",
+    "aula4/validacao.excalidraw",
+    "aula4/metricas.excalidraw",
+    "aula4/bias-variance.excalidraw",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "aula3/representacao-texto.excalidraw",
+    "aula3/representacao-imagem.excalidraw",
+    "aula2/engenharia_de_caracteristicas.excalidraw.md",
+    "media/Pasted Image 20260502195925_101.png",
+    "media/Pasted Image 20260502195046_447.png",
+    "Pasted Image 20260502194953_619.png",
+    "media/Pasted Image 20260502193628_776.png",
+    "media/Pasted Image 20260502193506_984.png",
+    "media/Pasted Image 20260502193312_029.png",
+    "media/Pasted Image 20260502191758_893.png",
+    "media/Pasted Image 20260502191435_334.png",
+    "aula13",
+    "README.md",
+    "Excalidraw",
     "lab3/mnist_lab.ipynb",
     "lab3",
-    "ç",
-    "Pasted Image 20260430103820_204.png",
-    "Pasted Image 20260429170525_929.png",
-    "Pasted Image 20260429165721_309.png",
-    "Pasted Image 20260429164615_305.png",
-    "aula12/gan.excalidraw.md",
-    "aula10/arvore_decisao.excalidraw.md",
-    "aula12",
-    "media/Pasted Image 20260427215808_751.png",
-    "media/Pasted Image 20260427215750_798.png",
-    "media/Pasted Image 20260427215259_296.png",
-    "media/Pasted Image 20260427214006_603.png",
-    "media/Pasted Image 20260427213920_175.png",
-    "media/Pasted Image 20260427213503_697.png",
     "Sem título.md",
-    "aula11/perceptron",
-    "aula11/perceptron.c",
-    "aula8/classificadores_lineares.excalidraw.md",
-    "aula11",
-    "lab2/Lab2_ML.pdf",
-    "lab2/resultados.csv",
-    "lab2/ML Lab2 - Página1.csv",
-    "aula7/gaussian_mixture_models.excalidraw.md",
-    "aula5/classificacao_instancias.excalidraw.md",
-    "aula9/support_vector_machines.excalidraw.md",
     "estudo_p1.excalidraw.md",
-    "aula6/bayesiana.excalidraw.md",
-    "aula2/engenharia_de_caracteristicas.excalidraw.md",
-    "README.md",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "Untitled.md"
   ]
 }
