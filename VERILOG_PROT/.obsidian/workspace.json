@@ -11,10 +11,14 @@
             "id": "7b7b2bbe77db2ba9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "verilog/Verilog_rush.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Verilog_rush"
             }
           }
         ]
@@ -74,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "185eb0adbf0f8da8",
@@ -184,6 +187,8 @@
   "active": "7b7b2bbe77db2ba9",
   "lastOpenFiles": [
     "verilog/Verilog.md",
+    "verilog/Verilog_rush.md",
+    "verilog/verilog_sketches.excalidraw",
     "aulas/lista_exercicios_1/mux_2.vcd",
     "aulas/lista_exercicios_1/mux_2_TB",
     "aulas/lista_exercicios_1/mux_2.v",
@@ -193,7 +198,6 @@
     "aulas/codigos_aulas/half_adder_tb.vcd",
     "aulas/codigos_aulas/half_adder_tb.v",
     "aulas/codigos_aulas/half_adder_tb",
-    "aulas/codigos_aulas",
     "verilog/media/Pasted image 20260402205226.png",
     "Pasted image 20260402205114.png",
     "verilog/media/Pasted image 20260402190749.png",
