@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "1c81bdb0a9ed59f8",
+        "id": "3f272fb0cbd23581",
         "type": "tabs",
         "children": [
           {
-            "id": "8f8fb2d65cb34740",
+            "id": "935694cace09797a",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula13/transformers.excalidraw.md"
+                "file": "aula14/ensembles.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "transformers.excalidraw"
+              "title": "ensembles.excalidraw"
             }
           }
         ]
@@ -42,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -76,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -170,23 +169,30 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "8f8fb2d65cb34740",
+  "active": "935694cace09797a",
   "lastOpenFiles": [
-    "Pasted Image 20260502202823_563.png",
-    "Pasted Image 20260502202616_478.png",
+    "aula14/multiplos_classificadores.excalidraw.md",
+    "aula14/ensembles.excalidraw.md",
+    "media/Pasted Image 20260502232745_012.png",
+    "media/Pasted Image 20260502232640_065.png",
+    "media/Pasted Image 20260502232412_595.png",
+    "aula13/transformers.excalidraw.md",
+    "media/Pasted Image 20260502202823_563.png",
+    "Excalidraw",
+    "aula14",
+    "media/Pasted Image 20260502202616_478.png",
     "outros/estudo_p1.excalidraw.md",
     "media/Pasted Image 20260502184642_251.png",
-    "aula13/transformers.excalidraw.md",
     "aula3/representacao-audio.excalidraw",
     "aula12/rnn.excalidraw.md",
     "aula12/gan.excalidraw.md",
@@ -209,15 +215,9 @@
     "media/Pasted Image 20260502195046_447.png",
     "Pasted Image 20260502194953_619.png",
     "media/Pasted Image 20260502193628_776.png",
-    "media/Pasted Image 20260502193506_984.png",
-    "media/Pasted Image 20260502193312_029.png",
-    "media/Pasted Image 20260502191758_893.png",
-    "media/Pasted Image 20260502191435_334.png",
     "aula13",
     "README.md",
-    "Excalidraw",
     "lab3/mnist_lab.ipynb",
-    "lab3",
     "Sem título.md",
     "estudo_p1.excalidraw.md",
     "Untitled.md"
