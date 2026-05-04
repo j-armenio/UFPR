@@ -4,19 +4,67 @@
     "type": "split",
     "children": [
       {
-        "id": "3f272fb0cbd23581",
+        "id": "88c240af6f23b24e",
         "type": "tabs",
         "children": [
           {
-            "id": "935694cace09797a",
+            "id": "3b17a908953d65aa",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula14/ensembles.excalidraw.md"
+                "file": "aula11/perceptron_mlp.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "ensembles.excalidraw"
+              "title": "perceptron_mlp.excalidraw"
+            }
+          },
+          {
+            "id": "83402f176b4ec9cd",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula12/gan.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "gan.excalidraw"
+            }
+          },
+          {
+            "id": "24309196b8649436",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula12/rnn.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "rnn.excalidraw"
+            }
+          },
+          {
+            "id": "5147c7302c971b5f",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula13/transformers.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "transformers.excalidraw"
+            }
+          },
+          {
+            "id": "c8eb85d130b0185b",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula14/multiplos_classificadores.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "multiplos_classificadores.excalidraw"
             }
           }
         ]
@@ -179,25 +227,21 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "935694cace09797a",
+  "active": "18ae20b36d79e108",
   "lastOpenFiles": [
+    "media/Pasted Image 20260503154032_489.png",
+    "aula11/cnn.excalidraw.md",
     "aula14/multiplos_classificadores.excalidraw.md",
-    "aula14/ensembles.excalidraw.md",
-    "media/Pasted Image 20260502232745_012.png",
-    "media/Pasted Image 20260502232640_065.png",
-    "media/Pasted Image 20260502232412_595.png",
     "aula13/transformers.excalidraw.md",
-    "media/Pasted Image 20260502202823_563.png",
-    "Excalidraw",
-    "aula14",
-    "media/Pasted Image 20260502202616_478.png",
-    "outros/estudo_p1.excalidraw.md",
-    "media/Pasted Image 20260502184642_251.png",
-    "aula3/representacao-audio.excalidraw",
     "aula12/rnn.excalidraw.md",
     "aula12/gan.excalidraw.md",
     "aula11/perceptron_mlp.excalidraw.md",
-    "aula11/cnn.excalidraw.md",
+    "media/Pasted Image 20260503154706_057.png",
+    "media/Pasted Image 20260503144142_013.png",
+    "media/Pasted Image 20260503142746_630.png",
+    "media/Pasted Image 20260503142707_450.png",
+    "media/Pasted Image 20260503142343_753.png",
+    "media/Pasted Image 20260503142330_509.png",
     "aula10/arvore_decisao.excalidraw.md",
     "aula9/support_vector_machines.excalidraw.md",
     "aula8/classificadores_lineares.excalidraw.md",
@@ -210,11 +254,15 @@
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "aula3/representacao-texto.excalidraw",
     "aula3/representacao-imagem.excalidraw",
+    "aula3/representacao-audio.excalidraw",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
-    "media/Pasted Image 20260502195925_101.png",
-    "media/Pasted Image 20260502195046_447.png",
-    "Pasted Image 20260502194953_619.png",
-    "media/Pasted Image 20260502193628_776.png",
+    "aula14/ensembles.excalidraw.md",
+    "media/Pasted Image 20260502232745_012.png",
+    "media/Pasted Image 20260502232640_065.png",
+    "media/Pasted Image 20260502232412_595.png",
+    "Excalidraw",
+    "aula14",
+    "outros/estudo_p1.excalidraw.md",
     "aula13",
     "README.md",
     "lab3/mnist_lab.ipynb",
