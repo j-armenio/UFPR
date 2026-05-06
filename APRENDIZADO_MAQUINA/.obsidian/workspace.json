@@ -8,54 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3b17a908953d65aa",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula11/perceptron_mlp.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "perceptron_mlp.excalidraw"
-            }
-          },
-          {
-            "id": "83402f176b4ec9cd",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula12/gan.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "gan.excalidraw"
-            }
-          },
-          {
-            "id": "24309196b8649436",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula12/rnn.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "rnn.excalidraw"
-            }
-          },
-          {
-            "id": "5147c7302c971b5f",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula13/transformers.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "transformers.excalidraw"
-            }
-          },
-          {
             "id": "c8eb85d130b0185b",
             "type": "leaf",
             "state": {
@@ -227,16 +179,16 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "18ae20b36d79e108",
+  "active": "73cfa240fae6155a",
   "lastOpenFiles": [
-    "media/Pasted Image 20260503154032_489.png",
-    "aula11/cnn.excalidraw.md",
     "aula14/multiplos_classificadores.excalidraw.md",
     "aula13/transformers.excalidraw.md",
     "aula12/rnn.excalidraw.md",
     "aula12/gan.excalidraw.md",
+    "aula11/cnn.excalidraw.md",
     "aula11/perceptron_mlp.excalidraw.md",
     "media/Pasted Image 20260503154706_057.png",
+    "media/Pasted Image 20260503154032_489.png",
     "media/Pasted Image 20260503144142_013.png",
     "media/Pasted Image 20260503142746_630.png",
     "media/Pasted Image 20260503142707_450.png",

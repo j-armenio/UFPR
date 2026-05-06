@@ -8,67 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e5c82f3400d89afe",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula1-introducao.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula1-introducao.excalidraw"
-            }
-          },
-          {
-            "id": "6e3d4c069dea848a",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula2-medindo_qubit.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula2-medindo_qubit.excalidraw"
-            }
-          },
-          {
-            "id": "83229a3f465982aa",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula3-numeros_complexos_e_algebra_linear.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula3-numeros_complexos_e_algebra_linear.excalidraw"
-            }
-          },
-          {
             "id": "c4204b6ed26a2c31",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula4-2qubits.excalidraw.md"
+                "file": "revisao_p1.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula4-2qubits.excalidraw"
-            }
-          },
-          {
-            "id": "e9cdad508ffc84c5",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula5-portas_e_circuitos_quanticos.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula5-portas_e_circuitos_quanticos.excalidraw"
+              "title": "revisao_p1.excalidraw"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -125,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "2daca57fec333d6d",
@@ -231,15 +183,54 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "6e3d4c069dea848a",
+  "floating": {
+    "id": "b3b54b694270552a",
+    "type": "floating",
+    "children": [
+      {
+        "id": "870f438902575f46",
+        "type": "window",
+        "children": [
+          {
+            "id": "0af09172df87a7ff",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "aa9df6f9cdd91f0a",
+                "type": "leaf",
+                "state": {
+                  "type": "excalidraw",
+                  "state": {
+                    "file": "aula5-portas_e_circuitos_quanticos.excalidraw.md"
+                  },
+                  "icon": "excalidraw-icon",
+                  "title": "aula5-portas_e_circuitos_quanticos.excalidraw"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": -1225,
+        "y": -150,
+        "width": 1229,
+        "height": 653,
+        "maximize": true,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "c4204b6ed26a2c31",
   "lastOpenFiles": [
-    "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
-    "aula2-medindo_qubit.excalidraw.md",
-    "aula4-2qubits.excalidraw.md",
     "aula5-portas_e_circuitos_quanticos.excalidraw.md",
+    "revisao_p1.excalidraw.md",
+    "aula2-medindo_qubit.excalidraw.md",
+    "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
+    "aula4-2qubits.excalidraw.md",
     "aula1-introducao.excalidraw.md",
-    "Pasted Image 20260427185836_300.png",
     "Excalidraw",
+    "Sem título.md",
+    "Pasted Image 20260427185836_300.png",
     "aula1"
   ]
 }
