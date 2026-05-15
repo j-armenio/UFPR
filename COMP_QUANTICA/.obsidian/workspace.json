@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "4a429f8899f89527",
+        "id": "0367d43e56d52979",
         "type": "tabs",
         "children": [
           {
-            "id": "4fffc95342963aac",
+            "id": "ec1c4361b4e915c3",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -18,33 +18,8 @@
               "icon": "excalidraw-icon",
               "title": "aula3-numeros_complexos_e_algebra_linear.excalidraw"
             }
-          },
-          {
-            "id": "c4204b6ed26a2c31",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "revisao_p1.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "revisao_p1.excalidraw"
-            }
-          },
-          {
-            "id": "a8aea71b0bfd0bf7",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula2-medindo_qubit.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula2-medindo_qubit.excalidraw"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -207,13 +182,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "a8aea71b0bfd0bf7",
+  "active": "fbff2c56bc658880",
   "lastOpenFiles": [
-    "aula5-portas_e_circuitos_quanticos.excalidraw.md",
-    "aula4-2qubits.excalidraw.md",
-    "revisao_p1.excalidraw.md",
     "aula2-medindo_qubit.excalidraw.md",
+    "aula4-2qubits.excalidraw.md",
     "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
+    "aula5-portas_e_circuitos_quanticos.excalidraw.md",
+    "revisao_p1.excalidraw.md",
     "aula1-introducao.excalidraw.md",
     "Excalidraw",
     "Sem título.md",

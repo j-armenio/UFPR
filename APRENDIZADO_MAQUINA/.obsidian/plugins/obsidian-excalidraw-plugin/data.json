@@ -141,7 +141,7 @@
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "hachure",
-      "strokeWidth": 0.2,
+      "strokeWidth": 0.3,
       "roughness": 0,
       "penOptions": {
         "highlighter": false,
@@ -150,7 +150,7 @@
         "outlineWidth": 0,
         "options": {
           "thinning": 0.6,
-          "smoothing": 0.25,
+          "smoothing": 0.5,
           "streamline": 0.5,
           "easing": "easeOutSine",
           "start": {

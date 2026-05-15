@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "88c240af6f23b24e",
+        "id": "672ed53dd4e6a4d5",
         "type": "tabs",
         "children": [
           {
-            "id": "c8eb85d130b0185b",
+            "id": "5f58e3e9d3d165dc",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula14/multiplos_classificadores.excalidraw.md"
+                "file": "outros/quantum_ml/am_quantico.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "multiplos_classificadores.excalidraw"
+              "title": "am_quantico.excalidraw"
             }
           }
         ]
@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 242.5,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -179,45 +180,49 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "73cfa240fae6155a",
+  "active": "5f58e3e9d3d165dc",
   "lastOpenFiles": [
+    "datasets/lab2/mnist/train-labels-idx1-ubyte/train-labels-idx1-ubyte",
+    "datasets/lab2/mnist/train-labels-idx1-ubyte",
+    "datasets/lab2/mnist/train-images-idx3-ubyte/train-images-idx3-ubyte",
+    "datasets/lab2/mnist/train-images-idx3-ubyte",
+    "datasets/lab2/mnist/t10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte",
+    "datasets/lab2/mnist/t10k-labels-idx1-ubyte",
+    "datasets/lab2/mnist/t10k-images-idx3-ubyte/t10k-images-idx3-ubyte",
+    "datasets/lab2/mnist/t10k-images-idx3-ubyte",
+    "datasets/lab2/mnist",
+    "outros/quantum_ml/mnist_quantum.py",
+    "outros/quantum_ml/mnist_quantum.md",
+    "outros/quantum_ml",
     "aula14/multiplos_classificadores.excalidraw.md",
+    "aula15/selecao_de_atributos.excalidraw.md",
+    "media/Pasted Image 20260513104348_960.png",
+    "outros/quantum_ml/am_quantico.excalidraw.md",
+    "media/Pasted Image 20260514105427_515.png",
+    "media/Pasted Image 20260514105306_269.png",
+    "media/Pasted Image 20260514102226_794.png",
+    "media/Pasted Image 20260514102544_151.png",
+    "media/Pasted Image 20260514102020_058.png",
+    "media/Pasted Image 20260514101838_607.png",
+    "media/Pasted Image 20260514101820_110.png",
+    "media/Pasted Image 20260514101537_388.png",
+    "media/Pasted Image 20260514101150_035.png",
     "aula13/transformers.excalidraw.md",
     "aula12/rnn.excalidraw.md",
     "aula12/gan.excalidraw.md",
     "aula11/cnn.excalidraw.md",
     "aula11/perceptron_mlp.excalidraw.md",
-    "media/Pasted Image 20260503154706_057.png",
-    "media/Pasted Image 20260503154032_489.png",
-    "media/Pasted Image 20260503144142_013.png",
-    "media/Pasted Image 20260503142746_630.png",
-    "media/Pasted Image 20260503142707_450.png",
-    "media/Pasted Image 20260503142343_753.png",
-    "media/Pasted Image 20260503142330_509.png",
     "aula10/arvore_decisao.excalidraw.md",
     "aula9/support_vector_machines.excalidraw.md",
     "aula8/classificadores_lineares.excalidraw.md",
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
     "aula5/classificacao_instancias.excalidraw.md",
-    "aula4/validacao.excalidraw",
-    "aula4/metricas.excalidraw",
-    "aula4/bias-variance.excalidraw",
     "aula4/benchmark_avaliacao_continua.excalidraw.md",
-    "aula3/representacao-texto.excalidraw",
-    "aula3/representacao-imagem.excalidraw",
-    "aula3/representacao-audio.excalidraw",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "aula14/ensembles.excalidraw.md",
-    "media/Pasted Image 20260502232745_012.png",
-    "media/Pasted Image 20260502232640_065.png",
-    "media/Pasted Image 20260502232412_595.png",
-    "Excalidraw",
-    "aula14",
     "outros/estudo_p1.excalidraw.md",
-    "aula13",
     "README.md",
-    "lab3/mnist_lab.ipynb",
     "Sem título.md",
     "estudo_p1.excalidraw.md",
     "Untitled.md"
