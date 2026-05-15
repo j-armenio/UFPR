@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "672ed53dd4e6a4d5",
+        "id": "6e23ca2f3bbfb568",
         "type": "tabs",
         "children": [
           {
-            "id": "5f58e3e9d3d165dc",
+            "id": "7aaf1b8c035862e8",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "outros/quantum_ml/am_quantico.excalidraw.md"
+                "file": "aula15/selecao_e_explicabilidade_de_atributos.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "am_quantico.excalidraw"
+              "title": "selecao_e_explicabilidade_de_atributos.excalidraw"
             }
           }
         ]
@@ -76,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -180,8 +179,16 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "5f58e3e9d3d165dc",
+  "active": "7aaf1b8c035862e8",
   "lastOpenFiles": [
+    "lab1/relatorio.pdf",
+    "aula15/selecao_e_explicabilidade_de_atributos.excalidraw.md",
+    "Pasted Image 20260515154047_137.png",
+    "Pasted Image 20260515153707_760.png",
+    "Pasted Image 20260515153533_769.png",
+    "Pasted Image 20260515121738_614.png",
+    "Pasted Image 20260515121700_396.png",
+    "outros/quantum_ml/am_quantico.excalidraw.md",
     "datasets/lab2/mnist/train-labels-idx1-ubyte/train-labels-idx1-ubyte",
     "datasets/lab2/mnist/train-labels-idx1-ubyte",
     "datasets/lab2/mnist/train-images-idx3-ubyte/train-images-idx3-ubyte",
@@ -191,22 +198,13 @@
     "datasets/lab2/mnist/t10k-images-idx3-ubyte/t10k-images-idx3-ubyte",
     "datasets/lab2/mnist/t10k-images-idx3-ubyte",
     "datasets/lab2/mnist",
-    "outros/quantum_ml/mnist_quantum.py",
     "outros/quantum_ml/mnist_quantum.md",
-    "outros/quantum_ml",
     "aula14/multiplos_classificadores.excalidraw.md",
-    "aula15/selecao_de_atributos.excalidraw.md",
     "media/Pasted Image 20260513104348_960.png",
-    "outros/quantum_ml/am_quantico.excalidraw.md",
     "media/Pasted Image 20260514105427_515.png",
     "media/Pasted Image 20260514105306_269.png",
     "media/Pasted Image 20260514102226_794.png",
     "media/Pasted Image 20260514102544_151.png",
-    "media/Pasted Image 20260514102020_058.png",
-    "media/Pasted Image 20260514101838_607.png",
-    "media/Pasted Image 20260514101820_110.png",
-    "media/Pasted Image 20260514101537_388.png",
-    "media/Pasted Image 20260514101150_035.png",
     "aula13/transformers.excalidraw.md",
     "aula12/rnn.excalidraw.md",
     "aula12/gan.excalidraw.md",
