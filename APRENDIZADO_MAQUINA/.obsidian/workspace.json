@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "6e23ca2f3bbfb568",
+        "id": "ba158a74f975d69c",
         "type": "tabs",
         "children": [
           {
-            "id": "7aaf1b8c035862e8",
+            "id": "ce5cc2572fcfff1e",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula15/interpretabilidade_e_explicabilidade.excalidraw.md"
+                "file": "aula17/desbalanceamento.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "interpretabilidade_e_explicabilidade.excalidraw"
+              "title": "desbalanceamento.excalidraw"
             }
           }
         ]
@@ -42,7 +42,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -170,41 +170,43 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "7aaf1b8c035862e8",
+  "active": "ce5cc2572fcfff1e",
   "lastOpenFiles": [
-    "Pasted Image 20260522165743_135.png",
-    "Pasted Image 20260522165458_555.png",
-    "Pasted Image 20260522165047_352.png",
-    "Pasted Image 20260522164255_754.png",
-    "Pasted Image 20260522163851_541.png",
-    "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
-    "Pasted Image 20260522163458_117.png",
-    "Pasted Image 20260522163135_878.png",
-    "Pasted Image 20260522162806_462.png",
+    "aula16/auto_supervisionada.excalidraw.md",
+    "aula17/desbalanceamento.excalidraw.md",
+    "aula16/semi_supervisionada.excalidraw.md",
+    "media/Pasted Image 20260523195628_540.png",
+    "aula17",
+    "media/Pasted Image 20260524015240_972.png",
+    "media/Pasted Image 20260524014618_070.png",
+    "media/Pasted Image 20260524012826_551.png",
+    "media/Pasted Image 20260524012239_418.png",
+    "media/Pasted Image 20260524010916_880.png",
+    "media/Pasted Image 20260524010548_004.png",
+    "media/Pasted Image 20260523202627_992.png",
+    "Pasted Image 20260524010509_189.png",
+    "media/Pasted Image 20260523200159_547.png",
     "aula15/selecao_de_atributos.excalidraw.md",
+    "aula16",
+    "aula1",
+    "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
     "Excalidraw",
-    "Pasted Image 20260522161800_809.png",
-    "Pasted Image 20260522160623_041.png",
-    "Pasted Image 20260522160442_951.png",
     "datasets/MNIST/raw/t10k-labels-idx1-ubyte",
     "datasets/MNIST/raw/t10k-labels-idx1-ubyte.gz",
     "datasets/MNIST/raw/t10k-images-idx3-ubyte",
     "datasets/MNIST/raw/t10k-images-idx3-ubyte.gz",
     "datasets/MNIST/raw/train-labels-idx1-ubyte",
     "datasets/MNIST/raw/train-labels-idx1-ubyte.gz",
-    "datasets/MNIST/raw/train-images-idx3-ubyte",
-    "datasets/MNIST/raw/train-images-idx3-ubyte.gz",
-    "datasets/MNIST/raw",
     "outros/quantum_ml/am_quantico.excalidraw.md",
     "outros/quantum_ml/mnist_quantum.md",
     "aula14/multiplos_classificadores.excalidraw.md",
@@ -224,8 +226,6 @@
     "aula14/ensembles.excalidraw.md",
     "outros/estudo_p1.excalidraw.md",
     "README.md",
-    "Sem título.md",
-    "estudo_p1.excalidraw.md",
-    "Untitled.md"
+    "Sem título.md"
   ]
 }
