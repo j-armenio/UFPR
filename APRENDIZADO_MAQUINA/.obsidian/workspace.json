@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "ba158a74f975d69c",
+        "id": "25e864480417ff62",
         "type": "tabs",
         "children": [
           {
-            "id": "ce5cc2572fcfff1e",
+            "id": "2612b134466c91d1",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula17/desbalanceamento.excalidraw.md"
+                "file": "aula18/nao_supervisionada.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "desbalanceamento.excalidraw"
+              "title": "nao_supervisionada.excalidraw"
             }
           }
         ]
@@ -76,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -180,22 +179,24 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "ce5cc2572fcfff1e",
+  "active": "2612b134466c91d1",
   "lastOpenFiles": [
-    "aula16/auto_supervisionada.excalidraw.md",
     "aula17/desbalanceamento.excalidraw.md",
+    "aula18/nao_supervisionada.excalidraw.md",
+    "aula18",
+    "media/Pasted Image 20260524232422_372.png",
+    "media/Pasted Image 20260525001412_181.png",
+    "media/Pasted Image 20260525000649_218.png",
+    "media/Pasted Image 20260525000458_884.png",
+    "media/Pasted Image 20260524235333_903.png",
+    "media/Pasted Image 20260524235320_811.png",
+    "media/Pasted Image 20260524235254_161.png",
+    "media/Pasted Image 20260524235013_505.png",
+    "media/Pasted Image 20260524234958_924.png",
+    "media/Pasted Image 20260524234946_058.png",
+    "aula16/auto_supervisionada.excalidraw.md",
     "aula16/semi_supervisionada.excalidraw.md",
-    "media/Pasted Image 20260523195628_540.png",
     "aula17",
-    "media/Pasted Image 20260524015240_972.png",
-    "media/Pasted Image 20260524014618_070.png",
-    "media/Pasted Image 20260524012826_551.png",
-    "media/Pasted Image 20260524012239_418.png",
-    "media/Pasted Image 20260524010916_880.png",
-    "media/Pasted Image 20260524010548_004.png",
-    "media/Pasted Image 20260523202627_992.png",
-    "Pasted Image 20260524010509_189.png",
-    "media/Pasted Image 20260523200159_547.png",
     "aula15/selecao_de_atributos.excalidraw.md",
     "aula16",
     "aula1",
@@ -206,7 +207,6 @@
     "datasets/MNIST/raw/t10k-images-idx3-ubyte",
     "datasets/MNIST/raw/t10k-images-idx3-ubyte.gz",
     "datasets/MNIST/raw/train-labels-idx1-ubyte",
-    "datasets/MNIST/raw/train-labels-idx1-ubyte.gz",
     "outros/quantum_ml/am_quantico.excalidraw.md",
     "outros/quantum_ml/mnist_quantum.md",
     "aula14/multiplos_classificadores.excalidraw.md",
