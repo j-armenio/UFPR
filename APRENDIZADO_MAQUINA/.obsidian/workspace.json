@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2612b134466c91d1",
+            "id": "05588d849ce04c0a",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 242.5,
+    "collapsed": true
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -179,10 +180,18 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2612b134466c91d1",
+  "active": "05588d849ce04c0a",
   "lastOpenFiles": [
-    "aula17/desbalanceamento.excalidraw.md",
+    "Pasted Image 20260525021649_063.png",
+    "Pasted Image 20260525021602_913.png",
     "aula18/nao_supervisionada.excalidraw.md",
+    "Pasted Image 20260525020435_206.png",
+    "Pasted Image 20260525020424_215.png",
+    "aula16/semi_supervisionada.excalidraw.md",
+    "aula16/auto_supervisionada.excalidraw.md",
+    "aula15/selecao_de_atributos.excalidraw.md",
+    "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
+    "aula17/desbalanceamento.excalidraw.md",
     "aula18",
     "media/Pasted Image 20260524232422_372.png",
     "media/Pasted Image 20260525001412_181.png",
@@ -191,16 +200,9 @@
     "media/Pasted Image 20260524235333_903.png",
     "media/Pasted Image 20260524235320_811.png",
     "media/Pasted Image 20260524235254_161.png",
-    "media/Pasted Image 20260524235013_505.png",
-    "media/Pasted Image 20260524234958_924.png",
-    "media/Pasted Image 20260524234946_058.png",
-    "aula16/auto_supervisionada.excalidraw.md",
-    "aula16/semi_supervisionada.excalidraw.md",
     "aula17",
-    "aula15/selecao_de_atributos.excalidraw.md",
     "aula16",
     "aula1",
-    "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
     "Excalidraw",
     "datasets/MNIST/raw/t10k-labels-idx1-ubyte",
     "datasets/MNIST/raw/t10k-labels-idx1-ubyte.gz",
@@ -225,7 +227,6 @@
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "aula14/ensembles.excalidraw.md",
     "outros/estudo_p1.excalidraw.md",
-    "README.md",
-    "Sem título.md"
+    "README.md"
   ]
 }
