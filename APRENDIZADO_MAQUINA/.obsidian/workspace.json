@@ -4,11 +4,83 @@
     "type": "split",
     "children": [
       {
-        "id": "3b8fd9e7b4a0156e",
+        "id": "9834b147039e3efb",
         "type": "tabs",
         "children": [
           {
-            "id": "42db8f81d3270034",
+            "id": "c23e08a7162f7ec2",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula15/interpretabilidade_e_explicabilidade.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "interpretabilidade_e_explicabilidade.excalidraw"
+            }
+          },
+          {
+            "id": "9cdbab317850d4ca",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula15/selecao_de_atributos.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "selecao_de_atributos.excalidraw"
+            }
+          },
+          {
+            "id": "8c6d2ae98ba915bd",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula16/auto_supervisionada.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "auto_supervisionada.excalidraw"
+            }
+          },
+          {
+            "id": "369850906f2473f2",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula16/semi_supervisionada.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "semi_supervisionada.excalidraw"
+            }
+          },
+          {
+            "id": "11580a6a7dff316d",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula17/desbalanceamento.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "desbalanceamento.excalidraw"
+            }
+          },
+          {
+            "id": "bcff6886ce6aefbd",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "aula18/nao_supervisionada.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "nao_supervisionada.excalidraw"
+            }
+          },
+          {
+            "id": "6dbdb5762e4f4626",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
@@ -19,7 +91,8 @@
               "title": "data_streams.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -180,28 +253,27 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "42db8f81d3270034",
+  "active": "6dbdb5762e4f4626",
   "lastOpenFiles": [
-    "Pasted Image 20260525131358_435.png",
-    "Pasted Image 20260525131027_229.png",
-    "Pasted Image 20260525130255_513.png",
-    "Pasted Image 20260525125538_186.png",
-    "Pasted Image 20260525124140_827.png",
-    "Pasted Image 20260525124120_654.png",
-    "Pasted Image 20260525123944_032.png",
-    "Pasted Image 20260525123746_199.png",
-    "Pasted Image 20260525123701_098.png",
-    "Pasted Image 20260525123456_309.png",
-    "Pasted Image 20260525123355_262.png",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
-    "aula19/data_streams.excalidraw.md",
-    "aula19",
+    "aula17/desbalanceamento.excalidraw.md",
     "aula18/nao_supervisionada.excalidraw.md",
+    "aula19/data_streams.excalidraw.md",
     "aula16/semi_supervisionada.excalidraw.md",
     "aula16/auto_supervisionada.excalidraw.md",
     "aula15/selecao_de_atributos.excalidraw.md",
     "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
-    "aula17/desbalanceamento.excalidraw.md",
+    "media/Pasted Image 20260525122905_905.png",
+    "media/Pasted Image 20260525131358_435.png",
+    "media/Pasted Image 20260525131027_229.png",
+    "media/Pasted Image 20260525130255_513.png",
+    "media/Pasted Image 20260525125538_186.png",
+    "media/Pasted Image 20260525124140_827.png",
+    "media/Pasted Image 20260525124120_654.png",
+    "media/Pasted Image 20260525123944_032.png",
+    "media/Pasted Image 20260525123746_199.png",
+    "media/Pasted Image 20260525123701_098.png",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "aula19",
     "aula18",
     "aula17",
     "aula16",
