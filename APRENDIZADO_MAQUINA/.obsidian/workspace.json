@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "25e864480417ff62",
+        "id": "3b8fd9e7b4a0156e",
         "type": "tabs",
         "children": [
           {
-            "id": "05588d849ce04c0a",
+            "id": "42db8f81d3270034",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula18/nao_supervisionada.excalidraw.md"
+                "file": "aula19/data_streams.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "nao_supervisionada.excalidraw"
+              "title": "data_streams.excalidraw"
             }
           }
         ]
@@ -180,26 +180,29 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "05588d849ce04c0a",
+  "active": "42db8f81d3270034",
   "lastOpenFiles": [
-    "Pasted Image 20260525021649_063.png",
-    "Pasted Image 20260525021602_913.png",
+    "Pasted Image 20260525131358_435.png",
+    "Pasted Image 20260525131027_229.png",
+    "Pasted Image 20260525130255_513.png",
+    "Pasted Image 20260525125538_186.png",
+    "Pasted Image 20260525124140_827.png",
+    "Pasted Image 20260525124120_654.png",
+    "Pasted Image 20260525123944_032.png",
+    "Pasted Image 20260525123746_199.png",
+    "Pasted Image 20260525123701_098.png",
+    "Pasted Image 20260525123456_309.png",
+    "Pasted Image 20260525123355_262.png",
+    "aula4/benchmark_avaliacao_continua.excalidraw.md",
+    "aula19/data_streams.excalidraw.md",
+    "aula19",
     "aula18/nao_supervisionada.excalidraw.md",
-    "Pasted Image 20260525020435_206.png",
-    "Pasted Image 20260525020424_215.png",
     "aula16/semi_supervisionada.excalidraw.md",
     "aula16/auto_supervisionada.excalidraw.md",
     "aula15/selecao_de_atributos.excalidraw.md",
     "aula15/interpretabilidade_e_explicabilidade.excalidraw.md",
     "aula17/desbalanceamento.excalidraw.md",
     "aula18",
-    "media/Pasted Image 20260524232422_372.png",
-    "media/Pasted Image 20260525001412_181.png",
-    "media/Pasted Image 20260525000649_218.png",
-    "media/Pasted Image 20260525000458_884.png",
-    "media/Pasted Image 20260524235333_903.png",
-    "media/Pasted Image 20260524235320_811.png",
-    "media/Pasted Image 20260524235254_161.png",
     "aula17",
     "aula16",
     "aula1",
@@ -208,7 +211,6 @@
     "datasets/MNIST/raw/t10k-labels-idx1-ubyte.gz",
     "datasets/MNIST/raw/t10k-images-idx3-ubyte",
     "datasets/MNIST/raw/t10k-images-idx3-ubyte.gz",
-    "datasets/MNIST/raw/train-labels-idx1-ubyte",
     "outros/quantum_ml/am_quantico.excalidraw.md",
     "outros/quantum_ml/mnist_quantum.md",
     "aula14/multiplos_classificadores.excalidraw.md",
@@ -223,10 +225,8 @@
     "aula7/gaussian_mixture_models.excalidraw.md",
     "aula6/bayesiana.excalidraw.md",
     "aula5/classificacao_instancias.excalidraw.md",
-    "aula4/benchmark_avaliacao_continua.excalidraw.md",
     "aula2/engenharia_de_caracteristicas.excalidraw.md",
     "aula14/ensembles.excalidraw.md",
-    "outros/estudo_p1.excalidraw.md",
-    "README.md"
+    "outros/estudo_p1.excalidraw.md"
   ]
 }
