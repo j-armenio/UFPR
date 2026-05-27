@@ -1,0 +1,10 @@
+[
+ {
+  "InstFile" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_logic.v",
+  "InstLine" : 1,
+  "InstName" : "pong_logic",
+  "ModuleFile" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_logic.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "pong_logic"
+ }
+]
