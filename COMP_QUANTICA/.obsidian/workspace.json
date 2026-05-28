@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "0367d43e56d52979",
+        "id": "27f0a14bd8cb6557",
         "type": "tabs",
         "children": [
           {
-            "id": "4a11b42602ef2926",
+            "id": "ea79dded5fe00e94",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula5-portas_e_circuitos_quanticos.excalidraw.md"
+                "file": "aula7-introducao_algoritmos_quanticos.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula5-portas_e_circuitos_quanticos.excalidraw"
-            }
-          },
-          {
-            "id": "bd1ed4c155416283",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "aula6-teorema_da_nao_clonagem.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "aula6-teorema_da_nao_clonagem.excalidraw"
+              "title": "aula7-introducao_algoritmos_quanticos.excalidraw"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -196,10 +183,11 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "bd1ed4c155416283",
+  "active": "ea79dded5fe00e94",
   "lastOpenFiles": [
-    "aula5-portas_e_circuitos_quanticos.excalidraw.md",
     "aula6-teorema_da_nao_clonagem.excalidraw.md",
+    "aula7-introducao_algoritmos_quanticos.excalidraw.md",
+    "aula5-portas_e_circuitos_quanticos.excalidraw.md",
     "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
     "aula2-medindo_qubit.excalidraw.md",
     "aula4-2qubits.excalidraw.md",
