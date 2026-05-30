@@ -2,15 +2,67 @@
  "Device" : "GW1NR-9C",
  "Files" : [
   {
-   "Path" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_logic.v",
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/input_controller.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_render.v",
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/tb_pong.v",
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_clkdiv/gowin_clkdiv.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_rpll/gowin_rpll.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_defines.vh",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_enc.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_openldi.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tcard.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_term.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
    "Type" : "verilog"
   }
  ],
@@ -18,8 +70,8 @@
 
  ],
  "LoopLimit" : 2000,
- "ResultFile" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/impl/temp/rtl_parser.result",
- "Top" : "",
+ "ResultFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/temp/rtl_parser.result",
+ "Top" : "top",
  "VerilogStd" : "verilog_2001",
  "VhdlStd" : "vhdl_93"
 }

@@ -42,7 +42,7 @@ module input_controller (
                 db_cnt1 <= db_cnt1 + 1;
             else
                 // Chegou ao máximo, botão estável
-                btn_stable <= 1'b1;
+                btn1_stable <= 1'b1;
         end else begin
             // Se o botão foi solto (ou trepidação), zeramos o contador
             db_cnt1 <= 0;
@@ -56,11 +56,11 @@ module input_controller (
                 db_cnt2 <= db_cnt2 + 1;
             else
                 // Chegou ao máximo, botão estável
-                btn_stable <= 1'b1;
+                btn2_stable <= 1'b1;
         end else begin
             // Se o botão foi solto (ou trepidação), zeramos o contador
             db_cnt2 <= 0;
-            btn1_stable <= 1'b0;
+            btn2_stable <= 1'b0;
         end
 
         // Atualiza memória do estado anterior

@@ -1,10 +1,348 @@
 [
  {
-  "InstFile" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_logic.v",
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+  "InstLine" : 23,
+  "InstName" : "svo_hdmi_top",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+  "ModuleLine" : 23,
+  "ModuleName" : "svo_hdmi_top",
+  "SubInsts" : [
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 89,
+    "InstName" : "svo_tcard",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tcard.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_tcard"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 99,
+    "InstName" : "svo_term",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_term.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_term"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 114,
+    "InstName" : "svo_overlay",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+    "ModuleLine" : 250,
+    "ModuleName" : "svo_overlay",
+    "SubInsts" : [
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "InstLine" : 307,
+      "InstName" : "svo_buf_in",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "ModuleLine" : 101,
+      "ModuleName" : "svo_buf",
+      "SubInsts" : [
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 145,
+        "InstName" : "svo_axis_pipe",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 31,
+        "ModuleName" : "svo_axis_pipe"
+       }
+      ]
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "InstLine" : 321,
+      "InstName" : "svo_buf_over",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "ModuleLine" : 101,
+      "ModuleName" : "svo_buf",
+      "SubInsts" : [
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 145,
+        "InstName" : "svo_axis_pipe",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 31,
+        "ModuleName" : "svo_axis_pipe"
+       }
+      ]
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "InstLine" : 335,
+      "InstName" : "svo_buf_out",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "ModuleLine" : 101,
+      "ModuleName" : "svo_buf",
+      "SubInsts" : [
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 145,
+        "InstName" : "svo_axis_pipe",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 31,
+        "ModuleName" : "svo_axis_pipe"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 135,
+    "InstName" : "svo_enc",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_enc.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_enc"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 152,
+    "InstName" : "svo_tmds_0",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_tmds"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 162,
+    "InstName" : "svo_tmds_1",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_tmds"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi_top.v",
+    "InstLine" : 172,
+    "InstName" : "svo_tmds_2",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+    "ModuleLine" : 23,
+    "ModuleName" : "svo_tmds"
+   }
+  ]
+ },
+ {
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_openldi.v",
+  "InstLine" : 23,
+  "InstName" : "svo_openldi",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_openldi.v",
+  "ModuleLine" : 23,
+  "ModuleName" : "svo_openldi"
+ },
+ {
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+  "InstLine" : 178,
+  "InstName" : "svo_dim",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+  "ModuleLine" : 178,
+  "ModuleName" : "svo_dim",
+  "SubInsts" : [
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+    "InstLine" : 219,
+    "InstName" : "svo_axis_pipe",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+    "ModuleLine" : 31,
+    "ModuleName" : "svo_axis_pipe"
+   }
+  ]
+ },
+ {
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+  "InstLine" : 359,
+  "InstName" : "svo_rect",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+  "ModuleLine" : 359,
+  "ModuleName" : "svo_rect"
+ },
+ {
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v",
+  "InstLine" : 23,
+  "InstName" : "svo_vdma",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v",
+  "ModuleLine" : 23,
+  "ModuleName" : "svo_vdma",
+  "SubInsts" : [
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v",
+    "InstLine" : 255,
+    "InstName" : "fifo",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v",
+    "ModuleLine" : 344,
+    "ModuleName" : "svo_vdma_crossclock_fifo"
+   }
+  ]
+ },
+ {
+  "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
   "InstLine" : 1,
-  "InstName" : "pong_logic",
-  "ModuleFile" : "C:/Gowin/Gowin_V1.9.11.03_Education_x64/IDE/bin/fpga_projects/ping_pong/src/pong_logic.v",
+  "InstName" : "top",
+  "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
   "ModuleLine" : 1,
-  "ModuleName" : "pong_logic"
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 18,
+    "InstName" : "u_pll",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_rpll/gowin_rpll.v",
+    "ModuleLine" : 9,
+    "ModuleName" : "Gowin_rPLL"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 24,
+    "InstName" : "u_div_5",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_clkdiv/gowin_clkdiv.v",
+    "ModuleLine" : 8,
+    "ModuleName" : "Gowin_CLKDIV"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 36,
+    "InstName" : "u_input",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/input_controller.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "input_controller"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 57,
+    "InstName" : "u_game_logic",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "pong_logic"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 69,
+    "InstName" : "u_game_render",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "pong_render"
+   },
+   {
+    "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
+    "InstLine" : 83,
+    "InstName" : "u_hdmi",
+    "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "svo_hdmi",
+    "SubInsts" : [
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 73,
+      "InstName" : "svo_tcard",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tcard.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_tcard"
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 111,
+      "InstName" : "svo_term",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_term.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_term"
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 122,
+      "InstName" : "svo_overlay",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+      "ModuleLine" : 250,
+      "ModuleName" : "svo_overlay",
+      "SubInsts" : [
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 307,
+        "InstName" : "svo_buf_in",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 101,
+        "ModuleName" : "svo_buf",
+        "SubInsts" : [
+         {
+          "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "InstLine" : 145,
+          "InstName" : "svo_axis_pipe",
+          "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "ModuleLine" : 31,
+          "ModuleName" : "svo_axis_pipe"
+         }
+        ]
+       },
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 321,
+        "InstName" : "svo_buf_over",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 101,
+        "ModuleName" : "svo_buf",
+        "SubInsts" : [
+         {
+          "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "InstLine" : 145,
+          "InstName" : "svo_axis_pipe",
+          "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "ModuleLine" : 31,
+          "ModuleName" : "svo_axis_pipe"
+         }
+        ]
+       },
+       {
+        "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "InstLine" : 335,
+        "InstName" : "svo_buf_out",
+        "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+        "ModuleLine" : 101,
+        "ModuleName" : "svo_buf",
+        "SubInsts" : [
+         {
+          "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "InstLine" : 145,
+          "InstName" : "svo_axis_pipe",
+          "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v",
+          "ModuleLine" : 31,
+          "ModuleName" : "svo_axis_pipe"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 143,
+      "InstName" : "svo_enc",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_enc.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_enc"
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 160,
+      "InstName" : "svo_tmds_0",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_tmds"
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 170,
+      "InstName" : "svo_tmds_1",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_tmds"
+     },
+     {
+      "InstFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v",
+      "InstLine" : 180,
+      "InstName" : "svo_tmds_2",
+      "ModuleFile" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_tmds.v",
+      "ModuleLine" : 23,
+      "ModuleName" : "svo_tmds"
+     }
+    ]
+   }
+  ]
  }
 ]

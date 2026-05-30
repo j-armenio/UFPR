@@ -86,11 +86,20 @@ module pong_logic (
                 // Se está indo para cima, subtrai 2 pixels em y
                     ball_y <= ball_y - BALL_SPEED;
 
-                // Colisão: teto e chão
-                if (ball_y >= SCREEN_H - BALL_SIZE)
-                    ball_dir_y <= 0; // Bateu no chão, sobe
-                else if (ball_y <= 0)
-                    ball_dir_y <= 1; // Bateu no teto, desce
+                // ===== Movimento e Colisão Y da Bola =====
+                if (ball_dir_y) begin // Se está indo para baixo
+                    if (ball_y >= (SCREEN_H - BALL_SIZE - BALL_SPEED)) begin
+                        ball_dir_y <= 0; // Previu que vai bater no chão: inverte
+                    end else begin
+                        ball_y <= ball_y + BALL_SPEED;
+                    end
+                end else begin        // Se está indo para cima
+                    if (ball_y <= BALL_SPEED) begin
+                        ball_dir_y <= 1; // Previu que vai bater no teto: inverte
+                    end else begin
+                        ball_y <= ball_y - BALL_SPEED;
+                    end
+                end
 
                 // Colisão: Jogador 1 (esquerda)
                 if (ball_x <= PADDLE1_X + PADDLE_W && ball_x + BALL_SIZE >= PADDLE1_X &&

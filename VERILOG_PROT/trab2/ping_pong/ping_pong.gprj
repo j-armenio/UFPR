@@ -5,8 +5,29 @@
     <Version>5</Version>
     <Device name="GW1NR-9C" pn="GW1NR-LV9QN88PC6/I5">gw1nr9c-004</Device>
     <FileList>
-        <File path="src/pong_logic.v" type="file.verilog" enable="1"/>
-        <File path="src/pong_render.v" type="file.verilog" enable="1"/>
-        <File path="src/tb_pong.v" type="file.verilog" enable="1"/>
+        <File path="src/game/input_controller.v" type="file.verilog" enable="1"/>
+        <File path="src/game/pong_logic.v" type="file.verilog" enable="1"/>
+        <File path="src/game/pong_render.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_clkdiv/gowin_clkdiv.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_rpll/gowin_rpll.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_defines.vh" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_enc.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_hdmi.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_hdmi_top.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_openldi.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_tcard.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_term.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_tmds.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_utils.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi/svo_vdma.v" type="file.verilog" enable="1"/>
+        <File path="top.v" type="file.verilog" enable="1"/>
+        <File path="constraints.cst" type="file.cst" enable="1"/>
+        <File path="hdmi.sdc" type="file.sdc" enable="1"/>
+        <File path="ping_pong.gprj" type="file.other" enable="1"/>
+        <File path="ping_pong.gprj.user" type="file.other" enable="1"/>
+        <File path="src/gowin_clkdiv/gowin_clkdiv.ipc" type="file.other" enable="1"/>
+        <File path="src/gowin_clkdiv/gowin_clkdiv.mod" type="file.other" enable="1"/>
+        <File path="src/gowin_rpll/gowin_rpll.ipc" type="file.other" enable="1"/>
+        <File path="src/gowin_rpll/gowin_rpll.mod" type="file.other" enable="1"/>
     </FileList>
 </Project>
