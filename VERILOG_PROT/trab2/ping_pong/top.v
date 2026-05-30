@@ -54,6 +54,9 @@ module top (
     wire [11:0] paddle1_y;
     wire [11:0] paddle2_y;
 
+    wire [2:0] p1_score; // Carrega pontuação
+    wire [2:0] p2_score;
+
     pong_logic u_game_logic (
         .clk(clk_p),
         .resetn(game_resetn),
@@ -63,7 +66,9 @@ module top (
         .ball_x(ball_x),
         .ball_y(ball_y),
         .paddle1_y(paddle1_y),
-        .paddle2_y(paddle2_y)
+        .paddle2_y(paddle2_y),
+        .p1_score(p1_score),
+        .p2_score(p2_score)
     );
 
     pong_render u_game_render (
@@ -76,6 +81,8 @@ module top (
         .ball_y(ball_y),
         .paddle1_y(paddle1_y),
         .paddle2_y(paddle2_y),
+        .p1_score(p1_score),
+        .p2_score(p2_score),
         .rgb_out(game_rgb)
     );
 

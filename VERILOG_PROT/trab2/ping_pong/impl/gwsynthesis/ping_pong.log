@@ -36,6 +36,7 @@ Analyzing Verilog file '/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/sr
 Analyzing included file '/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_defines.vh'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v":21)
 Back to file '/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v":21)
 Analyzing Verilog file '/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v'
+Analyzing Verilog file '/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/font_rom.v'
 Compiling module 'top'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v":1)
 Compiling module 'Gowin_rPLL'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_rpll/gowin_rpll.v":9)
 Compiling module 'Gowin_CLKDIV'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/gowin_clkdiv/gowin_clkdiv.v":8)
@@ -44,17 +45,20 @@ WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("/home/jo
 WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/input_controller.v":56)
 WARN  (EX3791) : Expression size 28 truncated to fit in target size 27("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/input_controller.v":81)
 Compiling module 'pong_logic'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":1)
-WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":62)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":64)
-WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":68)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":70)
-WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":76)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":79)
-WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":84)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":87)
-WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":94)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":100)
+WARN  (EX3791) : Expression size 10 truncated to fit in target size 9("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":91)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":96)
+WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":103)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":108)
+WARN  (EX3791) : Expression size 13 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":116)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 12("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":121)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":131)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":142)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":182)
+WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_logic.v":190)
 Compiling module 'pong_render'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v":1)
+WARN  (EX3791) : Expression size 30 truncated to fit in target size 3("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v":62)
+WARN  (EX3791) : Expression size 30 truncated to fit in target size 4("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v":65)
+Compiling module 'font_rom'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/font_rom.v":1)
 WARN  (EX3073) : Port 'in_axis_tvalid' remains unconnected for this instance("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v":120)
 Compiling module 'svo_hdmi'("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v":4)
 WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_hdmi.v":64)
@@ -135,6 +139,7 @@ Running technical mapping ...
 [75%] Tech-Mapping Phase 2 completed
 [80%] Tech-Mapping Phase 3 completed
 [90%] Tech-Mapping Phase 4 completed
+WARN  (NL0002) : The module "font_rom" instantiated to "u_font" is swept in optimizing("/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/pong_render.v":75)
 [95%] Generate netlist file "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/gwsynthesis/ping_pong.vg" completed
 [100%] Generate report file "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/gwsynthesis/ping_pong_syn.rpt.html" completed
 GowinSynthesis finish

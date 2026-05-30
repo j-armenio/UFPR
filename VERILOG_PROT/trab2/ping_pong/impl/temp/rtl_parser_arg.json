@@ -64,6 +64,10 @@
   {
    "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v",
    "Type" : "verilog"
+  },
+  {
+   "Path" : "/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/font_rom.v",
+   "Type" : "verilog"
   }
  ],
  "IncludePath" : [

@@ -12,27 +12,27 @@
   <Part Number>: GW1NR-LV9QN88PC6/I5
   <Device>: GW1NR-9
   <Device Version>: C
-  <Created Time>:Sat May 30 11:09:53 2026
+  <Created Time>:Sat May 30 14:58:05 2026
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.106s, Elapsed time = 0h 0m 0.1s
-    Placement Phase 1: CPU time = 0h 0m 0.006s, Elapsed time = 0h 0m 0.005s
-    Placement Phase 2: CPU time = 0h 0m 0.069s, Elapsed time = 0h 0m 0.064s
-    Placement Phase 3: CPU time = 0h 0m 0.316s, Elapsed time = 0h 0m 0.305s
-    Total Placement: CPU time = 0h 0m 0.497s, Elapsed time = 0h 0m 0.474s
+    Placement Phase 0: CPU time = 0h 0m 0.107s, Elapsed time = 0h 0m 0.106s
+    Placement Phase 1: CPU time = 0h 0m 0.006s, Elapsed time = 0h 0m 0.006s
+    Placement Phase 2: CPU time = 0h 0m 0.074s, Elapsed time = 0h 0m 0.073s
+    Placement Phase 3: CPU time = 0h 0m 0.333s, Elapsed time = 0h 0m 0.329s
+    Total Placement: CPU time = 0h 0m 0.52s, Elapsed time = 0h 0m 0.514s
  Running routing:
     Routing Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Routing Phase 1: CPU time = 0h 0m 0.1s, Elapsed time = 0h 0m 0.1s
-    Routing Phase 2: CPU time = 0h 0m 0.248s, Elapsed time = 0h 0m 0.242s
+    Routing Phase 1: CPU time = 0h 0m 0.119s, Elapsed time = 0h 0m 0.119s
+    Routing Phase 2: CPU time = 0h 0m 0.304s, Elapsed time = 0h 0m 0.302s
     Routing Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Total Routing: CPU time = 0h 0m 0.348s, Elapsed time = 0h 0m 0.342s
+    Total Routing: CPU time = 0h 0m 0.423s, Elapsed time = 0h 0m 0.421s
  Generate output files:
-    CPU time = 0h 0m 0.246s, Elapsed time = 0h 0m 0.245s
+    CPU time = 0h 0m 0.265s, Elapsed time = 0h 0m 0.258s
 
- Total Time and Memory Usage: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s, Peak memory usage = 503MB
+ Total Time and Memory Usage: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s, Peak memory usage = 852MB
 
 
 3. Resource Usage Summary
@@ -40,15 +40,15 @@
   --------------------------------------------------------------------------------
   Resources                   | Usage                               | Utilization
   --------------------------------------------------------------------------------
-  Logic                       | 1240/8640                           |  15%
-    --LUT,ALU,ROM16           | 1144(853 LUT, 291 ALU, 0 ROM16)     | -
+  Logic                       | 1401/8640                           |  17%
+    --LUT,ALU,ROM16           | 1305(1000 LUT, 305 ALU, 0 ROM16)    | -
     --SSRAM(RAM16)            | 16                                  | -
-  Register                    | 429/6693                            |  7%
+  Register                    | 436/6693                            |  7%
     --Logic Register as Latch | 0/6480                              |  0%
-    --Logic Register as FF    | 429/6480                            |  7%
+    --Logic Register as FF    | 436/6480                            |  7%
     --I/O Register as Latch   | 0/213                               |  0%
     --I/O Register as FF      | 0/213                               |  0%
-  CLS                         | 743/4320                            |  18%
+  CLS                         | 819/4320                            |  19%
   I/O Port                    | 17/71                               |  24%
   I/O Buf                     | 13                                  | -
     --Input Buf               | 3                                   | -
@@ -77,7 +77,7 @@
   Clock Resource| Usage         | Utilization 
   ------------------------------------------
   PRIMARY       | 2/8           | 25%
-  LW            | 1/8           | 13%
+  LW            | 2/8           | 25%
   GCLK_PIN      | 2/3           | 67%
   CLKDIV        | 1/8           | 13%
   rPLL          | 1/2           | 50%
@@ -91,6 +91,7 @@
   -------------------------------------------
   clk_d          | PRIMARY        |  TR BL
   clk_p          | PRIMARY        |  TR TL BR BL
+  led_d[4]       | LW             |  -
   u_hdmi/n44_5   | LW             |  -
   clk_p5         | HCLK           | BANK0_BANK1_HCLK0
   ===========================================

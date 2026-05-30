@@ -20,6 +20,7 @@
         <File path="/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_utils.v" type="verilog"/>
         <File path="/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/hdmi/svo_vdma.v" type="verilog"/>
         <File path="/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/top.v" type="verilog"/>
+        <File path="/home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/src/game/font_rom.v" type="verilog"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="0"/>

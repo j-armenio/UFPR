@@ -5,6 +5,7 @@
     <Version>5</Version>
     <Device name="GW1NR-9C" pn="GW1NR-LV9QN88PC6/I5">gw1nr9c-004</Device>
     <FileList>
+        <File path="src/game/font_rom.v" type="file.verilog" enable="1"/>
         <File path="src/game/input_controller.v" type="file.verilog" enable="1"/>
         <File path="src/game/pong_logic.v" type="file.verilog" enable="1"/>
         <File path="src/game/pong_render.v" type="file.verilog" enable="1"/>
