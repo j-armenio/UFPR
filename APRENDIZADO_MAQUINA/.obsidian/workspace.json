@@ -149,8 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5,
-    "collapsed": true
+    "width": 242.5
   },
   "right": {
     "id": "9fcf42872188b7b3",
@@ -255,9 +254,9 @@
   },
   "active": "6dbdb5762e4f4626",
   "lastOpenFiles": [
+    "aula19/data_streams.excalidraw.md",
     "aula17/desbalanceamento.excalidraw.md",
     "aula18/nao_supervisionada.excalidraw.md",
-    "aula19/data_streams.excalidraw.md",
     "aula16/semi_supervisionada.excalidraw.md",
     "aula16/auto_supervisionada.excalidraw.md",
     "aula15/selecao_de_atributos.excalidraw.md",

@@ -1,22 +1,22 @@
 {
   "main": {
-    "id": "36cbfc7ccf5ce854",
+    "id": "21726b01ee59ecd7",
     "type": "split",
     "children": [
       {
-        "id": "27f0a14bd8cb6557",
+        "id": "579726603dbbc079",
         "type": "tabs",
         "children": [
           {
-            "id": "ea79dded5fe00e94",
+            "id": "0979aabf7fc19b86",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "aula7-introducao_algoritmos_quanticos.excalidraw.md"
+                "file": "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "aula7-introducao_algoritmos_quanticos.excalidraw"
+              "title": "Drawing 2026-06-01 12.00.45.excalidraw"
             }
           }
         ]
@@ -25,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "ee6fc08a7a4d8bca",
+    "id": "d8a2bdcbd9b87516",
     "type": "split",
     "children": [
       {
-        "id": "31a8efa17b6b0cca",
+        "id": "25ec55a52391b3f6",
         "type": "tabs",
         "children": [
           {
-            "id": "fbff2c56bc658880",
+            "id": "352b8613ed40bda9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -46,7 +46,7 @@
             }
           },
           {
-            "id": "30ead07bb7b8fbc2",
+            "id": "45cd1b7eec4766a9",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -63,7 +63,7 @@
             }
           },
           {
-            "id": "9cf391f0a7324637",
+            "id": "3b577b905f09c8c9",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -80,20 +80,20 @@
     "collapsed": true
   },
   "right": {
-    "id": "2daca57fec333d6d",
+    "id": "e2dd763ce8a7c645",
     "type": "split",
     "children": [
       {
-        "id": "9c5f88b0dded4f4c",
+        "id": "565f7b8ba23d8d25",
         "type": "tabs",
         "children": [
           {
-            "id": "df58d0b3e9dbce1d",
+            "id": "63e7cdc1ced7f7c3",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "aula5.excalidraw.md",
+                "file": "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,25 +103,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para aula5.excalidraw"
+              "title": "Links inversos para Drawing 2026-06-01 12.00.45.excalidraw"
             }
           },
           {
-            "id": "73c79cbe44caf14f",
+            "id": "d44c2c1f1d33aaa2",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "aula5.excalidraw.md",
+                "file": "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para aula5.excalidraw"
+              "title": "Links de saída para Drawing 2026-06-01 12.00.45.excalidraw"
             }
           },
           {
-            "id": "c98fc9e34c6c36c9",
+            "id": "5c411f3716654a8c",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -136,7 +136,7 @@
             }
           },
           {
-            "id": "0443f06943455cfe",
+            "id": "3794a98b029fbcbe",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -150,18 +150,18 @@
             }
           },
           {
-            "id": "9e343f0408e1c765",
+            "id": "18c58a9b0aa11022",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "aula5.excalidraw.md",
+                "file": "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de aula5.excalidraw"
+              "title": "Sumário de Drawing 2026-06-01 12.00.45.excalidraw"
             }
           }
         ]
@@ -183,19 +183,9 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "8259f94debd3d49c",
+  "active": "0979aabf7fc19b86",
   "lastOpenFiles": [
-    "aula7-introducao_algoritmos_quanticos.excalidraw.md",
-    "aula6-teorema_da_nao_clonagem.excalidraw.md",
-    "aula5-portas_e_circuitos_quanticos.excalidraw.md",
-    "aula3-numeros_complexos_e_algebra_linear.excalidraw.md",
-    "aula2-medindo_qubit.excalidraw.md",
-    "aula4-2qubits.excalidraw.md",
-    "revisao_p1.excalidraw.md",
-    "aula1-introducao.excalidraw.md",
-    "Excalidraw",
-    "Sem título.md",
-    "Pasted Image 20260427185836_300.png",
-    "aula1"
+    "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md",
+    "Excalidraw"
   ]
 }
