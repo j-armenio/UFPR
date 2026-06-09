@@ -1,9 +1,9 @@
--d /home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/gwsynthesis/ping_pong.vg
+-d /home/armenio/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/gwsynthesis/ping_pong.vg
 -p GW1NR-9C-QFN88P-6
 -pn GW1NR-LV9QN88PC6/I5
--cst /home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/constraints.cst
--cfg /home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/pnr/device.cfg
--sdc /home/joao/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/hdmi.sdc
+-cst /home/armenio/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/constraints.cst
+-cfg /home/armenio/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/impl/pnr/device.cfg
+-sdc /home/armenio/gitClone/UFPR/VERILOG_PROT/trab2/ping_pong/hdmi.sdc
 -bit
 -tr
 -ph
