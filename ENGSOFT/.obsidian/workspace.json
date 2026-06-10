@@ -8,15 +8,15 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0979aabf7fc19b86",
+            "id": "23c96190527f7307",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md"
+                "file": "conteudo_p1.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "Drawing 2026-06-01 12.00.45.excalidraw"
+              "title": "conteudo_p1.excalidraw"
             }
           }
         ]
@@ -183,16 +183,21 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "0979aabf7fc19b86",
+  "active": "23c96190527f7307",
   "lastOpenFiles": [
-    "Screenshot_20260609_163111.png",
+    "Pasted Image 20260610015056_326.png",
+    "conteudo_p2.excalidraw.md",
+    "conteudo_p1.excalidraw.md",
+    "Excalidraw/Drawing 2026-06-10 01.08.09.excalidraw.md",
+    "media/Pasted Image 20260609233012_782.png",
+    "media",
     "Excalidraw/temas-p1.excalidraw.md",
-    "Screenshot_20260609_173048.png",
+    "media/Screenshot_20260609_163111.png",
+    "media/Screenshot_20260609_173048.png",
     "Pasted Image 20260609161706_753.png",
     "Pasted Image 20260609161712_550.png",
     "Screenshot_20260609_173018.png",
-    "Screenshot_20260609_163354.png",
-    "Excalidraw/Drawing 2026-06-01 12.00.45.excalidraw.md",
+    "media/Screenshot_20260609_163354.png",
     "Excalidraw"
   ]
 }
